@@ -172,19 +172,22 @@ UPDATE `eav_form_fieldset_label` SET `label`='Informações Pessoais' WHERE `lab
 UPDATE `eav_form_fieldset_label` SET `label`='Informações de Endereços' WHERE `label`='Address Information';
 
 /* poll */
+/*
 UPDATE `poll` SET `poll_title`='Qual sua cor favorita' WHERE `poll_title`='What is your favorite color';
-
+*/
 /* poll_answer */
+/*
 UPDATE `poll_answer` SET `answer_title`='Verde' WHERE `answer_title`='Green';
 UPDATE `poll_answer` SET `answer_title`='Vermelho' WHERE `answer_title`='Red';
 UPDATE `poll_answer` SET `answer_title`='Preto' WHERE `answer_title`='Black';
 UPDATE `poll_answer` SET `answer_title`='Magenta' WHERE `answer_title`='Magenta';
-
+*/
 /* rating */
+/*
 UPDATE `rating` SET `rating_code`='Qualidade' WHERE `rating_code`='Quality';
 UPDATE `rating` SET `rating_code`='Aprovação' WHERE `rating_code`='Value';
 UPDATE `rating` SET `rating_code`='Preço' WHERE `rating_code`='Price';
-
+*/
 /* review_status - nao pode alterar o codigo pq eh usado em hardcode (!) */
 /* UPDATE `review_status` SET `status_code`='Aprovado' WHERE `status_code`='Approved'; */
 /* UPDATE `review_status` SET `status_code`='Pendente' WHERE `status_code`='Pending'; */

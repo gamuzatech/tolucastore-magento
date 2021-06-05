@@ -73,6 +73,7 @@
                 <Mage_Admin/>
             </depends>
         </Mage_Adminhtml>
+        <!--
         <Mage_AdminNotification>
             <active>true</active>
             <codePool>core</codePool>
@@ -81,6 +82,7 @@
                <Mage_Adminhtml/>
             </depends>
         </Mage_AdminNotification>
+        -->
         <Mage_Cron>
             <active>true</active>
             <codePool>core</codePool>
@@ -182,6 +184,7 @@
                 <Mage_Catalog/>
             </depends>
         </Mage_Payment>
+        <!--
         <Mage_Usa>
             <active>true</active>
             <codePool>core</codePool>
@@ -225,6 +228,7 @@
                 <Mage_Usa/>
             </depends>
         </Mage_GoogleCheckout>
+        -->
         <Mage_Log>
             <active>true</active>
             <codePool>core</codePool>
@@ -240,6 +244,7 @@
                 <Mage_Core/>
             </depends>
         </Mage_Backup>
+        <!--
         <Mage_Poll>
             <active>true</active>
             <codePool>core</codePool>
@@ -253,7 +258,7 @@
             <codePool>core</codePool>
             <depends>
                 <Mage_Core/>
-        <Mage_Review/>
+                <Mage_Review/>
             </depends>
         </Mage_Rating>
         <Mage_Review>
@@ -271,6 +276,7 @@
                 <Mage_Catalog/>
             </depends>
         </Mage_Tag>
+        -->
         <Mage_Cms>
             <active>true</active>
             <codePool>core</codePool>
@@ -288,6 +294,7 @@
                 <Mage_Cms/>
             </depends>
         </Mage_Reports>
+        <!--
         <Mage_Newsletter>
             <active>true</active>
             <codePool>core</codePool>
@@ -298,6 +305,7 @@
                 <Mage_Widget/>
             </depends>
         </Mage_Newsletter>
+        -->
         <Mage_Tax>
             <active>true</active>
             <codePool>core</codePool>
@@ -314,6 +322,7 @@
                 <Mage_Catalog/>
             </depends>
         </Mage_Wishlist>
+        <!--
         <Mage_GoogleAnalytics>
             <active>true</active>
             <codePool>core</codePool>
@@ -321,6 +330,7 @@
                 <Mage_Core/>
             </depends>
         </Mage_GoogleAnalytics>
+        -->
         <Mage_CatalogInventory>
             <active>true</active>
             <codePool>core</codePool>
@@ -336,6 +346,7 @@
                 <Mage_Sales/>
              </depends>
         </Mage_GiftMessage>
+        <!--
         <Mage_Sendfriend>
             <active>true</active>
             <codePool>core</codePool>
@@ -343,6 +354,7 @@
                 <Mage_Catalog/>
              </depends>
         </Mage_Sendfriend>
+        -->
         <Mage_Media>
             <active>true</active>
             <codePool>core</codePool>
@@ -350,6 +362,7 @@
                 <Mage_Core/>
              </depends>
         </Mage_Media>
+        <!--
         <Mage_Sitemap>
             <active>true</active>
             <codePool>core</codePool>
@@ -364,6 +377,7 @@
                 <Mage_Core/>
             </depends>
         </Mage_Contacts>
+        -->
         <Mage_Dataflow>
             <active>true</active>
             <codePool>core</codePool>
@@ -371,6 +385,7 @@
                 <Mage_Core/>
             </depends>
         </Mage_Dataflow>
+        <!--
         <Mage_Rss>
             <active>true</active>
             <codePool>core</codePool>
@@ -390,6 +405,7 @@
                 <Mage_Customer/>
             </depends>
         </Mage_ProductAlert>
+        -->
         <Mage_Index>
             <active>true</active>
             <codePool>core</codePool>
