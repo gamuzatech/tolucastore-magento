@@ -13,8 +13,15 @@
  */
 -->
 <config>
+    <tabs>
+        <gamuza translate="label" module="mobile">
+            <label>Gamuza</label>
+            <sort_order>0</sort_order>
+        </gamuza>
+    </tabs>
     <sections>
         <carriers>
+            <tab>gamuza</tab>
             <groups>
                 <pedroteixeira_correios translate="label" module="pedroteixeira_correios">
                     <label>Correios - Pedro Teixeira</label>
