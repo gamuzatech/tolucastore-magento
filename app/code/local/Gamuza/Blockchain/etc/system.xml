@@ -76,7 +76,7 @@
             <tab>gamuza</tab>
             <groups>
                 <gamuza_blockchain_info translate="label" module="blockchain">
-                    <label>Blockchain.info</label>
+                    <label>Gamuza - Payment via Bitcoin</label>
                     <frontend_type>text</frontend_type>
                     <sort_order>100</sort_order>
                     <show_in_default>1</show_in_default>
