@@ -13,6 +13,8 @@
  */
 class PedroTeixeira_Correios_Helper_Data extends Mage_Core_Helper_Abstract
 {
+    const CORREIOS_TRACKING_URL = 'https://www2.correios.com.br/sistemas/rastreamento/newprint.cfm';
+
     /**
      * Gets the configuration value by path
      *

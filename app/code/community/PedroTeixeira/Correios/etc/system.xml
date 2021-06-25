@@ -461,5 +461,8 @@
                 </pedroteixeira_correios>
             </groups>
         </carriers>
+        <shipping>
+            <tab>gamuza</tab>
+        </shipping>
     </sections>
 </config>

@@ -697,13 +697,58 @@ class PedroTeixeira_Correios_Model_Carrier_CorreiosMethod
     }
 
     /**
-     * Protected Get Tracking, opens the request to Correios
+     * Workaround Get Tracking, opens the request to Correios
      *
      * @param string $code Code
      *
      * @return bool
      */
     protected function _getTracking($code)
+    {
+        try
+        {
+            $client = new Zend_Http_Client(PedroTeixeira_Correios_Helper_Data::CORREIOS_TRACKING_URL);
+            $client->setParameterPost ('objetos', $code);
+
+            $response = $client->request ('POST');
+
+            $track = utf8_encode ($response->getBody ()); // windows-1252 really?
+            $track = str_replace ('self.print();', "", $track); // disable_print
+        }
+        catch (Exception $e)
+        {
+            $error = Mage::getModel ('shipping/tracking_result_error')
+                ->setCarrier ($this->_code)
+                ->setCarrierTitle ($this->getConfigData ('title'))
+                ->setTracking ($code)
+                ->setErrorMessage ($this->getConfigData ('urlerror'))
+            ;
+
+            $this->_result->append ($error);
+
+            return false;
+        }
+
+        $tracking = Mage::getModel ('shipping/tracking_result_status')
+            ->setCarrier ($this->_code)
+            ->setCarrierTitle ($this->getConfigData ('title'))
+            ->setTracking ($code)
+            ->addData (array ('status' => $track))
+        ;
+
+        $this->_result->append ($tracking);
+
+        return true;
+    }
+
+    /**
+     * Protected Get Tracking, opens the request to Correios
+     *
+     * @param string $code Code
+     *
+     * @return bool
+     */
+    protected function _getTracking_DISABLED($code)
     {
         $error = Mage::getModel('shipping/tracking_result_error');
         $error->setTracking($code);
