@@ -36,6 +36,7 @@
             <codePool>local</codePool>
             <version>0.0.1</version>
             <depends>
+                <Mage_Adminhtml />
                 <Mage_Directory />
                 <Mage_Payment />
             </depends>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+/**
+ * @package     Gamuza_Basic
+ * @copyright   Copyright (c) 2016 Gamuza Technologies (http://www.gamuza.com.br/)
+ * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the
+ * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
+ * Boston, MA 02110-1301, USA.
+ */
+
+/**
+ * See the AUTHORS file for a list of people on the Gamuza Team.
+ * See the ChangeLog files for a list of changes.
+ * These files are distributed with gamuza_basic-magento at http://github.com/gamuzatech/.
+ */
+-->
+
+<layout>
+    <default>
+        <reference name="head">
+            <action method="removeItem">
+                <type>skin_css</type>
+                <name>css/styles.css</name>
+                <params>media="all"</params>
+            </action>
+
+            <action method="removeItem">
+                <type>skin_css</type>
+                <name>css/madisonisland.css</name>
+                <params>media="all"</params>
+            </action>
+
+            <action method="appendItem">
+                <type>skin_css</type>
+                <name>css/styles.css</name>
+                <params>media="all"</params>
+            </action>
+
+            <action method="appendItem">
+                <type>skin_css</type>
+                <name>css/madisonisland.css</name>
+                <params>media="all"</params>
+            </action>
+
+            <action method="appendItem">
+                <type>skin_css</type>
+                <name>css/gamuza/basic/styles.css</name>
+                <params>media="all"</params>
+            </action>
+        </reference>
+    </default>
+
+    <customer_account>
+        <reference name="customer_account_navigation">
+            <action method="removeLinkByName"><name>billing_agreements</name></action>
+            <action method="removeLinkByName"><name>OAuth Customer Tokens</name></action>
+            <action method="removeLinkByName"><name>downloadable_products</name></action>
+            <action method="removeLinkByName"><name>recurring_profiles</name></action>
+            <action method="appendLink" translate="label" module="customer"><name>logout</name><path>customer/account/logout</path><label>Log Out</label></action>]
+        </reference>
+    </customer_account>
+</layout>
+

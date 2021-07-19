@@ -37,6 +37,46 @@ UPDATE `cms_page` SET `title`='Política de Privacidade' WHERE `title`='Privacy 
 /* UPDATE `core_config_data` SET `value`='BRL' WHERE `path`='currency/options/allow'; */
 /* UPDATE `core_config_data` SET `value`='BR' WHERE `path`='general/country/default'; */
 
+INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`)
+    VALUES ('default', 0, 'carriers/flatrate/title', 'Valor Fixo')
+    ON DUPLICATE KEY UPDATE `updated_at` = NULL;
+
+INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`)
+    VALUES ('default', 0, 'carriers/freeshipping/title', 'Entrega Grátis')
+    ON DUPLICATE KEY UPDATE `updated_at` = NULL;
+
+INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`)
+    VALUES ('default', 0, 'carriers/tablerate/title', 'Tabela de Cálculo')
+    ON DUPLICATE KEY UPDATE `updated_at` = NULL;
+
+INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`)
+    VALUES ('default', 0, 'payment/free/title', 'Sem Pagamento')
+    ON DUPLICATE KEY UPDATE `updated_at` = NULL;
+
+INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`)
+    VALUES ('default', 0, 'payment/banktransfer/title', 'Transferência Bancária')
+    ON DUPLICATE KEY UPDATE `updated_at` = NULL;
+
+INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`)
+    VALUES ('default', 0, 'payment/cashondelivery/title', 'Dinheiro na Entrega')
+    ON DUPLICATE KEY UPDATE `updated_at` = NULL;
+
+INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`)
+    VALUES ('default', 0, 'payment/machineondelivery/title', 'Maquininha na Entrega')
+    ON DUPLICATE KEY UPDATE `updated_at` = NULL;
+
+INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`)
+    VALUES ('default', 0, 'payment/purchaseorder/title', 'Ordem de Compra')
+    ON DUPLICATE KEY UPDATE `updated_at` = NULL;
+
+INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`)
+    VALUES ('default', 0, 'payment/gamuza_blockchain_info/title', 'Pagar com Bitcoin')
+    ON DUPLICATE KEY UPDATE `updated_at` = NULL;
+
+INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`)
+    VALUES ('default', 0, 'payment/gamuza_picpay_payment/title', 'Pagar com PicPay')
+    ON DUPLICATE KEY UPDATE `updated_at` = NULL;
+
 /* core_store */
 UPDATE `core_store` SET `name`='Português (Brasil)' WHERE `name`='Default Store View';
 
@@ -299,3 +339,4 @@ INSERT INTO `directory_country_region_name` (`locale`, `region_id`, `name`) SELE
 
 INSERT INTO `directory_country_region` (`country_id`, `code`, `default_name`) SELECT * FROM (SELECT 'BR', 'DF', 'Distrito Federal') AS tmp WHERE NOT EXISTS (SELECT `default_name` FROM `directory_country_region` WHERE `default_name`='Distrito Federal') LIMIT 1;
 INSERT INTO `directory_country_region_name` (`locale`, `region_id`, `name`) SELECT * FROM (SELECT 'pt_BR', LAST_INSERT_ID(), 'Distrito Federal') AS tmp WHERE NOT EXISTS (SELECT `name` FROM `directory_country_region_name` WHERE `name`='Distrito Federal') LIMIT 1;
+

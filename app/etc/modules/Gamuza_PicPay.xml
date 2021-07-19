@@ -33,6 +33,10 @@
         <Gamuza_PicPay>
             <active>true</active>
             <codePool>local</codePool>
+            <depends>
+                <Mage_Adminhtml />
+                <Mage_Payment />
+            </depends>
         </Gamuza_PicPay>
     </modules>
 </config>
