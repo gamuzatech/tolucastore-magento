@@ -45,11 +45,12 @@
                 <params>media="screen, projection"</params>
             </action>
         </reference>
-
+        <!--
         <reference name="notifications">
             <remove name="notification_toolbar" />
             <remove name="notification_window" />
         </reference>
+        -->
     </default>
 
     <adminhtml_dashboard_index>

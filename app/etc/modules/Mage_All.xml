@@ -73,7 +73,6 @@
                 <Mage_Admin/>
             </depends>
         </Mage_Adminhtml>
-        <!--
         <Mage_AdminNotification>
             <active>true</active>
             <codePool>core</codePool>
@@ -82,7 +81,6 @@
                <Mage_Adminhtml/>
             </depends>
         </Mage_AdminNotification>
-        -->
         <Mage_Cron>
             <active>true</active>
             <codePool>core</codePool>

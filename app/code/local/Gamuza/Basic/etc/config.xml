@@ -432,6 +432,12 @@
             <log>
                 <enable_log>2</enable_log>
             </log>
+            <adminnotification>
+                <feed_url>www.toluca.com.br/media/sitemap/notifications.rss</feed_url>
+                <popup_url>www.toluca.com.br/notificationPopup</popup_url>
+                <severity_icons_url>www.toluca.com.br/media/widgets/%s/%s.gif</severity_icons_url>
+                <use_https>1</use_https>
+            </adminnotification>
         </system>
         <advanced>
             <modules_disable_output>

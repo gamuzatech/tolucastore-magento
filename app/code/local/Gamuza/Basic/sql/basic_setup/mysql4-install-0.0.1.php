@@ -218,10 +218,11 @@ $coreConfig->saveConfig ('admin/security/validate_formkey_checkout', '1');
 /**
  * System
  */
-$coreConfig->saveConfig ('system/cron/enableRunNow',        '1');
-$coreConfig->saveConfig ('system/cron/showCronUserMessage', '0');
-$coreConfig->saveConfig ('system/smtp/disable',             '1');
-$coreConfig->saveConfig ('system/log/enable_log',           '2');
+$coreConfig->saveConfig ('system/cron/enableRunNow',           '1');
+$coreConfig->saveConfig ('system/cron/showCronUserMessage',    '0');
+$coreConfig->saveConfig ('system/smtp/disable',                '1');
+$coreConfig->saveConfig ('system/log/enable_log',              '2');
+$coreConfig->saveConfig ('system/adminnotification/use_https', '2');
 
 /**
  * Advanced
