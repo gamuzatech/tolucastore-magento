@@ -26,7 +26,7 @@
  * These files are distributed with gamuza_basic-magento at http://github.com/gamuzatech/.
  */
 
-$installer = new Mage_Eav_Model_Entity_Setup ('basic_setup');
+$installer = new Mage_Core_Model_Resource_Setup ('basic_setup');
 $installer->startSetup ();
 
 $coreConfig = Mage::getModel ('core/config');
@@ -85,41 +85,6 @@ $coreConfig->saveConfig (Mage_CatalogSearch_Model_Fulltext::XML_PATH_CATALOG_SEA
 $coreConfig->saveConfig ('catalog/custom_options/date_fields_order', 'd,m,y');
 $coreConfig->saveConfig ('catalog/custom_options/time_format',       '24h');
 
-$attribute = Mage::getSingleton ('eav/config')
-    ->getAttribute ('catalog_category', 'custom_use_parent_settings')
-    ->setData ('default_value', '1')
-    ->save ();
-
-$attribute = Mage::getSingleton ('eav/config')
-    ->getAttribute ('catalog_category', 'is_anchor')
-    ->setData ('default_value', '1')
-    ->save ();
-
-$attribute = Mage::getSingleton ('eav/config')
-    ->getAttribute ('catalog_category', 'page_layout')
-    ->setData ('default_value', 'two_columns_left')
-    ->save ();
-
-$attribute = Mage::getSingleton ('eav/config')
-    ->getAttribute ('catalog_product', 'sku')
-    ->setData ('frontend_input', 'label')
-    ->save ();
-
-$attribute = Mage::getSingleton ('eav/config')
-    ->getAttribute ('catalog_product', 'short_description')
-    ->setData ('frontend_input', 'text')
-    ->save ();
-
-$attribute = Mage::getSingleton ('eav/config')
-    ->getAttribute ('catalog_product', 'url_key')
-    ->setData ('frontend_input', 'label')
-    ->save ();
-
-$attribute = Mage::getSingleton ('eav/config')
-    ->getAttribute ('catalog_product', 'tax_class_id')
-    ->setData ('default_value', '0')
-    ->save ();
-
 /**
  * CatalogInventory
  */
@@ -140,36 +105,6 @@ $coreConfig->saveConfig ('customer/address/middlename_show', '0');
 $coreConfig->saveConfig ('customer/address/dob_show',        'opt');
 $coreConfig->saveConfig ('customer/address/taxvat_show',     'opt');
 $coreConfig->saveConfig ('customer/address/gender_show',     'opt');
-
-$attribute = Mage::getSingleton ('eav/config')
-    ->getAttribute ('customer', 'middlename')
-    ->setData ('is_visible', 0)
-    ->save ();
-
-$attribute = Mage::getSingleton ('eav/config')
-    ->getAttribute ('customer_address', 'middlename')
-    ->setData ('is_visible', 0)
-    ->save ();
-
-$attribute = Mage::getSingleton ('eav/config')
-    ->getAttribute ('customer_address', 'company')
-    ->setData ('is_visible', 0)
-    ->save ();
-
-$attribute = Mage::getSingleton ('eav/config')
-    ->getAttribute ('customer_address', 'street')
-    ->setData ('multiline_count', 4)
-    ->save ();
-
-$attribute = Mage::getSingleton ('eav/config')
-    ->getAttribute ('customer_address', 'telephone')
-    ->setData ('is_required', 0)
-    ->save ();
-
-$attribute = Mage::getSingleton ('eav/config')
-    ->getAttribute ('customer_address', 'fax')
-    ->setData ('is_required', 1)
-    ->save ();
 
 /**
  * Wishlist
