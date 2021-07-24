@@ -370,8 +370,8 @@
                 <amount>0</amount>
             </minimum_order>
             <gift_options>
-                <allow_order>1</allow_order>
-                <allow_items>1</allow_items>
+                <allow_order>0</allow_order>
+                <allow_items>0</allow_items>
             </gift_options>
         </sales>
         <sales_email>

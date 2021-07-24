@@ -182,8 +182,8 @@ $coreConfig->saveConfig ('wishlist/general/active', '0');
 $coreConfig->saveConfig ('sales/minimum_order/active', '1');
 $coreConfig->saveConfig ('sales/minimum_order/amount', '0');
 
-$coreConfig->saveConfig ('sales/gift_options/allow_order', '1');
-$coreConfig->saveConfig ('sales/gift_options/allow_items', '1');
+$coreConfig->saveConfig ('sales/gift_options/allow_order', '0');
+$coreConfig->saveConfig ('sales/gift_options/allow_items', '0');
 
 /**
  * Sales Email
