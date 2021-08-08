@@ -76,9 +76,11 @@ class Gamuza_Mobile_Model_Product_Api extends Mage_Catalog_Model_Api_Resource
             ->getTypeId ()
         ;
 
+        /*
         $this->_freeshippingAttribute = Mage::getModel ('eav/entity_attribute')
             ->loadByCode ($this->_entityTypeId, 'free_shipping')
         ;
+        */
     }
 
     /**
@@ -196,7 +198,7 @@ class Gamuza_Mobile_Model_Product_Api extends Mage_Catalog_Model_Api_Resource
 
             foreach ($this->_boolCodes as $code)
             {
-                if (!strcmp ($code, 'free_shipping'))
+                if (!strcmp ($code, 'free_shipping__'))
                 {
                     foreach ($this->_freeshippingAttribute->getSource ()->getAllOptions () as $option)
                     {
