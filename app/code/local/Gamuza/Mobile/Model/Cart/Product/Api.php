@@ -32,6 +32,8 @@ class Gamuza_Mobile_Model_Cart_Product_Api extends Gamuza_Mobile_Model_Api_Resou
 
     const DISTRO_STORE_ID = Mage_Core_Model_App::DISTRO_STORE_ID;
 
+    const XML_PATH_WEB_SECURE_BASE_TUNNEL_URL = 'web/secure/base_tunnel_url';
+
     /**
      * Base preparation of product data
      *
@@ -397,11 +399,13 @@ class Gamuza_Mobile_Model_Cart_Product_Api extends Gamuza_Mobile_Model_Api_Resou
                 : Mage::helper ('checkout')->__('Minimum order amount is %s', $minimumCurrency)
             ;
         }
-
+/*
         $mediaUrl = Mage::app ()
             ->getStore (Mage_Core_Model_App::ADMIN_STORE_ID)
             ->getBaseUrl (Mage_Core_Model_Store::URL_TYPE_MEDIA, false)
         ;
+*/
+        $mediaUrl = Mage::getStoreConfig (self::XML_PATH_WEB_SECURE_BASE_TUNNEL_URL) . '/media/';
 
         foreach ($quote->getAllVisibleItems () as $item)
         {
