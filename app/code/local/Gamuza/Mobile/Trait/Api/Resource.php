@@ -73,8 +73,8 @@ trait Gamuza_Mobile_Trait_Api_Resource
     {
         $remoteIp = Mage::helper('core/http')->getRemoteAddr(false);
 
-        $firstName = Mage::helper ('customer')->__('First Name');
-        $lastName  = Mage::helper ('customer')->__('Last Name');
+        $firstName = Mage::getStoreConfig ('general/store_information/name', $storeId);
+        $lastName  = Mage::getStoreConfig ('general/store_information/name', $storeId);
 
         try
         {
@@ -109,8 +109,8 @@ trait Gamuza_Mobile_Trait_Api_Resource
             Mage::getModel ('checkout/cart_customer_api')->setAddresses ($quote->getId (), array(
                 array(
                     'mode'       => 'billing',
-                    'firstname'  => Mage::getStoreConfig ('general/store_information/name', $storeId),
-                    'lastname'   => Mage::getStoreConfig ('general/store_information/name', $storeId),
+                    'firstname'  => $firstName,
+                    'lastname'   => $lastName,
                     'company'    => null,
                     'street'     => array(
                         Mage::getStoreConfig ('shipping/origin/street_line1', $storeId),
