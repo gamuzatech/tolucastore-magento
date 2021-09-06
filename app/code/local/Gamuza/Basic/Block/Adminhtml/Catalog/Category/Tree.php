@@ -49,5 +49,17 @@ class Gamuza_Basic_Block_Adminhtml_Catalog_Category_Tree
     {
         return false;
     }
+
+    public function canAddSubCategory()
+    {
+        $category = $this->getCategory();
+
+        if ($category && $category->getId() && $category->getLevel() != 1)
+        {
+            return false;
+        }
+
+        return parent::canAddSubCategory();
+    }
 }
 
