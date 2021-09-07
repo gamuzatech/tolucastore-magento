@@ -35,6 +35,13 @@ try
 {
     $cacheTypes = Mage::helper('core')->getCacheTypes();
 
+    if ($argc != 1)
+    {
+        array_shift($argv);
+
+        $cacheTypes = array_flip($argv);
+    }
+
     foreach($cacheTypes as $type => $value)
     {
         Mage::app()->getCacheInstance()->cleanType($type);
@@ -45,6 +52,8 @@ try
     }
 
     Mage::app()->saveUseCache($cacheTypes);
+
+    if ($argc != 1) exit(0);
 
     Mage::app()->cleanCache();
 
