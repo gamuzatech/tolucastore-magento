@@ -414,6 +414,9 @@
             </option>
         </shipping>
         <admin>
+            <startup>
+                <page>sales/order</page>
+            </startup>
             <security>
                 <session_cookie_lifetime>86400</session_cookie_lifetime>
                 <validate_formkey_checkout>1</validate_formkey_checkout>

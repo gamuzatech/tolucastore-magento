@@ -147,6 +147,8 @@ $coreConfig->saveConfig ('shipping/option/checkout_multiple', '0');
 /**
  * Admin
  */
+$coreConfig->saveConfig (Mage_Admin_Model_User::XML_PATH_STARTUP_PAGE, 'sales/order');
+
 $coreConfig->saveConfig ('admin/security/session_cookie_lifetime',   '86400');
 $coreConfig->saveConfig ('admin/security/validate_formkey_checkout', '1');
 
