@@ -33,7 +33,7 @@ umask(0);
 
 try
 {
-    Mage::app()->cleanAllSessions();
+    // Mage::app()->cleanAllSessions();
 
     $dir = Mage::app()->getConfig()->getOptions()->getSessionDir();
 
