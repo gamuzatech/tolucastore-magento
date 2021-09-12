@@ -145,7 +145,7 @@ class Gamuza_Basic_Model_Observer
 
                 imagecopyresampled ($resized, $original, 0, 0, 0, 0, 1024, 1024, $image->getOriginalWidth (), $image->getOriginalHeight ());
 
-                imagejpeg ($resized, $file, 85);
+                imagejpeg ($resized, $file, 75);
             }
         }
 
