@@ -45,7 +45,24 @@ class Gamuza_Basic_Helper_Data extends Mage_Core_Helper_Abstract
     const PRODUCT_PRICE_VIEW_PRICE_STATIC   = 5;
     const PRODUCT_PRICE_VIEW_PRICE_AVERAGE  = 6;
 
+    const ORDER_STATUS_PREPARING = 'preparing';
+    const ORDER_STATUS_PAID      = 'paid';
+    const ORDER_STATUS_SHIPPED   = 'shipped';
+    const ORDER_STATUS_DELIVERED = 'delivered';
+    const ORDER_STATUS_REFUNDED  = 'refunded';
+
     const SQL_PT_BR = 'pt_BR' . DS . 'sql' . DS . 'sql_pt_br_19_utf8.txt';
+
+    public function getLocaleCode ($scope = 'default', $scope_id = 0)
+    {
+        $read = Mage::getSingleton('core/resource')->getConnection('core_read');
+
+        return $read->fetchOne(
+            " SELECT value FROM core_config_data " .
+            " WHERE scope = '$scope' AND scope_id = $scope_id " .
+            " AND path = 'general/locale/code'"
+        );
+    }
 
     public function getTotals (Mage_Adminhtml_Block_Widget_Grid $grid)
     {

@@ -52,5 +52,60 @@ class Gamuza_Basic_Adminhtml_Sales_OrderController extends Mage_Adminhtml_Sales_
 
         $this->getResponse ()->setBody ($collection->getFirstItem ()->getQty ());
     }
+
+    /**
+     * Cancel order
+     */
+    public function cancelAction()
+    {
+        parent::cancelAction();
+
+        if ($order = Mage::registry ('current_order'))
+        {
+            $status  = Gamuza_Basic_Model_Order::STATUS_CANCELED;
+            $comment = Mage::helper ('basic')->__('The order was canceled.');
+
+            $order->queueOrderUpdateEmail (true, $comment, true)
+                ->addStatusToHistory ($status, $comment, true)
+                ->save ()
+            ;
+        }
+
+        $this->_redirect ('*/sales_order/view', array ('order_id' => $order->getId ()));
+    }
+
+    /**
+     * Prepare order to delivery
+     */
+    public function prepareAction()
+    {
+        if ($order = $this->_initOrder ())
+        {
+            try
+            {
+                $status  = Gamuza_Basic_Model_Order::STATUS_PREPARING;
+                $comment = Mage::helper ('basic')->__('The order is being prepared.');
+
+                $order->queueOrderUpdateEmail (true, $comment, true)
+                    ->addStatusToHistory ($status, $comment, true)
+                    ->save ()
+                ;
+
+                $this->_getSession()->addSuccess ($this->__('The order notification has been sent.'));
+            }
+            catch (Mage_Core_Exception $e)
+            {
+                $this->_getSession ()->addError ($e->getMessage ());
+            }
+            catch (Exception $e)
+            {
+                $this->_getSession ()->addError ($this->__('Failed to send the order notification.'));
+
+                // Mage::logException ($e);
+            }
+        }
+
+        $this->_redirect ('*/sales_order/view', array ('order_id' => $order->getId ()));
+    }
 }
 

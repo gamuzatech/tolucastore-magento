@@ -40,6 +40,36 @@ class Gamuza_Basic_Block_Adminhtml_Sales_Order_View extends Mage_Adminhtml_Block
         $this->_removeButton('order_edit');
         $this->_removeButton('order_hold');
         $this->_removeButton('order_unhold');
+
+        $order = $this->getOrder ();
+
+        /**
+         * Prepare
+         */
+        if (!strcmp ($order->getState (), Mage_Sales_Model_Order::STATE_NEW) && !strcmp ($order->getStatus (), Gamuza_Basic_Model_Order::STATUS_PENDING))
+        {
+            $coreHelper = Mage::helper ('core');
+
+            $confirmationMessage = $coreHelper->jsQuoteEscape(
+                Mage::helper ('basic')->__('Are you sure?')
+            );
+
+            $onclickJs = sprintf ("confirmSetLocation ('%s', '%s');", $confirmationMessage, $this->getPrepareUrl ());
+
+            $this->addButton ('order_prepare', array(
+                'label'   => Mage::helper ('basic')->__('Prepare'),
+                'class'   => 'scalable go',
+                'onclick' => $onclickJs,
+            ), 1);
+
+            $this->removeButton ('order_invoice');
+            $this->removeButton ('order_ship');
+        }
+    }
+
+    public function getPrepareUrl ()
+    {
+        return $this->getUrl ('*/*/prepare');
     }
 }
 
