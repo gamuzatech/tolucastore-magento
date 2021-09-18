@@ -103,5 +103,11 @@ $installer->getConnection ()->addColumn(
     'tinyint(1) UNSIGNED DEFAULT NULL'
 );
 
+$installer->getConnection ()->addColumn(
+    $installer->getTable ('sales/order_status_history'),
+    'is_customer_pushed',
+    'tinyint(1) UNSIGNED DEFAULT 0'
+);
+
 $installer->endSetup ();
 
