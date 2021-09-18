@@ -76,6 +76,8 @@ trait Gamuza_Mobile_Trait_Api_Resource
         $firstName = Mage::getStoreConfig ('general/store_information/name', $storeId);
         $lastName  = Mage::getStoreConfig ('general/store_information/name', $storeId);
 
+        $code = Mage::getStoreConfig ('general/store_information/code', $storeId);
+
         try
         {
             /*@var $quote Mage_Sales_Model_Quote*/
@@ -90,7 +92,9 @@ trait Gamuza_Mobile_Trait_Api_Resource
                 ->save()
             ;
 
-            $quote->setData (Gamuza_Mobile_Helper_Data::ORDER_ATTRIBUTE_IS_APP, true);
+            $quote->setData (Gamuza_Mobile_Helper_Data::ORDER_ATTRIBUTE_IS_APP, true)
+                ->setData (Gamuza_Mobile_Helper_Data::ORDER_ATTRIBUTE_STORE_INFO_CODE, $code)
+            ;
 
             $customerData = array(
                 'mode'      => Mage_Checkout_Model_Type_Onepage::METHOD_GUEST,

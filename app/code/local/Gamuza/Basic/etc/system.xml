@@ -36,6 +36,22 @@
         </gamuza>
     </tabs>
     <sections>
+        <general>
+            <groups>
+                <store_information>
+                    <fields>
+                        <code translate="label" module="basic">
+                            <label>Code</label>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </code>
+                    </fields>
+                </store_information>
+            </groups>
+        </general>
         <shipping>
             <tab>gamuza</tab>
             <groups>

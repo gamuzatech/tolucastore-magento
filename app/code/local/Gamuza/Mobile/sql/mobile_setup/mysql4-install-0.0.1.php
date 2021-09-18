@@ -50,6 +50,18 @@ foreach ($entities as $entity)
     $installer->addAttribute ($entity, Gamuza_Mobile_Helper_Data::ORDER_ATTRIBUTE_IS_APP, $options);
 }
 
+$options = array(
+    'type'     => Varien_Db_Ddl_Table::TYPE_TEXT,
+    'nullable' => false,
+    'visible'  => true,
+    'required' => false,
+);
+
+foreach ($entities as $entity)
+{
+    $installer->addAttribute ($entity, Gamuza_Mobile_Helper_Data::ORDER_ATTRIBUTE_STORE_INFO_CODE, $options);
+}
+
 /**
  * Order Table
  */
