@@ -117,5 +117,100 @@ class Gamuza_Basic_Block_Adminhtml_Catalog_Product_Grid
 
         $this->sortColumnsByOrder ();
     }
+
+    protected function _prepareMassaction()
+    {
+        parent::_prepareMassaction();
+
+        $this->getMassactionBlock()->addItem('stock_qty', array(
+             'label'=> Mage::helper('basic')->__('Change Stock Qty'),
+             'url'  => $this->getUrl('*/*/massStockQty', array('_current'=>true)),
+             'additional' => array(
+                    'visibility' => array(
+                         'name' => 'stock_qty',
+                         'type' => 'text',
+                         'class' => 'required-entry validate-digits',
+                         'label' => Mage::helper('basic')->__('Qty'),
+                     )
+             )
+        ));
+
+        $statuses = array(
+            array (),
+            array ('value' => Mage_CatalogInventory_Model_Stock_Status::STATUS_OUT_OF_STOCK, 'label' => Mage::helper ('catalogInventory')->__('Out of Stock')),
+            array ('value' => Mage_CatalogInventory_Model_Stock_Status::STATUS_IN_STOCK,     'label' => Mage::helper ('catalogInventory')->__('In Stock'))
+        );
+
+        $this->getMassactionBlock()->addItem('stock_status', array(
+             'label'=> Mage::helper('basic')->__('Change Stock Status'),
+             'url'  => $this->getUrl('*/*/massStockStatus', array('_current'=>true)),
+             'additional' => array(
+                    'visibility' => array(
+                         'name' => 'stock_status',
+                         'type' => 'select',
+                         'class' => 'required-entry',
+                         'label' => Mage::helper('basic')->__('Status'),
+                         'values' => $statuses
+                     )
+             )
+        ));
+
+        $this->getMassactionBlock()->addItem('price', array(
+             'label'=> Mage::helper('basic')->__('Change Price'),
+             'url'  => $this->getUrl('*/*/massPrice', array('_current'=>true)),
+             'additional' => array(
+                    'visibility' => array(
+                         'name' => 'price',
+                         'type' => 'text',
+                         'class' => 'required-entry validate-number validate-greater-than-zero',
+                         'label' => Mage::helper('basic')->__('Price'),
+                     )
+             )
+        ));
+
+        $this->getMassactionBlock()->addItem('special_price', array(
+             'label'=> Mage::helper('basic')->__('Change Special Price'),
+             'url'  => $this->getUrl('*/*/massSpecialPrice', array('_current'=>true)),
+             'additional' => array(
+                    'visibility' => array(
+                         'name' => 'special_price',
+                         'type' => 'text',
+                         'class' => 'required-entry validate-number validate-zero-or-greater',
+                         'label' => Mage::helper('basic')->__('Special Price'),
+                     )
+             )
+        ));
+
+        $this->getMassactionBlock()->addItem('weight', array(
+             'label'=> Mage::helper('basic')->__('Change Weight'),
+             'url'  => $this->getUrl('*/*/massWeight', array('_current'=>true)),
+             'additional' => array(
+                    'visibility' => array(
+                         'name' => 'weight',
+                         'type' => 'text',
+                         'class' => 'required-entry validate-number validate-zero-or-greater',
+                         'label' => Mage::helper('basic')->__('Weight'),
+                     )
+             )
+        ));
+
+        $visibilities = Mage::getModel('catalog/product_visibility')->getOptionArray();
+
+        array_unshift ($visibilities, array('label'=>'', 'value'=>''));
+
+        $this->getMassactionBlock()->addItem('visibility', array(
+             'label'=> Mage::helper('basic')->__('Change Visibility'),
+             'url'  => $this->getUrl('*/*/massVisibility', array('_current'=>true)),
+             'additional' => array(
+                    'visibility' => array(
+                         'name' => 'visibility',
+                         'type' => 'select',
+                         'class' => 'required-entry validate-select',
+                         'label' => Mage::helper('basic')->__('Visibility'),
+                         'values' => $visibilities,
+                     )
+             )
+        ));
+    }
 }
 
