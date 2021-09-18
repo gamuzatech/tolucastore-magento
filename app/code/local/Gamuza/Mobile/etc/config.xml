@@ -76,6 +76,18 @@
                 </connection>
             </mobile_read>
         </resources>
+        <fieldsets>
+            <sales_convert_quote>
+                <is_app>
+                    <to_order>*</to_order>
+                </is_app>
+            </sales_convert_quote>
+            <sales_convert_order>
+                <is_app>
+                    <to_quote>*</to_quote>
+                </is_app>
+            </sales_convert_order>
+        <fieldsets>
         <payment>
             <machine>
                 <types>

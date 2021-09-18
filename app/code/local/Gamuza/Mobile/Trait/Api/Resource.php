@@ -90,6 +90,8 @@ trait Gamuza_Mobile_Trait_Api_Resource
                 ->save()
             ;
 
+            $quote->setData (Gamuza_Mobile_Helper_Data::ORDER_ATTRIBUTE_IS_APP, true);
+
             $customerData = array(
                 'mode'      => Mage_Checkout_Model_Type_Onepage::METHOD_GUEST,
                 'firstname' => $firstName,

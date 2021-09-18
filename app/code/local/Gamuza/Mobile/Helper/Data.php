@@ -28,6 +28,7 @@
 
 class Gamuza_Mobile_Helper_Data extends Mage_Core_Helper_Abstract
 {
+    const ORDER_ATTRIBUTE_IS_APP         = 'is_app';
     const ORDER_ATTRIBUTE_CUSTOMER_STARS = 'customer_stars';
 }
 
