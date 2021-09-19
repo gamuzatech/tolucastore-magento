@@ -118,7 +118,7 @@
         <carriers>
             <pedroteixeira_correios>
                 <!-- GENERAL -->
-                <active>1</active>
+                <active>0</active>
                 <model>PedroTeixeira_Correios_Model_Carrier_CorreiosMethod</model>
                 <title>Correios</title>
                 <postmethods>04014,04510</postmethods>
