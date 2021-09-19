@@ -66,7 +66,9 @@ class Gamuza_Basic_Adminhtml_Sales_OrderController extends Mage_Adminhtml_Sales_
             $comment = Mage::helper ('basic')->__('The order was canceled.');
 
             $order->queueOrderUpdateEmail (true, $comment, true)
-                ->addStatusToHistory ($status, $comment, true)
+                ->addStatusHistoryComment ($comment, $status)
+                ->setIsCustomerNotified (true)
+                ->setIsVisibleOnFront (true)
                 ->save ()
             ;
         }

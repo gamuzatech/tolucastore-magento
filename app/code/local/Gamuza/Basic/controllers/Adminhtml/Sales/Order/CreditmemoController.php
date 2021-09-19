@@ -52,7 +52,9 @@ class Gamuza_Basic_Adminhtml_Sales_Order_CreditmemoController
             $comment = Mage::helper ('basic')->__('The order was refunded.');
 
             $order->queueOrderUpdateEmail (true, $comment, true)
-                ->addStatusToHistory ($status, $comment, true)
+                ->addStatusHistoryComment ($comment, $status)
+                ->setIsCustomerNotified (true)
+                ->setIsVisibleOnFront (true)
                 ->save ()
             ;
         }

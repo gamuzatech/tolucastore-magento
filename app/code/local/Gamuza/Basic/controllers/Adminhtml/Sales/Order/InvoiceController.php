@@ -52,7 +52,9 @@ class Gamuza_Basic_Adminhtml_Sales_Order_InvoiceController
             $comment = Mage::helper ('basic')->__('The order was paid.');
 
             $order->queueOrderUpdateEmail (true, $comment, true)
-                ->addStatusToHistory ($status, $comment, true)
+                ->addStatusHistoryComment ($comment, $status)
+                ->setIsCustomerNotified (true)
+                ->setIsVisibleOnFront (true)
                 ->save ()
             ;
         }

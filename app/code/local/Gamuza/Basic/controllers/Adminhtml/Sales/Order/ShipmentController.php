@@ -54,7 +54,9 @@ class Gamuza_Basic_Adminhtml_Sales_Order_ShipmentController
             $comment = Mage::helper ('basic')->__('The order was shipped.');
 
             $order->queueOrderUpdateEmail (true, $comment, true)
-                ->addStatusToHistory ($status, $comment, true)
+                ->addStatusHistoryComment ($comment, $status)
+                ->setIsCustomerNotified (true)
+                ->setIsVisibleOnFront (true)
                 ->save ()
             ;
         }
