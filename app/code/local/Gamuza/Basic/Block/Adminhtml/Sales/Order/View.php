@@ -65,11 +65,39 @@ class Gamuza_Basic_Block_Adminhtml_Sales_Order_View extends Mage_Adminhtml_Block
             $this->removeButton ('order_invoice');
             $this->removeButton ('order_ship');
         }
+
+        /**
+         * Delivered
+         */
+        if (!strcmp ($order->getState (), Mage_Sales_Model_Order::STATE_COMPLETE)
+            && in_array ($order->getStatus (), array(
+                Gamuza_Basic_Model_Order::STATUS_PAID, Gamuza_Basic_Model_Order::STATUS_SHIPPED
+            )))
+        {
+            $coreHelper = Mage::helper ('core');
+
+            $confirmationMessage = $coreHelper->jsQuoteEscape(
+                Mage::helper ('basic')->__('Are you sure?')
+            );
+
+            $onclickJs = sprintf ("confirmSetLocation ('%s', '%s');", $confirmationMessage, $this->getDeliveredStatusUrl ());
+
+            $this->addButton ('order_delivered', array(
+                'label'   => Mage::helper ('basic')->__('Delivered'),
+                'class'   => 'scalable go',
+                'onclick' => $onclickJs,
+            ), 1);
+        }
     }
 
     public function getPrepareUrl ()
     {
         return $this->getUrl ('*/*/prepare');
+    }
+
+    public function getDeliveredStatusUrl ()
+    {
+        return $this->getUrl ('*/*/deliveredStatus');
     }
 }
 

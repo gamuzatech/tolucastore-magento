@@ -75,5 +75,13 @@ $orderStatus = Mage::getModel ('sales/order_status')
 
 $orderStatus->assignState (Mage_Sales_Model_Order::STATE_CLOSED);
 
+$orderStatus = Mage::getModel ('sales/order_status')
+    ->setStatus (Gamuza_Basic_Helper_Data::ORDER_STATUS_DELIVERED)
+    ->setLabel (Mage::helper ('basic')->__('Delivered'))
+    ->save ()
+;
+
+$orderStatus->assignState (Mage_Sales_Model_Order::STATE_COMPLETE);
+
 $installer->endSetup ();
 

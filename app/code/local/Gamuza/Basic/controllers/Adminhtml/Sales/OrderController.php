@@ -70,6 +70,8 @@ class Gamuza_Basic_Adminhtml_Sales_OrderController extends Mage_Adminhtml_Sales_
                 ->setIsCustomerNotified (true)
                 ->setIsVisibleOnFront (true)
                 ->save ()
+                ->getOrder ()
+                ->save ()
             ;
         }
 
@@ -89,7 +91,49 @@ class Gamuza_Basic_Adminhtml_Sales_OrderController extends Mage_Adminhtml_Sales_
                 $comment = Mage::helper ('basic')->__('The order is being prepared.');
 
                 $order->queueOrderUpdateEmail (true, $comment, true)
-                    ->addStatusToHistory ($status, $comment, true)
+                    ->addStatusHistoryComment ($comment, $status)
+                    ->setIsCustomerNotified (true)
+                    ->setIsVisibleOnFront (true)
+                    ->save ()
+                    ->getOrder ()
+                    ->save ()
+                ;
+
+                $this->_getSession()->addSuccess ($this->__('The order notification has been sent.'));
+            }
+            catch (Mage_Core_Exception $e)
+            {
+                $this->_getSession ()->addError ($e->getMessage ());
+            }
+            catch (Exception $e)
+            {
+                $this->_getSession ()->addError ($this->__('Failed to send the order notification.'));
+
+                // Mage::logException ($e);
+            }
+        }
+
+        $this->_redirect ('*/sales_order/view', array ('order_id' => $order->getId ()));
+    }
+
+    /**
+     * Delivered order status
+     */
+    public function deliveredStatusAction()
+    {
+        if ($order = $this->_initOrder ())
+        {
+            try
+            {
+                $status  = Gamuza_Basic_Model_Order::STATUS_DELIVERED;
+                $comment = $this->__('The order was delivered.');
+
+                $order->queueOrderUpdateEmail (true, $comment, true)
+                    ->addStatusHistoryComment ($comment, $status)
+                    ->setIsCustomerNotified (true)
+                    ->setIsVisibleOnFront (true)
+                    ->save ()
+                    ->getOrder ()
                     ->save ()
                 ;
 

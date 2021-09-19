@@ -58,6 +58,8 @@ class Gamuza_Basic_Adminhtml_Sales_Order_ShipmentController
                 ->setIsCustomerNotified (true)
                 ->setIsVisibleOnFront (true)
                 ->save ()
+                ->getOrder ()
+                ->save ()
             ;
         }
 

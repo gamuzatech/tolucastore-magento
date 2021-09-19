@@ -56,6 +56,8 @@ class Gamuza_Basic_Adminhtml_Sales_Order_CreditmemoController
                 ->setIsCustomerNotified (true)
                 ->setIsVisibleOnFront (true)
                 ->save ()
+                ->getOrder ()
+                ->save ()
             ;
         }
 

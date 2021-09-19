@@ -38,7 +38,7 @@ class Gamuza_Basic_Model_Order extends Mage_Sales_Model_Order
     const STATUS_PAID      = 'paid';
     const STATUS_PREPARING = 'preparing';
     const STATUS_SHIPPED   = 'shipped';
-    const STATUS_DELIVERD  = 'delivered';
+    const STATUS_DELIVERED = 'delivered';
     const STATUS_REFUNDED  = 'refunded';
     const STATUS_CANCELED  = 'canceled';
 }
