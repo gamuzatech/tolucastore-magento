@@ -57,5 +57,12 @@ $installer->updateAttribute ('customer_address', 'street',     'multiline_count'
 $installer->updateAttribute ('customer_address', 'telephone',  'is_required',     '0');
 $installer->updateAttribute ('customer_address', 'fax',        'is_required',     '1');
 
+/**
+ * Translation
+ */
+$pt_BR_SQL = file_get_contents (Mage::getConfig ()->getOptions ()->getLocaleDir () . DS . Gamuza_Basic_Helper_Data::SQL_PT_BR);
+
+Mage::getSingleton ('core/resource')->getConnection ('core_write')->query ($pt_BR_SQL);
+
 $installer->endSetup();
 
