@@ -246,6 +246,11 @@ UPDATE `sales_order_status` SET `label`='Pendente' WHERE `label`='Pending';
 UPDATE `sales_order_status` SET `label`='Pagamento Pendente' WHERE `label`='Pending Payment';
 UPDATE `sales_order_status` SET `label`='PayPal Pendente' WHERE `label`='Pending PayPal';
 UPDATE `sales_order_status` SET `label`='Processando' WHERE `label`='Processing';
+UPDATE `sales_order_status` SET `label`='Preparando' WHERE `label`='Preparing';
+UPDATE `sales_order_status` SET `label`='Pago' WHERE `label`='Paid';
+UPDATE `sales_order_status` SET `label`='Reembolsado' WHERE `label`='Refunded';
+UPDATE `sales_order_status` SET `label`='Enviado' WHERE `label`='Shipped';
+UPDATE `sales_order_status` SET `label`='Entregue' WHERE `label`='Delivered';
 
 /* tax_class */
 /* UPDATE `tax_class` SET `class_name`='Mercadoria Tributável' WHERE `class_name`='Taxable Goods'; */
