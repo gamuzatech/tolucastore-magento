@@ -255,7 +255,7 @@
                 <model>mobile/payment_method_cashondelivery</model>
             </cashondelivery>
             <machineondelivery>
-                <active>0</active>
+                <active>1</active>
                 <cctypes>AE,AL,AU,BC,CC,DC,DI,EC,ED,ELO,HI,HC,JCB,MC,SM,SO,TI,VI,VE,VR</cctypes>
                 <model>mobile/payment_method_machineondelivery</model>
                 <order_status>pending</order_status>
