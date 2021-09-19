@@ -459,6 +459,11 @@
                 <merge_css_files>1</merge_css_files>
             </css>
         </dev>
+        <payment>
+            <cashondelivery>
+                <active>1</active>
+            </cashondelivery>
+        </payment>
     </default>
 </config>
 
