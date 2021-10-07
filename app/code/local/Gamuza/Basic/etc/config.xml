@@ -51,6 +51,7 @@
             </basic>
             <adminhtml>
                 <rewrite>
+                    <backup>Gamuza_Basic_Block_Adminhtml_Backup</backup>
                     <catalog_category_tree>Gamuza_Basic_Block_Adminhtml_Catalog_Category_Tree</catalog_category_tree>
                     <catalog_category_tabs>Gamuza_Basic_Block_Adminhtml_Catalog_Category_Tabs</catalog_category_tabs>
                     <catalog_product_edit_tab_attributes>Gamuza_Basic_Block_Adminhtml_Catalog_Product_Edit_Tab_Attributes</catalog_product_edit_tab_attributes>
@@ -445,6 +446,11 @@
                 <severity_icons_url>www.toluca.com.br/media/widgets/%s/%s.gif</severity_icons_url>
                 <use_https>1</use_https>
             </adminnotification>
+            <backup>
+                <enabled>1</enabled>
+                <type>media</type>
+                <maintenance>0</maintenance>
+            </backup>
         </system>
         <advanced>
             <modules_disable_output>

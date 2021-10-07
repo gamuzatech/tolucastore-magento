@@ -160,6 +160,9 @@ $coreConfig->saveConfig ('system/cron/showCronUserMessage',    '0');
 $coreConfig->saveConfig ('system/smtp/disable',                '1');
 $coreConfig->saveConfig ('system/log/enable_log',              '2');
 $coreConfig->saveConfig ('system/adminnotification/use_https', '2');
+$coreConfig->saveConfig ('system/backup/enabled',              '1');
+$coreConfig->saveConfig ('system/backup/type',                 'media');
+$coreConfig->saveConfig ('system/backup/maintenance',          '0');
 
 /**
  * Advanced
