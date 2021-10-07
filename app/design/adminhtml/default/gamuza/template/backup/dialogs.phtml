@@ -135,9 +135,9 @@
                                 <label for="rollback_maintenance_mode"><?php echo $this->__('Put store on the maintenance mode while rollback processing')?></label>
                             </td>
                         </tr>
-                        <tr id="use-ftp-checkbox-row" style="display: none;">
+                        <tr id="use-ftp-checkbox-row" style="display: none; visibility: hidden;">
                             <td>&nbsp;</td>
-                            <td><input type="checkbox" name="use_ftp" value="1" id="use_ftp" onClick="backup.toggleFtpCredentialsForm();"/> <label for="use_ftp"><?php echo $this->__('Use FTP Connection')?></label></td>
+                            <td><input type="checkbox" name="use_ftp" value="" id="use_ftp" onClick="backup.toggleFtpCredentialsForm();"/> <label for="use_ftp"><?php echo $this->__('Use FTP Connection')?></label></td>
                         </tr>
                     </table>
                 </div>

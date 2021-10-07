@@ -133,6 +133,15 @@
                 </importexport>
             </updates>
         </layout>
+        <translate>
+            <modules>
+                <Mage_ImportExport>
+                    <files>
+                        <default>Mage_ImportExport.csv</default>
+                    </files>
+                </Mage_ImportExport>
+            </modules>
+        </translate>
     </adminhtml>
     <default>
         <system>

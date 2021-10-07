@@ -123,6 +123,13 @@
                     <address>Gamuza_Basic_Model_Customer_Address</address>
                 </rewrite>
             </customer>
+            <importexport>
+                <rewrite>
+                    <source_export_format>Gamuza_Basic_Model_ImportExport_Source_Export_Format</source_export_format>
+                    <source_export_entity>Gamuza_Basic_Model_ImportExport_Source_Export_Entity</source_export_entity>
+                    <source_import_entity>Gamuza_Basic_Model_ImportExport_Source_Import_Entity</source_import_entity>
+                </rewrite>
+            </importexport>
             <sales>
                 <rewrite>
                     <quote_address>Gamuza_Basic_Model_Sales_Quote_Address</quote_address>
