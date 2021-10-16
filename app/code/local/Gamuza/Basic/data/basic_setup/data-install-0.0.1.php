@@ -37,6 +37,7 @@ $installer->updateAttribute ('catalog_category', 'is_anchor',                  '
 $installer->updateAttribute ('catalog_category', 'page_layout',                'default_value', 'two_columns_left');
 
 $installer->updateAttribute ('catalog_product', 'sku',               'frontend_input', 'label');
+$installer->updateAttribute ('catalog_product', 'description',       'is_required',    '0');
 $installer->updateAttribute ('catalog_product', 'short_description', 'frontend_input', 'text');
 $installer->updateAttribute ('catalog_product', 'url_key',           'frontend_input', 'label');
 $installer->updateAttribute ('catalog_product', 'tax_class_id',      'default_value',  '0');
