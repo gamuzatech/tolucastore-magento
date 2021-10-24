@@ -33,6 +33,15 @@ class Gamuza_Basic_Helper_Data extends Mage_Core_Helper_Abstract
     const CUSTOMER_GENDER_MALE   = 1;
     const CUSTOMER_GENDER_FEMALE = 2;
 
+    const ORDER_ATTRIBUTE_IS_APP = 'is_app';
+    const ORDER_ATTRIBUTE_IS_BOT = 'is_bot';
+
+    const ORDER_SUFFIX_APP    = 'APP';
+    const ORDER_SUFFIX_BOT    = 'BOT';
+    const ORDER_SUFFIX_ADMIN  = 'ADMIN';
+    const ORDER_SUFFIX_MARKET = 'MARKET';
+    const ORDER_SUFFIX_STORE  = 'STORE';
+
     const PRODUCT_ATTRIBUTE_SIZE = 'size';
     const PRODUCT_ATTRIBUTE_FREE_SHIPPING = 'free_shipping';
     const PRODUCT_ATTRIBUTE_PRICE_TYPE   = 'price_type';
@@ -80,6 +89,19 @@ class Gamuza_Basic_Helper_Data extends Mage_Core_Helper_Abstract
         $object->addData ($fieldsTotals);
 
         return $object;
+    }
+
+    function isMobile ()
+    {
+        /*
+        $result = Zend_Http_UserAgent_Mobile::match(
+            Mage::helper ('core/http')->getHttpUserAgent (),
+            $_SERVER
+        );
+
+        return $result;
+        */
+        return preg_match ('/(iPad|iPhone|Darwin|Android|okhttp)/i', $_SERVER ['HTTP_USER_AGENT']);
     }
 }
 

@@ -123,6 +123,11 @@
                     <address>Gamuza_Basic_Model_Customer_Address</address>
                 </rewrite>
             </customer>
+            <eav>
+                <rewrite>
+                    <entity_type>Gamuza_Basic_Model_Eav_Entity_Type</entity_type>
+                </rewrite>
+            </eav>
             <importexport>
                 <rewrite>
                     <source_export_format>Gamuza_Basic_Model_ImportExport_Source_Export_Format</source_export_format>
