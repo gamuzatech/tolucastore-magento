@@ -45,6 +45,7 @@ class Gamuza_Basic_Helper_Data extends Mage_Core_Helper_Abstract
     const PRODUCT_ATTRIBUTE_SIZE = 'size';
     const PRODUCT_ATTRIBUTE_FREE_SHIPPING = 'free_shipping';
     const PRODUCT_ATTRIBUTE_PRICE_TYPE   = 'price_type';
+    const PRODUCT_ATTRIBUTE_SKU_POSITION = 'sku_position';
 
     const PRODUCT_PRICE_VIEW_PRICE_RANGE    = 0;
     const PRODUCT_PRICE_VIEW_AS_LOW_AS      = 1;

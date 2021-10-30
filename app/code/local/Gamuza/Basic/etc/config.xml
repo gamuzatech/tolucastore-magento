@@ -110,6 +110,7 @@
             <catalog_resource>
                 <rewrite>
                     <product_collection>Gamuza_Basic_Model_Catalog_Resource_Product_Collection</product_collection>
+                    <product_flat_indexer>Gamuza_Basic_Model_Catalog_Resource_Product_Flat_Indexer</product_flat_indexer>
                 </rewrite>
             </catalog_resource>
             <core>
@@ -118,6 +119,11 @@
                     <locale_config>Gamuza_Basic_Model_Core_Locale_Config</locale_config>
                 </rewrite>
             </core>
+            <catalog>
+                <rewrite>
+                    <product_option>Gamuza_Basic_Model_Catalog_Product_Option</product_option>
+                </rewrite>
+            </catalog>
             <customer>
                 <rewrite>
                     <address>Gamuza_Basic_Model_Customer_Address</address>
@@ -292,6 +298,13 @@
                 </basic>
             </updates>
         </layout>
+        <product>
+            <collection>
+                <attributes>
+                    <sku_position />
+                </attributes>
+            </collection>
+        </product>
     </frontend>
     <default>
         <general>
