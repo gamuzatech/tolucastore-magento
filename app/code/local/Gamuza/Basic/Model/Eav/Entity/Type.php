@@ -33,30 +33,28 @@ class Gamuza_Basic_Model_Eav_Entity_Type extends Mage_Eav_Model_Entity_Type
         }
         else
         {
-            $isMobile = Mage::helper ('basic')->isMobile ();
+            $suffix = Gamuza_Basic_Helper_Data::ORDER_SUFFIX_STORE;
+        }
 
-            $orderId = Mage::app ()->getRequest ()->getParam ('order_id');
+        $isMobile = Mage::helper ('basic')->isMobile ();
 
-            $currentOrder = Mage::getModel ('sales/order')->load ($orderId);
+        $orderId = Mage::app ()->getRequest ()->getParam ('order_id');
 
-            $isApp = $currentOrder && $currentOrder->getData (Gamuza_Basic_Helper_Data::ORDER_ATTRIBUTE_IS_APP);
+        $currentOrder = Mage::getModel ('sales/order')->load ($orderId);
 
-            $isBot = Mage::helper ('core')->isModuleEnabled ('Gamuza_Bot')
-                && !strcmp (Mage::app ()->getRequest ()->getControllerModule (), 'Gamuza_Bot')
-            ;
+        $isApp = $currentOrder && $currentOrder->getData (Gamuza_Basic_Helper_Data::ORDER_ATTRIBUTE_IS_APP);
 
-            if ($isMobile || $isApp)
-            {
-                $suffix = Gamuza_Basic_Helper_Data::ORDER_SUFFIX_APP;
-            }
-            else if ($isBot)
-            {
-                $suffix = Gamuza_Basic_Helper_Data::ORDER_SUFFIX_BOT;
-            }
-            else
-            {
-                $suffix = Gamuza_Basic_Helper_Data::ORDER_SUFFIX_STORE;
-            }
+        $isBot = Mage::helper ('core')->isModuleEnabled ('Gamuza_Bot')
+            && !strcmp (Mage::app ()->getRequest ()->getControllerModule (), 'Gamuza_Bot')
+        ;
+
+        if ($isMobile || $isApp)
+        {
+            $suffix = Gamuza_Basic_Helper_Data::ORDER_SUFFIX_APP;
+        }
+        else if ($isBot)
+        {
+            $suffix = Gamuza_Basic_Helper_Data::ORDER_SUFFIX_BOT;
         }
 
         return sprintf ('%s-%s', $result, $suffix);
