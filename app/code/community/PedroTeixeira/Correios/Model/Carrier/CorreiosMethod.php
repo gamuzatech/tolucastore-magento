@@ -708,12 +708,11 @@ class PedroTeixeira_Correios_Model_Carrier_CorreiosMethod
         try
         {
             $client = new Zend_Http_Client(PedroTeixeira_Correios_Helper_Data::CORREIOS_TRACKING_URL);
-            $client->setParameterPost ('objetos', $code);
+            $client->setParameterGet ('id', $code);
 
-            $response = $client->request ('POST');
+            $response = $client->request ('GET');
 
-            $track = utf8_encode ($response->getBody ()); // windows-1252 really?
-            $track = str_replace ('self.print();', "", $track); // disable_print
+            $track = $response->getBody ();
         }
         catch (Exception $e)
         {
