@@ -36,7 +36,7 @@
             <sort_order>1000</sort_order>
             <children>
                 <blockchain module="blockchain">
-                    <title>Blockchain</title>
+                    <title>Bitcoin</title>
                     <sort_order>0</sort_order>
                     <children>
                         <transaction module="blockchain">
@@ -66,7 +66,7 @@
                         <sort_order>1000</sort_order>
                         <children>
                             <blockchain translate="title" module="blockchain">
-                                <title>Blockchain</title>
+                                <title>Bitcoin</title>
                                 <sort_order>1000</sort_order>
                                 <children>
                                     <transaction translate="title">
