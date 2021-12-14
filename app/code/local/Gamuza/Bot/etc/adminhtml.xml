@@ -19,7 +19,7 @@
                     <children>
                         <queue translate="title" module="bot">
                             <title>Manage Queue</title>
-                            <sort_order>20</sort_order>
+                            <sort_order>0</sort_order>
                             <action>admin_bot/adminhtml_queue</action>
                         </queue>
                     </children>
@@ -44,12 +44,24 @@
                                 <children>
                                     <queue translate="title" module="bot">
                                         <title>Manage Queue</title>
-                                        <sort_order>20</sort_order>
+                                        <sort_order>0</sort_order>
                                     </queue>
                                 </children>
                             </bot>
                         </children>
                     </gamuza>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <bot translate="title" module="bot">
+                                        <title>Gamuza Bot Section</title>
+                                        <sort_order>0</sort_order>
+                                    </bot>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
                 </children>
             </admin>
         </resources>

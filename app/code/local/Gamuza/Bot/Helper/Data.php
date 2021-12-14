@@ -25,5 +25,9 @@ class Gamuza_Bot_Helper_Data extends Mage_Core_Helper_Abstract
     const STATUS_PAYMENT_MACHINE = 'payment_machine';
     const STATUS_CHECKOUT = 'checkout';
     const STATUS_ORDER    = 'order';
+
+    const XML_PATH_BOT_BASIC_AUTH_ACTIVE   = 'bot/basic_auth/active';
+    const XML_PATH_BOT_BASIC_AUTH_USERNAME = 'bot/basic_auth/username';
+    const XML_PATH_BOT_BASIC_AUTH_PASSWORD = 'bot/basic_auth/password';
 }
 
