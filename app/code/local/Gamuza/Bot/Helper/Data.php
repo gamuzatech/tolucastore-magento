@@ -29,5 +29,10 @@ class Gamuza_Bot_Helper_Data extends Mage_Core_Helper_Abstract
     const XML_PATH_BOT_BASIC_AUTH_ACTIVE   = 'bot/basic_auth/active';
     const XML_PATH_BOT_BASIC_AUTH_USERNAME = 'bot/basic_auth/username';
     const XML_PATH_BOT_BASIC_AUTH_PASSWORD = 'bot/basic_auth/password';
+
+    public function uniqid ()
+    {
+        return hash ('sha512', uniqid (rand (), true));
+    }
 }
 

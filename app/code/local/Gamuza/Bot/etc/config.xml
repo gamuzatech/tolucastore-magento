@@ -10,7 +10,7 @@
 <config>
     <modules>
         <Gamuza_Bot>
-            <version>0.0.2</version>
+            <version>0.0.3</version>
         </Gamuza_Bot>
     </modules>
     <global>
