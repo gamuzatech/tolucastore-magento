@@ -88,7 +88,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
 
         if (strpos ($to, $this->_phone) === false)
         {
-            return $this->_setJsonBody ('[ WRONG NUMBER ]');
+            return array ('result' => '[ WRONG NUMBER ]');
         }
 
         Mage::app ()->setCurrentStore (Mage_Core_Model_App::DISTRO_STORE_ID);
@@ -190,7 +190,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
                 . $this->_getCategoryList ($storeId)
             ;
 
-            return $this->_setJsonBody ($result);
+            return array ('result' => $result);
         }
 
         $queue = $collection->getFirstItem ();
@@ -199,7 +199,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
 
         if ($queue->getIsMuted ())
         {
-            return $this->_setJsonBody ('');
+            return array ('result' => '', 'muted' => 1);
         }
 
         $body = Mage::helper ('core')->removeAccents ($senderMessage);
@@ -212,7 +212,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
 
             $result = Mage::helper ('bot/message')->getPleaseWaitAnAttendantText ();
 
-            return $this->_setJsonBody ($result);
+            return array ('result' => $result);
         }
 
         switch ($queue->getStatus ())
@@ -1040,7 +1040,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
             }
         }
 
-        return $this->_setJsonBody ($result);
+        return array ('result' => $result);
     }
 
     private function _getCategoryCollection ($storeId)
@@ -1480,21 +1480,6 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
                 return $result;
             }
         }
-    }
-
-    private function _setJsonBody ($body)
-    {
-        $json = array(
-            'result' => $body
-        );
-        /*
-        $this->getResponse()
-            ->clearHeaders ()
-            ->setHeader ('Content-type','application/json',true)
-            ->setBody (Mage::helper('core')->jsonEncode ($json))
-        ;
-        */
-        return $json;
     }
 }
 
