@@ -180,7 +180,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
                     'postcode'   => $shippingPostcode,
                     'country_id' => 'BR',
                     'telephone'  => null,
-                    'fax'        => substr ($from, -11),
+                    'fax'        => substr ($from, -13),
                     'use_for_shipping' => 1,
                 )
             ), $storeId);
@@ -701,7 +701,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
                             'postcode'   => $shippingPostcode,
                             'country_id' => 'BR',
                             'telephone'  => null,
-                            'fax'        => substr ($queue->getNumber (), -11),
+                            'fax'        => substr ($queue->getNumber (), -13),
                             'use_for_shipping' => 1,
                         )
                     ), $storeId);
