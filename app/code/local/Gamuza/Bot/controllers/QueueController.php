@@ -45,6 +45,7 @@ class Gamuza_Bot_QueueController extends Mage_Core_Controller_Front_Action
         $jsonData = json_decode ($rawData, true);
 
         $result = Mage::getModel ('bot/queue_api')->message(
+            $jsonData ['botType'],
             $jsonData ['from'],
             $jsonData ['to'],
             $jsonData ['senderName'],

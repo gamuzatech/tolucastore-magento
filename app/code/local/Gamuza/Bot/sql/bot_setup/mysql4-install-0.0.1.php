@@ -23,6 +23,13 @@ SQLBLOCK;
     $installer->run ($sqlBlock);
 
     $installer->getConnection ()
+        ->addColumn ($table, 'type_id', array(
+            'type'     => Varien_Db_Ddl_Table::TYPE_TEXT,
+            'length'   => 255,
+            'nullable' => false,
+            'comment'  => 'Type ID',
+        ));
+    $installer->getConnection ()
         ->addColumn ($table, 'store_id', array(
             'type'     => Varien_Db_Ddl_Table::TYPE_INTEGER,
             'length'   => 11,

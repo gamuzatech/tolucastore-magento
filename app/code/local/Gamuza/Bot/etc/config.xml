@@ -64,11 +64,17 @@
                 <is_bot>
                     <to_order>*</to_order>
                 </is_bot>
+                <bot_type>
+                    <to_order>*</to_order>
+                </bot_type>
             </sales_convert_quote>
             <sales_convert_order>
                 <is_bot>
                     <to_quote>*</to_quote>
                 </is_bot>
+                <bot_type>
+                    <to_quote>*</to_quote>
+                </bot_type>
             </sales_convert_order>
         </fieldsets>
     </global>

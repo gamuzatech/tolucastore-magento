@@ -81,7 +81,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
         $this->_phone = preg_replace ('[\D]', null, Mage::getStoreConfig ('general/store_information/phone'));
     }
 
-    public function message ($from, $to, $senderName, $senderMessage)
+    public function message ($botType, $from, $to, $senderName, $senderMessage)
     {
         $from = preg_replace ('[\D]', null, $from);
         $to   = preg_replace ('[\D]', null, $to);
@@ -139,6 +139,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
             ;
 
             $queue = Mage::getModel ('bot/queue')
+                ->setTypeId ($botType)
                 ->setStoreId ($storeId)
                 ->setQuoteId ($quote->getId ())
                 ->setNumber ($from)
@@ -163,6 +164,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
             Mage::getModel ('checkout/cart_customer_api')->set ($quote->getId (), $customerData, $storeId);
 
             $quote->setData (Gamuza_Bot_Helper_Data::ORDER_ATTRIBUTE_IS_BOT, true)
+                ->setData (Gamuza_Bot_Helper_Data::ORDER_ATTRIBUTE_BOT_TYPE, $botType)
                 ->setCustomerGroupId (0)
                 ->setCustomerIsGuest (1)
                 ->save ()

@@ -53,6 +53,13 @@ class Gamuza_Bot_Block_Adminhtml_Queue_Grid extends Mage_Adminhtml_Block_Widget_
 		    'index'  => 'entity_id',
             'filter_index' => 'main_table.entity_id',
 		));
+		$this->addColumn ('type_id', array(
+		    'header' => Mage::helper ('bot')->__('Type'),
+		    'align'  => 'right',
+		    'index'  => 'type_id',
+            'type'   => 'options',
+            'options' => Mage::getModel ('bot/adminhtml_system_config_source_bot_type')->toArray (),
+		));
 		$this->addColumn ('increment_id', array(
 		    'header' => Mage::helper ('bot')->__('Order'),
 		    'align'  => 'right',

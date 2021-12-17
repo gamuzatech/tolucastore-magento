@@ -29,5 +29,18 @@ foreach ($entities as $entity)
     $installer->addAttribute ($entity, Gamuza_Bot_Helper_Data::ORDER_ATTRIBUTE_IS_BOT, $options);
 }
 
+$options = array(
+    'type'     => Varien_Db_Ddl_Table::TYPE_TEXT,
+    'length'   => 255,
+    'nullable' => false,
+    'visible'  => true,
+    'required' => false,
+);
+
+foreach ($entities as $entity)
+{
+    $installer->addAttribute ($entity, Gamuza_Bot_Helper_Data::ORDER_ATTRIBUTE_BOT_TYPE, $options);
+}
+
 $installer->endSetup ();
 

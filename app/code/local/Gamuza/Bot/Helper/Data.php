@@ -8,6 +8,11 @@
 class Gamuza_Bot_Helper_Data extends Mage_Core_Helper_Abstract
 {
     const ORDER_ATTRIBUTE_IS_BOT = 'is_bot';
+    const ORDER_ATTRIBUTE_BOT_TYPE = 'bot_type';
+
+    const BOT_TYPE_SIGNAL   = 'signal';
+    const BOT_TYPE_TELEGRAM = 'telegram';
+    const BOT_TYPE_WHATSAPP = 'whatsapp';
 
     const STATUS_BOT      = 'bot';
     const STATUS_CATEGORY = 'category';
