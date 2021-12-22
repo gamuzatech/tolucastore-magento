@@ -81,6 +81,9 @@
                 <is_app>
                     <to_order>*</to_order>
                 </is_app>
+                <customer_info_code>
+                    <to_order>*</to_order>
+                </customer_info_code>
                 <store_info_code>
                     <to_order>*</to_order>
                 </store_info_code>
@@ -89,6 +92,9 @@
                 <is_app>
                     <to_quote>*</to_quote>
                 </is_app>
+                <customer_info_code>
+                    <to_quote>*</to_quote>
+                </customer_info_code>
                 <store_info_code>
                     <to_quote>*</to_quote>
                 </store_info_code>

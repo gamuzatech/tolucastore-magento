@@ -50,7 +50,7 @@ trait Gamuza_Mobile_Trait_Api_Resource
 
         if ((!$quote || !$quote->getId()) && $createNewQuote)
         {
-            $quote = $this->_createNewQuote ($storeId, $customerEmail);
+            $quote = $this->_createNewQuote ($storeId, $store, $customerEmail);
         }
 
         if (!$quote || !$quote->getId())
@@ -69,14 +69,14 @@ trait Gamuza_Mobile_Trait_Api_Resource
      * @param int|string $store
      * @return int
      */
-    protected function _createNewQuote ($storeId, $customerEmail)
+    protected function _createNewQuote ($storeId, $customerCode, $customerEmail)
     {
         $remoteIp = Mage::helper('core/http')->getRemoteAddr(false);
 
         $firstName = Mage::getStoreConfig ('general/store_information/name', $storeId);
         $lastName  = Mage::getStoreConfig ('general/store_information/name', $storeId);
 
-        $code = Mage::getStoreConfig ('general/store_information/code', $storeId);
+        $storeCode = Mage::getStoreConfig ('general/store_information/code', $storeId);
 
         try
         {
@@ -93,7 +93,8 @@ trait Gamuza_Mobile_Trait_Api_Resource
             ;
 
             $quote->setData (Gamuza_Mobile_Helper_Data::ORDER_ATTRIBUTE_IS_APP, true)
-                ->setData (Gamuza_Mobile_Helper_Data::ORDER_ATTRIBUTE_STORE_INFO_CODE, $code)
+                ->setData (Gamuza_Mobile_Helper_Data::ORDER_ATTRIBUTE_CUSTOMER_INFO_CODE, $customerCode)
+                ->setData (Gamuza_Mobile_Helper_Data::ORDER_ATTRIBUTE_STORE_INFO_CODE, $storeCode)
             ;
 
             $customerData = array(
