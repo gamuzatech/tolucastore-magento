@@ -1026,6 +1026,10 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
                         ->setUpdatedAt (date ('c'))
                         ->save ()
                     ;
+
+                    $quote = Mage::getModel ('sales/quote')->load ($queue->getQuoteId ());
+
+                    if ($quote && $quote->getId ()) $quote->delete ();
                 }
                 else
                 {
