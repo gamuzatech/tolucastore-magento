@@ -435,6 +435,7 @@ class Gamuza_Mobile_Model_Cart_Product_Api extends Gamuza_Mobile_Model_Api_Resou
             $productData = array(
                 'product_id'              => intval($item->getProductId()),
                 // Basic item data
+                'sku'                     => $item->getSku(),
                 'name'                    => $item->getName(),
                 'free_shipping'           => boolval($item->getFreeShipping()),
                 'is_qty_decimal'          => boolval($item->getIsQtyDecimal()),
