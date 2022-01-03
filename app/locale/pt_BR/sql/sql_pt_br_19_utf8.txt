@@ -77,6 +77,10 @@ INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`)
     VALUES ('default', 0, 'payment/gamuza_picpay_payment/title', 'Pagar com PicPay')
     ON DUPLICATE KEY UPDATE `updated_at` = NULL;
 
+INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`)
+    VALUES ('default', 0, 'payment/gamuza_openpix_payment/title', 'Pagar com OpenPix')
+    ON DUPLICATE KEY UPDATE `updated_at` = NULL;
+
 /* core_store */
 UPDATE `core_store` SET `name`='Português (Brasil)' WHERE `name`='Default Store View';
 
