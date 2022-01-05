@@ -79,11 +79,13 @@ class Gamuza_PicPay_Block_Adminhtml_Transaction_Grid extends Mage_Adminhtml_Bloc
 	        'type'    => 'options',
 		    'options' => self::_getCustomers (),
 		));
+/*
 		$this->addColumn ('order_id', array(
 		    'header'  => Mage::helper ('picpay')->__('Order ID'),
 		    'align'   => 'right',
 		    'index'   => 'order_id',
 		));
+*/
 		$this->addColumn ('order_increment_id', array(
 		    'header'  => Mage::helper ('picpay')->__('Order Inc. ID'),
 		    'align'   => 'right',
