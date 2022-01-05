@@ -82,6 +82,12 @@
                     <html_head>Gamuza_Basic_Block_Page_Html_Head</html_head>
                 </rewrite>
             </page>
+            <aoe_scheduler>
+                <rewrite>
+                    <adminhtml_scheduler>Gamuza_Basic_Block_Aoe_Scheduler_Adminhtml_Scheduler</adminhtml_scheduler>
+                    <adminhtml_timeline>Gamuza_Basic_Block_Aoe_Scheduler_Adminhtml_Timeline</adminhtml_timeline>
+                </rewrite>
+            </aoe_scheduler>
         </blocks>
         <models>
             <basic>
