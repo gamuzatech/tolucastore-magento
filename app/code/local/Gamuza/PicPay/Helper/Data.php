@@ -43,6 +43,7 @@ class Gamuza_PicPay_Helper_Data extends Mage_Core_Helper_Abstract
     const API_PAYMENT_STATUS_COMPLETED   = 'completed';
     const API_PAYMENT_STATUS_REFUNDED    = 'refunded';
     const API_PAYMENT_STATUS_CHARGEDBACK = 'chagedback';
+    const API_PAYMENT_STATUS_ERROR       = 'error';
 
     const TRANSACTION_TABLE = 'gamuza_picpay_transaction';
 
@@ -129,7 +130,15 @@ class Gamuza_PicPay_Helper_Data extends Mage_Core_Helper_Abstract
 
     public function getOrderReferenceId ($order)
     {
-        return $order->getIncrementId () . '-' . $order->getProtectCode ();
+        $result = Mage::helper ('core')->formatDate(
+            $order->getCreatedAt (),
+            Mage_Core_Model_Locale::FORMAT_TYPE_MEDIUM,
+            true
+        );
+
+        return sprintf ('%s-%s', $order->getIncrementId (),
+            str_replace (array ('/', ':', ' '), '-', $result))
+        ;
     }
 }
 

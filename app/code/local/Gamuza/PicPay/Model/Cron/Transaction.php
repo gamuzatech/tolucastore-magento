@@ -41,7 +41,18 @@ class Gamuza_PicPay_Model_Cron_Transaction extends Gamuza_PicPay_Model_Cron_Abst
 
             $apiStatusUrl = str_replace ('{referenceId}', $referenceId, Gamuza_PicPay_Helper_Data::API_PAYMENTS_STATUS_URL);
 
-            $resultStatus = Mage::helper ('picpay')->api ($apiStatusUrl, null, null, $order->getStoreId ());
+            try
+            {
+                $resultStatus = Mage::helper ('picpay')->api ($apiStatusUrl, null, null, $order->getStoreId ());
+            }
+            catch (Exception $e)
+            {
+                $this->message ($e->getMessage ());
+
+                /* fake */
+                $resultStatus = new stdClass;
+                $resultStatus->status = Gamuza_PicPay_Helper_Data::API_PAYMENT_STATUS_ERROR;
+            }
 
             $payment = $order->getPayment ();
 
@@ -64,6 +75,7 @@ class Gamuza_PicPay_Model_Cron_Transaction extends Gamuza_PicPay_Model_Cron_Abst
                 case Gamuza_PicPay_Helper_Data::API_PAYMENT_STATUS_EXPIRED:
                 case Gamuza_PicPay_Helper_Data::API_PAYMENT_STATUS_REFUNDED:
                 case Gamuza_PicPay_Helper_Data::API_PAYMENT_STATUS_CHARGEDBACK:
+                case Gamuza_PicPay_Helper_Data::API_PAYMENT_STATUS_ERROR:
                 {
                     $comment = Mage::helper ('picpay')->__('The payment was expired.');
 

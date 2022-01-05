@@ -46,6 +46,7 @@ class Gamuza_PicPay_Model_Adminhtml_System_Config_Source_Payment_Status
             array ('value' => Gamuza_PicPay_Helper_Data::API_PAYMENT_STATUS_COMPLETED,   'label' => Mage::helper ('picpay')->__('Completed')),
             array ('value' => Gamuza_PicPay_Helper_Data::API_PAYMENT_STATUS_REFUNDED,    'label' => Mage::helper ('picpay')->__('Refunded')),
             array ('value' => Gamuza_PicPay_Helper_Data::API_PAYMENT_STATUS_CHARGEDBACK, 'label' => Mage::helper ('picpay')->__('Chargedback')),
+            array ('value' => Gamuza_PicPay_Helper_Data::API_PAYMENT_STATUS_ERROR,       'label' => Mage::helper ('picpay')->__('Error')),
         );
 
         return $result;
@@ -66,6 +67,7 @@ class Gamuza_PicPay_Model_Adminhtml_System_Config_Source_Payment_Status
             Gamuza_PicPay_Helper_Data::API_PAYMENT_STATUS_COMPLETED   => Mage::helper ('picpay')->__('Completed'),
             Gamuza_PicPay_Helper_Data::API_PAYMENT_STATUS_REFUNDED    => Mage::helper ('picpay')->__('Refunded'),
             Gamuza_PicPay_Helper_Data::API_PAYMENT_STATUS_CHARGEDBACK => Mage::helper ('picpay')->__('Chargedback'),
+            Gamuza_PicPay_Helper_Data::API_PAYMENT_STATUS_ERROR       => Mage::helper ('picpay')->__('Error'),
         );
 
         return $result;
