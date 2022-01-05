@@ -66,8 +66,6 @@ class Gamuza_OpenPix_Model_Payment_Method_Payment extends Mage_Payment_Model_Met
         $customerPhone  = preg_replace ('[\D]', '', $order->getBillingAddress ()->getFax ());
         $customerTaxvat = preg_replace ('[\D]', '', $order->getCustomerTaxvat ());
 
-        if (empty ($customerTaxvat)) $customerTaxvat = '00000000000';
-
         $post = array(
             'correlationID' => $correlationId,
             'value'     => $orderAmount,
