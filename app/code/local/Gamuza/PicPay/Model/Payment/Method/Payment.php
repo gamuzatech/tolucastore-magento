@@ -37,7 +37,8 @@ class Gamuza_PicPay_Model_Payment_Method_Payment extends Mage_Payment_Model_Meth
     protected $_formBlockType = 'picpay/payment_form_payment';
     protected $_infoBlockType = 'picpay/payment_info_payment';
 
-    const DDI_BRL = '+55';
+    const DEFAULT_CUSTOMER_EMAIL  = 'store@toluca.com.br';
+    const DEFAULT_CUSTOMER_TAXVAT = '02788178824';
 
     /**
      * Order payment abstract method
@@ -68,23 +69,24 @@ class Gamuza_PicPay_Model_Payment_Method_Payment extends Mage_Payment_Model_Meth
 
         $customerTaxvat = preg_replace ('[\D]', '', $order->getCustomerTaxvat ());
 
-        if (empty ($customerTaxvat)) $customerTaxvat = '00000000000';
-
         $customerEmail = $order->getCustomerEmail ();
 
-        $customerPhone = self::DDI_BRL . $order->getBillingAddress ()->getFax ();
+        $customerPhone = preg_replace ('[\D]', '', $order->getBillingAddress ()->getFax ());
+
+        $orderCreatedAt = str_replace (' ', '-', $order->getCreatedAt ());
 
         $post = array(
-            'referenceId' => $order->getIncrementId (),
-            'callbackUrl' => $callbackUrl,
+            'referenceId' => $order->getIncrementId () . '-' . $orderCreatedAt,
+            'callbackUrl' => str_replace (':81', '.local', $callbackUrl),
             'returnUrl'   => null,
             'value'       => floatval ($order->getBaseGrandTotal ()),
             'expiresAt'   => null,
+            'purchaseMode' => 'online',
             'buyer' => array(
                 'firstName' => $order->getCustomerFirstname (),
                 'lastName'  => $order->getCustomerLastname (),
-                'document'  => $customerTaxvat,
-                'email'     => $customerEmail,
+                'document'  => $customerTaxvat ? $customerTaxvat : self::DEFAULT_CUSTOMER_TAXVAT,
+                'email'     => $customerEmail ? $customerEmail : self::DEFAULT_CUSTOMER_EMAIL,
                 'phone'     => $customerPhone,
             ),
         );

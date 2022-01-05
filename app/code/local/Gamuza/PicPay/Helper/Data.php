@@ -100,6 +100,7 @@ class Gamuza_PicPay_Helper_Data extends Mage_Core_Helper_Abstract
             case 404: { $message = 'Invalid URL';          break; }
             case 405: { $message = 'Method Not Allowed';   break; }
             case 409: { $message = 'Resource Exists';      break; }
+            case 422: { $message = 'Invalid Data';         break; }
             case 500: { $message = 'Internal Error';       break; }
             case 200: { $message = null; /* Success! */    break; }
         }
