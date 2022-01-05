@@ -37,6 +37,8 @@ class Gamuza_OpenPix_Model_Payment_Method_Payment extends Mage_Payment_Model_Met
     protected $_formBlockType = 'openpix/payment_form_payment';
     protected $_infoBlockType = 'openpix/payment_info_payment';
 
+    const DEFAULT_CUSTOMER_EMAIL  = 'store@toluca.com.br';
+    const DEFAULT_CUSTOMER_TAXVAT = '02788178824';
     const EXPIRES_IN_SECONDS = 900;
 
     /**
@@ -73,9 +75,9 @@ class Gamuza_OpenPix_Model_Payment_Method_Payment extends Mage_Payment_Model_Met
             'expiresIn' => self::EXPIRES_IN_SECONDS,
             'customer' => array(
                 'name'  => $customerName,
-                'email' => $customerEmail,
+                'email' => $customerEmail ? $customerEmail : self::DEFAULT_CUSTOMER_EMAIL,
                 'phone' => $customerPhone,
-                'taxID' => $customerTaxvat,
+                'taxID' => $customerTaxvat ? $customerTaxvat : self::DEFAULT_CUSTOMER_TAXVAT,
             ),
             'additionalInfo' => array(
                 array(
