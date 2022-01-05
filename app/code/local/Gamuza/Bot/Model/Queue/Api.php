@@ -46,9 +46,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
         '2' => 'machineondelivery',
         '3' => 'banktransfer',
         '4' => 'gamuza_picpay_payment',
-        '5' => 'gamuza_blockchain_info',
-        '6' => 'gamuza_openpix_payment',
-        '7' => 'purchaseorder',
+        '5' => 'gamuza_openpix_payment',
     );
 
     protected $_paymentCcTypes = array(
@@ -1014,13 +1012,13 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
 
                     $storeName = Mage::getStoreConfig (Mage_Core_Model_Store::XML_PATH_STORE_STORE_NAME);
 
+                    $order = Mage::getModel ('sales/order')->loadByIncrementId ($incrementId);
+
                     $result = Mage::helper ('bot/message')->getYourOrderNumberText ($incrementId) . PHP_EOL . PHP_EOL
-                        . Mage::helper ('bot/message')->getOrderInformationText ($incrementId)
+                        . Mage::helper ('bot/message')->getOrderInformationText ($order)
                         . Mage::helper ('bot/message')->getThankYouForShoppingText ($storeName) . PHP_EOL . PHP_EOL
                         . Mage::helper ('bot/message')->getBuyThroughTheAppText ()
                     ;
-
-                    $order = Mage::getModel ('sales/order')->loadByIncrementId ($incrementId);
 
                     $queue->setStatus (Gamuza_Bot_Helper_Data::STATUS_ORDER)
                         ->setOrderId ($order->getId ())

@@ -375,8 +375,10 @@ class Gamuza_Bot_Helper_Message extends Mage_Core_Helper_Abstract
         return $this->__('Your order number is *%s*', $incrementId);
     }
 
-    public function getOrderInformationText ($incrementId)
+    public function getOrderInformationText ($order)
     {
+        $incrementId = $order->getIncrementId ();
+
         $result = null;
 
         if (Mage::helper ('core')->isModuleEnabled ('Gamuza_PicPay'))
@@ -401,6 +403,13 @@ class Gamuza_Bot_Helper_Message extends Mage_Core_Helper_Abstract
                     . $transaction->getPaymentLinkUrl () . PHP_EOL . PHP_EOL
                 ;
             }
+        }
+
+        if ($order->getPayment ()->getMethod () == Mage_Payment_Model_Method_Banktransfer::PAYMENT_METHOD_BANKTRANSFER_CODE)
+        {
+            $result .= $this->__('Here are the payment instructions:') . PHP_EOL . PHP_EOL
+                . Mage::getStoreConfig ('payment/banktransfer/instructions', $order->getStoreId ()) . PHP_EOL . PHP_EOL
+            ;
         }
 
         return $result;
