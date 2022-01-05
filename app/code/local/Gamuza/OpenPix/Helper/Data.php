@@ -38,6 +38,7 @@ class Gamuza_OpenPix_Helper_Data extends Mage_Core_Helper_Abstract
     const API_PAYMENT_STATUS_ACTIVE    = 'ACTIVE';
     const API_PAYMENT_STATUS_COMPLETED = 'COMPLETED';
     const API_PAYMENT_STATUS_EXPIRED   = 'EXPIRED';
+    const API_PAYMENT_STATUS_ERROR     = 'ERROR';
 
     const TRANSACTION_TABLE = 'gamuza_openpix_transaction';
 

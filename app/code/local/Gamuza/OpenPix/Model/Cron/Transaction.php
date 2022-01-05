@@ -43,11 +43,21 @@ class Gamuza_OpenPix_Model_Cron_Transaction extends Gamuza_OpenPix_Model_Cron_Ab
 
             if (empty ($transactionId)) $transactionId = $payment->getData (Gamuza_OpenPix_Helper_Data::PAYMENT_ATTRIBUTE_OPENPIX_CORRELATION_ID);
 
-            if (empty ($transactionId)) continue;
-
             $apiStatusUrl = str_replace ('{id}', $transactionId, Gamuza_OpenPix_Helper_Data::API_PAYMENT_STATUS_URL);
 
-            $resultStatus = Mage::helper ('openpix')->api ($apiStatusUrl, null, null, $order->getStoreId ());
+            try
+            {
+                $resultStatus = Mage::helper ('openpix')->api ($apiStatusUrl, null, null, $order->getStoreId ());
+            }
+            catch (Exception $e)
+            {
+                $this->message ($e->getMessage ());
+
+                /* fake */
+                $resultStatus = new stdClass;
+                $resultStatus->charge = new stdClass;
+                $resultStatus->charge->status = Gamuza_OpenPix_Helper_Data::API_PAYMENT_STATUS_ERROR;
+            }
 
             $payment->setData (Gamuza_OpenPix_Helper_Data::PAYMENT_ATTRIBUTE_OPENPIX_STATUS, $resultStatus->charge->status)
                 ->save ()
@@ -66,6 +76,7 @@ class Gamuza_OpenPix_Model_Cron_Transaction extends Gamuza_OpenPix_Model_Cron_Ab
                     break; // nothing
                 }
                 case Gamuza_OpenPix_Helper_Data::API_PAYMENT_STATUS_EXPIRED:
+                case Gamuza_OpenPix_Helper_Data::API_PAYMENT_STATUS_ERROR:
                 {
                     $comment = Mage::helper ('openpix')->__('The payment was expired.');
 
