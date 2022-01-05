@@ -37,11 +37,13 @@ class Gamuza_PicPay_Model_Cron_Transaction extends Gamuza_PicPay_Model_Cron_Abst
 
         foreach ($collection as $order)
         {
-            $payment = $order->getPayment ();
+            $referenceId = Mage::helper ('picpay')->getOrderReferenceId ($order);
 
-            $apiStatusUrl = str_replace ('{referenceId}', $order->getIncrementId (), Gamuza_PicPay_Helper_Data::API_PAYMENTS_STATUS_URL);
+            $apiStatusUrl = str_replace ('{referenceId}', $referenceId, Gamuza_PicPay_Helper_Data::API_PAYMENTS_STATUS_URL);
 
             $resultStatus = Mage::helper ('picpay')->api ($apiStatusUrl, null, null, $order->getStoreId ());
+
+            $payment = $order->getPayment ();
 
             $payment->setData (Gamuza_PicPay_Helper_Data::PAYMENT_ATTRIBUTE_PICPAY_STATUS, $resultStatus->status)
                 ->save ()

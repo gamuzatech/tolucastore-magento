@@ -126,5 +126,10 @@ class Gamuza_PicPay_Helper_Data extends Mage_Core_Helper_Abstract
     {
         return Mage::getStoreConfig ("payment/gamuza_picpay_payment/{$key}", $store);
     }
+
+    public function getOrderReferenceId ($order)
+    {
+        return $order->getIncrementId () . '-' . $order->getProtectCode ();
+    }
 }
 

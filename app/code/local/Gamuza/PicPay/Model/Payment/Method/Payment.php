@@ -73,10 +73,8 @@ class Gamuza_PicPay_Model_Payment_Method_Payment extends Mage_Payment_Model_Meth
 
         $customerPhone = preg_replace ('[\D]', '', $order->getBillingAddress ()->getFax ());
 
-        $orderCreatedAt = str_replace (' ', '-', $order->getCreatedAt ());
-
         $post = array(
-            'referenceId' => $order->getIncrementId () . '-' . $orderCreatedAt,
+            'referenceId' => Mage::helper ('picpay')->getOrderReferenceId ($order),
             'callbackUrl' => str_replace (':81', '.local', $callbackUrl),
             'returnUrl'   => null,
             'value'       => floatval ($order->getBaseGrandTotal ()),
