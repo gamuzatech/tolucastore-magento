@@ -47,6 +47,7 @@
 "Please enter any notes:","Por favor, digite alguma observação:"
 "%s %s %s has doubts on bot.","%s %s %s está com dúvidas no bot."
 "Click on the link to make the payment via PicPay:","Clique no link para efetuar o pagamento via PicPay:"
+"Click on the link to make the payment via OpenPix:","Clique no link para efetuar o pagamento via OpenPix:"
 "required","obrigatório"
 "Please enter the amount of the money change for your order:","Por favor digite o valor do troco para o seu pedido:"
 "Example: 50","Exemplo: 50"

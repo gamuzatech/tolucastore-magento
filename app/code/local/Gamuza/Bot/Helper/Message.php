@@ -391,6 +391,18 @@ class Gamuza_Bot_Helper_Message extends Mage_Core_Helper_Abstract
             }
         }
 
+        if (Mage::helper ('core')->isModuleEnabled ('Gamuza_OpenPix'))
+        {
+            $transaction = Mage::getModel ('openpix/transaction')->load ($incrementId, 'order_increment_id');
+
+            if ($transaction && $transaction->getId ())
+            {
+                $result .= $this->__('Click on the link to make the payment via OpenPix:') . PHP_EOL . PHP_EOL
+                    . $transaction->getPaymentLinkUrl () . PHP_EOL . PHP_EOL
+                ;
+            }
+        }
+
         return $result;
     }
 }

@@ -23,8 +23,8 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
     const COMMAND_OK      = 'ok';
     const COMMAND_CLEAR   = 'limpar';
 
-    const DEFAULT_CUSTOMER_EMAIL  = 'bot@toluca.com.br';
-    const DEFAULT_CUSTOMER_TAXVAT = '123.456.789-01';
+    const DEFAULT_CUSTOMER_EMAIL  = 'store@toluca.com.br';
+    const DEFAULT_CUSTOMER_TAXVAT = '02788178824';
 
     protected $_shippingMethods = array(
         '1'  => 'freeshipping_freeshipping',
@@ -47,7 +47,8 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
         '3' => 'banktransfer',
         '4' => 'gamuza_picpay_payment',
         '5' => 'gamuza_blockchain_info',
-        '6' => 'purchaseorder',
+        '6' => 'gamuza_openpix_payment',
+        '7' => 'purchaseorder',
     );
 
     protected $_paymentCcTypes = array(
