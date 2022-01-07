@@ -118,6 +118,7 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
         'cc_approval', 'cc_installments', 'cc_status', 'cc_last4', 'ext_payment_id',
         'blockchain_address', 'blockchain_amount',
         'picpay_status', 'picpay_url',
+        'openpix_status', 'openpix_url', 'openpix_transaction_id', 'openpix_correlation_id',
     );
 
     protected $_orderStatusHistoryAttributes = array(

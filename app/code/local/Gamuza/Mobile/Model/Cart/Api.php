@@ -164,6 +164,19 @@ class Gamuza_Mobile_Model_Cart_Api extends Mage_Checkout_Model_Api_Resource
             }
         }
 
+        if (Mage::helper ('core')->isModuleEnabled ('Gamuza_OpenPix'))
+        {
+            $transaction = Mage::getModel ('openpix/transaction')->load ($incrementId, 'order_increment_id');
+
+            if ($transaction && $transaction->getId ())
+            {
+                $result ['openpix'] = array (
+                    'status' => $transaction->getStatus (),
+                    'url'    => $transaction->getPaymentLinkUrl (),
+                );
+            }
+        }
+
         return $result;
     }
 
