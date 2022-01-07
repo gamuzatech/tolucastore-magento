@@ -334,6 +334,50 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
         $result['shipping_address'] = $this->_getAttributes($order->getShippingAddress(), 'order_address', $this->_orderAddressAttributes);
         $result['billing_address']  = $this->_getAttributes($order->getBillingAddress(), 'order_address', $this->_orderAddressAttributes);
 
+        $countryPhones = Mage::app ()->getLocale ()->getTranslationList ('territorytophone');
+
+        if ($order->getBillingAddress ())
+        {
+            $result['billing_address']['region_code'] = $order->getBillingAddress ()->getRegionCode ();
+            $result['billing_address']['region_name'] = $order->getBillingAddress ()->getRegion ();
+            $result['billing_address']['country_iso2'] = $order->getBillingAddress ()->getCountryModel ()->getIso2Code ();
+            $result['billing_address']['country_iso3'] = $order->getBillingAddress ()->getCountryModel ()->getIso3Code ();
+            $result['billing_address']['country_name'] = $order->getBillingAddress ()->getCountryModel ()->getName ();
+            $result['billing_address']['country'] = $order->getBillingAddress ()->getCountryModel ()->getName ();
+
+            foreach ($countryPhones as $phone => $code)
+            {
+                if ($code == $order->getBillingAddress ()->getCountryId ())
+                {
+                    $result['billing_address']['country_id'] = ord ($code);
+                    $result['billing_address']['country_code'] = $phone;
+
+                    break;
+                }
+            }
+        }
+
+        if ($order->getShippingAddress ())
+        {
+            $result['shipping_address']['region_code'] = $order->getShippingAddress ()->getRegionCode ();
+            $result['shipping_address']['region_name'] = $order->getShippingAddress ()->getRegion ();
+            $result['shipping_address']['country_iso2'] = $order->getShippingAddress ()->getCountryModel ()->getIso2Code ();
+            $result['shipping_address']['country_iso3'] = $order->getShippingAddress ()->getCountryModel ()->getIso3Code ();
+            $result['shipping_address']['country_name'] = $order->getShippingAddress ()->getCountryModel ()->getName ();
+            $result['shipping_address']['country'] = $order->getShippingAddress ()->getCountryModel ()->getName ();
+
+            foreach ($countryPhones as $phone => $code)
+            {
+                if ($code == $order->getShippingAddress ()->getCountryId ())
+                {
+                    $result['shipping_address']['country_id'] = ord ($code);
+                    $result['shipping_address']['country_code'] = $phone;
+
+                    break;
+                }
+            }
+        }
+
         foreach (array ('billing', 'shipping') as $addressType)
         {
             $result [$addressType . '_address']['street'] = explode (PHP_EOL, $result [$addressType . '_address']['street']);
