@@ -31,6 +31,8 @@
  */
 class Gamuza_Basic_Model_Observer
 {
+    const SALES_QUOTE_LIFETIME = 86400;
+
     public function adminhtmlCmsPageEditTabContentPrepareForm ($observer)
     {
         $event = $observer->getEvent ();
@@ -148,6 +150,20 @@ class Gamuza_Basic_Model_Observer
                 imagejpeg ($resized, $file, 75);
             }
         }
+
+        return $this;
+    }
+
+    public function cleanExpiredQuotes()
+    {
+        Mage::dispatchEvent('clear_expired_quotes_before', array('sales_observer' => $this));
+
+        /** @var $quotes Mage_Sales_Model_Mysql4_Quote_Collection */
+        $quotes = Mage::getModel('sales/quote')->getCollection();
+
+        $quotes->addFieldToFilter('updated_at', array('to'=>date("Y-m-d H:i:s", mktime(23, 59, 59) - self::SALES_QUOTE_LIFETIME)));
+
+        $quotes->walk('delete');
 
         return $this;
     }
