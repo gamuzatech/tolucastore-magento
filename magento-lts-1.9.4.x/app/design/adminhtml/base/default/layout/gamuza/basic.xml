@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+/**
+ * @package     Gamuza_Basic
+ * @copyright   Copyright (c) 2016 Gamuza Technologies (http://www.gamuza.com.br/)
+ * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the
+ * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
+ * Boston, MA 02110-1301, USA.
+ */
+
+/**
+ * See the AUTHORS file for a list of people on the Gamuza Team.
+ * See the ChangeLog files for a list of changes.
+ * These files are distributed with gamuza_basic-magento at http://github.com/gamuzatech/.
+ */
+-->
+
+<layout>
+    <default>
+        <reference name="head">
+            <action method="setTitle" translate="title"><title>Toluca Store Admin</title></action>
+
+            <action method="appendItem">
+                <type>skin_css</type>
+                <name>css/gamuza/basic/custom.css</name>
+                <params>media="all"</params>
+            </action>
+
+            <action method="appendItem">
+                <type>skin_css</type>
+                <name>css/gamuza/basic/menu.css</name>
+                <params>media="screen, projection"</params>
+            </action>
+        </reference>
+        <!--
+        <reference name="notifications">
+            <remove name="notification_toolbar" />
+            <remove name="notification_window" />
+        </reference>
+        -->
+    </default>
+
+    <adminhtml_dashboard_index>
+        <reference name="content">
+            <remove name="store_switcher" />
+        </reference>
+    </adminhtml_dashboard_index>
+
+    <adminhtml_system_config_edit>
+        <reference name="left">
+            <remove name="adminhtml.system.config.switcher" />
+        </reference>
+    </adminhtml_system_config_edit>
+
+    <adminhtml_catalog_product_index>
+        <reference name="content">
+            <remove name="store_switcher" />
+        </reference>
+    </adminhtml_catalog_product_index>
+
+    <adminhtml_catalog_product_edit>
+        <reference name="content">
+            <remove name="store_switcher" />
+        </reference>
+    </adminhtml_catalog_product_edit>
+
+    <adminhtml_catalog_product_action_attribute_edit>
+        <reference name="left">
+            <remove name="store_switcher" />
+        </reference>
+    </adminhtml_catalog_product_action_attribute_edit>
+
+    <adminhtml_customer_attribute_edit>
+        <reference name="left">
+            <remove name="website_switcher" />
+        </reference>
+    </adminhtml_customer_attribute_edit>
+
+    <adminhtml_customer_address_attribute_edit>
+        <reference name="left">
+            <remove name="website_switcher" />
+        </reference>
+    </adminhtml_customer_address_attribute_edit>
+
+    <adminhtml_customer_edit>
+        <reference name="left">
+            <remove name="sales" />
+            <remove name="accordion" />
+        </reference>
+        <reference name="customer_edit_tabs">
+            <action method="removeTab"><name>customer_edit_tab_agreements</name></action>
+            <action method="removeTab"><name>customer_edit_tab_recurring_profile</name></action>
+        </reference>
+    </adminhtml_customer_edit>
+</layout>
+
