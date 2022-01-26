@@ -180,7 +180,7 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
      * @param null|object|array $filters
      * @return array
      */
-    public function items($filters = null)
+    public function items($filters = null, $store = null)
     {
         $orders = array();
 
@@ -287,7 +287,7 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
      * @param string $orderIncrementId
      * @return array
      */
-    public function info($orderIncrementId = null)
+    public function info($orderIncrementId = null, $store = null)
     {
         if (empty ($orderIncrementId))
         {
@@ -501,7 +501,7 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
      * @param  string $comment
      * @return boolean
      */
-    public function rate ($orderIncrementId = null, $stars = null, $comment = null)
+    public function rate ($orderIncrementId = null, $stars = null, $comment = null, $store = null)
     {
         if (empty ($orderIncrementId))
         {

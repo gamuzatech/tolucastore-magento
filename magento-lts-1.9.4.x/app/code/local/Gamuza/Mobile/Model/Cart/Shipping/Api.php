@@ -130,7 +130,7 @@ class Gamuza_Mobile_Model_Cart_Shipping_Api extends Mage_Checkout_Model_Cart_Shi
 
                 foreach ($rates as $rate)
                 {
-                    $rateItem = $this->_getAttributes($rate, $this->_rateAttributes);
+                    $rateItem = $this->_getAttributes($rate, 'global', $this->_rateAttributes);
 
                     $rateItem['carrier_name'] = $carrierName;
 

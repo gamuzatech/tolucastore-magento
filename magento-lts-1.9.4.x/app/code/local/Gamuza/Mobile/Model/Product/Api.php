@@ -91,7 +91,7 @@ class Gamuza_Mobile_Model_Product_Api extends Mage_Catalog_Model_Api_Resource
      * @param null|object|array $filters
      * @return array
      */
-    public function items ($filters = null)
+    public function items ($filters = null, $store = null, $category = null)
     {
         $storeId = Mage_Core_Model_App::DISTRO_STORE_ID;
 
