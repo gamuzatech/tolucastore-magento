@@ -380,7 +380,7 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
 
         foreach (array ('billing', 'shipping') as $addressType)
         {
-            $result [$addressType . '_address']['street'] = explode (PHP_EOL, $result [$addressType . '_address']['street']);
+            $result [$addressType . '_address']['street'] = explode ("\n", $result [$addressType . '_address']['street']);
 
             foreach ($this->_intAttributes as $attribute)
             {

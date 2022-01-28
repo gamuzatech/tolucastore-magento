@@ -1359,7 +1359,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
 
         $info = Mage::getModel ('checkout/cart_api')->info ($quoteId, $storeId);
 
-        $result .= sprintf ('*%s*: %s', Mage::helper ('bot')->__('Shipping Address'), implode (' ', explode (PHP_EOL, $info ['shipping_address']['street'])))
+        $result .= sprintf ('*%s*: %s', Mage::helper ('bot')->__('Shipping Address'), implode (' ', explode ("\n", $info ['shipping_address']['street'])))
             . PHP_EOL . PHP_EOL
         ;
 
