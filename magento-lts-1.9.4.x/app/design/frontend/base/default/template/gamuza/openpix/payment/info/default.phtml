@@ -41,7 +41,7 @@
             <th><strong><?php echo $this->escapeHtml($_label)?>:</strong></th>
         </tr>
         <tr>
-            <td><?php echo nl2br(implode($this->getValueAsArray($_value, false), "\n"))?></td>
+            <td><?php echo nl2br(implode("\n", $this->getValueAsArray($_value, false)))?></td>
         </tr>
     <?php endforeach; ?>
     </tbody>
