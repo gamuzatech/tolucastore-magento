@@ -75,7 +75,7 @@ class Gamuza_PicPay_Model_Payment_Method_Payment extends Mage_Payment_Model_Meth
 
         $post = array(
             'referenceId' => Mage::helper ('picpay')->getOrderReferenceId ($order),
-            'callbackUrl' => str_replace (':81', '.local', $callbackUrl),
+            'callbackUrl' => str_replace (':8080', '.local', $callbackUrl),
             'returnUrl'   => null,
             'value'       => floatval ($order->getBaseGrandTotal ()),
             'expiresAt'   => null,
