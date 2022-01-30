@@ -33,6 +33,12 @@ umask(0);
 
 try
 {
+    Mage::app()->cleanAllSessions();
+
+    $write = Mage::getSingleton('core/resource')->getConnection('core_write');
+
+    $write->delete(Mage::getSingleton('core/resource')->getTableName('core_session'));
+
     Mage::getModel ('basic/observer')->cleanExpiredQuotes ();
 }
 catch (Exception $e)
