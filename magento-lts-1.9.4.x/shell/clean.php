@@ -33,7 +33,19 @@ umask(0);
 
 try
 {
-    Mage::app()->cleanAllSessions();
+    // Mage::app()->cleanAllSessions();
+
+    $dir = Mage::app()->getConfig()->getOptions()->getSessionDir();
+
+    $dh  = scandir($dir);
+
+    foreach ($dh as $file)
+    {
+        if (strpos ($file, 'sess_') !== false)
+        {
+            unlink ($dir . DS . $file);
+        }
+    }
 
     $write = Mage::getSingleton('core/resource')->getConnection('core_write');
 
