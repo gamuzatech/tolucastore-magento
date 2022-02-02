@@ -102,6 +102,28 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
             ->addFieldToFilter ('status',    array ('neq' => Gamuza_Bot_Helper_Data::STATUS_ORDER))
         ;
 
+        $collection->getSelect ()
+            ->order ('created_at DESC')
+            ->limit (1)
+        ;
+
+        if ($collection->count () > 0)
+        {
+            $queue = $collection->getFirstItem ();
+
+            $quote = Mage::getModel ('sales/quote')->load ($queue->getQuoteId ());
+
+            if (!$quote || !$quote->getId ())
+            {
+                foreach ($collection as $key => $item)
+                {
+                    $collection->removeItemByKey ($key);
+                }
+
+                $queue->delete ();
+            }
+        }
+
         if (!empty ($senderName))
         {
              $senderName = explode (' ', $senderName, 2);
@@ -124,7 +146,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
 
         $remoteIp = Mage::helper ('core/http')->getRemoteAddr (false);
 
-        if (!$collection->getSize ())
+        if (!$collection->count ())
         {
             $quote = Mage::getModel ('sales/quote')
                 ->setStoreId ($storeId)
@@ -228,7 +250,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
 
                 $categoryId = $collection->getFirstItem ()->getId ();
 
-                if ($collection->getSize () > 0)
+                if ($collection->count () > 0)
                 {
                     $queue->setCategoryId ($categoryId)
                         ->setStatus (Gamuza_Bot_Helper_Data::STATUS_PRODUCT)
