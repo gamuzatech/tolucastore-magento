@@ -87,4 +87,18 @@ if (file_exists($maintenanceFile)) {
     }
 }
 
+$httpXOriginalHost = Mage::app()->getRequest()->getServer('HTTP_X_ORIGINAL_HOST');
+
+if (!empty($httpXOriginalHost)) {
+    foreach (Mage::app()->getStores(false, false) as $store) {
+        if (strpos($store->getBaseUrl(), $httpXOriginalHost) !== false) {
+            $httpHost = Mage::app()->getRequest()->getServer('HTTP_HOST');
+            $_SERVER['HTTP_X_INBOUND_HOST'] = $httpHost;
+            $_SERVER['HTTP_HOST'] = $httpXOriginalHost;
+            $mageRunCode = $store->getCode();
+            break;
+        }
+    }
+}
+
 Mage::run($mageRunCode, $mageRunType);
