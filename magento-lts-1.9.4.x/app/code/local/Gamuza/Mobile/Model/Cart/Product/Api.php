@@ -399,7 +399,7 @@ class Gamuza_Mobile_Model_Cart_Product_Api extends Gamuza_Mobile_Model_Api_Resou
         }
 
         $mediaUrl = Mage::app ()
-            ->getStore (Mage_Core_Model_App::ADMIN_STORE_ID)
+            ->getStore (Mage_Core_Model_App::DISTRO_STORE_ID)
             ->getBaseUrl (Mage_Core_Model_Store::URL_TYPE_MEDIA, false)
         ;
 
