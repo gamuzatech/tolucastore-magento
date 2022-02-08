@@ -7,6 +7,8 @@
 
 class Gamuza_Bot_Adminhtml_QueueController extends Mage_Adminhtml_Controller_Action
 {
+    use Gamuza_Bot_Trait_Queue;
+
 	protected function _isAllowed ()
 	{
 	    return Mage::getSingleton ('admin/session')->isAllowed ('gamuza/bot/queue');
