@@ -30,7 +30,7 @@
 
 <config>
     <tabs>
-        <gamuza translate="label" module="jsonapi">
+        <gamuza translate="label" module="basic">
             <label>Gamuza</label>
             <sort_order>0</sort_order>
         </gamuza>

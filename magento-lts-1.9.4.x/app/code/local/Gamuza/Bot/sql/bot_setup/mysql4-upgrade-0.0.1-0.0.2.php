@@ -5,7 +5,7 @@
  * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
  */
 
-$installer = new Mage_Sales_Model_Resource_Setup ('mobile_setup');
+$installer = new Mage_Sales_Model_Resource_Setup ('bot_setup');
 $installer->startSetup ();
 
 /**
