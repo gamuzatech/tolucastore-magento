@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+/**
+ * @package     EasySoftware_ERP
+ * @copyright   Copyright (c) 2022 Gamuza Technologies (http://www.gamuza.com.br/)
+ * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
+ */
+-->
+
+<config>
+    <modules>
+        <EasySoftware_ERP>
+            <active>true</active>
+            <codePool>local</codePool>
+            <version>0.0.1</version>
+        </EasySoftware_ERP>
+    </modules>
+</config>
+

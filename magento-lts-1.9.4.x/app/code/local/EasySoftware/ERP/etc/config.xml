@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+/**
+ * @package     EasySoftware_ERP
+ * @copyright   Copyright (c) 2022 Gamuza Technologies (http://www.gamuza.com.br/)
+ * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
+ */
+-->
+
+<config>
+    <modules>
+        <EasySoftware_ERP>
+            <version>0.0.2</version>
+        </EasySoftware_ERP>
+    </modules>
+    <global>
+        <helpers>
+            <erp>
+                <class>EasySoftware_ERP_Helper</class>
+            </erp>
+        </helpers>
+        <blocks>
+            <erp>
+                <class>EasySoftware_ERP_Block</class>
+            </erp>
+        </blocks>
+        <models>
+            <erp>
+                <class>EasySoftware_ERP_Model</class>
+                <resourceModel>erp_mysql4</resourceModel>
+            </erp>
+            <erp_mysql4>
+                <class>EasySoftware_ERP_Model_Mysql4</class>
+                <entities>
+                    <group>
+                        <table>easysoftware_erp_group</table>
+                    </group>
+                </entities>
+            </erp_mysql4>
+        </models>
+        <resources>
+            <erp_setup>
+                <setup>
+                    <module>EasySoftware_ERP</module>
+                    <class>Mage_Catalog_Model_Resource_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </erp_setup>
+            <erp_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </erp_write>
+            <erp_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </erp_read>
+        </resources>
+    </global>
+    <admin>
+        <routers>
+            <admin_erp>
+                <use>admin</use>
+                <args>
+                    <module>EasySoftware_ERP</module>
+                    <frontName>admin_erp</frontName>
+                </args>
+            </admin_erp>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <erp>
+                    <file>easysoftware/erp.xml</file>
+                </erp>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <EasySoftware_ERP>
+                    <files>
+                        <default>EasySoftware_ERP.csv</default>
+                    </files>
+                </EasySoftware_ERP>
+            </modules>
+        </translate>
+    </adminhtml>
+    <crontab>
+        <jobs>
+            <easysoftware_erp_group>
+                <schedule><cron_expr>* * * * *</cron_expr></schedule>
+                <run><model>erp/cron::runGroup</model></run>
+            </easysoftware_erp_group>
+        </jobs>
+    </crontab>
+    <default>
+        <erp>
+            <settings>
+                <active>0</active>
+                <company_id>1</company_id>
+            </settings>
+            <firebird>
+                <host>localhost</host>
+                <port>3050</port>
+                <database><![CDATA[C:\StoreERP\Dados\DADOS.FDB]]></database>
+                <username>SYSDBA</username>
+                <password>masterkey</password>
+            </firebird>
+            <queue>
+                <group>60</group>
+            </queue>
+        </erp>
+    </default>
+</config>
+

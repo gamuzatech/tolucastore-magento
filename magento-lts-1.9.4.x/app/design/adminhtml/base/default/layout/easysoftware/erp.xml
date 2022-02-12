@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+/**
+ * @package     EasySoftware_ERP
+ * @copyright   Copyright (c) 2022 Gamuza Technologies (http://www.gamuza.com.br/)
+ * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
+ */
+-->
+
+<layout version="0.1.0">
+    <admin_erp_adminhtml_group_index>
+        <reference name="content">
+            <block type="erp/adminhtml_group" name="group" />
+        </reference>
+    </admin_erp_adminhtml_group_index>
+</layout>
+
