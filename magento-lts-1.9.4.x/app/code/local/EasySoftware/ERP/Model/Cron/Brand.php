@@ -93,7 +93,7 @@ QUERY;
             'default'    => null,
             'order'      => 0,
             'label'      => array(
-                array ('store_code' => Mage_Core_Model_App::ADMIN_STORE_ID, 'value' => ucfirst (strtolower ($brand->getName ()))),
+                array ('store_code' => Mage_Core_Model_App::ADMIN_STORE_ID, 'value' => $this->getHelper ()->ucfirst ($brand->getName ())),
             ),
         );
 

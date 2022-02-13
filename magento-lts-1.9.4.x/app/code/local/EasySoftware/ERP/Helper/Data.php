@@ -47,6 +47,18 @@ class EasySoftware_ERP_Helper_Data extends Mage_Core_Helper_Abstract
         return ibase_query ($connection, $query);
     }
 
+    public function mb_strtolower ($text)
+    {
+        mb_internal_encoding ('UTF-8');
+
+        return mb_strtolower ($text);
+    }
+
+    public function ucfirst ($text)
+    {
+        return ucfirst ($this->mb_strtolower ($text));
+    }
+
     public function getFirebirdConfig ($key, $store = null)
     {
         return Mage::getStoreConfig ("erp/firebird/{$key}", $store);
