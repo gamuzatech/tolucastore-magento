@@ -10,7 +10,7 @@
 <config>
     <modules>
         <EasySoftware_ERP>
-            <version>0.0.2</version>
+            <version>0.0.3</version>
         </EasySoftware_ERP>
     </modules>
     <global>
@@ -35,6 +35,9 @@
                     <group>
                         <table>easysoftware_erp_group</table>
                     </group>
+                    <brand>
+                        <table>easysoftware_erp_brand</table>
+                    </brand>
                 </entities>
             </erp_mysql4>
         </models>
@@ -95,6 +98,10 @@
                 <schedule><cron_expr>* * * * *</cron_expr></schedule>
                 <run><model>erp/cron::runGroup</model></run>
             </easysoftware_erp_group>
+            <easysoftware_erp_brand>
+                <schedule><cron_expr>* * * * *</cron_expr></schedule>
+                <run><model>erp/cron::runBrand</model></run>
+            </easysoftware_erp_brand>
         </jobs>
     </crontab>
     <default>
@@ -112,7 +119,11 @@
             </firebird>
             <queue>
                 <group>60</group>
+                <brand>60</brand>
             </queue>
+            <product>
+                <brand>brand</brand>
+            </product>
         </erp>
     </default>
 </config>

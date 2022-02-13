@@ -13,5 +13,10 @@
             <block type="erp/adminhtml_group" name="group" />
         </reference>
     </admin_erp_adminhtml_group_index>
+    <admin_erp_adminhtml_brand_index>
+        <reference name="content">
+            <block type="erp/adminhtml_brand" name="brand" />
+        </reference>
+    </admin_erp_adminhtml_brand_index>
 </layout>
 

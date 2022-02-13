@@ -18,6 +18,11 @@
                     <sort_order>0</sort_order>
                     <action>admin_erp/adminhtml_group</action>
                 </group>
+                <brand module="erp">
+                    <title>Brands</title>
+                    <sort_order>10</sort_order>
+                    <action>admin_erp/adminhtml_brand</action>
+                </brand>
             </children>
         </erp>
     </menu>
@@ -36,6 +41,10 @@
                                 <title>Groups</title>
                                 <sort_order>0</sort_order>
                             </group>
+                            <brand translate="title" module="erp">
+                                <title>Brands</title>
+                                <sort_order>10</sort_order>
+                            </brand>
                         </children>
                     </erp>
                     <system>

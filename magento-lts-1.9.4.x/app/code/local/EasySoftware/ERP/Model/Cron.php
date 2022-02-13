@@ -11,5 +11,10 @@ class EasySoftware_ERP_Model_Cron
     {
         Mage::getModel ('erp/cron_group')->run ();
     }
+
+    public function runBrand ()
+    {
+        Mage::getModel ('erp/cron_brand')->run ();
+    }
 }
 

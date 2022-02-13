@@ -107,12 +107,13 @@ QUERY;
 
         $group->setCategoryId ($mageCategory->getId ());
 
-        return true;
+        return $mageCategory->getId ();
     }
 
     private function cleanupERPGroup ($group)
     {
-        $now = date ('Y-m-d H:i:s');
+        $now = Mage::getModel ('core/date')->date ('Y-m-d H:i:s');
+
         $externalId = $group->getExternalId ();
         $companyId = $group->getCompanyId ();
 
@@ -125,7 +126,7 @@ QUERY;
 
         if ($result == 1)
         {
-            $group->setSyncedAt (date ('c'))
+            $group->setSyncedAt ($now)
                 ->setStatus (EasySoftware_ERP_Helper_Data::STATUS_OKAY)
                 ->setMessage (new Zend_Db_Expr ('NULL'))
                 ->save ();

@@ -52,6 +52,11 @@ class EasySoftware_ERP_Helper_Data extends Mage_Core_Helper_Abstract
         return Mage::getStoreConfig ("erp/firebird/{$key}", $store);
     }
 
+    public function getProductConfig ($key, $store = null)
+    {
+        return Mage::getStoreConfig ("erp/product/{$key}", $store);
+    }
+
     public function getQueueConfig ($key, $store = null)
     {
         return Mage::getStoreConfig ("erp/queue/{$key}", $store);

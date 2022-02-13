@@ -36,6 +36,16 @@ class EasySoftware_ERP_Model_Cron_Abstract
         return Mage::helper ('erp');
     }
 
+    protected function getUtils ()
+    {
+        return Mage::getModel ('erp/utils');
+    }
+
+    protected function getProductConfig ($key, $storeId = null)
+    {
+        return $this->getHelper ()->getProductConfig ($key, $storeId);
+    }
+
     protected function getQueueConfig ($key, $storeId = null)
     {
         return $this->getHelper ()->getQueueConfig ($key, $storeId);

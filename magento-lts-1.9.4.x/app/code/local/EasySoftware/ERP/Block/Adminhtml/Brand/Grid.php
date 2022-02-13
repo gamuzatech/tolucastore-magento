@@ -5,13 +5,13 @@
  * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
  */
 
-class EasySoftware_ERP_Block_Adminhtml_Group_Grid extends Mage_Adminhtml_Block_Widget_Grid
+class EasySoftware_ERP_Block_Adminhtml_Brand_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
 	public function __construct ()
 	{
 		parent::__construct ();
 
-		$this->setId ('erpGroupGrid');
+		$this->setId ('erpBrandGrid');
 		$this->setDefaultSort ('updated_at');
 		$this->setDefaultDir ('DESC');
 		$this->setSaveParametersInSession (true);
@@ -19,7 +19,7 @@ class EasySoftware_ERP_Block_Adminhtml_Group_Grid extends Mage_Adminhtml_Block_W
 
 	protected function _prepareCollection ()
 	{
-		$collection = Mage::getModel ('erp/group')->getCollection ();
+		$collection = Mage::getModel ('erp/brand')->getCollection ();
 
 		$this->setCollection ($collection);
 
@@ -34,11 +34,24 @@ class EasySoftware_ERP_Block_Adminhtml_Group_Grid extends Mage_Adminhtml_Block_W
 	        'type'   => 'number',
 		    'index'  => 'entity_id',
 		));
+        $this->addColumn ('attribute_id', array(
+            'header'  => Mage::helper ('erp')->__('Attribute'),
+            'index'   => 'attribute_id',
+            'type'    => 'options',
+            'options' => Mage::getModel ('erp/adminhtml_system_config_source_attribute_product')->toArray (),
+        ));
+        $this->addColumn ('option_id', array(
+            'header' => Mage::helper ('erp')->__('Option ID'),
+            'index'  => 'option_id',
+            'type'   => 'number',
+        ));
+/*
 		$this->addColumn ('company_id', array(
 		    'header' => Mage::helper ('erp')->__('Company ID'),
 		    'align'  => 'right',
 		    'index'  => 'company_id',
 		));
+*/
 		$this->addColumn ('external_id', array(
 		    'header' => Mage::helper ('erp')->__('Ext. ID'),
 		    'align'  => 'right',
@@ -78,27 +91,27 @@ class EasySoftware_ERP_Block_Adminhtml_Group_Grid extends Mage_Adminhtml_Block_W
             'type'   => 'datetime',
 		));
 
+        $this->addExportType ('*/*/exportCsv', Mage::helper ('erp')->__('CSV'));
+
         $this->addColumn('action', array(
             'header'  => Mage::helper('erp')->__('Action'),
             'width'   => '50px',
             'type'    => 'action',
-            'getter'  => 'getCategoryId',
-            'index'    => 'stores',
+            'getter'  => 'getAttributeId',
             'filter'   => false,
             'sortable' => false,
+            'index'    => 'stores',
             'actions' => array(
                 array(
-                    'field'   => 'id',
-                    'caption' => Mage::helper('erp')->__('Category'),
+                    'caption' => Mage::helper ('catalog')->__('Attribute'),
+                    'field'   => 'attribute_id',
                     'url'     => array(
-                        'base'   => 'adminhtml/catalog_category/edit',
-                        'params' => array('store'=>$this->getRequest()->getParam('store'), 'clear' => true)
+                        'base'   => 'adminhtml/catalog_product_attribute/edit',
+                        'params' => array('store' => $this->getRequest()->getParam('store'))
                     ),
                 )
             ),
         ));
-
-        $this->addExportType ('*/*/exportCsv', Mage::helper ('erp')->__('CSV'));
 
 		return parent::_prepareColumns ();
 	}
@@ -113,9 +126,9 @@ class EasySoftware_ERP_Block_Adminhtml_Group_Grid extends Mage_Adminhtml_Block_W
 		$this->setMassactionIdField ('entity_id');
 		$this->getMassactionBlock ()->setFormFieldName ('entity_ids')
 		    ->setUseSelectAll (true)
-		    ->addItem ('remove_groups', array(
-				 'label'   => Mage::helper ('erp')->__('Remove Groups'),
-				 'url'     => $this->getUrl ('*/adminhtml_group/massRemove'),
+		    ->addItem ('remove_brands', array(
+				 'label'   => Mage::helper ('erp')->__('Remove Brands'),
+				 'url'     => $this->getUrl ('*/adminhtml_brand/massRemove'),
 				 'confirm' => Mage::helper ('erp')->__('Are you sure?')
 			))
         ;
