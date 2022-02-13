@@ -48,6 +48,25 @@ $installer->addAttribute ('catalog_product', Gamuza_Basic_Helper_Data::PRODUCT_A
     'sort_order'       => 1000,
 ));
 
+$installer->addAttribute ('catalog_product', Gamuza_Basic_Helper_Data::PRODUCT_ATTRIBUTE_COLOR, array(
+    'group'            => Mage::helper ('basic')->__('General'),
+    'label'            => Mage::helper ('basic')->__('Color'),
+    'global'           => Mage_Catalog_Model_Resource_Eav_Attribute::SCOPE_GLOBAL,
+    'source'           => 'eav/entity_attribute_source_table',
+    'type'             => 'int',
+    'input'            => 'select',
+    'visible'          => true,
+    'required'         => false,
+    'user_defined'     => true,
+    'searchable'       => true,
+    'filterable'       => true,
+    'comparable'       => true,
+    'visible_on_front' => true,
+    'unique'           => false,
+    'is_configurable'  => false,
+    'sort_order'       => 1000,
+));
+
 $installer->addAttribute ('catalog_product', Gamuza_Basic_Helper_Data::PRODUCT_ATTRIBUTE_SIZE, array(
     'group'            => Mage::helper ('basic')->__('General'),
     'label'            => Mage::helper ('basic')->__('Size'),

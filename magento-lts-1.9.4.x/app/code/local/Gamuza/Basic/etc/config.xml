@@ -308,6 +308,7 @@
             <collection>
                 <attributes>
                     <brand />
+                    <color />
                     <sku_position />
                     <size />
                 </attributes>
