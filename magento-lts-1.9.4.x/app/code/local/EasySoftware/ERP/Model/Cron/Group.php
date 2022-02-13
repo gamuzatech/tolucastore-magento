@@ -102,7 +102,7 @@ QUERY;
 
         $mageCategory
             ->setIsActive ($group->getIsActive ())
-            ->setName ($group->getName ())
+            ->setName (ucfirst (strtolower ($group->getName ())))
             ->save ();
 
         $group->setCategoryId ($mageCategory->getId ());
