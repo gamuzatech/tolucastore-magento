@@ -45,13 +45,11 @@ class EasySoftware_ERP_Block_Adminhtml_Brand_Grid extends Mage_Adminhtml_Block_W
             'index'  => 'option_id',
             'type'   => 'number',
         ));
-/*
 		$this->addColumn ('company_id', array(
 		    'header' => Mage::helper ('erp')->__('Company ID'),
 		    'align'  => 'right',
 		    'index'  => 'company_id',
 		));
-*/
 		$this->addColumn ('external_id', array(
 		    'header' => Mage::helper ('erp')->__('Ext. ID'),
 		    'align'  => 'right',

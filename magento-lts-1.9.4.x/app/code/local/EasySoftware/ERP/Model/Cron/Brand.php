@@ -11,11 +11,13 @@ class EasySoftware_ERP_Model_Cron_Brand extends EasySoftware_ERP_Model_Cron_Abst
 
     private function readERPBrandsAPI ()
     {
+        $companyId = $this->getStoreConfig ('company_id');
         $limit     = $this->getQueueConfig ('limit') ?? self::DEFAULT_QUEUE_LIMIT;
 
 $query = <<< QUERY
     SELECT FIRST {$limit} * FROM MARCA
-    WHERE DATAHORA_ENVIADO IS NULL
+    WHERE EMPRESA = {$companyId}
+    AND DATAHORA_ENVIADO IS NULL
     OR DATAHORA_ATUALIZADO > DATAHORA_ENVIADO
 QUERY;
 
@@ -26,6 +28,7 @@ QUERY;
             $brand = Mage::getModel ('erp/brand')->load ($row->CODIGO, 'external_id');
 
             $brand->setExternalId ($row->CODIGO)
+                ->setCompanyId ($row->EMPRESA)
                 ->setName (utf8_encode ($row->DESCRICAO))
                 ->setIsActive (!strcmp ($row->ATIVO, 'S'))
                 ->setStatus (EasySoftware_ERP_Helper_Data::STATUS_PENDING)
@@ -108,10 +111,11 @@ QUERY;
         $now = Mage::getModel ('core/date')->date ('Y-m-d H:i:s');
 
         $externalId = $brand->getExternalId ();
+        $companyId = $brand->getCompanyId ();
 
 $query = <<< QUERY
     UPDATE MARCA SET DATAHORA_ENVIADO = '{$now}'
-    WHERE CODIGO = {$externalId}
+    WHERE CODIGO = {$externalId} AND EMPRESA = {$companyId}
 QUERY;
 
         $result = Mage::helper ('erp')->query ($query);
