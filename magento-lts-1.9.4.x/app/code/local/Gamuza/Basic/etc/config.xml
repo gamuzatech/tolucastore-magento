@@ -307,7 +307,9 @@
         <product>
             <collection>
                 <attributes>
+                    <brand />
                     <sku_position />
+                    <size />
                 </attributes>
             </collection>
         </product>
