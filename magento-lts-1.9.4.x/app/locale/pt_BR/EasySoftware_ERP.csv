@@ -23,5 +23,11 @@
 "Attribute","Atributo"
 "Option ID","ID Opção"
 "Remove Brands","Remover Marcas"
+"Category ID","ID Categoria"
+"Category Name","Nome Categoria"
 "Attribute not found: %s","Atributo não encontrado: %s"
+"Products Manager","Gerenciador de Produtos"
+"Remove Products","Remover Produtos"
+"Product not found: %s [ %s ]","Produto não encontrado: %s [ %s ]"
+"Ext. SKU","SKU Ext."
 

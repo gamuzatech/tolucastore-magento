@@ -10,7 +10,7 @@
 <config>
     <modules>
         <EasySoftware_ERP>
-            <version>0.0.3</version>
+            <version>0.0.4</version>
         </EasySoftware_ERP>
     </modules>
     <global>
@@ -32,12 +32,15 @@
             <erp_mysql4>
                 <class>EasySoftware_ERP_Model_Mysql4</class>
                 <entities>
-                    <group>
-                        <table>easysoftware_erp_group</table>
-                    </group>
                     <brand>
                         <table>easysoftware_erp_brand</table>
                     </brand>
+                    <group>
+                        <table>easysoftware_erp_group</table>
+                    </group>
+                    <product>
+                        <table>easysoftware_erp_product</table>
+                    </product>
                 </entities>
             </erp_mysql4>
         </models>
@@ -94,14 +97,18 @@
     </adminhtml>
     <crontab>
         <jobs>
-            <easysoftware_erp_group>
-                <schedule><cron_expr>* * * * *</cron_expr></schedule>
-                <run><model>erp/cron::runGroup</model></run>
-            </easysoftware_erp_group>
             <easysoftware_erp_brand>
                 <schedule><cron_expr>* * * * *</cron_expr></schedule>
                 <run><model>erp/cron::runBrand</model></run>
             </easysoftware_erp_brand>
+            <easysoftware_erp_group>
+                <schedule><cron_expr>* * * * *</cron_expr></schedule>
+                <run><model>erp/cron::runGroup</model></run>
+            </easysoftware_erp_group>
+            <easysoftware_erp_product>
+                <schedule><cron_expr>* * * * *</cron_expr></schedule>
+                <run><model>erp/cron::runProduct</model></run>
+            </easysoftware_erp_product>
         </jobs>
     </crontab>
     <default>
@@ -118,8 +125,9 @@
                 <password>masterkey</password>
             </firebird>
             <queue>
-                <group>60</group>
                 <brand>60</brand>
+                <group>60</group>
+                <product>60</product>
             </queue>
             <product>
                 <brand>brand</brand>

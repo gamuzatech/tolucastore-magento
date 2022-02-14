@@ -13,16 +13,21 @@
             <title>ERP</title>
             <sort_order>1000</sort_order>
             <children>
-                <group module="erp">
-                    <title>Groups</title>
-                    <sort_order>0</sort_order>
-                    <action>admin_erp/adminhtml_group</action>
-                </group>
                 <brand module="erp">
                     <title>Brands</title>
-                    <sort_order>10</sort_order>
+                    <sort_order>0</sort_order>
                     <action>admin_erp/adminhtml_brand</action>
                 </brand>
+                <group module="erp">
+                    <title>Groups</title>
+                    <sort_order>10</sort_order>
+                    <action>admin_erp/adminhtml_group</action>
+                </group>
+                <product module="erp">
+                    <title>Products</title>
+                    <sort_order>20</sort_order>
+                    <action>admin_erp/adminhtml_product</action>
+                </product>
             </children>
         </erp>
     </menu>
@@ -37,14 +42,18 @@
                         <title>ERP</title>
                         <sort_order>1000</sort_order>
                         <children>
-                            <group translate="title" module="erp">
-                                <title>Groups</title>
-                                <sort_order>0</sort_order>
-                            </group>
                             <brand translate="title" module="erp">
                                 <title>Brands</title>
-                                <sort_order>10</sort_order>
+                                <sort_order>0</sort_order>
                             </brand>
+                            <group translate="title" module="erp">
+                                <title>Groups</title>
+                                <sort_order>10</sort_order>
+                            </group>
+                            <product translate="title" module="erp">
+                                <title>Products</title>
+                                <sort_order>20</sort_order>
+                            </product>
                         </children>
                     </erp>
                     <system>

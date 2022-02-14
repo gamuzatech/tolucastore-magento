@@ -99,5 +99,10 @@ class EasySoftware_ERP_Model_Utils
 
         return (int) $valueId;
     }
+
+    public function getDefaultAttributeSetId ()
+    {
+        return Mage::getModel('catalog/product')->getResource()->getEntityType()->getDefaultAttributeSetId ();
+    }
 }
 
