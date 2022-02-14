@@ -93,7 +93,7 @@ QUERY;
 
         $result = Mage::helper ('erp')->query ($query);
 
-        $row = ibase_fetch_object ($result);
+        $row = ibase_fetch_object ($result, IBASE_TEXT);
 
         if (empty ($row) || !is_object ($row))
         {
@@ -106,6 +106,7 @@ QUERY;
         {
             $mageProduct = Mage::getModel ('catalog/product')
                 ->setData (EasySoftware_ERP_Helper_Data::PRODUCT_ATTRIBUTE_ID, $product->getExternalId ())
+                ->setWebsiteIds (array (Mage::app ()->getStore (Mage_Core_Model_App::DISTRO_STORE_ID)->getWebsite ()->getId ()))
                 ->setAttributeSetId ($this->getUtils ()->getDefaultAttributeSetId ())
                 ->setTypeId (Mage_Catalog_Model_Product_Type::TYPE_SIMPLE)
                 ->setVisibility (Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH)
@@ -132,6 +133,35 @@ QUERY;
             $mageProduct->setWeight ($row->PESO_B * 1000);
         }
 
+        $groupId = $row->GRUPO;
+
+        if (!empty ($groupId) && intval ($groupId) > 0)
+        {
+            $mageCategory = Mage::getModel ('catalog/category')->loadByAttribute (EasySoftware_ERP_Helper_Data::CATEGORY_ATTRIBUTE_ID, $groupId);
+
+            if ($mageCategory && $mageCategory->getId ())
+            {
+                $mageProduct->setCategoryIds (array ($mageCategory->getId ()));
+            }
+        }
+
+        $brandId = $row->FK_MARCA;
+
+        if (!empty ($brandId) && intval ($brandId) > 0)
+        {
+            $brand = Mage::getModel ('erp/brand')->load ($brandId, 'external_id');
+
+            if ($brand && $brand->getId () && $brand->getOptionId ())
+            {
+                $mageProduct->setBrand ($brand->getOptionId ());
+            }
+        }
+
+        $mageProduct->setSpecialPrice ($row->PRECO_PROMO_VAREJO)
+            ->setSpecialFromDate ($row->INICIO_PROMOCAO)
+            ->setSpecialToDate ($row->FIM_PROMOCAO)
+        ;
+
         $mageProduct->save ();
 
         $stockItem = Mage::getModel ('cataloginventory/stock_item')
@@ -144,6 +174,43 @@ QUERY;
             ->setQty (floatval ($row->QTD_ATUAL))
             ->save ()
         ;
+
+        $mediaApi = Mage::getModel ('catalog/product_attribute_media_api');
+        $mediaDir = Mage::getBaseDir ('media');
+
+        foreach ($mediaApi->items ($mageProduct->getId ()) as $item)
+        {
+            $mediaApi->remove ($mageProduct->getId (), $item ['file']);
+
+            @ unlink ($mediaDir . DS . 'catalog' . DS . 'product' . $item ['file']);
+        }
+
+        if (!empty ($row->FOTO))
+        {
+            $temp = tempnam (sys_get_temp_dir (), 'ERP');
+
+            file_put_contents ($temp, $row->FOTO);
+
+            $im = imagecreatefrombmp ($temp);
+            imagepng ($im, $temp);
+            imagedestroy($im);
+
+            $photo = file_get_contents ($temp);
+
+            $image = array ();
+            $image ['file'] = array ('content' => base64_encode ($photo), 'mime' => 'image/png');
+            $image ['types'] = array ('image', 'small_image', 'thumbnail');
+            $image ['exclude'] = 0;
+
+            try
+            {
+                $mediaApi->create ($mageProduct->getId (), $image);
+            }
+            catch (Exception $e)
+            {
+                throw new Exception (Mage::helper ('erp')->__('Unable to save product image.'));
+            }
+        }
 
         $mageProduct = Mage::getModel ('catalog/product')->load ($mageProduct->getId ());
 
@@ -161,9 +228,10 @@ QUERY;
 
         $externalId = $product->getExternalId ();
         $companyId = $product->getCompanyId ();
+        $productSku = $product->getProductSku ();
 
 $query = <<< QUERY
-    UPDATE PRODUTO SET DATAHORA_ENVIADO = '{$now}'
+    UPDATE PRODUTO SET REFERENCIA = '{$productSku}', DATAHORA_ENVIADO = '{$now}'
     WHERE CODIGO = {$externalId} AND EMPRESA = {$companyId}
 QUERY;
 
