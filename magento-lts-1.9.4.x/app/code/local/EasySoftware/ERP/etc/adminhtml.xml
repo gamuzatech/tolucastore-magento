@@ -28,6 +28,11 @@
                     <sort_order>20</sort_order>
                     <action>admin_erp/adminhtml_product</action>
                 </product>
+                <customer module="erp">
+                    <title>Customers</title>
+                    <sort_order>30</sort_order>
+                    <action>admin_erp/adminhtml_customer</action>
+                </customer>
             </children>
         </erp>
     </menu>
@@ -54,6 +59,10 @@
                                 <title>Products</title>
                                 <sort_order>20</sort_order>
                             </product>
+                            <customer translate="title" module="erp">
+                                <title>Customers</title>
+                                <sort_order>30</sort_order>
+                            </customer>
                         </children>
                     </erp>
                     <system>

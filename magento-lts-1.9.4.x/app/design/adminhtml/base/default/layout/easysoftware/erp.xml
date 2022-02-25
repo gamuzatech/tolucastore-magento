@@ -23,5 +23,10 @@
             <block type="erp/adminhtml_product" name="product" />
         </reference>
     </admin_erp_adminhtml_product_index>
+    <admin_erp_adminhtml_customer_index>
+        <reference name="content">
+            <block type="erp/adminhtml_customer" name="customer" />
+        </reference>
+    </admin_erp_adminhtml_customer_index>
 </layout>
 

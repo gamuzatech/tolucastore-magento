@@ -128,6 +128,24 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </brand>
+                        <product translate="label" module="erp">
+                            <label>Product</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>erp/adminhtml_system_config_source_limit</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </product>
+                        <customer translate="label" module="erp">
+                            <label>Customer</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>erp/adminhtml_system_config_source_limit</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </customer>
                     </fields>
                 </queue>
                 <product translate="label" module="erp">
