@@ -53,13 +53,31 @@ $installer->startSetup ();
 $installer->updateAttribute ('customer', 'middlename', 'is_visible', '0');
 
 $installer->updateAttribute ('customer_address', 'middlename', 'is_visible',      '0');
-/*
-$installer->updateAttribute ('customer_address', 'company',    'is_visible',      '0');
-*/
 $installer->updateAttribute ('customer_address', 'street',     'multiline_count', '4');
 $installer->updateAttribute ('customer_address', 'region_id',  'is_required',     '1');
 $installer->updateAttribute ('customer_address', 'telephone',  'is_required',     '0');
 $installer->updateAttribute ('customer_address', 'fax',        'is_required',     '1');
+
+/**
+ * General
+ */
+$countries = array ('BR');
+
+foreach (Mage::helper('directory')->getCountryCollection() as $country)
+{
+    if ($country->getRegionCollection()->getSize() > 0)
+    {
+        $countries[] = $country->getId();
+    }
+}
+
+$coreConfig = Mage::getModel ('core/config');
+
+$coreConfig->deleteConfig (Mage_Directory_Helper_Data::XML_PATH_STATES_REQUIRED);
+$coreConfig->deleteConfig (Mage_Directory_Helper_Data::XML_PATH_DISPLAY_ALL_STATES);
+
+$coreConfig->saveConfig (Mage_Directory_Helper_Data::XML_PATH_STATES_REQUIRED, implode(',', $countries));
+$coreConfig->saveConfig (Mage_Directory_Helper_Data::XML_PATH_DISPLAY_ALL_STATES, '1');
 
 /**
  * Translation

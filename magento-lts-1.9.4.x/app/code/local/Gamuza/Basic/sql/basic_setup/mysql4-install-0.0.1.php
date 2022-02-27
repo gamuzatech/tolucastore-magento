@@ -38,19 +38,6 @@ $coreConfig->saveConfig (Mage_Core_Helper_Data::XML_PATH_DEFAULT_COUNTRY, 'BR');
 
 $coreConfig->saveConfig ('general/country/allow', 'BR');
 
-$countries = array ('BR');
-
-foreach (Mage::helper('directory')->getCountryCollection() as $country)
-{
-    if($country->getRegionCollection()->getSize() > 0)
-    {
-        $countries[] = $country->getId();
-    }
-}
-
-$coreConfig->saveConfig (Mage_Directory_Helper_Data::XML_PATH_STATES_REQUIRED, implode(',', $countries));
-$coreConfig->saveConfig (Mage_Directory_Helper_Data::XML_PATH_DISPLAY_ALL_STATES, '1');
-
 /**
  * Web
  */
