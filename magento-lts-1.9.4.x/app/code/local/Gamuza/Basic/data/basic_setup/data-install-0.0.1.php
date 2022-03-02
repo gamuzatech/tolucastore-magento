@@ -80,6 +80,40 @@ $coreConfig->saveConfig (Mage_Directory_Helper_Data::XML_PATH_STATES_REQUIRED, i
 $coreConfig->saveConfig (Mage_Directory_Helper_Data::XML_PATH_DISPLAY_ALL_STATES, '1');
 
 /**
+ * Cms Page  with 'home' identifier page modification for report pages
+ */
+/** @var Mage_Cms_Model_Page $cms */
+$cms = Mage::getModel('cms/page')->load('home', 'identifier');
+
+$reportLayoutUpdate = <<< REPORT_LAYOUT_UPDATE
+<reference name="content">
+    <block type="catalog/product_new" name="home.catalog.product.new" alias="product_new" template="catalog/product/new.phtml" after="cms_page">
+        <action method="addPriceBlockType">
+            <type>bundle</type>
+            <block>bundle/catalog_product_price</block>
+            <template>bundle/catalog/product/price.phtml</template>
+        </action>
+    </block>
+    <block type="reports/product_viewed" name="home.reports.product.viewed" alias="product_viewed" template="reports/home_product_viewed.phtml" after="product_new">
+        <action method="addPriceBlockType">
+            <type>bundle</type>
+            <block>bundle/catalog_product_price</block>
+            <template>bundle/catalog/product/price.phtml</template>
+        </action>
+    </block>
+    <block type="reports/product_compared" name="home.reports.product.compared" template="reports/home_product_compared.phtml" after="product_viewed">
+        <action method="addPriceBlockType">
+            <type>bundle</type>
+            <block>bundle/catalog_product_price</block>
+            <template>bundle/catalog/product/price.phtml</template>
+        </action>
+    </block>
+</reference>
+REPORT_LAYOUT_UPDATE;
+
+$cms->setLayoutUpdateXml($reportLayoutUpdate)->save();
+
+/**
  * Translation
  */
 $pt_BR_SQL = file_get_contents (Mage::getConfig ()->getOptions ()->getLocaleDir () . DS . Gamuza_Basic_Helper_Data::SQL_PT_BR);
