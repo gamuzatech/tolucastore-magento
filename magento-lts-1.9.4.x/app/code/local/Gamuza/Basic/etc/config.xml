@@ -499,6 +499,16 @@
                 <merge_css_files>1</merge_css_files>
             </css>
         </dev>
+        <carriers>
+            <pickup>
+                <active>1</active>
+                <title>Store Pickup</title>
+                <name>pickup</name>
+                <sallowspecific>0</sallowspecific>
+                <specificerrmsg>This shipping method is currently unavailable.</specificerrmsg>
+                <model>basic/shipping_carrier_pickup</model>
+            </pickup>
+        </carriers>
         <payment>
             <cashondelivery>
                 <active>1</active>
