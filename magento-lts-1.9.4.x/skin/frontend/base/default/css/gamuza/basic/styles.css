@@ -13,6 +13,14 @@ header.header.sticky.mm-slideout {
     display: none;
 }
 
+.cart-forms {
+    float: left;
+}
+
+.cart-table {
+    width: 100%;
+}
+
 .header-language-background {
     background-color: #54217c;
 }
