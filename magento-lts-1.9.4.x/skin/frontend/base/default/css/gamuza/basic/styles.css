@@ -21,6 +21,10 @@ header.header.sticky.mm-slideout {
     width: 100%;
 }
 
+.customer-account-login .col2-set .col-1 ul {
+    list-style: none;
+}
+
 .header-language-background {
     background-color: #54217c;
 }
