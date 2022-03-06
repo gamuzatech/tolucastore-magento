@@ -105,5 +105,11 @@
             <action method="removeTab"><name>customer_edit_tab_recurring_profile</name></action>
         </reference>
     </adminhtml_customer_edit>
+
+    <admin_basic_adminhtml_sales_tablerate_index>
+        <reference name="content">
+            <block type="basic/adminhtml_sales_tablerate" name="tablerate" />
+        </reference>
+    </admin_basic_adminhtml_sales_tablerate_index>
 </layout>
 

@@ -95,6 +95,16 @@
         </shipping>
         <carriers>
             <groups>
+                <tablerate>
+                    <fields>
+                        <export>
+                            <show_in_default>1</show_in_default>
+                        </export>
+                        <import>
+                            <show_in_default>1</show_in_default>
+                        </import>
+                    </fields>
+                </tablerate>
                 <pickup translate="label" module="shipping">
                     <label>Store Pickup</label>
                     <frontend_type>text</frontend_type>

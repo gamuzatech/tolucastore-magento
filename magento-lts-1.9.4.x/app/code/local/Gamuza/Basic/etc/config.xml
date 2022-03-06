@@ -152,6 +152,11 @@
                     <quote_address>Gamuza_Basic_Model_Sales_Quote_Address</quote_address>
                 </rewrite>
             </sales>
+            <shipping>
+                <rewrite>
+                    <carrier_tablerate>Gamuza_Basic_Model_Shipping_Carrier_Tablerate</carrier_tablerate>
+                </rewrite>
+            </shipping>
         </models>
         <resources>
             <basic_setup>
