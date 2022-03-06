@@ -61,6 +61,10 @@
                 <params>media="all"</params>
             </action>
         </reference>
+        <reference name="top.links">
+            <action method="addLink" translate="label title" module="customer"><label>Manage Addresses</label><url>/customer/address/</url><title>Manage Addresses</title><prepare/><urlParams/><position>20</position></action>
+            <action method="addLink" translate="label title" module="sales"><label>My Orders</label><url>/sales/order/history</url><title>My Orders</title><prepare/><urlParams/><position>30</position></action>
+        </reference>
     </default>
 
     <customer_account>
@@ -69,7 +73,7 @@
             <action method="removeLinkByName"><name>OAuth Customer Tokens</name></action>
             <action method="removeLinkByName"><name>downloadable_products</name></action>
             <action method="removeLinkByName"><name>recurring_profiles</name></action>
-            <action method="appendLink" translate="label" module="customer"><name>logout</name><path>customer/account/logout</path><label>Log Out</label></action>]
+            <action method="appendLink" translate="label" module="customer"><name>logout</name><path>customer/account/logout</path><label>Log Out</label></action>
         </reference>
     </customer_account>
 
