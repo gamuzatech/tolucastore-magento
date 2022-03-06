@@ -39,8 +39,8 @@ class Gamuza_Basic_Helper_Data extends Mage_Core_Helper_Abstract
     const ORDER_SUFFIX_APP    = 'APP';
     const ORDER_SUFFIX_BOT    = 'BOT';
     const ORDER_SUFFIX_ADMIN  = 'ADMIN';
-    const ORDER_SUFFIX_MARKET = 'MARKET';
     const ORDER_SUFFIX_STORE  = 'STORE';
+    const ORDER_SUFFIX_OTHER  = 'OTHER';
 
     const PRODUCT_ATTRIBUTE_BRAND = 'brand';
     const PRODUCT_ATTRIBUTE_COLOR = 'color';
