@@ -32,11 +32,11 @@ class Gamuza_PagCripto_Model_Adminhtml_System_Config_Source_Payment_Cctype
     {
         $options =  array ();
 
-        foreach (Mage::getSingleton ('pagcripto/payment_config')->getCcTypes () as $code => $data)
+        foreach (Mage::getSingleton ('pagcripto/payment_config')->getCcTypes () as $code => $name)
         {
             $options [] = array(
-               'value' => $data ['code'],
-               'label' => sprintf ('%s (%s)', $data ['name'], $data ['code']),
+               'value' => $code,
+               'label' => $name
             );
         }
 

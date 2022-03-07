@@ -43,8 +43,9 @@ class Gamuza_PagCripto_Model_Payment_Config extends Mage_Payment_Model_Config
         $_types = Mage::getConfig ()->getNode (Gamuza_PagCripto_Helper_Data::XML_GLOBAL_PAYMENT_PAGCRIPTO_TYPES)->asArray ();
 
         uasort ($_types, array ('Gamuza_PagCripto_Model_Payment_Config', 'compareCcTypes'));
-/*
+
         $types = array ();
+
         foreach ($_types as $data)
         {
             if (isset ($data ['code']) && isset ($data ['name']))
@@ -52,8 +53,8 @@ class Gamuza_PagCripto_Model_Payment_Config extends Mage_Payment_Model_Config
                 $types [$data ['code']] = $data['name'];
             }
         }
-*/
-        return $_types;
+
+        return $types;
     }
 }
 

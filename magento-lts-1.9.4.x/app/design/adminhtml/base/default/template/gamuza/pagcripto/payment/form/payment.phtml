@@ -37,8 +37,7 @@
         <label for="<?php echo $_code ?>_cc_type" class="required"><em>*</em><?php echo $this->__('Crypto Currency Types') ?></label>
         <div class="input-box">
             <?php $_ccType = $this->getInfoData('cc_type') ?>
-            <?php foreach ($this->getCcAvailableTypes() as $_typeCode => $_typeValue): ?>
-                <?php $_typeName = $_typeValue ['name']; ?>
+            <?php foreach ($this->getCcAvailableTypes() as $_typeCode => $_typeName): ?>
                 <div class="form-item">
                     <p><label for="<?php echo $_code . '_' . $_typeCode ?>_cc_type">
                         <img src="<?php echo $this->getSkinUrl($_code . '-' . $_typeCode) ?>-logo.png" alt="<?php echo $_typeName ?>" title="<?php echo $_typeName; ?>" width="64" />
