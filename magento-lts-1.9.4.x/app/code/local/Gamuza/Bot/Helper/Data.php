@@ -28,6 +28,7 @@ class Gamuza_Bot_Helper_Data extends Mage_Core_Helper_Abstract
     const STATUS_PAYMENT  = 'payment';
     const STATUS_PAYMENT_CASH = 'payment_cash';
     const STATUS_PAYMENT_MACHINE = 'payment_machine';
+    const STATUS_PAYMENT_CRIPTO = 'payment_cripto';
     const STATUS_CHECKOUT = 'checkout';
     const STATUS_ORDER    = 'order';
 

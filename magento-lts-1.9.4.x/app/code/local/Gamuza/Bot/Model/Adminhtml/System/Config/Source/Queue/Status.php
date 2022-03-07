@@ -32,6 +32,7 @@ class Gamuza_Bot_Model_Adminhtml_System_Config_Source_Queue_Status
             Gamuza_Bot_Helper_Data::STATUS_PAYMENT  => Mage::helper ('bot')->__('Payment'),
             Gamuza_Bot_Helper_Data::STATUS_PAYMENT_CASH    => Mage::helper ('bot')->__('Payment Cash'),
             Gamuza_Bot_Helper_Data::STATUS_PAYMENT_MACHINE => Mage::helper ('bot')->__('Payment Machine'),
+            Gamuza_Bot_Helper_Data::STATUS_PAYMENT_CRIPTO  => Mage::helper ('bot')->__('Payment Cripto'),
             Gamuza_Bot_Helper_Data::STATUS_CHECKOUT => Mage::helper ('bot')->__('Checkout'),
             Gamuza_Bot_Helper_Data::STATUS_ORDER    => Mage::helper ('bot')->__('Order'),
         );
