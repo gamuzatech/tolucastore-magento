@@ -22,7 +22,7 @@ class Gamuza_Bot_Helper_Message extends Mage_Core_Helper_Abstract
     const ENTER_TO_CONFIRM_ORDER     = 'enter_to_confirm_order';
 
     const ENTER_CATEGORY_CODE        = 'enter_category_code';
-    const ENTER_BOT_TO_ATTENDANT     = 'enter_bot_to_attendant';
+    const ENTER_ZAP_TO_ATTENDANT     = 'enter_zap_to_attendant';
     const ENTER_PRODUCT_CODE_TO_CART = 'enter_product_code_to_cart';
     const CHOOSE_OPTION_FOR_PRODUCT  = 'choose_options_for_product';
     const ENTER_PRODUCT_OPTION_CODE  = 'enter_product_option_code';
@@ -98,9 +98,9 @@ class Gamuza_Bot_Helper_Message extends Mage_Core_Helper_Abstract
         return $this->getText (self::ENTER_CATEGORY_CODE);
     }
 
-    public function getEnterBotToAttendantText ()
+    public function getEnterZapToAttendantText ()
     {
-        return $this->getText (self::ENTER_BOT_TO_ATTENDANT);
+        return $this->getText (self::ENTER_ZAP_TO_ATTENDANT);
     }
 
     public function getEnterProductCodeToCartText ()
@@ -165,7 +165,7 @@ class Gamuza_Bot_Helper_Message extends Mage_Core_Helper_Abstract
             {
                 $result = $this->__('Would you like to add any notes for this product?') . PHP_EOL . PHP_EOL
                     . $this->__('Please enter any notes:') . PHP_EOL . PHP_EOL
-                    . $this->getTypeCommandToContinueText (Gamuza_Bot_Model_Queue_Api::COMMAND_OK)
+                    . $this->getTypeCommandToContinueText (Gamuza_Bot_Model_Queue_Api::COMMAND_ZERO)
                 ;
 
                 break;
@@ -218,9 +218,9 @@ class Gamuza_Bot_Helper_Message extends Mage_Core_Helper_Abstract
 
                 break;
             }
-            case self::ENTER_BOT_TO_ATTENDANT:
+            case self::ENTER_ZAP_TO_ATTENDANT:
             {
-                $result = $this->__('Or at any time enter *bot* to call the attendant.');
+                $result = $this->__('Or at any time enter *%s* to call the attendant.', Gamuza_Bot_Helper_Data::STATUS_ZAP);
 
                 break;
             }

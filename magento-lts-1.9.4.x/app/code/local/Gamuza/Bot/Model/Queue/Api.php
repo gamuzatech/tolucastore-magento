@@ -20,8 +20,8 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
     const QUANTITY_LENGTH    = 5;
 
     const COMMAND_ZERO    = '0';
+    const COMMAND_ONE     = '1';
     const COMMAND_OK      = 'ok';
-    const COMMAND_CLEAR   = 'limpar';
 
     const DEFAULT_CUSTOMER_EMAIL  = 'store@toluca.com.br';
     const DEFAULT_CUSTOMER_TAXVAT = '02788178824';
@@ -247,7 +247,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
 
         $result = null;
 
-        if (!strcmp (strtolower (trim ($body)), Gamuza_Bot_Helper_Data::STATUS_BOT))
+        if (!strcmp (strtolower (trim ($body)), Gamuza_Bot_Helper_Data::STATUS_ZAP))
         {
             $queue->setIsMuted (true)->save ();
 
@@ -293,7 +293,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
                 {
                     $result = $this->_getCartReview ($queue->getQuoteId (), $storeId)
                         . Mage::helper ('bot/message')->getTypeListToCategoriesText (self::COMMAND_ZERO) . PHP_EOL . PHP_EOL
-                        . Mage::helper ('bot/message')->getTypeClearToRestartText (self::COMMAND_CLEAR) . PHP_EOL . PHP_EOL
+                        . Mage::helper ('bot/message')->getTypeClearToRestartText (self::COMMAND_ONE) . PHP_EOL . PHP_EOL
                         . Mage::helper ('bot/message')->getTypeCommandToContinueText (self::COMMAND_OK)
                     ;
 
@@ -347,7 +347,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
                         break;
                     }
 
-                    if ($product->getHasOptions ())
+                    if (!empty ($product->getOptions ()))
                     {
                         $result = $this->_getProductOptions ($product);
 
@@ -385,7 +385,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
                         {
                             $result = Mage::helper ('bot/message')->getProductNotAddedToCartText () . PHP_EOL . PHP_EOL
                                 . $e->getCustomMessage () . PHP_EOL . PHP_EOL
-                                . $this->_getProductList ($seller->getStoreId, $queue->getCategoryId ())
+                                . $this->_getProductList ($storeId, $queue->getCategoryId ())
                             ;
 
                             $queue->setStatus (Gamuza_Bot_Helper_Data::STATUS_PRODUCT)
@@ -411,13 +411,13 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
             }
             case Gamuza_Bot_Helper_Data::STATUS_BUNDLE:
             {
-                if (!strcmp (strtolower (trim ($body)), self::COMMAND_OK))
+                if (!strcmp (strtolower (trim ($body)), self::COMMAND_ZERO))
                 {
                     $queueStatus = null;
 
                     $product = Mage::getModel ('catalog/product')->load ($queue->getProductId ());
 
-                    if ($product->getHasOptions ())
+                    if (!empty ($product->getOptions ()))
                     {
                         $result = $this->_getProductOptions ($product);
 
@@ -443,7 +443,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
                 $collection = Mage::getModel ('bundle/option')->getCollection ()
                     ->joinValues (Mage_Core_Model_App::ADMIN_STORE_ID)
                     ->setProductIdFilter ($queue->getProductId ())
-                    ->addFieldToFilter ('main_table.sort_order', array ('eq' => $optionId))
+                    ->addFieldToFilter ('main_table.position', array ('eq' => $optionId))
                 ;
 
                 $option = $collection->getFirstItem ();
@@ -476,7 +476,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
 
                 $collection->getSelect ()
                     ->where ('selection.parent_product_id = ?', $queue->getProductId ())
-                    ->where ('selection.sort_order IN (?)', $matches [0])
+                    ->where ('selection.position IN (?)', $matches [0])
                     ->reset (Zend_Db_Select::COLUMNS)
                     ->columns (array(
                         'id'   => 'selection.selection_id',
@@ -484,7 +484,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
                     ))
                 ;
 
-                if ($collection->count () > 0 || !strcmp (strtolower (trim ($body)), self::COMMAND_OK))
+                if ($collection->count () > 0 || !strcmp (strtolower (trim ($body)), self::COMMAND_ZERO))
                 {
                     $product = Mage::getModel ('catalog/product')->load ($queue->getProductId ());
 
@@ -519,7 +519,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
             }
             case Gamuza_Bot_Helper_Data::STATUS_OPTION:
             {
-                if (!strcmp (strtolower (trim ($body)), self::COMMAND_OK))
+                if (!strcmp (strtolower (trim ($body)), self::COMMAND_ZERO))
                 {
                     $result = Mage::helper ('bot/message')->getAddCommentForProductText ();
 
@@ -584,7 +584,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
                     ))
                 ;
 
-                if ($collection->count () > 0 || !strcmp (strtolower (trim ($body)), self::COMMAND_OK))
+                if ($collection->count () > 0 || !strcmp (strtolower (trim ($body)), self::COMMAND_ZERO))
                 {
                     $product = Mage::getModel ('catalog/product')->load ($queue->getProductId ());
 
@@ -621,7 +621,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
             {
                 $additionalOptions = null;
 
-                if (strcmp (strtolower (trim ($body)), self::COMMAND_OK) != 0)
+                if (strcmp (strtolower (trim ($body)), self::COMMAND_ZERO) != 0)
                 {
                     $additionalOptions = array(
                         array(
@@ -660,7 +660,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
                 {
                     $result = Mage::helper ('bot/message')->getProductNotAddedToCartText () . PHP_EOL . PHP_EOL
                         . Mage::helper ('bot')->__('Obs: %s', $e->getCustomMessage ()) . PHP_EOL . PHP_EOL
-                        . $this->_getProductList ($seller->getStoreId, $queue->getCategoryId ())
+                        . $this->_getProductList ($storeId, $queue->getCategoryId ())
                     ;
 
                     $queue->setStatus (Gamuza_Bot_Helper_Data::STATUS_PRODUCT)
@@ -685,7 +685,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
                     break;
                 }
 
-                if (!strcmp (strtolower (trim ($body)), self::COMMAND_CLEAR))
+                if (!strcmp (strtolower (trim ($body)), self::COMMAND_ONE))
                 {
                     $quote = Mage::getModel ('sales/quote')->load ($queue->getQuoteId ());
 
@@ -718,7 +718,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
 
                 $result = $this->_getCartReview ($queue->getQuoteId (), $storeId)
                     . Mage::helper ('bot/message')->getTypeListToCategoriesText (self::COMMAND_ZERO) . PHP_EOL . PHP_EOL
-                    . Mage::helper ('bot/message')->getTypeClearToRestartText (self::COMMAND_CLEAR) . PHP_EOL . PHP_EOL
+                    . Mage::helper ('bot/message')->getTypeClearToRestartText (self::COMMAND_ONE) . PHP_EOL . PHP_EOL
                     . Mage::helper ('bot/message')->getTypeCommandToContinueText (self::COMMAND_OK)
                 ;
 
@@ -1186,7 +1186,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
             $result .= sprintf ('*%s*%s%s', $category->getPosition (), $strPad, $category->getName ()) . PHP_EOL;
         }
 
-        $result .= PHP_EOL . Mage::helper ('bot/message')->getEnterBotToAttendantText ();
+        $result .= PHP_EOL . Mage::helper ('bot/message')->getEnterZapToAttendantText ();
 
         return $result;
     }
@@ -1263,15 +1263,15 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
 
         foreach ($collection as $option)
         {
-            $strLen = self::OPTION_ID_LENGTH - strlen ($option->getSortOrder ());
+            $strLen = self::OPTION_ID_LENGTH - strlen ($option->getPosition ());
             $strPad = str_pad ("", $strLen, ' ', STR_PAD_RIGHT);
 
             $required = $option->getRequired () ? sprintf (' *(%s)* ', Mage::helper ('bot')->__('required')) : null;
 
-            $result .= sprintf ('*%s*%s%s%s', $option->getSortOrder (), $strPad, $option->getDefaultTitle (), $required) . PHP_EOL;
+            $result .= sprintf ('*%s*%s%s%s', $option->getPosition (), $strPad, $option->getDefaultTitle (), $required) . PHP_EOL;
         }
 
-        $result .= PHP_EOL . Mage::helper ('bot/message')->getTypeCommandToContinueText (self::COMMAND_OK);
+        $result .= PHP_EOL . Mage::helper ('bot/message')->getTypeCommandToContinueText (self::COMMAND_ZERO);
 
         return $result;
     }
@@ -1296,15 +1296,15 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
 
         foreach ($collection as $selection)
         {
-            $strLen = self::VALUE_ID_LENGTH - strlen ($selection->getSortOrder ());
+            $strLen = self::VALUE_ID_LENGTH - strlen ($selection->getPosition ());
             $strPad = str_pad ("", $strLen, ' ', STR_PAD_RIGHT);
 
             $selectionPrice = Mage::helper ('core')->currency ($selection->getFinalPrice (), true, false);
 
-            $result .= sprintf ('*%s*%s%s *%s*', $selection->getSortOrder (), $strPad, $selection->getName (), $selectionPrice) . PHP_EOL;
+            $result .= sprintf ('*%s*%s%s *%s*', $selection->getPosition (), $strPad, $selection->getName (), $selectionPrice) . PHP_EOL;
         }
 
-        $result .= PHP_EOL . Mage::helper ('bot/message')->getTypeCommandToContinueText (self::COMMAND_OK);
+        $result .= PHP_EOL . Mage::helper ('bot/message')->getTypeCommandToContinueText (self::COMMAND_ZERO);
 
         return $result;
     }
@@ -1325,7 +1325,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
             $result .= sprintf ('*%s*%s%s%s', $option->getSortOrder (), $strPad, $option->getTitle (), $require) . PHP_EOL;
         }
 
-        $result .= PHP_EOL . Mage::helper ('bot/message')->getTypeCommandToContinueText (self::COMMAND_OK);
+        $result .= PHP_EOL . Mage::helper ('bot/message')->getTypeCommandToContinueText (self::COMMAND_ZERO);
 
         return $result;
     }
@@ -1351,7 +1351,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
             $result .= sprintf ('*%s*%s%s *%s*', $value->getSortOrder (), $strPad, $value->getTitle (), $valuePrice) . PHP_EOL;
         }
 
-        $result .= PHP_EOL . Mage::helper ('bot/message')->getTypeCommandToContinueText (self::COMMAND_OK);
+        $result .= PHP_EOL . Mage::helper ('bot/message')->getTypeCommandToContinueText (self::COMMAND_ZERO);
 
         return $result;
     }
