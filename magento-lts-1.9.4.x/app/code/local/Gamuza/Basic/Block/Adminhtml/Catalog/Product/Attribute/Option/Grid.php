@@ -107,6 +107,12 @@ class Gamuza_Basic_Block_Adminhtml_Catalog_Product_Attribute_Option_Grid
             'escape' => true,
         ));
 */
+        $this->addColumn ('sort_order', array(
+            'header' => Mage::helper ('basic')->__('Sort Order'),
+            'width'  => '100px',
+            'type'   => 'number',
+            'index'  => 'sort_order',
+        ));
         $this->addColumn ('value_id', array(
             'header'    => Mage::helper ('basic')->__('Value ID'),
             'index'     => 'value_id',
@@ -115,12 +121,6 @@ class Gamuza_Basic_Block_Adminhtml_Catalog_Product_Attribute_Option_Grid
         $this->addColumn ('value', array(
             'header' => Mage::helper ('basic')->__('Value'),
             'index'  => 'value',
-        ));
-        $this->addColumn ('sort_order', array(
-            'header' => Mage::helper ('basic')->__('Sort Order'),
-            'width'  => '100px',
-            'type'   => 'number',
-            'index'  => 'sort_order',
         ));
 
         $this->addColumn ('action', array(
