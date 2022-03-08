@@ -1206,6 +1206,10 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
             ->addAttributeToSelect ('special_from_date')
             ->addAttributeToSelect ('special_to_date')
             ->addAttributeToSelect ('sku_position')
+            ->addAttributeToFilter ('type_id', array ('in' => array (
+                Mage_Catalog_Model_Product_Type::TYPE_SIMPLE,
+                Mage_Catalog_Model_Product_Type::TYPE_BUNDLE
+            )))
             ->addCategoryFilter ($category)
             ->setVisibility (Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH)
             ->addFinalPrice ()
