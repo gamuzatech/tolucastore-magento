@@ -39,6 +39,18 @@
                 </tablerate>
             </children>
         </sales>
+        <catalog>
+            <children>
+                <attributes>
+                    <children>
+                        <options translate="title" module="basic">
+                            <title>Manage Attribute Options</title>
+                            <action>admin_basic/adminhtml_catalog_product_attribute_option/index</action>
+                        </options>
+                    </children>
+                </attributes>
+            </children>
+        </catalog>
     </menu>
     <acl>
         <resources>
@@ -55,6 +67,17 @@
                             </tablerate>
                         </children>
                     </sales>
+                    <catalog>
+                        <children>
+                            <attributes>
+                                <children>
+                                    <options translate="title" module="basic">
+                                        <title>Manage Attribute Options</title>
+                                    </options>
+                                </children>
+                            </attributes>
+                        </children>
+                    </catalog>
                 </children>
             </admin>
         </resources>
