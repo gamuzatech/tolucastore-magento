@@ -369,11 +369,13 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
                             Mage::getModel ('checkout/cart_product_api')->add ($queue->getQuoteId (), $productsData, $storeId);
 
                             $result = Mage::helper ('bot/message')->getProductAddedToCartText () . PHP_EOL . PHP_EOL
-                                . $this->_getProductList ($storeId, $queue->getCategoryId ()) . PHP_EOL . PHP_EOL
-                                . Mage::helper ('bot/message')->getTypeCommandToGoToCartText (self::COMMAND_OK);
+                                . $this->_getCartReview ($queue->getQuoteId (), $storeId)
+                                . Mage::helper ('bot/message')->getTypeListToCategoriesText (self::COMMAND_ZERO) . PHP_EOL . PHP_EOL
+                                . Mage::helper ('bot/message')->getTypeClearToRestartText (self::COMMAND_ONE) . PHP_EOL . PHP_EOL
+                                . Mage::helper ('bot/message')->getTypeCommandToContinueText (self::COMMAND_OK)
                             ;
 
-                            $queue->setStatus (Gamuza_Bot_Helper_Data::STATUS_PRODUCT)
+                            $queue->setStatus (Gamuza_Bot_Helper_Data::STATUS_CART)
                                 ->setSelections (new Zend_Db_Expr ('NULL'))
                                 ->setOptions (new Zend_Db_Expr ('NULL'))
                                 ->setComment (new Zend_Db_Expr ('NULL'))
@@ -646,11 +648,13 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
                     Mage::getModel ('checkout/cart_product_api')->add ($queue->getQuoteId (), $productsData, $storeId);
 
                     $result = Mage::helper ('bot/message')->getProductAddedToCartText () . PHP_EOL . PHP_EOL
-                        . $this->_getProductList ($storeId, $queue->getCategoryId ()) . PHP_EOL . PHP_EOL
-                        . Mage::helper ('bot/message')->getTypeCommandToGoToCartText (self::COMMAND_OK);
+                        . $this->_getCartReview ($queue->getQuoteId (), $storeId)
+                        . Mage::helper ('bot/message')->getTypeListToCategoriesText (self::COMMAND_ZERO) . PHP_EOL . PHP_EOL
+                        . Mage::helper ('bot/message')->getTypeClearToRestartText (self::COMMAND_ONE) . PHP_EOL . PHP_EOL
+                        . Mage::helper ('bot/message')->getTypeCommandToContinueText (self::COMMAND_OK)
                     ;
 
-                    $queue->setStatus (Gamuza_Bot_Helper_Data::STATUS_PRODUCT)
+                    $queue->setStatus (Gamuza_Bot_Helper_Data::STATUS_CART)
                         ->setComment ($body)
                         ->setUpdatedAt (date ('c'))
                         ->save ()
