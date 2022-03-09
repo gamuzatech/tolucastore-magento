@@ -42,8 +42,6 @@ $installer->updateAttribute ('catalog_product', 'short_description', 'frontend_i
 $installer->updateAttribute ('catalog_product', 'url_key',           'frontend_input', 'label');
 $installer->updateAttribute ('catalog_product', 'tax_class_id',      'default_value',  '0');
 
-$installer->endSetup();
-
 /**
  * Customer
  */

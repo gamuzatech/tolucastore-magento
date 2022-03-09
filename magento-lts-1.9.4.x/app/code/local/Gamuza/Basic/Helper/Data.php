@@ -44,6 +44,7 @@ class Gamuza_Basic_Helper_Data extends Mage_Core_Helper_Abstract
 
     const PRODUCT_ATTRIBUTE_BRAND = 'brand';
     const PRODUCT_ATTRIBUTE_COLOR = 'color';
+    const PRODUCT_ATTRIBUTE_MANUFACTURER = 'manufacturer';
     const PRODUCT_ATTRIBUTE_SIZE = 'size';
     const PRODUCT_ATTRIBUTE_FREE_SHIPPING = 'free_shipping';
     const PRODUCT_ATTRIBUTE_PRICE_TYPE   = 'price_type';
