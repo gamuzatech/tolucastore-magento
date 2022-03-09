@@ -156,11 +156,6 @@
                     <quote_address>Gamuza_Basic_Model_Sales_Quote_Address</quote_address>
                 </rewrite>
             </sales>
-            <shipping>
-                <rewrite>
-                    <carrier_tablerate>Gamuza_Basic_Model_Shipping_Carrier_Tablerate</carrier_tablerate>
-                </rewrite>
-            </shipping>
         </models>
         <resources>
             <basic_setup>
@@ -517,6 +512,10 @@
                 <specificerrmsg>This shipping method is currently unavailable.</specificerrmsg>
                 <model>basic/shipping_carrier_pickup</model>
             </pickup>
+            <tablerate>
+                <handling_action>O</handling_action>
+                <model>basic/shipping_carrier_tablerate</model>
+            </tablerate>
         </carriers>
         <payment>
             <cashondelivery>

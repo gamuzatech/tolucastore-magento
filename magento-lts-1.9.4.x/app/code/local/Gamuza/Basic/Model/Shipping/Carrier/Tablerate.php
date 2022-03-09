@@ -40,13 +40,19 @@ class Gamuza_Basic_Model_Shipping_Carrier_Tablerate
      */
     public function getRate(Mage_Shipping_Model_Rate_Request $request)
     {
+        $websiteId = $request->getWebsiteId ();
+
         $destPostcode = preg_replace ('[\D]', '', $request->getDestPostcode ());
 
         $request->setWebsiteId (self::ADMIN_WEBSITE_ID)
             ->setDestPostcode ($destPostcode)
         ;
 
-        return Mage::getResourceModel('shipping/carrier_tablerate')->getRate($request);
+        $result = Mage::getResourceModel('shipping/carrier_tablerate')->getRate($request);
+
+        $request->setWebiteId ($websiteId);
+
+        return $result;
     }
 }
 
