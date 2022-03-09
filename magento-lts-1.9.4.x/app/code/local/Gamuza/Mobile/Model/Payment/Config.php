@@ -40,9 +40,9 @@ class Gamuza_Mobile_Model_Payment_Config extends Mage_Payment_Model_Config
      */
     public function getCcTypes()
     {
-        $_types = Mage::getConfig()->getNode('global/payment/machine/types')->asArray();
+        $_types = Mage::getConfig()->getNode(Gamuza_Mobile_Helper_Data::XML_GLOBAL_PAYMENT_MACHINE_TYPES)->asArray();
 
-        // uasort($_types, array('Gamuza_Mobile_Model_Payment_Config', 'compareCcTypes'));
+        uasort($_types, array('Gamuza_Mobile_Model_Payment_Config', 'compareCcTypes'));
 
         $types = array();
 
