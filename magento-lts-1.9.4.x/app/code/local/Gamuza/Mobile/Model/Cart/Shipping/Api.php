@@ -111,6 +111,7 @@ class Gamuza_Mobile_Model_Cart_Shipping_Api extends Mage_Checkout_Model_Cart_Shi
             $this->_fault("shipping_address_is_not_set");
         }
 
+        $quoteShippingAddress->collectTotals ()->save ();
         $quoteShippingAddress->setCollectShippingRates (true); // FORCE RELOAD
 
         try
