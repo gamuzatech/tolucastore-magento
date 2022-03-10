@@ -217,7 +217,12 @@ class Gamuza_Mobile_Model_Product_Api extends Mage_Catalog_Model_Api_Resource
 
                 if (!empty ($value) && !strcmp ($value, 'no_selection'))
                 {
-                    $value = Mage::getDesign ()->getSkinUrl (sprintf ("images/catalog/product/placeholder/{$code}.jpg"));
+                    $value = Mage::getSingleton ('mobile/core_design_package')
+                        ->setStore (Mage_Core_Model_App::DISTRO_STORE_ID)
+                        ->setPackageName ('rwd')
+                        ->setTheme ('magento2')
+                        ->getSkinUrl ("images/catalog/product/placeholder/{$code}.jpg")
+                    ;
                 }
                 else if (!empty ($value) && strcmp ($value, 'no_selection'))
                 {
