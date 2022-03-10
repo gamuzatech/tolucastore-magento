@@ -159,6 +159,19 @@ trait Gamuza_Mobile_Trait_Api_Resource
             }
         }
 
+        if (Mage::helper ('core')->isModuleEnabled ('Gamuza_PagCripto'))
+        {
+            $ccTypes = Mage::getSingleton('pagcripto/payment_config')->getCcTypes();
+
+            foreach ($ccTypes as $code => $title)
+            {
+                if (in_array($code, $methodCcTypes))
+                {
+                    $result[$code] = $title;
+                }
+            }
+        }
+
         if (empty($result))
         {
             return null;
