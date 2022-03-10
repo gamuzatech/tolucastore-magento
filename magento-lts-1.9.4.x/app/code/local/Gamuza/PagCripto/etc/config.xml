@@ -135,7 +135,7 @@
                     </USDC>
                     <USDT>
                         <code>USDT</code>
-                        <name>Tether</name>
+                        <name>USD Tether</name>
                         <order>100</order>
                     </USDT>
                 </types>
