@@ -117,6 +117,8 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
         'cc_owner', 'cc_type', 'additional_information', 'cc_trans_id',
         'cc_approval', 'cc_installments', 'cc_status', 'cc_last4', 'ext_payment_id',
         'blockchain_address', 'blockchain_amount',
+        'pagcripto_currency', 'pagcripto_address', 'pagcripto_status', 'pagcripto_payment_request',
+        'pagcripto_amount', 'pagcripto_confirmations', 'pagcripto_received_amount',
         'picpay_status', 'picpay_url',
         'openpix_status', 'openpix_url', 'openpix_transaction_id', 'openpix_correlation_id',
     );

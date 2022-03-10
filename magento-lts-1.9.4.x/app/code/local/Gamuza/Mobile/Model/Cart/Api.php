@@ -133,20 +133,22 @@ class Gamuza_Mobile_Model_Cart_Api extends Mage_Checkout_Model_Api_Resource
 
         $result = array(
             'increment_id' => $incrementId,
-            'blockchain'   => null,
+            'pagcripto'    => null,
             'picpay'       => null,
+            'openpix'      => null,
         );
 
-        if (Mage::helper ('core')->isModuleEnabled ('Gamuza_Blockchain'))
+        if (Mage::helper ('core')->isModuleEnabled ('Gamuza_PagCripto'))
         {
-            $transaction = Mage::getModel ('blockchain/transaction')->load ($incrementId, 'order_increment_id');
+            $transaction = Mage::getModel ('pagcripto/transaction')->load ($incrementId, 'order_increment_id');
 
             if ($transaction && $transaction->getId ())
             {
-                $result ['blockchain'] = array (
-                    'type'    => $transaction->getCurrencyType (),
-                    'address' => $transaction->getAddress (),
-                    'amount'  => $transaction->getAmount (),
+                $result ['pagcripto'] = array (
+                    'status'   => $transaction->getStatus (),
+                    'currency' => $transaction->getCurrency (),
+                    'address'  => $transaction->getAddress (),
+                    'amount'   => $transaction->getAmount (),
                 );
             }
         }
