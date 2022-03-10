@@ -213,7 +213,18 @@ class Gamuza_Mobile_Model_Product_Api extends Mage_Catalog_Model_Api_Resource
 
             foreach ($this->_imageCodes as $code)
             {
-                $resultProduct [$code] = $mediaUrl . 'catalog/product' . $product->getData ($code); // no_cache
+                $value = $product->getData ($code);
+
+                if (!empty ($value) && !strcmp ($value, 'no_selection'))
+                {
+                    $value = Mage::getDesign ()->getSkinUrl (sprintf ("images/catalog/product/placeholder/{$code}.jpg"));
+                }
+                else if (!empty ($value) && strcmp ($value, 'no_selection'))
+                {
+                    $value = $mediaUrl . 'catalog/product' . $value; // no_cache
+                }
+
+                $resultProduct [$code] = $value;
             }
 
             foreach ($this->_floatCodes as $code) $resultProduct [$code] = floatval ($resultProduct [$code]);
