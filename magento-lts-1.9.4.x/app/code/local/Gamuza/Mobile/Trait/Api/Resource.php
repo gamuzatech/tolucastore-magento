@@ -145,24 +145,26 @@ trait Gamuza_Mobile_Trait_Api_Resource
 
     protected function _getPaymentMethodAvailableCcTypes ($method)
     {
-        $ccTypes = Mage::getSingleton('mobile/payment_config')->getCcTypes();
-
         $methodCcTypes = explode(',', $method->getConfigData('cctypes'));
+
+        $result = array ();
+
+        $ccTypes = Mage::getSingleton('mobile/payment_config')->getCcTypes();
 
         foreach ($ccTypes as $code => $title)
         {
-            if (!in_array($code, $methodCcTypes))
+            if (in_array($code, $methodCcTypes))
             {
-                unset($ccTypes[$code]);
+                $result[$code] = $title;
             }
         }
 
-        if (empty($ccTypes))
+        if (empty($result))
         {
             return null;
         }
 
-        return $ccTypes;
+        return $result;
     }
 
     public function _getCcAvailableInstallments ($quote, $method)
