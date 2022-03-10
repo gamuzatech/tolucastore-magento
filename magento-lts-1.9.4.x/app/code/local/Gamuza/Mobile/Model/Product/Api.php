@@ -31,18 +31,28 @@ class Gamuza_Mobile_Model_Product_Api extends Mage_Catalog_Model_Api_Resource
     const PRICE_TYPE_FIXED = 'fixed';
 
     protected $_attributeCodes = array (
+        'brand',
+        'brand_value',
+        'color',
+        'color_value',
         'description',
         'free_shipping',
         'gift_message_available',
+        'has_options',
         'image',
         'image_label',
         'name',
         'news_from_date',
         'news_to_date',
         'price',
+        'price_type',
+        'price_view',
         'required_options',
         'short_description',
+        'size',
+        'size_value',
         'sku',
+        'sku_position',
         'small_image',
         'small_image_label',
         'special_from_date',
@@ -51,15 +61,21 @@ class Gamuza_Mobile_Model_Product_Api extends Mage_Catalog_Model_Api_Resource
         'status',
         'thumbnail',
         'thumbnail_label',
+        'type_id',
+        'url_key',
         'url_path',
+        'visibility',
+        'volume_altura',
+        'volume_comprimento',
+        'volume_largura',
         'weight',
     );
 
     protected $_descCodes  = array ('description', 'short_description');
     protected $_imageCodes = array ('image', 'small_image', 'thumbnail');
     protected $_floatCodes = array ('price');
-    protected $_intCodes   = array ('status', 'weight');
-    protected $_boolCodes  = array ('free_shipping', 'gift_message_available', 'required_options');
+    protected $_intCodes   = array ('sku_position', 'status', 'visibility', 'weight');
+    protected $_boolCodes  = array ('free_shipping', 'gift_message_available', 'has_options', 'required_options');
 
     protected $_filtersMap = array(
         'product_id' => 'entity_id',
