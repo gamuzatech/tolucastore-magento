@@ -26,12 +26,12 @@
  * These files are distributed with gamuza_basic-magento at http://github.com/gamuzatech/.
  */
 
-class Gamuza_Basic_Block_Adminhtml_Sales_Tablerate extends Mage_Adminhtml_Block_Widget_Grid_Container
+class Gamuza_Basic_Block_Adminhtml_Shipping_Tablerate extends Mage_Adminhtml_Block_Widget_Grid_Container
 {
 	public function __construct ()
 	{
 	    $this->_blockGroup = 'basic';
-	    $this->_controller = 'adminhtml_sales_tablerate';
+	    $this->_controller = 'adminhtml_shipping_tablerate';
 
 	    $this->_headerText = Mage::helper ('basic')->__('Table Rates Manager');
 

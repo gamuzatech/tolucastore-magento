@@ -23,37 +23,20 @@
 /**
  * See the AUTHORS file for a list of people on the Gamuza Team.
  * See the ChangeLog files for a list of changes.
- * These files are distributed with gamuza_Basic-magento at http://github.com/gamuzatech/.
+ * These files are distributed with gamuza_basic-magento at http://github.com/gamuzatech/.
  */
 
-class Gamuza_Basic_Adminhtml_Sales_TablerateController extends Mage_Adminhtml_Controller_Action
+class Gamuza_Basic_Block_Adminhtml_Shipping_Rate extends Mage_Adminhtml_Block_Widget_Grid_Container
 {
-	protected function _isAllowed ()
-	{
-	    return Mage::getSingleton ('admin/session')->isAllowed ('admin/sales/tablerate');
-	}
+    public function __construct ()
+    {
+        $this->_controller = 'adminhtml_shipping_rate';
+        $this->_blockGroup = 'basic';
+        $this->_headerText = Mage::helper ('basic')->__('Shipping Rates Manager');
 
-	protected function _initAction ()
-	{
-		$this->loadLayout ()
-            ->_setActiveMenu ('sales/tablerate')
-            ->_addBreadcrumb(
-                Mage::helper ('basic')->__('Table Rates Manager'),
-                Mage::helper ('basic')->__('Table Rates Manager')
-            )
-        ;
+        parent::__construct ();
 
-		return $this;
-	}
-
-	public function indexAction ()
-	{
-	    $this->_title ($this->__('Sales'));
-	    $this->_title ($this->__('Table Rates Manager'));
-
-		$this->_initAction ();
-
-		$this->renderLayout ();
-	}
+        $this->_removeButton ('add');
+    }
 }
 

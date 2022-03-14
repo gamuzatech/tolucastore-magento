@@ -112,10 +112,16 @@
         </reference>
     </admin_basic_adminhtml_catalog_product_attribute_option_index>
 
-    <admin_basic_adminhtml_sales_tablerate_index>
+    <admin_basic_adminhtml_shipping_tablerate_index>
         <reference name="content">
-            <block type="basic/adminhtml_sales_tablerate" name="tablerate" />
+            <block type="basic/adminhtml_shipping_tablerate" name="tablerate" />
         </reference>
-    </admin_basic_adminhtml_sales_tablerate_index>
+    </admin_basic_adminhtml_shipping_tablerate_index>
+
+    <admin_basic_adminhtml_shipping_rate_index>
+        <reference name="content">
+            <block type="basic/adminhtml_shipping_rate" name="rate" />
+        </reference>
+    </admin_basic_adminhtml_shipping_rate_index>
 </layout>
 

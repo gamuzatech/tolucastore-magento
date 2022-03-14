@@ -30,15 +30,23 @@
 
 <config>
     <menu>
-        <sales>
+        <shipping>
+            <title>Shipping</title>
+            <sort_order>25</sort_order>
+            <depends><module>Mage_Shipping</module></depends>
             <children>
                 <tablerate translate="title" module="basic">
                     <title>Table Rates</title>
-                    <action>admin_basic/adminhtml_sales_tablerate</action>
-                    <sort_order>55</sort_order>
+                    <action>admin_basic/adminhtml_shipping_tablerate</action>
+                    <sort_order>0</sort_order>
                 </tablerate>
+                <rates translate="title" module="basic">
+                    <title>Shipping Rates</title>
+                    <sort_order>10</sort_order>
+                    <action>admin_basic/adminhtml_shipping_rate</action>
+                </rates>
             </children>
-        </sales>
+        </shipping>
         <catalog>
             <children>
                 <attributes>
@@ -59,14 +67,20 @@
             </all>
             <admin>
                 <children>
-                    <sales>
+                    <shipping>
+                        <title>Shipping</title>
+                        <sort_order>25</sort_order>
                         <children>
                             <tablerate translate="title" module="basic">
                                 <title>Table Rates</title>
-                                <sort_order>55</sort_order>
+                                <sort_order>0</sort_order>
                             </tablerate>
+                            <rates translate="title" module="basic">
+                                <title>Shipping Rates</title>
+                                <sort_order>10</sort_order>
+                            </rates>
                         </children>
-                    </sales>
+                    </shipping>
                     <catalog>
                         <children>
                             <attributes>

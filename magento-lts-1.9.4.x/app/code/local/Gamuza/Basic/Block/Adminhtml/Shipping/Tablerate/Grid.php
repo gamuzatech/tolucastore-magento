@@ -26,7 +26,7 @@
  * These files are distributed with gamuza_basic-magento at http://github.com/gamuzatech/.
  */
 
-class Gamuza_Basic_Block_Adminhtml_Sales_Tablerate_Grid
+class Gamuza_Basic_Block_Adminhtml_Shipping_Tablerate_Grid
     extends Mage_Adminhtml_Block_Shipping_Carrier_Tablerate_Grid
 {
     /**
