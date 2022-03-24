@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+/**
+ * @package     Gamuza_MercadoLivre
+ * @copyright   Copyright (c) 2022 Gamuza Technologies (http://www.gamuza.com.br/)
+ * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
+ */
+-->
+
+<layout version="0.1.0">
+    <admin_mercadolivre_adminhtml_product_index>
+        <reference name="content">
+            <block type="mercadolivre/adminhtml_product" name="product" />
+        </reference>
+    </admin_mercadolivre_adminhtml_product_index>
+</layout>
+

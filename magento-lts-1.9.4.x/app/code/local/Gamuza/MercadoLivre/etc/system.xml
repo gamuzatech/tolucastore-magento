@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+/**
+ * @package     Gamuza_MercadoLivre
+ * @copyright   Copyright (c) 2022 Gamuza Technologies (http://www.gamuza.com.br/)
+ * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
+ */
+-->
+
+<config>
+    <tabs>
+        <gamuza translate="label" module="mercadolivre">
+            <label>Gamuza Technologies</label>
+            <sort_order>0</sort_order>
+        </gamuza>
+    </tabs>
+    <sections>
+        <mercadolivre translate="label" module="mercadolivre">
+            <label>Mercado Livre</label>
+            <tab>gamuza</tab>
+            <sort_order>10000</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <settings translate="label" module="mercadolivre">
+                    <label>Settings</label>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label" module="mercadolivre">
+                            <label>Active</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <app_id translate="label" module="mercadolivre">
+                            <label>App ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Crie sua aplicação a partir deste <a target='_blank' href='https://developers.mercadolivre.com.br/apps'>link</a>]]></comment>
+                        </app_id>
+                        <secret_key translate="label" module="mercadolivre">
+                            <label>Secret Key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </secret_key>
+                        <authorize>
+                            <label>Authorize</label>
+                            <frontend_type>button</frontend_type>
+                            <frontend_model>mercadolivre/adminhtml_system_config_form_button_authorize</frontend_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Your store needs to be online!</comment>
+                        </authorize>
+                        <!--
+                        <auth_code translate="label" module="mercadolivre">
+                            <label>Auth Code</label>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </auth_code>
+                        <user_id translate="label" module="mercadolivre">
+                            <label>User ID</label>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </user_id>
+                        <access_token translate="label" module="mercadolivre">
+                            <label>Access Token</label>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </access_token>
+                        <refresh_token translate="label" module="mercadolivre">
+                            <label>Refresh Token</label>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </refresh_token>
+                        -->
+                    </fields>
+                </settings>
+                <queue translate="label" module="mercadolivre">
+                    <label>Queue</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <product translate="label" module="mercadolivre">
+                            <label>Product</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>mercadolivre/adminhtml_system_config_source_queue_limit</source_model>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </product>
+                    </fields>
+                </queue>
+                <product translate="label" module="mercadolivre">
+                    <label>Product</label>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <listing_type translate="label" module="mercadolivre">
+                            <label>Listing Type</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>mercadolivre/adminhtml_system_config_source_listing_type</source_model>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </listing_type>
+                        <shipping_mode translate="label" module="mercadolivre">
+                            <label>Shipping Mode</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>mercadolivre/adminhtml_system_config_source_shipping_mode</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </shipping_mode>
+                        <free_shipping translate="label" module="mercadolivre">
+                            <label>Free Shipping</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </free_shipping>
+                        <local_pick_up translate="label" module="mercadolivre">
+                            <label>Local Pick Up</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </local_pick_up>
+                    </fields>
+                </product>
+            </groups>
+        </mercadolivre>
+    </sections>
+</config>
+

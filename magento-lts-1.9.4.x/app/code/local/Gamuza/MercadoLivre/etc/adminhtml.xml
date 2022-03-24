@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+/**
+ * @package     Gamuza_MercadoLivre
+ * @copyright   Copyright (c) 2022 Gamuza Technologies (http://www.gamuza.com.br/)
+ * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
+ */
+-->
+
+<config>
+    <menu>
+        <gamuza>
+            <title>Gamuza</title>
+            <sort_order>1000</sort_order>
+            <children>
+                <mercadolivre translate="title" module="mercadolivre">
+                    <title>MercadoLivre</title>
+                    <sort_order>100</sort_order>
+                    <children>
+                        <product translate="title" module="mercadolivre">
+                            <title>Manage Products</title>
+                            <action>admin_mercadolivre/adminhtml_product/index</action>
+                            <sort_order>0</sort_order>
+                        </product>
+                    </children>
+                </mercadolivre>
+            </children>
+        </gamuza>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <mercadolivre translate="title" module="mercadolivre">
+                                        <title>Gamuza MercadoLivre Section</title>
+                                        <sort_order>10000</sort_order>
+                                    </mercadolivre>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <gamuza>
+                        <children>
+                            <mercadolivre translate="title" module="mercadolivre">
+                                <title>MercadoLivre</title>
+                                <sort_order>100</sort_order>
+                                <children>
+                                    <product translate="title" module="mercadolivre">
+                                        <title>Manage Products</title>
+                                        <sort_order>0</sort_order>
+                                    </product>
+                                </children>
+                            </mercadolivre>
+                        </children>
+                    </gamuza>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>
+

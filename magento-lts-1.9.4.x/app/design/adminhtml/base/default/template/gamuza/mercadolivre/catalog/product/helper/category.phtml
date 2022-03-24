@@ -1,0 +1,112 @@
+<?php
+/**
+ * @package     Gamuza_MercadoLivre
+ * @copyright   Copyright (c) 2022 Gamuza Technologies (http://www.gamuza.com.br/)
+ * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
+ */
+?>
+
+<style>
+.mercadolivre-category-top   { padding-top: 10px; padding-left: 5px; }
+.mercadolivre-category-right { display: inline-table; padding-right: 10px; }
+</style>
+
+<?php $_categoryName = $this->getElement ()->getCategoryName (); ?>
+<?php if (!empty ($_categoryName)): ?>
+<tr>
+    <td class="label"><label id="mercadolivre-category-label"><?php echo Mage::helper ('adminhtml')->__('Category Name'); ?></label></td>
+    <td class="value"><span id="mercadolivre-category-name"><?php echo $_categoryName; ?></span></td>
+    <td class="scope-label"><span class="nobr"></span></td>
+</tr>
+<?php endif; ?>
+
+<?php if (!$this->getElement ()->getIsActive ()): ?>
+<p class="mercadolivre-category-top">
+    <strong><?php echo Mage::helper ('mercadolivre')->__('MercadoLivre is not enabled.'); ?></strong>
+</p>
+<?php else: ?>
+<?php $_categories = $this->getElement ()->getCategories (); ?>
+<?php if (empty ($_categories) || !count ($_categories)): ?>
+<p class="mercadolivre-category-top">
+    <strong><?php echo Mage::helper ('mercadolivre')->__('MercadoLivre categories were not found.'); ?></strong>
+</p>
+<?php else: ?>
+<div id="mercadolivre-category-children" class="mercadolivre-category-top">
+    <div id="mercadolivre-category-0" class="mercadolivre-category-right">
+        <select size=20>
+            <?php foreach ($_categories as $category): ?>
+            <?php $_categoryId   = $category->getData (Gamuza_MercadoLivre_Helper_Data::CATEGORY_ATTRIBUTE_ID); ?>
+            <?php $_categoryName = $category->getName (); ?>
+            <option onclick="getMercadoLivreCategories('<?php echo $_categoryId; ?>', '<?php echo $_categoryName; ?>', 0);" value="<?php echo $_categoryId; ?>">
+                <?php echo $_categoryName; ?>
+            </option>
+            <?php endforeach; ?>
+        <select>
+    </div>
+</div>
+<script>
+function getMercadoLivreCategories (id, name, position) {
+    var children = $$('#mercadolivre-category-children div');
+
+    for (var i = position + 1; i < children.length; i ++) {
+        $('mercadolivre-category-' + i).remove ();
+    }
+
+    new Ajax.Request ("<?php echo Mage::helper('adminhtml')->getUrl ('admin_mercadolivre/adminhtml_category/index'); ?>", {
+        method: 'get',
+        parameters: { 'id': id, 'position': position },
+        onSuccess: function (transport) {
+            if (transport.responseText == '[]') {
+                $('<?php echo $this->getElement ()->getHtmlId (); ?>').value = JSON.stringify ([id, name]);
+
+                $('mercadolivre-category-name').update (name + ' [ ' + id + ' ] ');
+
+                return; // nothing
+            }
+
+            var category = new Element ('div', {
+                id: 'mercadolivre-category-' + (position + 1),
+                class: 'mercadolivre-category-right',
+            });
+
+            $('mercadolivre-category-children').insert (category);
+
+            var select = new Element ('select', { size: 20 } );
+
+            category.insert (select);
+
+            var json = transport.responseJSON;
+
+            for (var item in json) {
+                var option = new Element ('option', {
+                    value: item,
+                    onclick: "getMercadoLivreCategories('" + item + "','" + json [item] + "', " + (position + 1) + ");",
+                }).update (json [item]);
+
+                select.insert (option);
+            }
+        },
+    });
+}
+</script>
+<?php endif; ?>
+<?php endif; ?>
+
+<?php if ($this->getElement ()->getIsActive ()): ?>
+<p class="mercadolivre-category-top">
+    <button type="button" class="scalable" onclick="updateMercadoLivreCategories();">
+        <span><span><span><?php echo Mage::helper ('adminhtml')->__('Update'); ?></span></span></span>
+    </button>
+</p>
+<script>
+function updateMercadoLivreCategories () {
+    new Ajax.Request ("<?php echo Mage::helper('adminhtml')->getUrl ('admin_mercadolivre/adminhtml_category/update'); ?>", {
+        method: 'get',
+        onSuccess: function (transport) {
+            window.location.reload ();
+        },
+    });
+}
+</script>
+<?php endif; ?>
+

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+/**
+ * @package     Gamuza_MercadoLivre
+ * @copyright   Copyright (c) 2022 Gamuza Technologies (http://www.gamuza.com.br/)
+ * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
+ */
+-->
+
+<config>
+    <modules>
+        <Gamuza_MercadoLivre>
+            <version>0.0.3</version>
+        </Gamuza_MercadoLivre>
+    </modules>
+    <global>
+        <helpers>
+            <mercadolivre>
+                <class>Gamuza_MercadoLivre_Helper</class>
+            </mercadolivre>
+        </helpers>
+        <blocks>
+            <mercadolivre>
+                <class>Gamuza_MercadoLivre_Block</class>
+            </mercadolivre>
+        </blocks>
+        <models>
+            <mercadolivre>
+                <class>Gamuza_MercadoLivre_Model</class>
+                <resourceModel>mercadolivre_mysql4</resourceModel>
+            </mercadolivre>
+            <mercadolivre_mysql4>
+                <class>Gamuza_MercadoLivre_Model_Mysql4</class>
+                <entities>		  
+                    <product>
+                        <table>gamuza_mercadolivre_product</table>
+                    </product>
+                </entities>
+            </mercadolivre_mysql4>
+        </models>
+        <resources>
+            <mercadolivre_setup>
+                <setup>
+                    <module>Gamuza_MercadoLivre</module>
+                    <class>Mage_Catalog_Model_Resource_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </mercadolivre_setup>
+            <mercadolivre_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </mercadolivre_write>
+            <mercadolivre_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </mercadolivre_read>
+        </resources>
+        <events>
+            <catalog_category_collection_load_before>
+                <observers>
+                    <gamuza_mercadolivre_catalog_category_collection_load_before>
+                        <class>mercadolivre/observer</class>
+                        <method>catalogCategoryCollectionLoadBefore</method>
+                    </gamuza_mercadolivre_catalog_category_collection_load_before>
+                </observers>
+            </catalog_category_collection_load_before>
+        </events>
+    </global>
+    <admin>
+        <routers>
+            <admin_mercadolivre>
+                <use>admin</use>
+                <args>
+                    <module>Gamuza_MercadoLivre</module>
+                    <frontName>admin_mercadolivre</frontName>
+                </args>
+            </admin_mercadolivre>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <mercadolivre>
+                    <file>gamuza/mercadolivre.xml</file>
+                </mercadolivre>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Gamuza_MercadoLivre>
+                    <files>
+                        <default>Gamuza_MercadoLivre.csv</default>
+                    </files>
+                </Gamuza_MercadoLivre>
+            </modules>
+        </translate>
+    </adminhtml>
+    <frontend>
+        <routers>
+            <mercadolivre>
+                <use>standard</use>
+                <args>
+                    <module>Gamuza_MercadoLivre</module>
+                    <frontName>mercadolivre</frontName>
+                </args>
+            </mercadolivre>
+        </routers>
+        <layout>
+            <updates>
+                <mercadolivre>
+                    <file>gamuza/mercadolivre.xml</file>
+                </mercadolivre>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Gamuza_MercadoLivre>
+                    <files>
+                        <default>Gamuza_MercadoLivre.csv</default>
+                    </files>
+                </Gamuza_MercadoLivre>
+            </modules>
+        </translate>
+        <category>
+            <collection>
+                <attributes>
+                    <mercadolivre_category_id />
+                </attributes>
+            </collection>
+        </category>
+        <product>
+            <collection>
+                <attributes>
+                    <mercadolivre_product_id />
+                    <mercadolivre_product_category />
+                </attributes>
+            </collection>
+        </product>
+    </frontend>
+    <crontab>
+        <jobs>
+            <gamuza_mercadolivre_token>
+                <schedule><cron_expr>0 */5 * * *</cron_expr></schedule>
+                <run><model>mercadolivre/cron::runToken</model></run>
+            </gamuza_mercadolivre_token>
+            <gamuza_mercadolivre_category>
+                <!--
+                <schedule><cron_expr>0 * * * *</cron_expr></schedule>
+                -->
+                <run><model>mercadolivre/cron::runCategory</model></run>
+            </gamuza_mercadolivre_category>
+            <gamuza_mercadolivre_product>
+                <schedule><cron_expr>*/5 * * * *</cron_expr></schedule>
+                <run><model>mercadolivre/cron::runProduct</model></run>
+            </gamuza_mercadolivre_product>
+        </jobs>
+    </crontab>
+    <default>
+        <mercadolivre>
+            <settings>
+                <api_url><![CDATA[https://api.mercadolibre.com]]></api_url>
+            </settings>
+            <queue>
+                <product>60</product>
+            </queue>
+            <product>
+                <listing_type>free</listing_type>
+                <shipping_mode>me2</shipping_mode>
+            </product>
+        </mercadolivre>
+    </default>
+</config>
+
