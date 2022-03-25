@@ -64,30 +64,29 @@ class Gamuza_PicPay_Helper_Data extends Mage_Core_Helper_Abstract
             curl_setopt ($curl, CURLOPT_CUSTOMREQUEST, $request);
         }
 
-        curl_setopt ($curl, CURLOPT_FAILONERROR, true);
-
         $result   = curl_exec ($curl);
         $info     = curl_getinfo ($curl);
         $response = json_decode ($result);
 
+        curl_close ($curl);
+
         $message = null;
 
-        switch ($httpCode = $info ['http_code'])
+        if (($httpCode = $info ['http_code']) != 200)
         {
-            case 400: { $message = 'Invalid Request';      break; }
-            case 401: { $message = 'Authentication Error'; break; }
-            case 403: { $message = 'Permission Denied';    break; }
-            case 404: { $message = 'Invalid URL';          break; }
-            case 405: { $message = 'Method Not Allowed';   break; }
-            case 409: { $message = 'Resource Exists';      break; }
-            case 422: { $message = 'Invalid Data';         break; }
-            case 500: { $message = 'Internal Error';       break; }
-            case 200: { $message = null; /* Success! */    break; }
-        }
+            if ($response && is_object ($response)
+                && property_exists ($response, 'message')
+                && property_exists ($response, 'errors'))
+            {
+                $responseErrors = null;
 
-        if ($error = curl_error ($curl))
-        {
-            $message = $error;
+                foreach ($response->errors as $error)
+                {
+                    $responseErrors .= sprintf ('%s: %s', $error->field, $error->message);
+                }
+
+                $message = sprintf ('%s [ %s ] %s', $response->message, $responseErrors, $httpCode);
+            }
         }
 
         if (!empty ($message))
@@ -96,8 +95,6 @@ class Gamuza_PicPay_Helper_Data extends Mage_Core_Helper_Abstract
 
             throw Mage::exception ('Gamuza_PicPay', $message, $httpCode);
         }
-
-        curl_close ($curl);
 
         return $response;
     }
