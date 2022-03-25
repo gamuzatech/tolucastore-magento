@@ -19,7 +19,7 @@
             <tab>gamuza</tab>
             <groups>
                 <gamuza_pagcripto_payment translate="label" module="pagcripto">
-                    <label>Gamuza - Payment via PagCripto</label>
+                    <label>Payment via PagCripto - Gamuza Technologies</label>
                     <frontend_type>text</frontend_type>
                     <sort_order>1200</sort_order>
                     <show_in_default>1</show_in_default>

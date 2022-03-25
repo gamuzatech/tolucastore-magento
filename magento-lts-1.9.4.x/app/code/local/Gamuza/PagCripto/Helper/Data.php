@@ -73,23 +73,16 @@ class Gamuza_PagCripto_Helper_Data extends Mage_Core_Helper_Abstract
         $info     = curl_getinfo ($curl);
         $response = json_decode ($result, true);
 
+        curl_close ($curl);
+
         $message = null;
 
-        switch ($httpCode = $info ['http_code'])
+        if (($httpCode = $info ['http_code']) != 200)
         {
-            case 400: { $message = 'Invalid Request';      break; }
-            case 401: { $message = 'Authentication Error'; break; }
-            case 403: { $message = 'Permission Denied';    break; }
-            case 404: { $message = 'Invalid URL';          break; }
-            case 405: { $message = 'Method Not Allowed';   break; }
-            case 409: { $message = 'Resource Exists';      break; }
-            case 500: { $message = 'Internal Error';       break; }
-            case 200: { $message = null; /* Success! */    break; }
-        }
-
-        if ($error = curl_error ($curl))
-        {
-            $message = $error;
+            if ($response && is_string ($response))
+            {
+                $message = sprintf ('%s [ %s ]', $response, $httpCode);
+            }
         }
 
         if (!empty ($message))
@@ -98,8 +91,6 @@ class Gamuza_PagCripto_Helper_Data extends Mage_Core_Helper_Abstract
 
             throw Mage::exception ('Gamuza_PagCripto', $message, $httpCode);
         }
-
-        curl_close ($curl);
 
         return $response;
     }

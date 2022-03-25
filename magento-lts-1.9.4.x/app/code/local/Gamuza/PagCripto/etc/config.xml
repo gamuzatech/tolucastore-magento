@@ -239,7 +239,7 @@
         <payment>
             <gamuza_pagcripto_payment>
                 <active>0</active>
-                <title>Gamuza - Payment via PagCripto</title>
+                <title>Payment via PagCripto - Gamuza Technologies</title>
                 <order_status>pending</order_status>
                 <paid_status>paid</paid_status>
                 <cctypes>BNB,BCH,BTC,BUSD,ETH,DASH,DOGE,LTC,NANO,USDC,USDT</cctypes>
