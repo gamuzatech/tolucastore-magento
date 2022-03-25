@@ -94,10 +94,10 @@ class Gamuza_MercadoLivre_Helper_Data extends Mage_Core_Helper_Abstract
         if (($httpCode = $info ['http_code']) != 200)
         {
             if ($response && is_object ($response)
-                && property_exists ($response, 'error')
-                && property_exists ($response, 'message'))
+                && property_exists ($response, 'message')
+                && property_exists ($response, 'error'))
             {
-                $message = sprintf ('%s [ %s ] %s', $response->error, $response->message, $httpCode);
+                $message = sprintf ('%s [ %s ] %s', $response->message, $response->error, $httpCode);
             }
         }
 
