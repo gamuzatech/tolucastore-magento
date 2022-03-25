@@ -59,16 +59,6 @@
                 </connection>
             </mercadolivre_read>
         </resources>
-        <events>
-            <catalog_category_collection_load_before>
-                <observers>
-                    <gamuza_mercadolivre_catalog_category_collection_load_before>
-                        <class>mercadolivre/observer</class>
-                        <method>catalogCategoryCollectionLoadBefore</method>
-                    </gamuza_mercadolivre_catalog_category_collection_load_before>
-                </observers>
-            </catalog_category_collection_load_before>
-        </events>
     </global>
     <admin>
         <routers>
@@ -98,6 +88,16 @@
                 </Gamuza_MercadoLivre>
             </modules>
         </translate>
+        <events>
+            <catalog_category_collection_load_before>
+                <observers>
+                    <gamuza_mercadolivre_catalog_category_collection_load_before>
+                        <class>mercadolivre/observer</class>
+                        <method>catalogCategoryCollectionLoadBefore</method>
+                    </gamuza_mercadolivre_catalog_category_collection_load_before>
+                </observers>
+            </catalog_category_collection_load_before>
+        </events>
     </adminhtml>
     <frontend>
         <routers>
