@@ -19,7 +19,7 @@
             <tab>gamuza</tab>
             <groups>
                 <gamuza_openpix_payment translate="label" module="openpix">
-                    <label>Gamuza - Payment via OpenPix</label>
+                    <label>Payment via OpenPix - Gamuza Technologies</label>
                     <frontend_type>text</frontend_type>
                     <sort_order>1200</sort_order>
                     <show_in_default>1</show_in_default>
