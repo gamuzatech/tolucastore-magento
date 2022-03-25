@@ -10,7 +10,7 @@
 <config>
     <tabs>
         <gamuza translate="label" module="basic">
-            <label>Gamuza</label>
+            <label>Gamuza Technologies</label>
             <sort_order>0</sort_order>
         </gamuza>
     </tabs>
@@ -73,6 +73,7 @@
             </groups>
         </shipping>
         <carriers>
+            <tab>gamuza</tab>
             <groups>
                 <tablerate>
                     <fields>
