@@ -42,11 +42,12 @@
                         <app_id translate="label" module="mercadolivre">
                             <label>App ID</label>
                             <frontend_type>text</frontend_type>
+                            <frontend_model>mercadolivre/adminhtml_system_config_form_text_application</frontend_model>
                             <sort_order>10</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <comment><![CDATA[Crie sua aplicação a partir deste <a target='_blank' href='https://developers.mercadolivre.com.br/apps'>link</a>]]></comment>
+                            <comment><![CDATA[Crie sua aplicação a partir deste <a target='_blank' href='https://developers.mercadolivre.com.br/devcenter'>link</a>]]></comment>
                         </app_id>
                         <secret_key translate="label" module="mercadolivre">
                             <label>Secret Key</label>
