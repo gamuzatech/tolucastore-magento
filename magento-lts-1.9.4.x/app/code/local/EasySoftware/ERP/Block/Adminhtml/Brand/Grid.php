@@ -12,7 +12,7 @@ class EasySoftware_ERP_Block_Adminhtml_Brand_Grid extends Mage_Adminhtml_Block_W
 		parent::__construct ();
 
 		$this->setId ('erpBrandGrid');
-		$this->setDefaultSort ('updated_at');
+		$this->setDefaultSort ('entity_id');
 		$this->setDefaultDir ('DESC');
 		$this->setSaveParametersInSession (true);
     }

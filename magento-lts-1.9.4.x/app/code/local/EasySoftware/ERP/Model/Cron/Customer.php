@@ -33,7 +33,7 @@ class EasySoftware_ERP_Model_Cron_Customer extends EasySoftware_ERP_Model_Cron_A
 
         $collection->getSelect ()
             ->joinLeft(
-                array ('erp' => Mage::getSingleton ('core/resource')->getTablename ('easysoftware_erp_customer')),
+                array ('erp' => EasySoftware_ERP_Helper_Data::CUSTOMER_TABLE)
                 'e.entity_id = erp.customer_id',
                 array ()
             )
@@ -150,6 +150,11 @@ QUERY;
         );
 
         $mageCustomer = Mage::getModel ('customer/customer')->load ($customer->getCustomerId ());
+
+        if (!$mageCustomer || !$mageCustomer->getId ())
+        {
+            throw new Exception (Mage::helper ('erp')->__('Customer was not found.'));
+        }
 
         $customerDob = substr ($mageCustomer->getDob (), 0, 10);
 

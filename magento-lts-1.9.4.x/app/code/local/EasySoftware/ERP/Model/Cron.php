@@ -26,5 +26,10 @@ class EasySoftware_ERP_Model_Cron
     {
         Mage::getModel ('erp/cron_customer')->run ();
     }
+
+    public function runOrder ()
+    {
+        Mage::getModel ('erp/cron_order')->run ();
+    }
 }
 

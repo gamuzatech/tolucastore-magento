@@ -8,7 +8,7 @@
 $installer = $this;
 $installer->startSetup ();
 
-function addERPProductTable ($installer, $model, $comment)
+function addERPOrderTable ($installer, $model, $comment)
 {
     $table = $installer->getTable ($model);
 
@@ -23,26 +23,56 @@ SQLBLOCK;
     $installer->run ($sqlBlock);
 
     $installer->getConnection ()
-        ->addColumn ($table, 'type_id', array(
-            'type'     => Varien_Db_Ddl_Table::TYPE_TEXT,
-            'length'   => 255,
-            'nullable' => false,
-            'comment'  => 'Type ID',
-        ));
-    $installer->getConnection ()
-        ->addColumn ($table, 'product_id', array(
+        ->addColumn ($table, 'customer_id', array(
             'type'     => Varien_Db_Ddl_Table::TYPE_INTEGER,
             'length'   => 11,
             'unsigned' => true,
             'nullable' => false,
-            'comment'  => 'Product ID',
+            'comment'  => 'Customer ID',
         ));
     $installer->getConnection ()
-        ->addColumn ($table, 'product_sku', array(
+        ->addColumn ($table, 'customer_email', array(
             'type'     => Varien_Db_Ddl_Table::TYPE_TEXT,
             'length'   => 255,
             'nullable' => false,
-            'comment'  => 'Product SKU',
+            'comment'  => 'Customer Email',
+        ));
+    $installer->getConnection ()
+        ->addColumn ($table, 'customer_taxvat', array(
+            'type'     => Varien_Db_Ddl_Table::TYPE_TEXT,
+            'length'   => 255,
+            'nullable' => false,
+            'comment'  => 'Customer Taxvat',
+        ));
+    $installer->getConnection ()
+        ->addColumn ($table, 'customer_name', array(
+            'type'     => Varien_Db_Ddl_Table::TYPE_TEXT,
+            'length'   => 255,
+            'nullable' => false,
+            'comment'  => 'Customer Name',
+        ));
+    $installer->getConnection ()
+        ->addColumn ($table, 'order_id', array(
+            'type'     => Varien_Db_Ddl_Table::TYPE_INTEGER,
+            'length'   => 11,
+            'unsigned' => true,
+            'nullable' => false,
+            'comment'  => 'Order ID',
+        ));
+    $installer->getConnection ()
+        ->addColumn ($table, 'order_increment_id', array(
+            'type'     => Varien_Db_Ddl_Table::TYPE_TEXT,
+            'length'   => 255,
+            'nullable' => false,
+            'comment'  => 'Order Increment Id',
+        ));
+    $installer->getConnection ()
+        ->addColumn ($table, 'order_base_grand_total', array(
+            'type'     => Varien_Db_Ddl_Table::TYPE_DECIMAL,
+            'length'   => '12,4',
+            'unsigned' => true,
+            'nullable' => false,
+            'comment'  => 'Order Base Grand Total',
         ));
     $installer->getConnection ()
         ->addColumn ($table, 'company_id', array(
@@ -61,26 +91,11 @@ SQLBLOCK;
             'comment'  => 'External ID',
         ));
     $installer->getConnection ()
-        ->addColumn ($table, 'external_sku', array(
-            'type'     => Varien_Db_Ddl_Table::TYPE_INTEGER,
-            'length'   => 11,
-            'unsigned' => true,
-            'nullable' => false,
-            'comment'  => 'External SKU',
-        ));
-    $installer->getConnection ()
-        ->addColumn ($table, 'name', array(
+        ->addColumn ($table, 'external_code', array(
             'type'     => Varien_Db_Ddl_Table::TYPE_TEXT,
             'length'   => 255,
             'nullable' => false,
-            'comment'  => 'Name',
-        ));
-    $installer->getConnection ()
-        ->addColumn ($table, 'is_active', array(
-            'type'     => Varien_Db_Ddl_Table::TYPE_BOOLEAN,
-            'unsigned' => true,
-            'nullable' => false,
-            'comment'  => 'Is Active',
+            'comment'  => 'External Code',
         ));
     $installer->getConnection ()
         ->addColumn ($table, 'status', array(
@@ -109,7 +124,7 @@ SQLBLOCK;
         ));
 }
 
-addERPProductTable ($installer, EasySoftware_ERP_Helper_Data::PRODUCT_TABLE, 'EasySoftware ERP Product');
+addERPOrderTable ($installer, EasySoftware_ERP_Helper_Data::ORDER_TABLE, 'EasySoftware ERP Order');
 
 $installer->endSetup ();
 

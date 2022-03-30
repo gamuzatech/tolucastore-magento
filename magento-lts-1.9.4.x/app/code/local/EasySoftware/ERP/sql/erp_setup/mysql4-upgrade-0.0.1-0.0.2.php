@@ -87,7 +87,7 @@ SQLBLOCK;
         ));
 }
 
-addERPGroupTable ($installer, 'easysoftware_erp_group', 'EasySoftware ERP Group');
+addERPGroupTable ($installer, EasySoftware_ERP_Helper_Data::GROUP_TABLE, 'EasySoftware ERP Group');
 
 $installer->endSetup ();
 

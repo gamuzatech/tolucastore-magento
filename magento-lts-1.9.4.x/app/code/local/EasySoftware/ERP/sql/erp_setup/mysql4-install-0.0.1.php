@@ -13,7 +13,7 @@ function addOrUpdateAttribute ($installer, $model, $code, $label)
     $installer->addAttribute ($model, $code, array(
         'group'         => Mage::helper ('adminhtml')->__('ERP'),
         'input'         => 'text',
-        'type'          => 'text',
+        'type'          => 'varchar',
         'label'         => $label,
         'required'      => 0,
         'user_defined'  => 1,

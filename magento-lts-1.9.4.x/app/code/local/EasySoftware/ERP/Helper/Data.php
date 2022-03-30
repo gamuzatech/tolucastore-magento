@@ -7,6 +7,12 @@
 
 class EasySoftware_ERP_Helper_Data extends Mage_Core_Helper_Abstract
 {
+    const GROUP_TABLE    = 'easysoftware_erp_group';
+    const BRAND_TABLE    = 'easysoftware_erp_brand';
+    const PRODUCT_TABLE  = 'easysoftware_erp_product';
+    const CUSTOMER_TABLE = 'easysoftware_erp_customer';
+    const ORDER_TABLE    = 'easysoftware_erp_order';
+
     const CATEGORY_ATTRIBUTE_ID = 'erp_category_id';
 
     const PRODUCT_ATTRIBUTE_ID = 'erp_product_id';
@@ -67,6 +73,11 @@ class EasySoftware_ERP_Helper_Data extends Mage_Core_Helper_Abstract
     public function getProductConfig ($key, $store = null)
     {
         return Mage::getStoreConfig ("erp/product/{$key}", $store);
+    }
+
+    public function getOrderConfig ($key, $store = null)
+    {
+        return Mage::getStoreConfig ("erp/order/{$key}", $store);
     }
 
     public function getQueueConfig ($key, $store = null)

@@ -12,7 +12,7 @@ class EasySoftware_ERP_Block_Adminhtml_Product_Grid extends Mage_Adminhtml_Block
 		parent::__construct ();
 
 		$this->setId ('erpProductGrid');
-		$this->setDefaultSort ('updated_at');
+		$this->setDefaultSort ('entity_id');
 		$this->setDefaultDir ('DESC');
 		$this->setSaveParametersInSession (true);
     }

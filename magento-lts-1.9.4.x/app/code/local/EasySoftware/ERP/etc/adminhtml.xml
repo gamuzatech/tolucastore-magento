@@ -33,6 +33,11 @@
                     <sort_order>30</sort_order>
                     <action>admin_erp/adminhtml_customer</action>
                 </customer>
+                <order module="erp">
+                    <title>Orders</title>
+                    <sort_order>40</sort_order>
+                    <action>admin_erp/adminhtml_order</action>
+                </order>
             </children>
         </erp>
     </menu>
@@ -63,6 +68,10 @@
                                 <title>Customers</title>
                                 <sort_order>30</sort_order>
                             </customer>
+                            <order translate="title" module="erp">
+                                <title>Orders</title>
+                                <sort_order>40</sort_order>
+                            </order>
                         </children>
                     </erp>
                     <system>

@@ -10,7 +10,7 @@
 <config>
     <modules>
         <EasySoftware_ERP>
-            <version>0.0.5</version>
+            <version>0.0.6</version>
         </EasySoftware_ERP>
     </modules>
     <global>
@@ -44,6 +44,9 @@
                     <customer>
                         <table>easysoftware_erp_customer</table>
                     </customer>
+                    <order>
+                        <table>easysoftware_erp_order</table>
+                    </order>
                 </entities>
             </erp_mysql4>
         </models>
@@ -116,6 +119,10 @@
                 <schedule><cron_expr>* * * * *</cron_expr></schedule>
                 <run><model>erp/cron::runCustomer</model></run>
             </easysoftware_erp_customer>
+            <easysoftware_erp_order>
+                <schedule><cron_expr>* * * * *</cron_expr></schedule>
+                <run><model>erp/cron::runOrder</model></run>
+            </easysoftware_erp_order>
         </jobs>
     </crontab>
     <default>
@@ -136,10 +143,18 @@
                 <group>60</group>
                 <product>60</product>
                 <customer>60</customer>
+                <order>60</order>
             </queue>
             <product>
                 <brand>brand</brand>
             </product>
+            <order>
+                <customer_guest_id>1</customer_guest_id>
+                <default_user_id>1</default_user_id>
+                <default_cashier_id>1</default_cashier_id>
+                <default_seller_id>1</default_seller_id>
+                <default_batch_id>2</default_batch_id>
+            </order>
         </erp>
     </default>
 </config>

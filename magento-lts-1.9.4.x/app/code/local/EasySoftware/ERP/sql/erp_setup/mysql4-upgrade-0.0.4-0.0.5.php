@@ -108,7 +108,7 @@ SQLBLOCK;
         ));
 }
 
-addERPCustomerTable ($installer, 'easysoftware_erp_customer', 'EasySoftware ERP Customer');
+addERPCustomerTable ($installer, EasySoftware_ERP_Helper_Data::CUSTOMER_TABLE, 'EasySoftware ERP Customer');
 
 $installer->endSetup ();
 

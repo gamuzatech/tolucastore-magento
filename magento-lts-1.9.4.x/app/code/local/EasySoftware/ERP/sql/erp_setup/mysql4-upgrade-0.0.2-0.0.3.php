@@ -95,7 +95,7 @@ SQLBLOCK;
         ));
 }
 
-addERPBrandTable ($installer, 'easysoftware_erp_brand', 'EasySoftware ERP Brand');
+addERPBrandTable ($installer, EasySoftware_ERP_Helper_Data::BRAND_TABLE, 'EasySoftware ERP Brand');
 
 $installer->endSetup ();
 
