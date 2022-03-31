@@ -80,7 +80,7 @@ class EasySoftware_ERP_Block_Adminhtml_Order_Grid extends Mage_Adminhtml_Block_W
             'currency_code' => $store->getBaseCurrency()->getCode(),
         ));
 		$this->addColumn ('company_id', array(
-		    'header' => Mage::helper ('erp')->__('Company ID'),
+		    'header' => Mage::helper ('erp')->__('Comp. ID'),
 		    'align'  => 'right',
 		    'index'  => 'company_id',
 		));
@@ -89,10 +89,19 @@ class EasySoftware_ERP_Block_Adminhtml_Order_Grid extends Mage_Adminhtml_Block_W
 		    'align'  => 'right',
 		    'index'  => 'external_id',
 		));
+/*
 		$this->addColumn ('external_code', array(
 		    'header' => Mage::helper ('erp')->__('Ext. Code'),
 		    'align'  => 'right',
 		    'index'  => 'external_code',
+		));
+*/
+		$this->addColumn ('is_canceled', array(
+		    'header'  => Mage::helper ('erp')->__('Cancel'),
+		    'align'   => 'right',
+		    'index'   => 'is_canceled',
+            'type'    => 'options',
+            'options' => Mage::getModel ('adminhtml/system_config_source_yesno')->toArray (),
 		));
 		$this->addColumn ('status', array(
 		    'header'  => Mage::helper ('erp')->__('Status'),

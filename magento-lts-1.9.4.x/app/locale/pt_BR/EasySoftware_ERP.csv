@@ -1,4 +1,5 @@
 "Company ID","ID Empresa"
+"Comp. ID","ID Emp."
 "Port","Porta"
 "Queue","Fila"
 "30 items","30 itens"
@@ -34,6 +35,7 @@
 "Unable to save customer.","Não foi possível salvar o cliente."
 "Unable to save order.","Não foi possível salvar o pedido."
 "Unable to save order item: %s %s %s","Não foi possível salvar o item do pedido: %s %s %s"
+"Unable to cancel order: %s","Não foi possível cancelar o pedido: %s"
 "Customers Manager","Gerenciador de Clientes"
 "Customer ID","ID Cliente"
 "Customer Taxvat","CPF / CNPJ"

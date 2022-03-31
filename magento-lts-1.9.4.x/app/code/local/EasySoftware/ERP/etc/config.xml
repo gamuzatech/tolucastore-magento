@@ -123,6 +123,10 @@
                 <schedule><cron_expr>* * * * *</cron_expr></schedule>
                 <run><model>erp/cron::runOrder</model></run>
             </easysoftware_erp_order>
+            <easysoftware_erp_order_status>
+                <schedule><cron_expr>* * * * *</cron_expr></schedule>
+                <run><model>erp/cron::runOrderStatus</model></run>
+            </easysoftware_erp_order_status>
         </jobs>
     </crontab>
     <default>

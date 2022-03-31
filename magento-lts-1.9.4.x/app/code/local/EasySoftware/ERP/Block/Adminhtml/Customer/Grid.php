@@ -61,11 +61,13 @@ class EasySoftware_ERP_Block_Adminhtml_Customer_Grid extends Mage_Adminhtml_Bloc
 		    'align'  => 'right',
 		    'index'  => 'external_id',
 		));
+/*
 		$this->addColumn ('external_code', array(
 		    'header' => Mage::helper ('erp')->__('Ext. Code'),
 		    'align'  => 'right',
 		    'index'  => 'external_code',
 		));
+*/
 		$this->addColumn ('is_active', array(
 		    'header'  => Mage::helper ('erp')->__('Is Active'),
 		    'align'   => 'right',

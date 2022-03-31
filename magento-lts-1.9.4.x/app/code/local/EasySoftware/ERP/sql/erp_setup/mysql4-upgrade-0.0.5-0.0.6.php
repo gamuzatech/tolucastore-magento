@@ -98,6 +98,13 @@ SQLBLOCK;
             'comment'  => 'External Code',
         ));
     $installer->getConnection ()
+        ->addColumn ($table, 'is_canceled', array(
+            'type'     => Varien_Db_Ddl_Table::TYPE_BOOLEAN,
+            'unsigned' => true,
+            'nullable' => false,
+            'comment'  => 'Is Canceled',
+        ));
+    $installer->getConnection ()
         ->addColumn ($table, 'status', array(
             'type'     => Varien_Db_Ddl_Table::TYPE_TEXT,
             'length'   => 255,
