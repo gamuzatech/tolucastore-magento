@@ -164,6 +164,8 @@ QUERY;
 
         $mageProduct->save ();
 
+        $pendingQty = $this->_getPendingQty ($mageProduct->getSku ());
+
         $stockItem = Mage::getModel ('cataloginventory/stock_item')
             ->assignProduct ($mageProduct)
             ->setStockId (Mage_CatalogInventory_Model_Stock::DEFAULT_STOCK_ID)
@@ -171,7 +173,7 @@ QUERY;
             ->setManageStock (true)
             ->setIsInStock (true)
             ->setStockStatusChangedAuto (true)
-            ->setQty (floatval ($row->QTD_ATUAL))
+            ->setQty (floatval ($row->QTD_ATUAL) - $pendingQty)
             ->save ()
         ;
 
@@ -266,6 +268,29 @@ QUERY;
                 $this->updateERPProductsMagento ($collection);
             }
         }
+    }
+
+    public function _getPendingQty ($sku)
+    {
+        $collection = Mage::getModel ('sales/order_item')->getCollection ()
+            ->addFieldToFilter ('main_table.sku', array ('eq' => $sku))
+        ;
+
+        $collection->getSelect ()
+            ->join(
+                array ('order' => Mage::getSingleton ('core/resource')->getTableName ('sales/order')),
+                'main_table.order_id = order.entity_id',
+                array ('state')
+            )
+            ->where ('order.state = ?', Mage_Sales_Model_Order::STATE_NEW)
+            ->group ('main_table.sku')
+            ->reset (Zend_Db_Select::COLUMNS)
+            ->columns (array(
+                'pending_qty' => 'SUM(qty_ordered)'
+            ))
+        ;
+
+        return $collection->getFirstItem ()->getPendingQty ();
     }
 }
 
