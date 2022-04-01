@@ -14,6 +14,9 @@ class Gamuza_Bot_Helper_Data extends Mage_Core_Helper_Abstract
     const BOT_TYPE_TELEGRAM = 'telegram';
     const BOT_TYPE_WHATSAPP = 'whatsapp';
 
+    const MESSAGE_TYPE_QUESTION = 'question';
+    const MESSAGE_TYPE_ANSWER   = 'answer';
+
     const STATUS_CATEGORY = 'category';
     const STATUS_PRODUCT  = 'product';
     const STATUS_OPTION   = 'option';

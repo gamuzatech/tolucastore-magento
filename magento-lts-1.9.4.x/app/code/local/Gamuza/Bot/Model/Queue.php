@@ -11,5 +11,19 @@ class Gamuza_Bot_Model_Queue extends Mage_Core_Model_Abstract
     {
         $this->_init ('bot/queue');
     }
+
+    protected function _beforeDelete ()
+    {
+        parent::_beforeDelete ();
+
+        $collection = Mage::getModel ('bot/message')->getCollection ()
+            ->addFieldToFilter ('queue_id', array ('eq' => $this->getId ()))
+        ;
+
+        foreach ($collection as $message)
+        {
+            $message->delete ();
+        }
+    }
 }
 

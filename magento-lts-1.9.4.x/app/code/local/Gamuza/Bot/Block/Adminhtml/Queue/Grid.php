@@ -12,7 +12,7 @@ class Gamuza_Bot_Block_Adminhtml_Queue_Grid extends Mage_Adminhtml_Block_Widget_
 		parent::__construct ();
 
 		$this->setId ('botQueueGrid');
-		$this->setDefaultSort ('updated_at');
+		$this->setDefaultSort ('entity_id');
 		$this->setDefaultDir ('DESC');
 		$this->setSaveParametersInSession (true);
     }
@@ -55,38 +55,36 @@ class Gamuza_Bot_Block_Adminhtml_Queue_Grid extends Mage_Adminhtml_Block_Widget_
 		));
 		$this->addColumn ('type_id', array(
 		    'header' => Mage::helper ('bot')->__('Type'),
-		    'align'  => 'right',
 		    'index'  => 'type_id',
             'type'   => 'options',
             'options' => Mage::getModel ('bot/adminhtml_system_config_source_bot_type')->toArray (),
 		));
+		$this->addColumn ('phone', array(
+		    'header'  => Mage::helper ('bot')->__('Phone'),
+		    'index'   => 'phone',
+		));
 		$this->addColumn ('increment_id', array(
 		    'header' => Mage::helper ('bot')->__('Order'),
-		    'align'  => 'right',
 		    'index'  => 'increment_id',
 		));
 		$this->addColumn ('category_id', array(
 		    'header'  => Mage::helper ('bot')->__('Category'),
-		    'align'   => 'right',
 		    'index'   => 'category_id',
             'type'    => 'options',
             'options' => $categories,
 		));
 		$this->addColumn ('product_id', array(
 		    'header'  => Mage::helper ('bot')->__('Product'),
-		    'align'   => 'right',
 		    'index'   => 'product_id',
             'type'    => 'options',
             'options' => $products,
 		));
 		$this->addColumn ('product_options', array(
 		    'header'  => Mage::helper ('bot')->__('Options'),
-		    'align'   => 'right',
 		    'index'   => 'product_options',
 		));
 		$this->addColumn ('product_comment', array(
 		    'header'  => Mage::helper ('bot')->__('Comment'),
-		    'align'   => 'right',
 		    'index'   => 'product_comment',
 		));
 		$this->addColumn ('number', array(
@@ -95,17 +93,14 @@ class Gamuza_Bot_Block_Adminhtml_Queue_Grid extends Mage_Adminhtml_Block_Widget_
 		));
 		$this->addColumn ('firstname', array(
 		    'header'  => Mage::helper ('bot')->__('Firstname'),
-            'align'   => 'right',
 		    'index'   => 'firstname',
 		));
 		$this->addColumn ('lastname', array(
 		    'header'  => Mage::helper ('bot')->__('Lastname'),
-            'align'   => 'right',
 		    'index'   => 'lastname',
 		));
 		$this->addColumn ('status', array(
 		    'header'  => Mage::helper ('bot')->__('Status'),
-		    'align'   => 'right',
 		    'index'   => 'status',
             'type'    => 'options',
             'options' => Mage::getModel ('bot/adminhtml_system_config_source_queue_status')->toArray (),
@@ -119,14 +114,12 @@ class Gamuza_Bot_Block_Adminhtml_Queue_Grid extends Mage_Adminhtml_Block_Widget_
 */
 		$this->addColumn ('is_muted', array(
 		    'header'  => Mage::helper ('bot')->__('Is Muted'),
-		    'align'   => 'right',
 		    'index'   => 'is_muted',
 	        'type'    => 'options',
             'options' => Mage::getModel ('adminhtml/system_config_source_yesno')->toArray (),
 		));
 		$this->addColumn ('is_notified', array(
 		    'header'  => Mage::helper ('bot')->__('Is Notified'),
-		    'align'   => 'right',
 		    'index'   => 'is_notified',
 	        'type'    => 'options',
             'options' => Mage::getModel ('adminhtml/system_config_source_yesno')->toArray (),
@@ -143,6 +136,26 @@ class Gamuza_Bot_Block_Adminhtml_Queue_Grid extends Mage_Adminhtml_Block_Widget_
             'type'   => 'datetime',
             'filter_index' => 'main_table.updated_at',
 		));
+
+        $this->addColumn ('action', array(
+            'header'   => Mage::helper ('bot')->__('Action'),
+            'width'    => '50px',
+            'type'     => 'action',
+            'getter'   => 'getId',
+            'index'    => 'stores',
+            'filter'   => false,
+            'sortable' => false,
+            'actions'  => array(
+                array(
+                    'caption' => Mage::helper ('bot')->__('History'),
+                    'field'   => 'id',
+                    'url'     => array(
+                        'base'   => '*/*/history',
+                        'params' => array ('store' => $this->getRequest ()->getParam ('store'))
+                    ),
+                )
+            ),
+        ));
 
         $this->addExportType ('*/*/exportCsv', Mage::helper ('bot')->__('CSV'));
 

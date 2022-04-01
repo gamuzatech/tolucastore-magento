@@ -116,7 +116,9 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
             ->addFieldToFilter ('store_id',  array ('eq' => $storeId))
             ->addFieldToFilter ('quote_id',  array ('gt' => 0))
             ->addFieldToFilter ('order_id',  array ('eq' => 0))
+            ->addFieldToFilter ('type_id',   array ('eq' => $botType))
             ->addFieldToFilter ('number',    array ('eq' => $from))
+            ->addFieldToFilter ('phone',     array ('eq' => $to))
             ->addFieldToFilter ('status',    array ('neq' => Gamuza_Bot_Helper_Data::STATUS_ORDER))
         ;
 
@@ -182,6 +184,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
                 ->setStoreId ($storeId)
                 ->setQuoteId ($quote->getId ())
                 ->setNumber ($from)
+                ->setPhone ($to)
                 ->setFirstname ($senderName [0])
                 ->setLastname ($senderName [1])
                 ->setRemoteIp ($remoteIp)
@@ -191,6 +194,8 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
                 ->setUpdatedAt (date ('c'))
                 ->save ()
             ;
+
+            $this->_saveMessage ($senderMessage, $queue, Gamuza_Bot_Helper_Data::MESSAGE_TYPE_QUESTION);
 
             $customerData = array(
                 'mode'      => Mage_Checkout_Model_Type_Onepage::METHOD_GUEST,
@@ -231,12 +236,16 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
                 . $this->_getCategoryList ($storeId)
             ;
 
+            $this->_saveMessage ($result, $queue);
+
             return array ('result' => $result);
         }
 
         $queue = $collection->getFirstItem ();
 
-        $queue->setRemoteIp ($remoteIp)->save ();
+        // $queue->setRemoteIp ($remoteIp)->save ();
+
+        $this->_saveMessage ($senderMessage, $queue, Gamuza_Bot_Helper_Data::MESSAGE_TYPE_QUESTION);
 
         if ($queue->getIsMuted ())
         {
@@ -249,9 +258,14 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
 
         if (!strcmp (strtolower (trim ($body)), Gamuza_Bot_Helper_Data::STATUS_ZAP))
         {
-            $queue->setIsMuted (true)->save ();
+            $queue->setIsMuted (true)
+                ->setUpdatedAt (date ('c'))
+                ->save ()
+            ;
 
             $result = Mage::helper ('bot/message')->getPleaseWaitAnAttendantText ();
+
+            $this->_saveMessage ($result, $queue);
 
             return array ('result' => $result);
         }
@@ -332,6 +346,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
                 if ($product && $product->getId () > 0 && in_array ($storeId, $product->getStoreIds ()))
                 {
                     $queue->setProductId ($product->getId ())
+                        ->setUpdatedAt (date ('c'))
                         ->save ()
                     ;
 
@@ -547,6 +562,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
                 if ($option && $option->getId () > 0)
                 {
                     $queue->setOptionId ($option->getId ())
+                        ->setUpdatedAt (date ('c'))
                         ->save ()
                     ;
 
@@ -1134,7 +1150,27 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
             }
         }
 
+        $this->_saveMessage ($result, $queue);
+
         return array ('result' => $result);
+    }
+
+    private function _saveMessage ($text, $queue, $type = Gamuza_Bot_Helper_Data::MESSAGE_TYPE_ANSWER)
+    {
+        $message = Mage::getModel ('bot/message')
+            ->setQueueId ($queue->getId ())
+            ->setBotType ($queue->getTypeId ())
+            ->setTypeId ($type)
+            ->setRemoteIp ($queue->getRemoteIp ())
+            ->setEmail ($queue->getEmail ())
+            ->setNumber ($queue->getNumber ())
+            ->setPhone ($queue->getPhone ())
+            ->setFirstname ($queue->getFirstname ())
+            ->setLastname ($queue->getLastname ())
+            ->setMessage ($text)
+            ->setCreatedAt (date ('c'))
+            ->save ()
+        ;
     }
 
     private function _getCategoryCollection ($storeId)

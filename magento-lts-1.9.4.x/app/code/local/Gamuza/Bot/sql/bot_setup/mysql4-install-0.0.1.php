@@ -121,6 +121,13 @@ SQLBLOCK;
             'comment'  => 'Number',
         ));
     $installer->getConnection ()
+        ->addColumn ($table, 'phone', array(
+            'type'     => Varien_Db_Ddl_Table::TYPE_TEXT,
+            'length'   => 255,
+            'nullable' => false,
+            'comment'  => 'phone',
+        ));
+    $installer->getConnection ()
         ->addColumn ($table, 'firstname', array(
             'type'     => Varien_Db_Ddl_Table::TYPE_TEXT,
             'length'   => 255,
