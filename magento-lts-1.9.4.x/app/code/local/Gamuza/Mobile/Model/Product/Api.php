@@ -3,27 +3,6 @@
  * @package     Gamuza_Mobile
  * @copyright   Copyright (c) 2017 Gamuza Technologies (http://www.gamuza.com.br/)
  * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
- *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Library General Public
- * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
- *
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Library General Public License for more details.
- *
- * You should have received a copy of the GNU Library General Public
- * License along with this library; if not, write to the
- * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
- * Boston, MA 02110-1301, USA.
- */
-
-/**
- * See the AUTHORS file for a list of people on the Gamuza Team.
- * See the ChangeLog files for a list of changes.
- * These files are distributed with gamuza_mobile-magento at http://github.com/gamuzatech/.
  */
 
 class Gamuza_Mobile_Model_Product_Api extends Mage_Catalog_Model_Api_Resource
@@ -31,18 +10,28 @@ class Gamuza_Mobile_Model_Product_Api extends Mage_Catalog_Model_Api_Resource
     const PRICE_TYPE_FIXED = 'fixed';
 
     protected $_attributeCodes = array (
+        'brand',
+        'brand_value',
+        'color',
+        'color_value',
         'description',
         'free_shipping',
         'gift_message_available',
+        'has_options',
         'image',
         'image_label',
         'name',
         'news_from_date',
         'news_to_date',
         'price',
+        'price_type',
+        'price_view',
         'required_options',
         'short_description',
+        'size',
+        'size_value',
         'sku',
+        'sku_position',
         'small_image',
         'small_image_label',
         'special_from_date',
@@ -51,15 +40,21 @@ class Gamuza_Mobile_Model_Product_Api extends Mage_Catalog_Model_Api_Resource
         'status',
         'thumbnail',
         'thumbnail_label',
+        'type_id',
+        'url_key',
         'url_path',
+        'visibility',
+        'volume_altura',
+        'volume_comprimento',
+        'volume_largura',
         'weight',
     );
 
     protected $_descCodes  = array ('description', 'short_description');
     protected $_imageCodes = array ('image', 'small_image', 'thumbnail');
     protected $_floatCodes = array ('price');
-    protected $_intCodes   = array ('status', 'weight');
-    protected $_boolCodes  = array ('free_shipping', 'gift_message_available', 'required_options');
+    protected $_intCodes   = array ('sku_position', 'status', 'visibility', 'weight');
+    protected $_boolCodes  = array ('free_shipping', 'gift_message_available', 'has_options', 'required_options');
 
     protected $_filtersMap = array(
         'product_id' => 'entity_id',
@@ -96,7 +91,14 @@ class Gamuza_Mobile_Model_Product_Api extends Mage_Catalog_Model_Api_Resource
         $storeCategoryId  = Mage::app ()->getStore ($storeId)->getRootCategoryId ();
         $baseCategoryPath = Mage_Catalog_Model_Category::TREE_ROOT_ID . '/' . $storeCategoryId;
 
-        $status     = Mage_Catalog_Model_Product_Status::STATUS_DISABLED;
+        $status = Mage_Catalog_Model_Product_Status::STATUS_DISABLED;
+
+        $typeIds = array(
+            Mage_Catalog_Model_Product_Type::TYPE_SIMPLE,
+            Mage_Catalog_Model_Product_Type::TYPE_BUNDLE,
+            Mage_Catalog_Model_Product_Type::TYPE_CONFIGURABLE
+        );
+
         $visibility = array(
             Mage_Catalog_Model_Product_Visibility::VISIBILITY_IN_CATALOG,
             Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH
@@ -117,6 +119,7 @@ class Gamuza_Mobile_Model_Product_Api extends Mage_Catalog_Model_Api_Resource
             ->addStoreFilter ($storeId)
             ->setFlag ('require_stock_items', true)
             ->addAttributeToFilter ('status', array ('neq' => $status))
+            ->addAttributeToFilter ('type_id', array ('in' => $typeIds))
             ->addAttributeToFilter ('visibility', array ('in' => $visibility))
             ->addAttributeToSelect ($this->_attributeCodes)
             /* compare to category_product_index table (filter inactive stores) */
@@ -189,7 +192,23 @@ class Gamuza_Mobile_Model_Product_Api extends Mage_Catalog_Model_Api_Resource
 
             foreach ($this->_imageCodes as $code)
             {
-                $resultProduct [$code] = $mediaUrl . 'catalog/product' . $product->getData ($code); // no_cache
+                $value = $product->getData ($code);
+
+                if (!empty ($value) && !strcmp ($value, 'no_selection'))
+                {
+                    $value = Mage::getSingleton ('mobile/core_design_package')
+                        ->setStore (Mage_Core_Model_App::DISTRO_STORE_ID)
+                        ->setPackageName ('rwd')
+                        ->setTheme ('magento2')
+                        ->getSkinUrl ("images/catalog/product/placeholder/{$code}.jpg")
+                    ;
+                }
+                else if (!empty ($value) && strcmp ($value, 'no_selection'))
+                {
+                    $value = $mediaUrl . 'catalog/product' . $value; // no_cache
+                }
+
+                $resultProduct [$code] = $value;
             }
 
             foreach ($this->_floatCodes as $code) $resultProduct [$code] = floatval ($resultProduct [$code]);

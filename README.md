@@ -1,3 +1,5 @@
+<img src="https://dl.dropboxusercontent.com/s/qi0b31um3y3nxo6/tolucastore-admin-panel.png" alt="TolucaStore Admin Panel"/>
+
 <p align="center">
 <a href="https://travis-ci.org/openmage/magento-lts"><img src="https://travis-ci.org/openmage/magento-lts.svg" alt="Build Status"></a>
 <a href="https://packagist.org/packages/openmage/magento-lts"><img src="https://poser.pugx.org/openmage/magento-lts/d/total.svg" alt="Total Downloads"></a>

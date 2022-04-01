@@ -4,27 +4,6 @@
  * @package     Gamuza_Basic
  * @copyright   Copyright (c) 2016 Gamuza Technologies (http://www.gamuza.com.br/)
  * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
- *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Library General Public
- * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
- *
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Library General Public License for more details.
- *
- * You should have received a copy of the GNU Library General Public
- * License along with this library; if not, write to the
- * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
- * Boston, MA 02110-1301, USA.
- */
-
-/**
- * See the AUTHORS file for a list of people on the Gamuza Team.
- * See the ChangeLog files for a list of changes.
- * These files are distributed with gamuza_basic-magento at http://github.com/gamuzatech/.
  */
 -->
 
@@ -96,7 +75,11 @@
             </basic>
             <basic_mysql4>
                 <class>Gamuza_Basic_Model_Mysql4</class>
-                <entities />
+                <entities>
+                    <eav_entity_attribute_option_value>
+                        <table>eav_attribute_option_value</table>
+                    </eav_entity_attribute_option_value>
+                </entities>
             </basic_mysql4>
             <adminhtml>
                 <rewrite>
@@ -499,6 +482,20 @@
                 <merge_css_files>1</merge_css_files>
             </css>
         </dev>
+        <carriers>
+            <pickup>
+                <active>1</active>
+                <title>Store Pickup</title>
+                <name>pickup</name>
+                <sallowspecific>0</sallowspecific>
+                <specificerrmsg>This shipping method is currently unavailable.</specificerrmsg>
+                <model>basic/shipping_carrier_pickup</model>
+            </pickup>
+            <tablerate>
+                <handling_action>O</handling_action>
+                <model>basic/shipping_carrier_tablerate</model>
+            </tablerate>
+        </carriers>
         <payment>
             <cashondelivery>
                 <active>1</active>

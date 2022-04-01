@@ -31,11 +31,11 @@ class Gamuza_Basic_Model_Eav_Entity_Type extends Mage_Eav_Model_Entity_Type
         }
         else if ($storeId == Mage_Core_Model_App::DISTRO_STORE_ID)
         {
-            $suffix = Gamuza_Basic_Helper_Data::ORDER_SUFFIX_MARKET;
+            $suffix = Gamuza_Basic_Helper_Data::ORDER_SUFFIX_STORE;
         }
         else
         {
-            $suffix = Gamuza_Basic_Helper_Data::ORDER_SUFFIX_STORE;
+            $suffix = Gamuza_Basic_Helper_Data::ORDER_SUFFIX_OTHER;
         }
 
         $isMobile = Mage::helper ('basic')->isMobile ();

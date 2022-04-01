@@ -52,6 +52,8 @@ try
     $write->delete(Mage::getSingleton('core/resource')->getTableName('core_session'));
 
     Mage::getModel ('basic/observer')->cleanExpiredQuotes ();
+
+    Mage::getModel ('bot/observer')->cleanExpiredQueues ();
 }
 catch (Exception $e)
 {

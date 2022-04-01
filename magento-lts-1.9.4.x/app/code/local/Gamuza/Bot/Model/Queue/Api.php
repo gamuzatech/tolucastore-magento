@@ -20,33 +20,38 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
     const QUANTITY_LENGTH    = 5;
 
     const COMMAND_ZERO    = '0';
+    const COMMAND_ONE     = '1';
     const COMMAND_OK      = 'ok';
-    const COMMAND_CLEAR   = 'limpar';
 
     const DEFAULT_CUSTOMER_EMAIL  = 'store@toluca.com.br';
     const DEFAULT_CUSTOMER_TAXVAT = '02788178824';
 
     protected $_shippingMethods = array(
-        '1'  => 'freeshipping_freeshipping',
-        '2'  => 'flatrate_flatrate',
-        '3'  => 'tablerate_tablerate',
-        '4'  => 'pedroteixeira_correios_40045',
-        '5'  => 'pedroteixeira_correios_40215',
-        '6'  => 'pedroteixeira_correios_40290',
-        '7'  => 'pedroteixeira_correios_04510',
-        '8'  => 'pedroteixeira_correios_04014',
-        '9'  => 'pedroteixeira_correios_04669',
-        '10' => 'pedroteixeira_correios_04162',
+        '1' => 'pickup_store',
+        '2' => 'freeshipping_freeshipping',
+        '3' => 'flatrate_flatrate',
+        '4' => 'tablerate_bestway',
+
+        '5' => 'pedroteixeira_correios_10065',
+        '6' => 'pedroteixeira_correios_04510',
+        '7' => 'pedroteixeira_correios_04014',
+        '8' => 'pedroteixeira_correios_40290',
+        '9' => 'pedroteixeira_correios_04162',
+
+        '10' => 'pedroteixeira_correios_04669',
         '11' => 'pedroteixeira_correios_04693',
-        '12' => 'pedroteixeira_correios_10065',
+        '12' => 'pedroteixeira_correios_40215',
+        '13' => 'pedroteixeira_correios_40045',
     );
 
     protected $_paymentMethods = array(
         '1' => 'cashondelivery',
         '2' => 'machineondelivery',
         '3' => 'banktransfer',
-        '4' => 'gamuza_picpay_payment',
-        '5' => 'gamuza_openpix_payment',
+
+        '4' => 'gamuza_pagcripto_payment',
+        '5' => 'gamuza_picpay_payment',
+        '6' => 'gamuza_openpix_payment',
     );
 
     protected $_paymentCcTypes = array(
@@ -70,7 +75,20 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
         '18' => 'VI',
         '19' => 'VE',
         '20' => 'VR',
-        '21' => 'BTC',
+    );
+
+    protected $_paymentCriptoTypes = array(
+        '1'  => 'BCH',
+        '2'  => 'BNB',
+        '3'  => 'BUSD',
+        '4'  => 'BTC',
+        '5'  => 'DASH',
+        '6'  => 'DOGE',
+        '7'  => 'ETH',
+        '8'  => 'LTC',
+        '9'  => 'NANO',
+        '10' => 'USDC',
+        '11' => 'USDT',
     );
 
     public function __construct ()
@@ -229,7 +247,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
 
         $result = null;
 
-        if (!strcmp (strtolower (trim ($body)), Gamuza_Bot_Helper_Data::STATUS_BOT))
+        if (!strcmp (strtolower (trim ($body)), Gamuza_Bot_Helper_Data::STATUS_ZAP))
         {
             $queue->setIsMuted (true)->save ();
 
@@ -275,7 +293,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
                 {
                     $result = $this->_getCartReview ($queue->getQuoteId (), $storeId)
                         . Mage::helper ('bot/message')->getTypeListToCategoriesText (self::COMMAND_ZERO) . PHP_EOL . PHP_EOL
-                        . Mage::helper ('bot/message')->getTypeClearToRestartText (self::COMMAND_CLEAR) . PHP_EOL . PHP_EOL
+                        . Mage::helper ('bot/message')->getTypeClearToRestartText (self::COMMAND_ONE) . PHP_EOL . PHP_EOL
                         . Mage::helper ('bot/message')->getTypeCommandToContinueText (self::COMMAND_OK)
                     ;
 
@@ -329,7 +347,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
                         break;
                     }
 
-                    if ($product->getHasOptions ())
+                    if (!empty ($product->getOptions ()))
                     {
                         $result = $this->_getProductOptions ($product);
 
@@ -351,11 +369,13 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
                             Mage::getModel ('checkout/cart_product_api')->add ($queue->getQuoteId (), $productsData, $storeId);
 
                             $result = Mage::helper ('bot/message')->getProductAddedToCartText () . PHP_EOL . PHP_EOL
-                                . $this->_getProductList ($storeId, $queue->getCategoryId ()) . PHP_EOL . PHP_EOL
-                                . Mage::helper ('bot/message')->getTypeCommandToGoToCartText (self::COMMAND_OK);
+                                . $this->_getCartReview ($queue->getQuoteId (), $storeId)
+                                . Mage::helper ('bot/message')->getTypeListToCategoriesText (self::COMMAND_ZERO) . PHP_EOL . PHP_EOL
+                                . Mage::helper ('bot/message')->getTypeClearToRestartText (self::COMMAND_ONE) . PHP_EOL . PHP_EOL
+                                . Mage::helper ('bot/message')->getTypeCommandToContinueText (self::COMMAND_OK)
                             ;
 
-                            $queue->setStatus (Gamuza_Bot_Helper_Data::STATUS_PRODUCT)
+                            $queue->setStatus (Gamuza_Bot_Helper_Data::STATUS_CART)
                                 ->setSelections (new Zend_Db_Expr ('NULL'))
                                 ->setOptions (new Zend_Db_Expr ('NULL'))
                                 ->setComment (new Zend_Db_Expr ('NULL'))
@@ -367,7 +387,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
                         {
                             $result = Mage::helper ('bot/message')->getProductNotAddedToCartText () . PHP_EOL . PHP_EOL
                                 . $e->getCustomMessage () . PHP_EOL . PHP_EOL
-                                . $this->_getProductList ($seller->getStoreId, $queue->getCategoryId ())
+                                . $this->_getProductList ($storeId, $queue->getCategoryId ())
                             ;
 
                             $queue->setStatus (Gamuza_Bot_Helper_Data::STATUS_PRODUCT)
@@ -393,13 +413,13 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
             }
             case Gamuza_Bot_Helper_Data::STATUS_BUNDLE:
             {
-                if (!strcmp (strtolower (trim ($body)), self::COMMAND_OK))
+                if (!strcmp (strtolower (trim ($body)), self::COMMAND_ZERO))
                 {
                     $queueStatus = null;
 
                     $product = Mage::getModel ('catalog/product')->load ($queue->getProductId ());
 
-                    if ($product->getHasOptions ())
+                    if (!empty ($product->getOptions ()))
                     {
                         $result = $this->_getProductOptions ($product);
 
@@ -425,7 +445,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
                 $collection = Mage::getModel ('bundle/option')->getCollection ()
                     ->joinValues (Mage_Core_Model_App::ADMIN_STORE_ID)
                     ->setProductIdFilter ($queue->getProductId ())
-                    ->addFieldToFilter ('main_table.sort_order', array ('eq' => $optionId))
+                    ->addFieldToFilter ('main_table.position', array ('eq' => $optionId))
                 ;
 
                 $option = $collection->getFirstItem ();
@@ -458,7 +478,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
 
                 $collection->getSelect ()
                     ->where ('selection.parent_product_id = ?', $queue->getProductId ())
-                    ->where ('selection.sort_order IN (?)', $matches [0])
+                    ->where ('selection.position IN (?)', $matches [0])
                     ->reset (Zend_Db_Select::COLUMNS)
                     ->columns (array(
                         'id'   => 'selection.selection_id',
@@ -466,7 +486,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
                     ))
                 ;
 
-                if ($collection->count () > 0 || !strcmp (strtolower (trim ($body)), self::COMMAND_OK))
+                if ($collection->count () > 0 || !strcmp (strtolower (trim ($body)), self::COMMAND_ZERO))
                 {
                     $product = Mage::getModel ('catalog/product')->load ($queue->getProductId ());
 
@@ -501,7 +521,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
             }
             case Gamuza_Bot_Helper_Data::STATUS_OPTION:
             {
-                if (!strcmp (strtolower (trim ($body)), self::COMMAND_OK))
+                if (!strcmp (strtolower (trim ($body)), self::COMMAND_ZERO))
                 {
                     $result = Mage::helper ('bot/message')->getAddCommentForProductText ();
 
@@ -566,7 +586,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
                     ))
                 ;
 
-                if ($collection->count () > 0 || !strcmp (strtolower (trim ($body)), self::COMMAND_OK))
+                if ($collection->count () > 0 || !strcmp (strtolower (trim ($body)), self::COMMAND_ZERO))
                 {
                     $product = Mage::getModel ('catalog/product')->load ($queue->getProductId ());
 
@@ -603,7 +623,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
             {
                 $additionalOptions = null;
 
-                if (strcmp (strtolower (trim ($body)), self::COMMAND_OK) != 0)
+                if (strcmp (strtolower (trim ($body)), self::COMMAND_ZERO) != 0)
                 {
                     $additionalOptions = array(
                         array(
@@ -628,11 +648,13 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
                     Mage::getModel ('checkout/cart_product_api')->add ($queue->getQuoteId (), $productsData, $storeId);
 
                     $result = Mage::helper ('bot/message')->getProductAddedToCartText () . PHP_EOL . PHP_EOL
-                        . $this->_getProductList ($storeId, $queue->getCategoryId ()) . PHP_EOL . PHP_EOL
-                        . Mage::helper ('bot/message')->getTypeCommandToGoToCartText (self::COMMAND_OK);
+                        . $this->_getCartReview ($queue->getQuoteId (), $storeId)
+                        . Mage::helper ('bot/message')->getTypeListToCategoriesText (self::COMMAND_ZERO) . PHP_EOL . PHP_EOL
+                        . Mage::helper ('bot/message')->getTypeClearToRestartText (self::COMMAND_ONE) . PHP_EOL . PHP_EOL
+                        . Mage::helper ('bot/message')->getTypeCommandToContinueText (self::COMMAND_OK)
                     ;
 
-                    $queue->setStatus (Gamuza_Bot_Helper_Data::STATUS_PRODUCT)
+                    $queue->setStatus (Gamuza_Bot_Helper_Data::STATUS_CART)
                         ->setComment ($body)
                         ->setUpdatedAt (date ('c'))
                         ->save ()
@@ -642,7 +664,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
                 {
                     $result = Mage::helper ('bot/message')->getProductNotAddedToCartText () . PHP_EOL . PHP_EOL
                         . Mage::helper ('bot')->__('Obs: %s', $e->getCustomMessage ()) . PHP_EOL . PHP_EOL
-                        . $this->_getProductList ($seller->getStoreId, $queue->getCategoryId ())
+                        . $this->_getProductList ($storeId, $queue->getCategoryId ())
                     ;
 
                     $queue->setStatus (Gamuza_Bot_Helper_Data::STATUS_PRODUCT)
@@ -667,7 +689,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
                     break;
                 }
 
-                if (!strcmp (strtolower (trim ($body)), self::COMMAND_CLEAR))
+                if (!strcmp (strtolower (trim ($body)), self::COMMAND_ONE))
                 {
                     $quote = Mage::getModel ('sales/quote')->load ($queue->getQuoteId ());
 
@@ -700,7 +722,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
 
                 $result = $this->_getCartReview ($queue->getQuoteId (), $storeId)
                     . Mage::helper ('bot/message')->getTypeListToCategoriesText (self::COMMAND_ZERO) . PHP_EOL . PHP_EOL
-                    . Mage::helper ('bot/message')->getTypeClearToRestartText (self::COMMAND_CLEAR) . PHP_EOL . PHP_EOL
+                    . Mage::helper ('bot/message')->getTypeClearToRestartText (self::COMMAND_ONE) . PHP_EOL . PHP_EOL
                     . Mage::helper ('bot/message')->getTypeCommandToContinueText (self::COMMAND_OK)
                 ;
 
@@ -788,7 +810,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
                 {
                     Mage::getModel ('checkout/cart_shipping_api')->setShippingMethod ($queue->getQuoteId (), $this->_shippingMethods [$shippingId], $storeId);
 
-                    $paymentMethods = Mage::getModel ('checkout/cart_payment_api')->getPaymentMethodsList ($queue->getQuoteId (), $storeId);
+                    $paymentMethods = Mage::getModel ('bot/checkout_cart_payment_api')->getPaymentMethodsList ($queue->getQuoteId (), $storeId);
 
                     if (count ($paymentMethods) > 0)
                     {
@@ -867,7 +889,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
             {
                 $paymentId = intval ($body);
 
-                $paymentMethods = Mage::getModel ('checkout/cart_payment_api')->getPaymentMethodsList ($queue->getQuoteId (), $storeId);
+                $paymentMethods = Mage::getModel ('bot/checkout_cart_payment_api')->getPaymentMethodsList ($queue->getQuoteId (), $storeId);
 
                 foreach ($paymentMethods as $id => $method)
                 {
@@ -901,13 +923,21 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
 
                             break;
                         }
+                        case 'gamuza_pagcripto_payment':
+                        {
+                            $result = $this->_getCriptoList ($queue->getQuoteId (), $storeId);
+
+                            $queueStatus = Gamuza_Bot_Helper_Data::STATUS_PAYMENT_CRIPTO;
+
+                            break;
+                        }
                         default:
                         {
                             $paymentData = array(
                                 'method' => $this->_paymentMethods [$paymentId]
                             );
 
-                            Mage::getModel ('checkout/cart_payment_api')->setPaymentMethod ($queue->getQuoteId (), $paymentData, $storeId);
+                            Mage::getModel ('bot/checkout_cart_payment_api')->setPaymentMethod ($queue->getQuoteId (), $paymentData, $storeId);
 
                             $result = $this->_getCheckoutReview ($queue->getQuoteId (), $storeId) . PHP_EOL . PHP_EOL;
 
@@ -960,7 +990,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
                         'cash_amount' => $paymentChange,
                     );
 
-                    Mage::getModel ('checkout/cart_payment_api')->setPaymentMethod ($queue->getQuoteId (), $paymentData, $storeId);
+                    Mage::getModel ('bot/checkout_cart_payment_api')->setPaymentMethod ($queue->getQuoteId (), $paymentData, $storeId);
 
                     $result = $this->_getCheckoutReview ($queue->getQuoteId (), $storeId) . PHP_EOL . PHP_EOL;
 
@@ -982,7 +1012,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
             {
                 $paymentId = intval ($body);
 
-                $paymentMethods = Mage::getModel ('checkout/cart_payment_api')->getPaymentMethodsList ($queue->getQuoteId (), $storeId);
+                $paymentMethods = Mage::getModel ('bot/checkout_cart_payment_api')->getPaymentMethodsList ($queue->getQuoteId (), $storeId);
 
                 foreach ($paymentMethods as $id => $method)
                 {
@@ -999,7 +1029,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
                         'cc_type' => $this->_paymentCcTypes [$paymentId],
                     );
 
-                    Mage::getModel ('checkout/cart_payment_api')->setPaymentMethod ($queue->getQuoteId (), $paymentData, $storeId);
+                    Mage::getModel ('bot/checkout_cart_payment_api')->setPaymentMethod ($queue->getQuoteId (), $paymentData, $storeId);
 
                     $result = $this->_getCheckoutReview ($queue->getQuoteId (), $storeId) . PHP_EOL . PHP_EOL;
 
@@ -1011,6 +1041,43 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
                 else
                 {
                     $result = $this->_getCardList ($queue->getQuoteId (), $storeId);
+                }
+
+                break;
+            }
+            case Gamuza_Bot_Helper_Data::STATUS_PAYMENT_CRIPTO:
+            {
+                $paymentId = intval ($body);
+
+                $paymentMethods = Mage::getModel ('bot/checkout_cart_payment_api')->getPaymentMethodsList ($queue->getQuoteId (), $storeId);
+
+                foreach ($paymentMethods as $id => $method)
+                {
+                    if (strcmp ($method ['code'], 'gamuza_pagcripto_payment') != 0)
+                    {
+                        unset ($paymentMethods [$id]);
+                    }
+                }
+
+                if (!empty ($this->_paymentCriptoTypes [$paymentId]) && $this->_getAllowedCriptoType ($paymentMethods, $paymentId))
+                {
+                    $paymentData = array(
+                        'method'  => 'gamuza_pagcripto_payment',
+                        'cc_type' => $this->_paymentCriptoTypes [$paymentId],
+                    );
+
+                    Mage::getModel ('bot/checkout_cart_payment_api')->setPaymentMethod ($queue->getQuoteId (), $paymentData, $storeId);
+
+                    $result = $this->_getCheckoutReview ($queue->getQuoteId (), $storeId) . PHP_EOL . PHP_EOL;
+
+                    $queue->setStatus (Gamuza_Bot_Helper_Data::STATUS_CHECKOUT)
+                        ->setUpdatedAt (date ('c'))
+                        ->save ()
+                    ;
+                }
+                else
+                {
+                    $result = $this->_getCriptoList ($queue->getQuoteId (), $storeId);
                 }
 
                 break;
@@ -1123,7 +1190,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
             $result .= sprintf ('*%s*%s%s', $category->getPosition (), $strPad, $category->getName ()) . PHP_EOL;
         }
 
-        $result .= PHP_EOL . Mage::helper ('bot/message')->getEnterBotToAttendantText ();
+        $result .= PHP_EOL . Mage::helper ('bot/message')->getEnterZapToAttendantText ();
 
         return $result;
     }
@@ -1139,6 +1206,10 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
             ->addAttributeToSelect ('special_from_date')
             ->addAttributeToSelect ('special_to_date')
             ->addAttributeToSelect ('sku_position')
+            ->addAttributeToFilter ('type_id', array ('in' => array (
+                Mage_Catalog_Model_Product_Type::TYPE_SIMPLE,
+                Mage_Catalog_Model_Product_Type::TYPE_BUNDLE
+            )))
             ->addCategoryFilter ($category)
             ->setVisibility (Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH)
             ->addFinalPrice ()
@@ -1200,15 +1271,15 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
 
         foreach ($collection as $option)
         {
-            $strLen = self::OPTION_ID_LENGTH - strlen ($option->getSortOrder ());
+            $strLen = self::OPTION_ID_LENGTH - strlen ($option->getPosition ());
             $strPad = str_pad ("", $strLen, ' ', STR_PAD_RIGHT);
 
             $required = $option->getRequired () ? sprintf (' *(%s)* ', Mage::helper ('bot')->__('required')) : null;
 
-            $result .= sprintf ('*%s*%s%s%s', $option->getSortOrder (), $strPad, $option->getDefaultTitle (), $required) . PHP_EOL;
+            $result .= sprintf ('*%s*%s%s%s', $option->getPosition (), $strPad, $option->getDefaultTitle (), $required) . PHP_EOL;
         }
 
-        $result .= PHP_EOL . Mage::helper ('bot/message')->getTypeCommandToContinueText (self::COMMAND_OK);
+        $result .= PHP_EOL . Mage::helper ('bot/message')->getTypeCommandToContinueText (self::COMMAND_ZERO);
 
         return $result;
     }
@@ -1233,15 +1304,15 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
 
         foreach ($collection as $selection)
         {
-            $strLen = self::VALUE_ID_LENGTH - strlen ($selection->getSortOrder ());
+            $strLen = self::VALUE_ID_LENGTH - strlen ($selection->getPosition ());
             $strPad = str_pad ("", $strLen, ' ', STR_PAD_RIGHT);
 
             $selectionPrice = Mage::helper ('core')->currency ($selection->getFinalPrice (), true, false);
 
-            $result .= sprintf ('*%s*%s%s *%s*', $selection->getSortOrder (), $strPad, $selection->getName (), $selectionPrice) . PHP_EOL;
+            $result .= sprintf ('*%s*%s%s *%s*', $selection->getPosition (), $strPad, $selection->getName (), $selectionPrice) . PHP_EOL;
         }
 
-        $result .= PHP_EOL . Mage::helper ('bot/message')->getTypeCommandToContinueText (self::COMMAND_OK);
+        $result .= PHP_EOL . Mage::helper ('bot/message')->getTypeCommandToContinueText (self::COMMAND_ZERO);
 
         return $result;
     }
@@ -1262,7 +1333,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
             $result .= sprintf ('*%s*%s%s%s', $option->getSortOrder (), $strPad, $option->getTitle (), $require) . PHP_EOL;
         }
 
-        $result .= PHP_EOL . Mage::helper ('bot/message')->getTypeCommandToContinueText (self::COMMAND_OK);
+        $result .= PHP_EOL . Mage::helper ('bot/message')->getTypeCommandToContinueText (self::COMMAND_ZERO);
 
         return $result;
     }
@@ -1288,7 +1359,7 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
             $result .= sprintf ('*%s*%s%s *%s*', $value->getSortOrder (), $strPad, $value->getTitle (), $valuePrice) . PHP_EOL;
         }
 
-        $result .= PHP_EOL . Mage::helper ('bot/message')->getTypeCommandToContinueText (self::COMMAND_OK);
+        $result .= PHP_EOL . Mage::helper ('bot/message')->getTypeCommandToContinueText (self::COMMAND_ZERO);
 
         return $result;
     }
@@ -1420,6 +1491,14 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
 
                 break;
             }
+            case 'gamuza_pagcripto_payment':
+            {
+                $paymentCcType = $info ['payment']['cc_type'];
+
+                $result .= Mage::helper ('bot/message')->getCurrencyTypeForCriptoText ($paymentCcType) . PHP_EOL . PHP_EOL;
+
+                break;
+            }
         }
 
         $result .= Mage::helper ('bot/message')->getEnterToConfirmOrderText ();
@@ -1472,9 +1551,28 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
         return false;
     }
 
+    private function _getAllowedCriptoType ($paymentMethods, $paymentId)
+    {
+        foreach ($paymentMethods as $method)
+        {
+            if (!strcmp ($method ['code'], 'gamuza_pagcripto_payment'))
+            {
+                foreach ($method ['cc_types'] as $id => $cctype)
+                {
+                    if (!strcmp ($id, $this->_paymentCriptoTypes [$paymentId]))
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
     private function _getCardList ($quoteId, $storeId)
     {
-        $paymentMethods = Mage::getModel ('checkout/cart_payment_api')->getPaymentMethodsList ($quoteId, $storeId);
+        $paymentMethods = Mage::getModel ('bot/checkout_cart_payment_api')->getPaymentMethodsList ($quoteId, $storeId);
 
         foreach ($paymentMethods as $paymentId => $paymentValue)
         {
@@ -1491,6 +1589,43 @@ class Gamuza_Bot_Model_Queue_Api extends Mage_Api_Model_Resource_Abstract
                 $result = Mage::helper ('bot/message')->getChooseTypeOfCardText () . PHP_EOL . PHP_EOL;
 
                 foreach ($this->_paymentCcTypes as $id => $cctype)
+                {
+                    foreach ($paymentValue ['cc_types'] as $_id => $_cctype)
+                    {
+                        if (!strcmp ($cctype, $_id))
+                        {
+                            $strLen = self::CCTYPE_ID_LENGTH - strlen ($id);
+                            $strPad = str_pad ("", $strLen, ' ', STR_PAD_RIGHT);
+
+                            $result .= sprintf ("*%s*%s%s", $id, $strPad, $_cctype) . PHP_EOL;
+                        }
+                    }
+                }
+
+                return $result;
+            }
+        }
+    }
+
+    private function _getCriptoList ($quoteId, $storeId)
+    {
+        $paymentMethods = Mage::getModel ('bot/checkout_cart_payment_api')->getPaymentMethodsList ($quoteId, $storeId);
+
+        foreach ($paymentMethods as $paymentId => $paymentValue)
+        {
+            if (!strcmp ($paymentValue ['code'], 'gamuza_pagcripto_payment'))
+            {
+                foreach ($paymentValue ['cc_types'] as $id => $cctype)
+                {
+                    if (!in_array ($id, $this->_paymentCriptoTypes))
+                    {
+                        unset ($paymentValue ['cc_types'][$id]);
+                    }
+                }
+
+                $result = Mage::helper ('bot/message')->getChooseTypeOfCriptoText () . PHP_EOL . PHP_EOL;
+
+                foreach ($this->_paymentCriptoTypes as $id => $cctype)
                 {
                     foreach ($paymentValue ['cc_types'] as $_id => $_cctype)
                     {

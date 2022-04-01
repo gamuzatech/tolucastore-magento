@@ -14,7 +14,6 @@ class Gamuza_Bot_Helper_Data extends Mage_Core_Helper_Abstract
     const BOT_TYPE_TELEGRAM = 'telegram';
     const BOT_TYPE_WHATSAPP = 'whatsapp';
 
-    const STATUS_BOT      = 'bot';
     const STATUS_CATEGORY = 'category';
     const STATUS_PRODUCT  = 'product';
     const STATUS_OPTION   = 'option';
@@ -28,8 +27,10 @@ class Gamuza_Bot_Helper_Data extends Mage_Core_Helper_Abstract
     const STATUS_PAYMENT  = 'payment';
     const STATUS_PAYMENT_CASH = 'payment_cash';
     const STATUS_PAYMENT_MACHINE = 'payment_machine';
+    const STATUS_PAYMENT_CRIPTO = 'payment_cripto';
     const STATUS_CHECKOUT = 'checkout';
     const STATUS_ORDER    = 'order';
+    const STATUS_ZAP      = 'zap';
 
     const XML_PATH_BOT_BASIC_AUTH_ACTIVE   = 'bot/basic_auth/active';
     const XML_PATH_BOT_BASIC_AUTH_USERNAME = 'bot/basic_auth/username';
