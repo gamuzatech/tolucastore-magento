@@ -157,29 +157,12 @@ class Gamuza_Bot_Block_Adminhtml_Queue_Grid extends Mage_Adminhtml_Block_Widget_
             ),
         ));
 
-        $this->addExportType ('*/*/exportCsv', Mage::helper ('bot')->__('CSV'));
-
 		return parent::_prepareColumns ();
 	}
 
 	public function getRowUrl ($row)
 	{
         // nothing here
-	}
-
-	protected function _prepareMassaction ()
-	{
-		$this->setMassactionIdField ('entity_id');
-		$this->getMassactionBlock ()->setFormFieldName ('entity_ids')
-		    ->setUseSelectAll (true)
-		    ->addItem ('remove_items', array(
-				 'label'   => Mage::helper ('bot')->__('Remove Items'),
-				 'url'     => $this->getUrl ('*/adminhtml_queue/massRemove'),
-				 'confirm' => Mage::helper ('bot')->__('Are you sure?')
-			))
-        ;
-
-		return $this;
 	}
 }
 

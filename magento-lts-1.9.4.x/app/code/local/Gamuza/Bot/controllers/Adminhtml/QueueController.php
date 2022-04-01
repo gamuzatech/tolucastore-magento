@@ -88,43 +88,5 @@ class Gamuza_Bot_Adminhtml_QueueController extends Mage_Adminhtml_Controller_Act
 		    $this->renderLayout ();
         }
     }
-
-    /**
-     * Export customer grid to CSV format
-     */
-    public function exportCsvAction()
-    {
-        $fileName = 'queue.csv';
-
-        $content = $this->getLayout()
-            ->createBlock('bot/adminhtml_queue_grid')
-            ->getCsvFile()
-        ;
-
-        $this->_prepareDownloadResponse ($fileName, $content);
-    }
-
-	public function massRemoveAction ()
-	{
-		try
-        {
-			$ids = $this->getRequest ()->getPost ('entity_ids', array ());
-
-			foreach ($ids as $id)
-            {
-                $model = Mage::getModel('bot/queue');
-
-                $model->setId ($id)->delete ();
-			}
-
-			Mage::getSingleton ('adminhtml/session')->addSuccess (Mage::helper ('bot')->__('Queue items were successfully removed.'));
-		}
-		catch (Exception $e)
-        {
-			Mage::getSingleton ('adminhtml/session')->addError ($e->getMessage ());
-		}
-
-		$this->_redirect('*/*/');
-	}
 }
 
