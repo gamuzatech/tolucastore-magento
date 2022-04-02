@@ -17,9 +17,14 @@
                     <title>Bot</title>
                     <sort_order>100</sort_order>
                     <children>
+                        <contact translate="title" module="bot">
+                            <title>Manage Contacts</title>
+                            <sort_order>0</sort_order>
+                            <action>admin_bot/adminhtml_contact</action>
+                        </contact>
                         <queue translate="title" module="bot">
                             <title>Manage Queue</title>
-                            <sort_order>0</sort_order>
+                            <sort_order>10</sort_order>
                             <action>admin_bot/adminhtml_queue</action>
                         </queue>
                     </children>
@@ -42,9 +47,13 @@
                                 <title>Bot</title>
                                 <sort_order>100</sort_order>
                                 <children>
+                                    <contact translate="title" module="bot">
+                                        <title>Manage Contacts</title>
+                                        <sort_order>0</sort_order>
+                                    </contact>
                                     <queue translate="title" module="bot">
                                         <title>Manage Queue</title>
-                                        <sort_order>0</sort_order>
+                                        <sort_order>10</sort_order>
                                     </queue>
                                 </children>
                             </bot>

@@ -8,6 +8,11 @@
 -->
 
 <layout version="0.1.0">
+    <admin_bot_adminhtml_contact_index>
+        <reference name="content">
+            <block type="bot/adminhtml_contact" name="contact" />
+        </reference>
+    </admin_bot_adminhtml_contact_index>
     <admin_bot_adminhtml_queue_index>
         <reference name="content">
             <block type="bot/adminhtml_queue" name="queue" />
