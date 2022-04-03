@@ -5,7 +5,8 @@
  * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
  */
 
-class Gamuza_Basic_Block_Adminhtml_Catalog_Product_Option_Edit_Form extends Mage_Adminhtml_Block_Widget_Form
+class Gamuza_Basic_Block_Adminhtml_Catalog_Product_Attribute_Option_Edit_Form
+    extends Mage_Adminhtml_Block_Widget_Form
 {
 	protected function _prepareForm ()
 	{

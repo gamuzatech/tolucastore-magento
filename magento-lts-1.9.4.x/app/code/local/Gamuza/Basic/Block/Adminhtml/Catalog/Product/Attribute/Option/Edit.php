@@ -13,7 +13,7 @@ class Gamuza_Basic_Block_Adminhtml_Catalog_Product_Attribute_Option_Edit
 		parent::__construct ();
 
 		$this->_blockGroup = 'basic';
-		$this->_controller = 'adminhtml_catalog_product_option';
+		$this->_controller = 'adminhtml_catalog_product_attribute_option';
 		$this->_objectId   = 'entity_id';
 
 		$this->_updateButton ('save',   'label', Mage::helper ('basic')->__('Save Option'));

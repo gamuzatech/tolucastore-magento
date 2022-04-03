@@ -139,8 +139,6 @@ class Gamuza_Basic_Adminhtml_Catalog_Product_Attribute_OptionController
 
 	public function deleteAction ()
 	{
-        $value = Mage::getModel ('basic/eav_entity_attribute_option_value')->load (629);
-
 		if ($this->getRequest ()->getParam ('id') > 0 )
         {
 			try
