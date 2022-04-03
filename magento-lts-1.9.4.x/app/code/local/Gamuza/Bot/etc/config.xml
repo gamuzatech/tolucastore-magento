@@ -10,7 +10,7 @@
 <config>
     <modules>
         <Gamuza_Bot>
-            <version>0.0.5</version>
+            <version>0.0.6</version>
         </Gamuza_Bot>
     </modules>
     <global>
@@ -41,6 +41,9 @@
                     <message>
                         <table>gamuza_bot_message</table>
                     </message>
+                    <promotion>
+                        <table>gamuza_bot_promotion</table>
+                    </promotion>
                 </entities>
             </bot_mysql4>
         </models>

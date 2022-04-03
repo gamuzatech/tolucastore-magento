@@ -60,7 +60,7 @@ class Gamuza_Bot_Adminhtml_ContactController extends Mage_Adminhtml_Controller_A
         catch (Exception $e)
         {
             $this->_getSession ()
-                ->addException ($e, $this->__('An error occurred while updating the product(s) status.')
+                ->addException ($e, $this->__('An error occurred while updating the contact(s) status.')
             );
         }
 
