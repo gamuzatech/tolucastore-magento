@@ -53,7 +53,7 @@ try
 
     Mage::getModel ('basic/observer')->cleanExpiredQuotes ();
 
-    Mage::getModel ('bot/observer')->cleanExpiredQueues ();
+    Mage::getModel ('bot/observer')->cleanExpiredChats ();
 }
 catch (Exception $e)
 {
