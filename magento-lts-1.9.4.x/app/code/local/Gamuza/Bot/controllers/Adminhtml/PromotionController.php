@@ -135,7 +135,7 @@ class Gamuza_Bot_Adminhtml_PromotionController extends Mage_Adminhtml_Controller
 					return $this;
 				}
 
-				$this->_redirect ('*/*/');
+				$this->_redirect ('*/*/index');
 
 				return $this;
 			}
@@ -150,7 +150,7 @@ class Gamuza_Bot_Adminhtml_PromotionController extends Mage_Adminhtml_Controller
 			}
 		}
 
-		$this->_redirect ('*/*/');
+		$this->_redirect ('*/*/index');
 	}
 
 	public function deleteAction ()
@@ -166,17 +166,75 @@ class Gamuza_Bot_Adminhtml_PromotionController extends Mage_Adminhtml_Controller
 
 				Mage::getSingleton ('adminhtml/session')->addSuccess (Mage::helper ('bot')->__('Promotion was successfully deleted.'));
 
-				$this->_redirect ('*/*/');
+				$this->_redirect ('*/*/index');
+
+			    return $this;
 			}
 			catch (Exception $e)
             {
 				Mage::getSingleton ('adminhtml/session')->addError ($e->getMessage ());
 
 				$this->_redirect ('*/*/edit', array ('id' => $this->getRequest ()->getParam ('id')));
+
+			    return $this;
 			}
 		}
 
-		$this->_redirect ('*/*/');
+		$this->_redirect ('*/*/index');
 	}
+
+    public function queueAction ()
+    {
+        $id = $this->getRequest ()->getParam ('id');
+
+		if ($id > 0)
+        {
+			try
+            {
+                $collection = Mage::getModel ('bot/queue')->getCollection ()
+                    ->addFieldToFilter ('promotion_id', array ('eq' => $id))
+                    ->addFieldToFilter ('status', array ('in' => array (
+                        Gamuza_Bot_Helper_Data::QUEUE_STATUS_PENDING,
+                        Gamuza_Bot_Helper_Data::QUEUE_STATUS_SENDING,
+                    )))
+                ;
+
+                if ($collection->getSize () > 0)
+                {
+                    throw new Exception (Mage::helper ('bot')->__('There are pending, sending or stopped promotions in the queue.'));
+                }
+
+                $promotion = Mage::getModel ('bot/promotion')->load ($id);
+
+                $queue = Mage::getModel ('bot/queue')
+                    ->setPromotionId ($promotion->getId ())
+                    ->setTypeId ($promotion->getTypeId ())
+                    ->setContactsTotal (0)
+                    ->setContactsSent (0)
+                    ->setStatus (Gamuza_Bot_Helper_Data::QUEUE_STATUS_PENDING)
+                    ->setName ($promotion->getName ())
+                    ->setMessage ($promotion->getMessage ())
+                    ->setCreatedAt (date ('c'))
+                    ->save ()
+                ;
+
+				Mage::getSingleton ('adminhtml/session')->addSuccess (Mage::helper ('bot')->__('Promotion was successfully sent to the queue.'));
+
+				$this->_redirect ('*/adminhtml_queue/index');
+
+			    return $this;
+			}
+			catch (Exception $e)
+            {
+				Mage::getSingleton ('adminhtml/session')->addError ($e->getMessage ());
+
+				$this->_redirect ('*/adminhtml_promotion/edit', array ('id' => $this->getRequest ()->getParam ('id')));
+
+			    return $this;
+			}
+		}
+
+		$this->_redirect ('*/*/index');
+    }
 }
 

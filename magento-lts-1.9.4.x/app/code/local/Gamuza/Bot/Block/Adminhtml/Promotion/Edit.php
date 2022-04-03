@@ -29,6 +29,15 @@ class Gamuza_Bot_Block_Adminhtml_Promotion_Edit extends Mage_Adminhtml_Block_Wid
 				editForm.submit ($('edit_form').action + 'back/edit/');
 			}
 		";
+
+        $this->_addButton('send', array(
+            'label'   => Mage::helper('bot')->__('Send Promotion'),
+            'class'   => 'scalable delete',
+            'onclick' => sprintf (
+                "confirmSetLocation('%s', '%s')",
+                $this->getSendMessage (), $this->getSendUrl ()
+            ),
+        ), -100);
 	}
 
 	public function getHeaderText ()
@@ -44,5 +53,15 @@ class Gamuza_Bot_Block_Adminhtml_Promotion_Edit extends Mage_Adminhtml_Block_Wid
 		     return Mage::helper ('bot')->__('Add New Promotion');
 		}
 	}
+
+    public function getSendMessage ()
+    {
+        return Mage::helper ('bot')->__('Confirm sending the promotion to the queue?');
+    }
+
+    public function getSendUrl ()
+    {
+        return $this->getUrl ('*/*/queue', array ('id' => $this->getRequest()->getParam('id')));
+    }
 }
 

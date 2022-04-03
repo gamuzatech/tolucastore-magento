@@ -32,6 +32,11 @@
                             <sort_order>20</sort_order>
                             <action>admin_bot/adminhtml_promotion</action>
                         </promotion>
+                        <queue translate="title" module="bot">
+                            <title>Manage Queue</title>
+                            <sort_order>30</sort_order>
+                            <action>admin_bot/adminhtml_queue</action>
+                        </queue>
                     </children>
                 </bot>
             </children>
@@ -62,8 +67,12 @@
                                     </contact>
                                     <promotion translate="title" module="bot">
                                         <title>Manage Promotions</title>
-                                        <sort_order>10</sort_order>
+                                        <sort_order>20</sort_order>
                                     </promotion>
+                                    <queue translate="title" module="bot">
+                                        <title>Manage Queue</title>
+                                        <sort_order>30</sort_order>
+                                    </queue>
                                 </children>
                             </bot>
                         </children>

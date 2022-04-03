@@ -11,6 +11,7 @@ class Gamuza_Bot_Helper_Data extends Mage_Core_Helper_Abstract
     const CONTACT_TABLE   = 'gamuza_bot_contact';
     const MESSAGE_TABLE   = 'gamuza_bot_message';
     const PROMOTION_TABLE = 'gamuza_bot_promotion';
+    const QUEUE_TABLE     = 'gamuza_bot_queue';
 
     const ORDER_ATTRIBUTE_IS_BOT = 'is_bot';
     const ORDER_ATTRIBUTE_BOT_TYPE = 'bot_type';
@@ -21,6 +22,12 @@ class Gamuza_Bot_Helper_Data extends Mage_Core_Helper_Abstract
 
     const MESSAGE_TYPE_QUESTION = 'question';
     const MESSAGE_TYPE_ANSWER   = 'answer';
+
+    const QUEUE_STATUS_PENDING  = 'pending';
+    const QUEUE_STATUS_SENDING  = 'sending';
+    const QUEUE_STATUS_FINISHED = 'finished';
+    const QUEUE_STATUS_CANCELED = 'canceled';
+    const QUEUE_STATUS_STOPPED  = 'stopped';
 
     const STATUS_CATEGORY = 'category';
     const STATUS_PRODUCT  = 'product';

@@ -1,0 +1,95 @@
+<?php
+/**
+ * @package     Gamuza_Bot
+ * @copyright   Copyright (c) 2022 Gamuza Technologies (http://www.gamuza.com.br/)
+ * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
+ */
+
+class Gamuza_Bot_Adminhtml_QueueController extends Mage_Adminhtml_Controller_Action
+{
+	protected function _isAllowed ()
+	{
+	    return Mage::getSingleton ('admin/session')->isAllowed ('gamuza/bot/queue');
+	}
+
+	protected function _initAction ()
+	{
+		$this->loadLayout ()->_setActiveMenu ('gamuza/bot/queue')
+            ->_addBreadcrumb(
+                Mage::helper ('bot')->__('Queue Manager'),
+                Mage::helper ('bot')->__('Queue Manager')
+            )
+        ;
+
+		return $this;
+	}
+
+	public function indexAction ()
+	{
+	    $this->_title ($this->__('Bot'));
+	    $this->_title ($this->__('Queue Manager'));
+
+		$this->_initAction ();
+
+		$this->renderLayout ();
+	}
+
+    public function massStatusAction ()
+    {
+        $queueIds = $this->getRequest()->getParam('queue');
+        $status   = $this->getRequest()->getParam('status');
+
+        $statuses = Mage::getModel ('bot/adminhtml_system_config_source_queue_status')->toArray ();
+
+        try
+        {
+            foreach ($queueIds as $id)
+            {
+                $queue = Mage::getSingleton ('bot/queue')->load ($id);
+
+                $queueStatus = $queue->getStatus ();
+
+                if (!in_array ($queueStatus, array(
+                    Gamuza_Bot_Helper_Data::QUEUE_STATUS_PENDING,
+                    Gamuza_Bot_Helper_Data::QUEUE_STATUS_SENDING,
+                )))
+                {
+                    throw new Mage_Core_Exception (Mage::helper ('bot')->__('Invalid queue status: %s', $statuses [$queueStatus]));
+                }
+
+                if ((!strcmp ($queueStatus, Gamuza_Bot_Helper_Data::QUEUE_STATUS_PENDING)
+                    && strcmp ($status, Gamuza_Bot_Helper_Data::QUEUE_STATUS_CANCELED))
+                    || (!strcmp ($queueStatus, Gamuza_Bot_Helper_Data::QUEUE_STATUS_SENDING)
+                    && strcmp ($status, Gamuza_Bot_Helper_Data::QUEUE_STATUS_STOPPED))
+                )
+                {
+                    throw new Mage_Core_Exception (
+                        Mage::helper ('bot')->__('Invalid queue status: %s for %s',
+                            $statuses [$status],
+                            $statuses [$queueStatus],
+                        )
+                    );
+                }
+
+                $queue->setStatus ($status)->save ();
+            }
+
+            $this->_getSession()->addSuccess(
+                $this->__('Total of %d record(s) have been updated.', count($queueIds))
+            );
+        }
+        catch (Mage_Core_Exception $e)
+        {
+            $this->_getSession ()->addError ($e->getMessage ());
+        }
+        catch (Exception $e)
+        {
+            $this->_getSession ()
+                ->addException ($e, $this->__('An error occurred while updating the queue(s) status.')
+            );
+        }
+
+        $this->_redirect ('*/*/index');
+    }
+}
+
