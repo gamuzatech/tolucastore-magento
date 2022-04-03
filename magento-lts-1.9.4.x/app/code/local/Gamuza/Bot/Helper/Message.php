@@ -165,7 +165,7 @@ class Gamuza_Bot_Helper_Message extends Mage_Core_Helper_Abstract
             {
                 $result = $this->__('Would you like to add any notes for this product?') . PHP_EOL . PHP_EOL
                     . $this->__('Please enter any notes:') . PHP_EOL . PHP_EOL
-                    . $this->getTypeCommandToContinueText (Gamuza_Bot_Model_Queue_Api::COMMAND_ZERO)
+                    . $this->getTypeCommandToContinueText (Gamuza_Bot_Model_Chat_Api::COMMAND_ZERO)
                 ;
 
                 break;

@@ -6,10 +6,10 @@
  */
 
 /**
- * Used in creating options for Queue_Status config value selection
+ * Used in creating options for Chat_Status config value selection
  *
  */
-class Gamuza_Bot_Model_Adminhtml_System_Config_Source_Queue_Status
+class Gamuza_Bot_Model_Adminhtml_System_Config_Source_Chat_Status
 {
     /**
      * Get options in "key-value" format

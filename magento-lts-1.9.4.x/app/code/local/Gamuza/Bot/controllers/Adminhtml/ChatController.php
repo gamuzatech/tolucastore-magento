@@ -5,36 +5,36 @@
  * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
  */
 
-class Gamuza_Bot_Adminhtml_QueueController extends Mage_Adminhtml_Controller_Action
+class Gamuza_Bot_Adminhtml_ChatController extends Mage_Adminhtml_Controller_Action
 {
-    use Gamuza_Bot_Trait_Queue;
+    use Gamuza_Bot_Trait_Chat;
 
 	protected function _isAllowed ()
 	{
-	    return Mage::getSingleton ('admin/session')->isAllowed ('gamuza/bot/queue');
+	    return Mage::getSingleton ('admin/session')->isAllowed ('gamuza/bot/chat');
 	}
 
 	protected function _initAction ()
 	{
-		$this->loadLayout ()->_setActiveMenu ('gamuza/bot/queue')
+		$this->loadLayout ()->_setActiveMenu ('gamuza/bot/chat')
             ->_addBreadcrumb(
-                Mage::helper ('bot')->__('Queue Manager'),
-                Mage::helper ('bot')->__('Queue Manager')
+                Mage::helper ('bot')->__('Chats Manager'),
+                Mage::helper ('bot')->__('Chats Manager')
             )
         ;
 
 		return $this;
 	}
 
-    protected function _initQueue()
+    protected function _initChat()
     {
         $id = $this->getRequest ()->getParam ('id');
 
-        $queue = Mage::getModel ('bot/queue')->load ($id);
+        $chat = Mage::getModel ('bot/chat')->load ($id);
 
-        if (!$queue || !$queue->getId ())
+        if (!$chat || !$chat->getId ())
         {
-            $this->_getSession ()->addError ($this->__('This queue no longer exists.'));
+            $this->_getSession ()->addError ($this->__('This chat no longer exists.'));
 
             $this->_redirect('*/*/index');
 
@@ -44,12 +44,12 @@ class Gamuza_Bot_Adminhtml_QueueController extends Mage_Adminhtml_Controller_Act
         }
 
         $collection = Mage::getModel ('bot/message')->getCollection ()
-            ->addFieldToFilter ('queue_id', array ('eq' => $queue->getId ()))
+            ->addFieldToFilter ('chat_id', array ('eq' => $chat->getId ()))
         ;
 
         if (!$collection->getSize ())
         {
-            $this->_getSession ()->addError ($this->__('This queue has no history.'));
+            $this->_getSession ()->addError ($this->__('This chat has no history.'));
 
             $this->_redirect('*/*/index');
 
@@ -58,16 +58,16 @@ class Gamuza_Bot_Adminhtml_QueueController extends Mage_Adminhtml_Controller_Act
             return false;
         }
 
-        Mage::register('bot_queue',     $queue);
-        Mage::register('current_queue', $queue);
+        Mage::register('bot_chat',     $chat);
+        Mage::register('current_chat', $chat);
 
-        return $queue;
+        return $chat;
     }
 
 	public function indexAction ()
 	{
 	    $this->_title ($this->__('Bot'));
-	    $this->_title ($this->__('Queue Manager'));
+	    $this->_title ($this->__('Chats Manager'));
 
 		$this->_initAction ();
 
@@ -76,9 +76,9 @@ class Gamuza_Bot_Adminhtml_QueueController extends Mage_Adminhtml_Controller_Act
 
     public function historyAction ()
     {
-        $queue = $this->_initQueue ();
+        $chat = $this->_initChat ();
 
-        if ($queue && $queue->getId ())
+        if ($chat && $chat->getId ())
         {
 	        $this->_title ($this->__('Bot'));
 	        $this->_title ($this->__('History Manager'));

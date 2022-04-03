@@ -5,13 +5,13 @@
  * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
  */
 
-class Gamuza_Bot_Block_Adminhtml_Queue_Grid extends Mage_Adminhtml_Block_Widget_Grid
+class Gamuza_Bot_Block_Adminhtml_Chat_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
 	public function __construct ()
 	{
 		parent::__construct ();
 
-		$this->setId ('botQueueGrid');
+		$this->setId ('botChatGrid');
 		$this->setDefaultSort ('entity_id');
 		$this->setDefaultDir ('DESC');
 		$this->setSaveParametersInSession (true);
@@ -19,7 +19,7 @@ class Gamuza_Bot_Block_Adminhtml_Queue_Grid extends Mage_Adminhtml_Block_Widget_
 
 	protected function _prepareCollection ()
 	{
-		$collection = Mage::getModel ('bot/queue')->getCollection ();
+		$collection = Mage::getModel ('bot/chat')->getCollection ();
 
         $collection->getSelect ()->joinLeft (
             array ('order' => Mage::getSingleton ('core/resource')->getTableName ('sales/order')),
@@ -103,7 +103,7 @@ class Gamuza_Bot_Block_Adminhtml_Queue_Grid extends Mage_Adminhtml_Block_Widget_
 		    'header'  => Mage::helper ('bot')->__('Status'),
 		    'index'   => 'status',
             'type'    => 'options',
-            'options' => Mage::getModel ('bot/adminhtml_system_config_source_queue_status')->toArray (),
+            'options' => Mage::getModel ('bot/adminhtml_system_config_source_chat_status')->toArray (),
             'filter_index' => 'main_table.status',
 		));
 /*

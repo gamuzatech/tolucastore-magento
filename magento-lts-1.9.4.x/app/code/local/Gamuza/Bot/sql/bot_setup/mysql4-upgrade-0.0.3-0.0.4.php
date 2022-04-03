@@ -23,12 +23,12 @@ SQLBLOCK;
     $installer->run ($sqlBlock);
 
     $installer->getConnection ()
-        ->addColumn ($table, 'queue_id', array(
+        ->addColumn ($table, 'chat_id', array(
             'type'     => Varien_Db_Ddl_Table::TYPE_INTEGER,
             'length'   => 11,
             'unsigned' => true,
             'nullable' => false,
-            'comment'  => 'Queue ID',
+            'comment'  => 'Chat ID',
         ));
     $installer->getConnection ()
         ->addColumn ($table, 'bot_type', array(
@@ -100,7 +100,7 @@ SQLBLOCK;
         ));
 }
 
-addBotMessageTable ($installer, 'gamuza_bot_message', 'Gamuza Bot Message');
+addBotMessageTable ($installer, Gamuza_Bot_Helper_Data::MESSAGE_TABLE, 'Gamuza Bot Message');
 
 $installer->endSetup ();
 

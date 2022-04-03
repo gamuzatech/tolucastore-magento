@@ -5,14 +5,14 @@
  * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
  */
 
-class Gamuza_Bot_Block_Adminhtml_Queue extends Mage_Adminhtml_Block_Widget_Grid_Container
+class Gamuza_Bot_Block_Adminhtml_Chat extends Mage_Adminhtml_Block_Widget_Grid_Container
 {
 	public function __construct ()
 	{
 	    $this->_blockGroup = 'bot';
-	    $this->_controller = 'adminhtml_queue';
+	    $this->_controller = 'adminhtml_chat';
 
-	    $this->_headerText = Mage::helper ('bot')->__('Queue Manager');
+	    $this->_headerText = Mage::helper ('bot')->__('Chats Manager');
 
 	    parent::__construct();
 

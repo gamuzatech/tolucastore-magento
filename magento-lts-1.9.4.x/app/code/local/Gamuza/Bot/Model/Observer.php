@@ -10,18 +10,18 @@
  */
 class Gamuza_Bot_Model_Observer
 {
-    const BOT_QUEUE_LIFETIME = 86400;
+    const BOT_CHAT_LIFETIME = 86400;
 
-    public function cleanExpiredQueues()
+    public function cleanExpiredChats()
     {
-        /** @var $chats Gamuza_Bot_Model_Mysql4_Queue_Collection */
-        $queues = Mage::getModel('bot/queue')->getCollection()
+        /** @var $chats Gamuza_Bot_Model_Mysql4_Chat_Collection */
+        $chats = Mage::getModel('bot/chat')->getCollection()
             ->addFieldToFilter('status', array ('neq' => Gamuza_Bot_Helper_Data::STATUS_ORDER))
         ;
 
-        $queues->addFieldToFilter('updated_at', array('to'=>date("Y-m-d H:i:s", mktime(23, 59, 59) - self::BOT_QUEUE_LIFETIME)));
+        $chats->addFieldToFilter('updated_at', array('to'=>date("Y-m-d H:i:s", mktime(23, 59, 59) - self::BOT_CHAT_LIFETIME)));
 
-        $queues->walk('delete');
+        $chats->walk('delete');
 
         return $this;
     }

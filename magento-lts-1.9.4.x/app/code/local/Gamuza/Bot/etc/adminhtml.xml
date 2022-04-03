@@ -17,16 +17,16 @@
                     <title>Bot</title>
                     <sort_order>100</sort_order>
                     <children>
+                        <chat translate="title" module="bot">
+                            <title>Manage Chats</title>
+                            <sort_order>0</sort_order>
+                            <action>admin_bot/adminhtml_chat</action>
+                        </chat>
                         <contact translate="title" module="bot">
                             <title>Manage Contacts</title>
-                            <sort_order>0</sort_order>
+                            <sort_order>10</sort_order>
                             <action>admin_bot/adminhtml_contact</action>
                         </contact>
-                        <queue translate="title" module="bot">
-                            <title>Manage Queue</title>
-                            <sort_order>10</sort_order>
-                            <action>admin_bot/adminhtml_queue</action>
-                        </queue>
                     </children>
                 </bot>
             </children>
@@ -47,14 +47,14 @@
                                 <title>Bot</title>
                                 <sort_order>100</sort_order>
                                 <children>
+                                    <chat translate="title" module="bot">
+                                        <title>Manage Chats</title>
+                                        <sort_order>0</sort_order>
+                                    </chat>
                                     <contact translate="title" module="bot">
                                         <title>Manage Contacts</title>
-                                        <sort_order>0</sort_order>
-                                    </contact>
-                                    <queue translate="title" module="bot">
-                                        <title>Manage Queue</title>
                                         <sort_order>10</sort_order>
-                                    </queue>
+                                    </contact>
                                 </children>
                             </bot>
                         </children>

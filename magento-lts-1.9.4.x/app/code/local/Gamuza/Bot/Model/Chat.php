@@ -5,11 +5,11 @@
  * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
  */
 
-class Gamuza_Bot_Model_Queue extends Mage_Core_Model_Abstract
+class Gamuza_Bot_Model_Chat extends Mage_Core_Model_Abstract
 {
     protected function _construct ()
     {
-        $this->_init ('bot/queue');
+        $this->_init ('bot/chat');
     }
 
     protected function _beforeDelete ()
@@ -17,7 +17,7 @@ class Gamuza_Bot_Model_Queue extends Mage_Core_Model_Abstract
         parent::_beforeDelete ();
 
         $collection = Mage::getModel ('bot/message')->getCollection ()
-            ->addFieldToFilter ('queue_id', array ('eq' => $this->getId ()))
+            ->addFieldToFilter ('chat_id', array ('eq' => $this->getId ()))
         ;
 
         foreach ($collection as $message)

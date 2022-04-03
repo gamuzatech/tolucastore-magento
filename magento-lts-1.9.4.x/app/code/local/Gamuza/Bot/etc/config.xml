@@ -32,12 +32,12 @@
             <bot_mysql4>
                 <class>Gamuza_Bot_Model_Mysql4</class>
                 <entities>
+                    <chat>
+                        <table>gamuza_bot_chat</table>
+                    </chat>
                     <contact>
                         <table>gamuza_bot_contact</table>
                     </contact>
-                    <queue>
-                        <table>gamuza_bot_queue</table>
-                    </queue>
                     <message>
                         <table>gamuza_bot_message</table>
                     </message>

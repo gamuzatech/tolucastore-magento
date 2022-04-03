@@ -116,7 +116,7 @@ SQLBLOCK;
     $installer->getConnection ()->addKey ($table, 'FK_GAMUZA_BOT_TYPE_ID_NUMBER_COMPOSITE', array ('type_id', 'number'), Varien_Db_Adapter_Interface::INDEX_TYPE_UNIQUE);
 }
 
-addBotContactTable ($installer, 'gamuza_bot_contact', 'Gamuza Bot Contact');
+addBotContactTable ($installer, Gamuza_Bot_Helper_Data::CONTACT_TABLE, 'Gamuza Bot Contact');
 
 $installer->endSetup ();
 

@@ -10,29 +10,29 @@
 <config>
     <api>
         <resources>
-            <bot_queue translate="title" module="bot">
-                <model>bot/queue_api</model>
-                <title>Bot Queue API</title>
-                <acl>bot/queue</acl>
+            <bot_chat translate="title" module="bot">
+                <model>bot/chat_api</model>
+                <title>Bot Chat API</title>
+                <acl>bot/chat</acl>
                 <methods>
                     <message translate="title" module="bot">
-                        <title>Send a message to the queue</title>
-                        <acl>bot/queue/message</acl>
+                        <title>Send a message to the chat</title>
+                        <acl>bot/chat/message</acl>
                     </message>
                 </methods>
-            </bot_queue>
+            </bot_chat>
         </resources>
         <acl>
             <resources>
                 <bot translate="title" module="bot">
                     <title>Gamuza Bot API</title>
                     <sort_order>0</sort_order>
-                    <queue translate="title" module="bot">
-                        <title>Queue</title>
+                    <chat translate="title" module="bot">
+                        <title>Chat</title>
                         <message translate="title" module="bot">
-                            <title>Send a message to the queue</title>
+                            <title>Send a message to the chat</title>
                         </message>
-                    </queue>
+                    </chat>
                 </bot>
             </resources>
         </acl>

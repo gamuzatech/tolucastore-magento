@@ -19,10 +19,10 @@ class Gamuza_Bot_Block_Adminhtml_History_Grid extends Mage_Adminhtml_Block_Widge
 
 	protected function _prepareCollection ()
 	{
-        $queue = Mage::registry ('current_queue');
+        $chat = Mage::registry ('current_chat');
 
 		$collection = Mage::getModel ('bot/message')->getCollection ()
-            ->addFieldToFilter ('queue_id', array ('eq' => $queue->getId ()))
+            ->addFieldToFilter ('chat_id', array ('eq' => $chat->getId ()))
         ;
 
 		$this->setCollection ($collection);
@@ -38,10 +38,10 @@ class Gamuza_Bot_Block_Adminhtml_History_Grid extends Mage_Adminhtml_Block_Widge
 	        'type'   => 'number',
 		    'index'  => 'entity_id',
 		));
-		$this->addColumn ('queue_id', array(
-		    'header' => Mage::helper ('bot')->__('Queue ID'),
+		$this->addColumn ('chat_id', array(
+		    'header' => Mage::helper ('bot')->__('Chat ID'),
 		    'align'  => 'right',
-		    'index'  => 'queue_id',
+		    'index'  => 'chat_id',
             'type'   => 'number',
 		));
 		$this->addColumn ('bot_type', array(

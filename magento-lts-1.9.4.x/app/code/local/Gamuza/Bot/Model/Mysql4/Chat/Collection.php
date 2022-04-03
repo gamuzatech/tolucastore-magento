@@ -5,11 +5,11 @@
  * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
  */
 
-class Gamuza_Bot_Model_Mysql4_Queue extends Mage_Core_Model_Mysql4_Abstract
+class Gamuza_Bot_Model_Mysql4_Chat_Collection extends Mage_Core_Model_Mysql4_Collection_Abstract
 {
-    protected function _construct ()
+    public function _construct ()
     {
-        $this->_init ('bot/queue', 'entity_id');
+        $this->_init ('bot/chat');
     }
 }
 
