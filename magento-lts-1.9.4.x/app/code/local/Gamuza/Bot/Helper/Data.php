@@ -9,6 +9,7 @@ class Gamuza_Bot_Helper_Data extends Mage_Core_Helper_Abstract
 {
     const CHAT_TABLE      = 'gamuza_bot_chat';
     const CONTACT_TABLE   = 'gamuza_bot_contact';
+    const LOG_TABLE       = 'gamuza_bot_log';
     const MESSAGE_TABLE   = 'gamuza_bot_message';
     const PROMOTION_TABLE = 'gamuza_bot_promotion';
     const QUEUE_TABLE     = 'gamuza_bot_queue';

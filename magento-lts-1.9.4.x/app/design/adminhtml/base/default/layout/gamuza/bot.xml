@@ -33,5 +33,10 @@
             <block type="bot/adminhtml_queue" name="queue" />
         </reference>
     </admin_bot_adminhtml_queue_index>
+    <admin_bot_adminhtml_queue_history>
+        <reference name="content">
+            <block type="bot/adminhtml_log" name="log" />
+        </reference>
+    </admin_bot_adminhtml_queue_history>
 </layout>
 

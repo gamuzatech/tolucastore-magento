@@ -10,7 +10,7 @@
 <config>
     <modules>
         <Gamuza_Bot>
-            <version>0.0.7</version>
+            <version>0.0.8</version>
         </Gamuza_Bot>
     </modules>
     <global>
@@ -38,6 +38,9 @@
                     <contact>
                         <table>gamuza_bot_contact</table>
                     </contact>
+                    <log>
+                        <table>gamuza_bot_log</table>
+                    </log>
                     <message>
                         <table>gamuza_bot_message</table>
                     </message>

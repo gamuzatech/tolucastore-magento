@@ -50,6 +50,7 @@ class Gamuza_Bot_Block_Adminhtml_Queue_Grid extends Mage_Adminhtml_Block_Widget_
 		    'header'  => Mage::helper ('bot')->__('Name'),
 		    'index'   => 'name',
 		));
+/*
 		$this->addColumn ('message', array(
 		    'header'  => Mage::helper ('bot')->__('Message'),
 		    'index'   => 'message',
@@ -57,6 +58,7 @@ class Gamuza_Bot_Block_Adminhtml_Queue_Grid extends Mage_Adminhtml_Block_Widget_
             'truncate' => 2500,
             'nl2br'    => true,
 		));
+*/
 		$this->addColumn ('contacts_total', array(
 		    'header' => Mage::helper ('bot')->__('Contacts Total'),
 		    'align'  => 'right',
@@ -96,8 +98,8 @@ class Gamuza_Bot_Block_Adminhtml_Queue_Grid extends Mage_Adminhtml_Block_Widget_
             'type'   => 'datetime',
 		));
 
-        $this->addColumn ('action', array(
-            'header'   => Mage::helper ('bot')->__('Action'),
+        $this->addColumn ('promotion', array(
+            // 'header'   => Mage::helper ('bot')->__('Action'),
             'width'    => '50px',
             'type'     => 'action',
             'getter'   => 'getPromotionId',
@@ -112,7 +114,27 @@ class Gamuza_Bot_Block_Adminhtml_Queue_Grid extends Mage_Adminhtml_Block_Widget_
                         'base'   => '*/adminhtml_promotion/edit',
                         'params' => array ('store' => $this->getRequest ()->getParam ('store'))
                     ),
-                )
+                ),
+            ),
+        ));
+
+        $this->addColumn ('history', array(
+            // 'header'   => Mage::helper ('bot')->__('Action'),
+            'width'    => '50px',
+            'type'     => 'action',
+            'getter'   => 'getId',
+            'index'    => 'stores',
+            'filter'   => false,
+            'sortable' => false,
+            'actions'  => array(
+                array(
+                    'caption' => Mage::helper ('bot')->__('History'),
+                    'field'   => 'id',
+                    'url'     => array(
+                        'base'   => '*/adminhtml_queue/history',
+                        'params' => array ('store' => $this->getRequest ()->getParam ('store'))
+                    ),
+                ),
             ),
         ));
 

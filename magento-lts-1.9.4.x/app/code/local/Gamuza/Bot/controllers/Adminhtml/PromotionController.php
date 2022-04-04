@@ -201,7 +201,7 @@ class Gamuza_Bot_Adminhtml_PromotionController extends Mage_Adminhtml_Controller
 
                 if ($collection->getSize () > 0)
                 {
-                    throw new Exception (Mage::helper ('bot')->__('There are pending, sending or stopped promotions in the queue.'));
+                    throw new Exception (Mage::helper ('bot')->__('There are pending or sending promotions in the queue.'));
                 }
 
                 $promotion = Mage::getModel ('bot/promotion')->load ($id);
@@ -217,6 +217,43 @@ class Gamuza_Bot_Adminhtml_PromotionController extends Mage_Adminhtml_Controller
                     ->setCreatedAt (date ('c'))
                     ->save ()
                 ;
+
+                $collection = Mage::getModel ('bot/contact')->getCollection ()
+                    ->addFieldToFilter ('type_id',   array ('eq' => $queue->getTypeId ()))
+                    ->addFieldToFilter ('is_active', array ('eq' => '1'))
+                ;
+
+                $collection->getSelect ()
+                    ->reset (Zend_Db_Select::COLUMNS)
+                    ->columns (array (
+                        'entity_id'
+                    ))
+                ;
+
+                if (!$collection->getSize ())
+                {
+                    $queue->delete ();
+
+                    throw new Exception (Mage::helper ('bot')->__('There are no contacts available to send promotion.'));
+                }
+
+                $queue->setContactsTotal ($collection->getSize ())->save ();
+
+                Mage::getSingleton ('core/resource_iterator')->walk ($collection->getSelect (), array (function ($args) {
+                    $entityId = $args ['row']['entity_id'];
+
+                    $promotion = $args ['promotion'];
+                    $queue     = $args ['queue'];
+
+                    Mage::getModel ('bot/log')
+                        ->setPromotionId ($promotion->getId ())
+                        ->setQueueId ($queue->getId ())
+                        ->setContactId ($entityId)
+                        ->setIsDelivered (0)
+                        ->setCreatedAt (date ('c'))
+                        ->save ()
+                    ;
+                }), array ('queue' => $queue, 'promotion' => $promotion));
 
 				Mage::getSingleton ('adminhtml/session')->addSuccess (Mage::helper ('bot')->__('Promotion was successfully sent to the queue.'));
 
