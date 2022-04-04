@@ -26,18 +26,19 @@ class Gamuza_Bot_Block_Adminhtml_Log_Grid extends Mage_Adminhtml_Block_Widget_Gr
         ;
 
         $collection->getSelect ()
-            ->joinLeft (
+            ->join (
                 array ('promotion' => Mage::getSingleton ('core/resource')->getTableName ('bot/promotion')),
                 'main_table.promotion_id = promotion.entity_id',
                 array (
                     'promotion_name' => 'promotion.name',
                 )
             )
-            ->joinLeft (
+            ->join (
                 array ('contact' => Mage::getSingleton ('core/resource')->getTableName ('bot/contact')),
                 'main_table.contact_id = contact.entity_id',
                 array (
-                    'contact_name' => 'contact.name',
+                    'contact_name'   => 'contact.name',
+                    'contact_number' => 'contact.number',
                 )
             )
         ;
@@ -83,6 +84,11 @@ class Gamuza_Bot_Block_Adminhtml_Log_Grid extends Mage_Adminhtml_Block_Widget_Gr
 		    'header' => Mage::helper ('bot')->__('Contact Name'),
 		    'index'  => 'contact_name',
 		    'filter_index' => 'contact.name',
+		));
+		$this->addColumn ('contact_number', array(
+		    'header' => Mage::helper ('bot')->__('Contact Number'),
+		    'index'  => 'contact_number',
+		    'filter_index' => 'contact.number',
 		));
 		$this->addColumn ('is_delivered', array(
 		    'header'  => Mage::helper ('bot')->__('Is Delivered'),
