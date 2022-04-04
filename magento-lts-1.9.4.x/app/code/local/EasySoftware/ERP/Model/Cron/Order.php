@@ -184,7 +184,8 @@ $queryOrder = <<< QUERY
         ACRESCIMO,
         FK_TABELA,
         PEDIDO,
-        NOME
+        NOME,
+        TELA
     )
     VALUES(
         $saleId,
@@ -210,7 +211,8 @@ $queryOrder = <<< QUERY
         0,
         1,
         '{$orderIncrementId}',
-        '{$customerName}'
+        '{$customerName}',
+        'PDV'
     );
 QUERY;
 
