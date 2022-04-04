@@ -1,7 +1,7 @@
 <?php
 /**
  * @package     Gamuza_Bot
- * @copyright   Copyright (c) 2020 Gamuza Technologies (http://www.gamuza.com.br/)
+ * @copyright   Copyright (c) 2022 Gamuza Technologies (http://www.gamuza.com.br/)
  * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
  */
 
@@ -19,21 +19,11 @@ class Gamuza_Bot_Model_Adminhtml_System_Config_Source_Queue_Status
     public function toArray ()
     {
         $result = array(
-            Gamuza_Bot_Helper_Data::STATUS_CATEGORY => Mage::helper ('bot')->__('Category'),
-            Gamuza_Bot_Helper_Data::STATUS_PRODUCT  => Mage::helper ('bot')->__('Product'),
-            Gamuza_Bot_Helper_Data::STATUS_OPTION   => Mage::helper ('bot')->__('Option'),
-            Gamuza_Bot_Helper_Data::STATUS_VALUE    => Mage::helper ('bot')->__('Value'),
-            Gamuza_Bot_Helper_Data::STATUS_BUNDLE   => Mage::helper ('bot')->__('Bundle'),
-            Gamuza_Bot_Helper_Data::STATUS_SELECTION => Mage::helper ('bot')->__('Selection'),
-            Gamuza_Bot_Helper_Data::STATUS_COMMENT  => Mage::helper ('bot')->__('Comment'),
-            Gamuza_Bot_Helper_Data::STATUS_CART     => Mage::helper ('bot')->__('Cart'),
-            Gamuza_Bot_Helper_Data::STATUS_ADDRESS  => Mage::helper ('bot')->__('Address'),
-            Gamuza_Bot_Helper_Data::STATUS_SHIPPING => Mage::helper ('bot')->__('Shipping'),
-            Gamuza_Bot_Helper_Data::STATUS_PAYMENT  => Mage::helper ('bot')->__('Payment'),
-            Gamuza_Bot_Helper_Data::STATUS_PAYMENT_CASH    => Mage::helper ('bot')->__('Payment Cash'),
-            Gamuza_Bot_Helper_Data::STATUS_PAYMENT_MACHINE => Mage::helper ('bot')->__('Payment Machine'),
-            Gamuza_Bot_Helper_Data::STATUS_CHECKOUT => Mage::helper ('bot')->__('Checkout'),
-            Gamuza_Bot_Helper_Data::STATUS_ORDER    => Mage::helper ('bot')->__('Order'),
+            Gamuza_Bot_Helper_Data::QUEUE_STATUS_PENDING  => Mage::helper ('bot')->__('Pending'),
+            Gamuza_Bot_Helper_Data::QUEUE_STATUS_SENDING  => Mage::helper ('bot')->__('Sending'),
+            Gamuza_Bot_Helper_Data::QUEUE_STATUS_FINISHED => Mage::helper ('bot')->__('Finished'),
+            Gamuza_Bot_Helper_Data::QUEUE_STATUS_CANCELED => Mage::helper ('bot')->__('Canceled'),
+            Gamuza_Bot_Helper_Data::QUEUE_STATUS_STOPPED  => Mage::helper ('bot')->__('Stopped'),
         );
 
         return $result;

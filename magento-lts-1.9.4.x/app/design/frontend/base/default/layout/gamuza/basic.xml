@@ -4,27 +4,6 @@
  * @package     Gamuza_Basic
  * @copyright   Copyright (c) 2016 Gamuza Technologies (http://www.gamuza.com.br/)
  * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
- *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Library General Public
- * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
- *
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Library General Public License for more details.
- *
- * You should have received a copy of the GNU Library General Public
- * License along with this library; if not, write to the
- * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
- * Boston, MA 02110-1301, USA.
- */
-
-/**
- * See the AUTHORS file for a list of people on the Gamuza Team.
- * See the ChangeLog files for a list of changes.
- * These files are distributed with gamuza_basic-magento at http://github.com/gamuzatech/.
  */
 -->
 
@@ -61,6 +40,10 @@
                 <params>media="all"</params>
             </action>
         </reference>
+        <reference name="top.links">
+            <action method="addLink" translate="label title" module="customer"><label>My Addresses</label><url>/customer/address/</url><title>My Addresses</title><prepare/><urlParams/><position>20</position></action>
+            <action method="addLink" translate="label title" module="sales"><label>My Orders</label><url>/sales/order/history</url><title>My Orders</title><prepare/><urlParams/><position>30</position></action>
+        </reference>
     </default>
 
     <customer_account>
@@ -69,8 +52,30 @@
             <action method="removeLinkByName"><name>OAuth Customer Tokens</name></action>
             <action method="removeLinkByName"><name>downloadable_products</name></action>
             <action method="removeLinkByName"><name>recurring_profiles</name></action>
-            <action method="appendLink" translate="label" module="customer"><name>logout</name><path>customer/account/logout</path><label>Log Out</label></action>]
+            <action method="appendLink" translate="label" module="customer"><name>logout</name><path>customer/account/logout</path><label>Log Out</label></action>
         </reference>
     </customer_account>
+
+    <gamuza_checkout_handle translate="label">
+        <reference name="content">
+            <reference name="checkout.success">
+                <block type="basic/checkout_onepage_success_info" />
+		        <block type="sales/order_items" name="order_items" template="sales/order/items.phtml">
+		            <action method="addItemRender"><type>default</type><block>sales/order_item_renderer_default</block><template>sales/order/items/renderer/default.phtml</template></action>
+		            <action method="addItemRender"><type>grouped</type><block>sales/order_item_renderer_grouped</block><template>sales/order/items/renderer/default.phtml</template></action>
+		            <block type="sales/order_totals" name="order_totals" template="sales/order/totals.phtml">
+		                <action method="setLabelProperties"><value>colspan="4" class="a-right"</value></action>
+		                <action method="setValueProperties"><value>class="last a-right"</value></action>
+		                <block type="tax/sales_order_tax" name="tax" template="tax/order/tax.phtml" />
+		            </block>
+		        </block>
+		        <block type="basic/checkout_onepage_success_additional" />
+            </reference>
+        </reference>
+    </gamuza_checkout_handle>
+
+    <checkout_onepage_success translate="label">
+        <update handle="gamuza_checkout_handle"/>
+    </checkout_onepage_success>
 </layout>
 

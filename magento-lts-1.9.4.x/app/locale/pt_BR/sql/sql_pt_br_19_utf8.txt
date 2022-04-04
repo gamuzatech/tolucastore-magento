@@ -50,6 +50,10 @@ INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`)
     ON DUPLICATE KEY UPDATE `updated_at` = NULL;
 
 INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`)
+    VALUES ('default', 0, 'carriers/pickup/title', 'Retirar na Loja')
+    ON DUPLICATE KEY UPDATE `updated_at` = NULL;
+
+INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`)
     VALUES ('default', 0, 'payment/free/title', 'Sem Pagamento')
     ON DUPLICATE KEY UPDATE `updated_at` = NULL;
 
@@ -71,6 +75,10 @@ INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`)
 
 INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`)
     VALUES ('default', 0, 'payment/gamuza_blockchain_info/title', 'Pagar com Bitcoin')
+    ON DUPLICATE KEY UPDATE `updated_at` = NULL;
+
+INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`)
+    VALUES ('default', 0, 'payment/gamuza_pagcripto_payment/title', 'Pagar com PagCripto')
     ON DUPLICATE KEY UPDATE `updated_at` = NULL;
 
 INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`)

@@ -5,7 +5,7 @@
  * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
  */
 
-trait Gamuza_Bot_Trait_Queue
+trait Gamuza_Bot_Trait_Chat
 {
     public function messageAction ()
     {
@@ -41,7 +41,7 @@ trait Gamuza_Bot_Trait_Queue
 
         $jsonData = json_decode ($rawData, true);
 
-        $result = Mage::getModel ('bot/queue_api')->message(
+        $result = Mage::getModel ('bot/chat_api')->message(
             $jsonData ['botType'],
             $jsonData ['from'],
             $jsonData ['to'],

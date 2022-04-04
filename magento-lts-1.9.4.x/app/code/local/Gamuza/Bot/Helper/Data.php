@@ -7,6 +7,13 @@
 
 class Gamuza_Bot_Helper_Data extends Mage_Core_Helper_Abstract
 {
+    const CHAT_TABLE      = 'gamuza_bot_chat';
+    const CONTACT_TABLE   = 'gamuza_bot_contact';
+    const LOG_TABLE       = 'gamuza_bot_log';
+    const MESSAGE_TABLE   = 'gamuza_bot_message';
+    const PROMOTION_TABLE = 'gamuza_bot_promotion';
+    const QUEUE_TABLE     = 'gamuza_bot_queue';
+
     const ORDER_ATTRIBUTE_IS_BOT = 'is_bot';
     const ORDER_ATTRIBUTE_BOT_TYPE = 'bot_type';
 
@@ -14,7 +21,15 @@ class Gamuza_Bot_Helper_Data extends Mage_Core_Helper_Abstract
     const BOT_TYPE_TELEGRAM = 'telegram';
     const BOT_TYPE_WHATSAPP = 'whatsapp';
 
-    const STATUS_BOT      = 'bot';
+    const MESSAGE_TYPE_QUESTION = 'question';
+    const MESSAGE_TYPE_ANSWER   = 'answer';
+
+    const QUEUE_STATUS_PENDING  = 'pending';
+    const QUEUE_STATUS_SENDING  = 'sending';
+    const QUEUE_STATUS_FINISHED = 'finished';
+    const QUEUE_STATUS_CANCELED = 'canceled';
+    const QUEUE_STATUS_STOPPED  = 'stopped';
+
     const STATUS_CATEGORY = 'category';
     const STATUS_PRODUCT  = 'product';
     const STATUS_OPTION   = 'option';
@@ -28,8 +43,10 @@ class Gamuza_Bot_Helper_Data extends Mage_Core_Helper_Abstract
     const STATUS_PAYMENT  = 'payment';
     const STATUS_PAYMENT_CASH = 'payment_cash';
     const STATUS_PAYMENT_MACHINE = 'payment_machine';
+    const STATUS_PAYMENT_CRIPTO = 'payment_cripto';
     const STATUS_CHECKOUT = 'checkout';
     const STATUS_ORDER    = 'order';
+    const STATUS_ZAP      = 'zap';
 
     const XML_PATH_BOT_BASIC_AUTH_ACTIVE   = 'bot/basic_auth/active';
     const XML_PATH_BOT_BASIC_AUTH_USERNAME = 'bot/basic_auth/username';

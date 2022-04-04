@@ -5,8 +5,8 @@
  * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
  */
 
-class Gamuza_Bot_QueueController extends Mage_Core_Controller_Front_Action
+class Gamuza_Bot_ChatController extends Mage_Core_Controller_Front_Action
 {
-    use Gamuza_Bot_Trait_Queue;
+    use Gamuza_Bot_Trait_Chat;
 }
 

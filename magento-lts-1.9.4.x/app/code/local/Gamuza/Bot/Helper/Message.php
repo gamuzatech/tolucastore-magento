@@ -22,7 +22,7 @@ class Gamuza_Bot_Helper_Message extends Mage_Core_Helper_Abstract
     const ENTER_TO_CONFIRM_ORDER     = 'enter_to_confirm_order';
 
     const ENTER_CATEGORY_CODE        = 'enter_category_code';
-    const ENTER_BOT_TO_ATTENDANT     = 'enter_bot_to_attendant';
+    const ENTER_ZAP_TO_ATTENDANT     = 'enter_zap_to_attendant';
     const ENTER_PRODUCT_CODE_TO_CART = 'enter_product_code_to_cart';
     const CHOOSE_OPTION_FOR_PRODUCT  = 'choose_options_for_product';
     const ENTER_PRODUCT_OPTION_CODE  = 'enter_product_option_code';
@@ -98,9 +98,9 @@ class Gamuza_Bot_Helper_Message extends Mage_Core_Helper_Abstract
         return $this->getText (self::ENTER_CATEGORY_CODE);
     }
 
-    public function getEnterBotToAttendantText ()
+    public function getEnterZapToAttendantText ()
     {
-        return $this->getText (self::ENTER_BOT_TO_ATTENDANT);
+        return $this->getText (self::ENTER_ZAP_TO_ATTENDANT);
     }
 
     public function getEnterProductCodeToCartText ()
@@ -165,7 +165,7 @@ class Gamuza_Bot_Helper_Message extends Mage_Core_Helper_Abstract
             {
                 $result = $this->__('Would you like to add any notes for this product?') . PHP_EOL . PHP_EOL
                     . $this->__('Please enter any notes:') . PHP_EOL . PHP_EOL
-                    . $this->getTypeCommandToContinueText (Gamuza_Bot_Model_Queue_Api::COMMAND_OK)
+                    . $this->getTypeCommandToContinueText (Gamuza_Bot_Model_Chat_Api::COMMAND_ZERO)
                 ;
 
                 break;
@@ -218,9 +218,9 @@ class Gamuza_Bot_Helper_Message extends Mage_Core_Helper_Abstract
 
                 break;
             }
-            case self::ENTER_BOT_TO_ATTENDANT:
+            case self::ENTER_ZAP_TO_ATTENDANT:
             {
-                $result = $this->__('Or at any time enter *bot* to call the attendant.');
+                $result = $this->__('Or at any time enter *%s* to call the attendant.', Gamuza_Bot_Helper_Data::STATUS_ZAP);
 
                 break;
             }
@@ -351,18 +351,62 @@ class Gamuza_Bot_Helper_Message extends Mage_Core_Helper_Abstract
         return $this->__('Please choose the type of card:');
     }
 
+    public function getChooseTypeOfCriptoText ()
+    {
+        return $this->__('Please choose the type of cripto:');
+    }
+
     public function getCardTypeForMachineText ($cctype)
     {
         $result = null;
 
         switch ($cctype)
         {
-            case 'VI': { $result = 'Visa';             break; }
-            case 'MC': { $result = 'MasterCard';       break; }
-            case 'AE': { $result = 'American Express'; break; }
+            case 'AE':  { $result = 'American Express';     break; }
+            case 'AL':  { $result = 'Alelo';                break; }
+            case 'AU':  { $result = 'Aura';                 break; }
+            case 'BC':  { $result = 'Banri Compras Débito'; break; }
+            case 'CC':  { $result = 'Cabal Débito';         break; }
+            case 'DC':  { $result = 'Diners Club';          break; }
+            case 'DI':  { $result = 'Discover';             break; }
+            case 'EC':  { $result = 'Elo Crédito';          break; }
+            case 'ED':  { $result = 'Elo Débito';           break; }
+            case 'ELO': { $result = 'Elo';                  break; }
+            case 'HC':  { $result = 'Hipercard';            break; }
+            case 'JCB': { $result = 'JCB';                  break; }
+            case 'HI':  { $result = 'Hiper';                break; }
+            case 'MC':  { $result = 'Mastercard';           break; }
+            case 'SM':  { $result = 'Maestro / Switch';     break; }
+            case 'SO':  { $result = 'Sodexo';               break; }
+            case 'TI':  { $result = 'Ticket';               break; }
+            case 'VE':  { $result = 'Visa Electron';        break; }
+            case 'VI':  { $result = 'Visa';                 break; }
+            case 'VR':  { $result = 'Vale Refeição';        break; }
         }
 
         return $this->__('Type of card: %s', $result);
+    }
+
+    public function getCurrencyTypeForCriptoText ($cctype)
+    {
+        $result = null;
+
+        switch ($cctype)
+        {
+            case 'BCH':  { $result = 'Bitcoin Cash'; break; }
+            case 'BNB':  { $result = 'Binance Coin'; break; }
+            case 'BUSD': { $result = 'Binance USD';  break; }
+            case 'BTC':  { $result = 'Bitcoin';      break; }
+            case 'DASH': { $result = 'Dash';         break; }
+            case 'DOGE': { $result = 'Dogecoin';     break; }
+            case 'ETH':  { $result = 'Ethereum';     break; }
+            case 'LTC':  { $result = 'Litecoin';     break; }
+            case 'NANO': { $result = 'Nano';         break; }
+            case 'USDC': { $result = 'USD Coin';     break; }
+            case 'USDT': { $result = 'USD Tether';   break; }
+        }
+
+        return $this->__('Type of cripto: %s', $result);
     }
 
     public function getThankYouForShoppingText ($storeName)
@@ -380,6 +424,20 @@ class Gamuza_Bot_Helper_Message extends Mage_Core_Helper_Abstract
         $incrementId = $order->getIncrementId ();
 
         $result = null;
+
+        if (Mage::helper ('core')->isModuleEnabled ('Gamuza_PagCripto'))
+        {
+            $transaction = Mage::getModel ('pagcripto/transaction')->load ($incrementId, 'order_increment_id');
+
+            if ($transaction && $transaction->getId ())
+            {
+                $result .= $this->__('Copy the address to make the payment via %s:', $transaction->getCurrency ()) . PHP_EOL . PHP_EOL
+                    . $transaction->getAddress () . PHP_EOL . PHP_EOL
+                    . $this->__('Amount') . PHP_EOL . PHP_EOL
+                    . $transaction->getAmount () . PHP_EOL . PHP_EOL
+                ;
+            }
+        }
 
         if (Mage::helper ('core')->isModuleEnabled ('Gamuza_PicPay'))
         {

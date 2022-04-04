@@ -10,7 +10,7 @@
  */
 class Gamuza_Basic_Model_Eav_Entity_Type extends Mage_Eav_Model_Entity_Type
 {
-    const API_METHOD_BOT_QUEUE_MESSAGE = 'bot_queue.message';
+    const API_METHOD_BOT_CHAT_MESSAGE = 'bot_chat.message';
 
     /**
      * Retreive new incrementId
@@ -31,11 +31,11 @@ class Gamuza_Basic_Model_Eav_Entity_Type extends Mage_Eav_Model_Entity_Type
         }
         else if ($storeId == Mage_Core_Model_App::DISTRO_STORE_ID)
         {
-            $suffix = Gamuza_Basic_Helper_Data::ORDER_SUFFIX_MARKET;
+            $suffix = Gamuza_Basic_Helper_Data::ORDER_SUFFIX_STORE;
         }
         else
         {
-            $suffix = Gamuza_Basic_Helper_Data::ORDER_SUFFIX_STORE;
+            $suffix = Gamuza_Basic_Helper_Data::ORDER_SUFFIX_OTHER;
         }
 
         $isMobile = Mage::helper ('basic')->isMobile ();
@@ -49,7 +49,7 @@ class Gamuza_Basic_Model_Eav_Entity_Type extends Mage_Eav_Model_Entity_Type
         $isBot = Mage::helper ('core')->isModuleEnabled ('Gamuza_Bot')
             && (!strcmp (Mage::app ()->getRequest ()->getControllerModule (), 'Gamuza_Bot')
             xor (!strcmp (Mage::app ()->getRequest ()->getControllerModule (), 'Gamuza_JsonApi')
-            && strpos (Mage::app ()->getRequest ()->getRawBody (), self::API_METHOD_BOT_QUEUE_MESSAGE) !== false))
+            && strpos (Mage::app ()->getRequest ()->getRawBody (), self::API_METHOD_BOT_CHAT_MESSAGE) !== false))
         ;
 
         if ($isMobile || $isApp)

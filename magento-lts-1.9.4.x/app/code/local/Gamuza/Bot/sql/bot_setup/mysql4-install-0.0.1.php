@@ -8,7 +8,7 @@
 $installer = $this;
 $installer->startSetup ();
 
-function addBotQueueTable ($installer, $model, $comment)
+function addBotChatTable ($installer, $model, $comment)
 {
     $table = $installer->getTable ($model);
 
@@ -121,6 +121,13 @@ SQLBLOCK;
             'comment'  => 'Number',
         ));
     $installer->getConnection ()
+        ->addColumn ($table, 'phone', array(
+            'type'     => Varien_Db_Ddl_Table::TYPE_TEXT,
+            'length'   => 255,
+            'nullable' => false,
+            'comment'  => 'phone',
+        ));
+    $installer->getConnection ()
         ->addColumn ($table, 'firstname', array(
             'type'     => Varien_Db_Ddl_Table::TYPE_TEXT,
             'length'   => 255,
@@ -178,7 +185,7 @@ SQLBLOCK;
         ));
 }
 
-addBotQueueTable ($installer, 'gamuza_bot_queue', 'Gamuza Bot Queue');
+addBotChatTable ($installer, Gamuza_Bot_Helper_Data::CHAT_TABLE, 'Gamuza Bot Chat');
 
 $installer->endSetup ();
 

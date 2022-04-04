@@ -1,14 +1,12 @@
 <?php
 /**
  * @package     Gamuza_Bot
- * @copyright   Copyright (c) 2020 Gamuza Technologies (http://www.gamuza.com.br/)
+ * @copyright   Copyright (c) 2022 Gamuza Technologies (http://www.gamuza.com.br/)
  * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
  */
 
 class Gamuza_Bot_Adminhtml_QueueController extends Mage_Adminhtml_Controller_Action
 {
-    use Gamuza_Bot_Trait_Queue;
-
 	protected function _isAllowed ()
 	{
 	    return Mage::getSingleton ('admin/session')->isAllowed ('gamuza/bot/queue');
@@ -26,6 +24,44 @@ class Gamuza_Bot_Adminhtml_QueueController extends Mage_Adminhtml_Controller_Act
 		return $this;
 	}
 
+    protected function _initQueue()
+    {
+        $id = $this->getRequest ()->getParam ('id');
+
+        $queue = Mage::getModel ('bot/queue')->load ($id);
+
+        if (!$queue || !$queue->getId ())
+        {
+            $this->_getSession ()->addError ($this->__('This queue no longer exists.'));
+
+            $this->_redirect('*/*/index');
+
+            $this->setFlag('', self::FLAG_NO_DISPATCH, true);
+
+            return false;
+        }
+
+        $collection = Mage::getModel ('bot/log')->getCollection ()
+            ->addFieldToFilter ('queue_id', array ('eq' => $queue->getId ()))
+        ;
+
+        if (!$collection->getSize ())
+        {
+            $this->_getSession ()->addError ($this->__('This queue has no history.'));
+
+            $this->_redirect('*/*/index');
+
+            $this->setFlag('', self::FLAG_NO_DISPATCH, true);
+
+            return false;
+        }
+
+        Mage::register('bot_queue',     $queue);
+        Mage::register('current_queue', $queue);
+
+        return $queue;
+    }
+
 	public function indexAction ()
 	{
 	    $this->_title ($this->__('Bot'));
@@ -36,42 +72,77 @@ class Gamuza_Bot_Adminhtml_QueueController extends Mage_Adminhtml_Controller_Act
 		$this->renderLayout ();
 	}
 
-    /**
-     * Export customer grid to CSV format
-     */
-    public function exportCsvAction()
+    public function historyAction ()
     {
-        $fileName = 'queue.csv';
+        $queue = $this->_initQueue ();
 
-        $content = $this->getLayout()
-            ->createBlock('bot/adminhtml_queue_grid')
-            ->getCsvFile()
-        ;
+        if ($queue && $queue->getId ())
+        {
+	        $this->_title ($this->__('Bot'));
+	        $this->_title ($this->__('History Manager'));
 
-        $this->_prepareDownloadResponse ($fileName, $content);
+		    $this->_initAction ();
+
+		    $this->renderLayout ();
+        }
     }
 
-	public function massRemoveAction ()
-	{
-		try
-        {
-			$ids = $this->getRequest ()->getPost ('entity_ids', array ());
+    public function massStatusAction ()
+    {
+        $queueIds = $this->getRequest()->getParam('queue');
+        $status   = $this->getRequest()->getParam('status');
 
-			foreach ($ids as $id)
+        $statuses = Mage::getModel ('bot/adminhtml_system_config_source_queue_status')->toArray ();
+
+        try
+        {
+            foreach ($queueIds as $id)
             {
-                $model = Mage::getModel('bot/queue');
+                $queue = Mage::getSingleton ('bot/queue')->load ($id);
 
-                $model->setId ($id)->delete ();
-			}
+                $queueStatus = $queue->getStatus ();
 
-			Mage::getSingleton ('adminhtml/session')->addSuccess (Mage::helper ('bot')->__('Queue items were successfully removed.'));
-		}
-		catch (Exception $e)
+                if (!in_array ($queueStatus, array(
+                    Gamuza_Bot_Helper_Data::QUEUE_STATUS_PENDING,
+                    Gamuza_Bot_Helper_Data::QUEUE_STATUS_SENDING,
+                )))
+                {
+                    throw new Mage_Core_Exception (Mage::helper ('bot')->__('Invalid queue status: %s', $statuses [$queueStatus]));
+                }
+
+                if ((!strcmp ($queueStatus, Gamuza_Bot_Helper_Data::QUEUE_STATUS_PENDING)
+                    && strcmp ($status, Gamuza_Bot_Helper_Data::QUEUE_STATUS_CANCELED))
+                    || (!strcmp ($queueStatus, Gamuza_Bot_Helper_Data::QUEUE_STATUS_SENDING)
+                    && strcmp ($status, Gamuza_Bot_Helper_Data::QUEUE_STATUS_STOPPED))
+                )
+                {
+                    throw new Mage_Core_Exception (
+                        Mage::helper ('bot')->__('Invalid queue status: %s for %s',
+                            $statuses [$status],
+                            $statuses [$queueStatus],
+                        )
+                    );
+                }
+
+                $queue->setStatus ($status)->save ();
+            }
+
+            $this->_getSession()->addSuccess(
+                $this->__('Total of %d record(s) have been updated.', count($queueIds))
+            );
+        }
+        catch (Mage_Core_Exception $e)
         {
-			Mage::getSingleton ('adminhtml/session')->addError ($e->getMessage ());
-		}
+            $this->_getSession ()->addError ($e->getMessage ());
+        }
+        catch (Exception $e)
+        {
+            $this->_getSession ()
+                ->addException ($e, $this->__('An error occurred while updating the queue(s) status.')
+            );
+        }
 
-		$this->_redirect('*/*/');
-	}
+        $this->_redirect ('*/*/index');
+    }
 }
 
