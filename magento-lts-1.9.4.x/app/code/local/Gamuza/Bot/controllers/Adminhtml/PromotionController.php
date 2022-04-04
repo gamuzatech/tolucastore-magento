@@ -251,6 +251,7 @@ class Gamuza_Bot_Adminhtml_PromotionController extends Mage_Adminhtml_Controller
                         ->setQueueId ($queue->getId ())
                         ->setContactId ($entityId)
                         ->setIsDelivered (0)
+                        ->setIsError (0)
                         ->setCreatedAt (date ('c'))
                         ->save ()
                     ;

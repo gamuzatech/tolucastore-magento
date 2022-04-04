@@ -91,19 +91,25 @@ class Gamuza_Bot_Block_Adminhtml_Log_Grid extends Mage_Adminhtml_Block_Widget_Gr
 		    'filter_index' => 'contact.number',
 		));
 		$this->addColumn ('is_delivered', array(
-		    'header'  => Mage::helper ('bot')->__('Is Delivered'),
+		    'header'  => Mage::helper ('bot')->__('Delivered'),
 		    'index'   => 'is_delivered',
             'type'    => 'options',
             'options' => Mage::getModel ('adminhtml/system_config_source_yesno')->toArray (),
 		));
-		$this->addColumn ('delivered_at', array(
-			'header' => Mage::helper ('bot')->__('Delivered At'),
-			'index'  => 'delivered_at',
-            'type'   => 'datetime',
+		$this->addColumn ('is_error', array(
+		    'header'  => Mage::helper ('bot')->__('Error'),
+		    'index'   => 'is_error',
+            'type'    => 'options',
+            'options' => Mage::getModel ('adminhtml/system_config_source_yesno')->toArray (),
 		));
 		$this->addColumn ('created_at', array(
 			'header' => Mage::helper ('bot')->__('Created At'),
 			'index'  => 'created_at',
+            'type'   => 'datetime',
+		));
+		$this->addColumn ('updated_at', array(
+			'header' => Mage::helper ('bot')->__('Updated At'),
+			'index'  => 'updated_at',
             'type'   => 'datetime',
 		));
 
