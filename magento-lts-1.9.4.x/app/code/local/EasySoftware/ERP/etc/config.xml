@@ -155,7 +155,7 @@
             <order>
                 <customer_guest_id>1</customer_guest_id>
                 <default_user_id>1</default_user_id>
-                <default_cashier_id>1</default_cashier_id>
+                <default_cashier_id>2</default_cashier_id>
                 <default_seller_id>1</default_seller_id>
                 <default_batch_id>2</default_batch_id>
             </order>
