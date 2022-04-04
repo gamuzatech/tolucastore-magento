@@ -106,6 +106,7 @@
 "Finished At","Finalizado Em"
 "Finished","Finalizado"
 "Stopped","Parado"
+"Promotion","Promoção"
 "Send Promotion","Enviar Promoção"
 "Confirm sending the promotion to the queue?","Confirma o envio da promoção para a fila?"
 "There are pending, sending or stopped promotions in the queue.","Existem promoções pendentes, enviando ou paradas na fila."

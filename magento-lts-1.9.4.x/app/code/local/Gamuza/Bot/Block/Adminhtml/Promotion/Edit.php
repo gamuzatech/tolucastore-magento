@@ -30,14 +30,28 @@ class Gamuza_Bot_Block_Adminhtml_Promotion_Edit extends Mage_Adminhtml_Block_Wid
 			}
 		";
 
-        $this->_addButton('send', array(
-            'label'   => Mage::helper('bot')->__('Send Promotion'),
-            'class'   => 'scalable delete',
-            'onclick' => sprintf (
-                "confirmSetLocation('%s', '%s')",
-                $this->getSendMessage (), $this->getSendUrl ()
-            ),
-        ), -100);
+        $id = $this->getRequest ()->getParam ('id');
+
+        if ($id > 0)
+        {
+            $this->_addButton('send', array(
+                'label'   => Mage::helper('bot')->__('Send Promotion'),
+                'class'   => 'scalable delete',
+                'onclick' => sprintf (
+                    "confirmSetLocation('%s', '%s')",
+                    $this->getSendMessage (), $this->getSendUrl ()
+                ),
+            ), -100);
+
+            $collection = Mage::getModel ('bot/queue')->getCollection ()
+                ->addFieldToFilter ('promotion_id', array ('eq' => $id))
+            ;
+
+            if ($collection->getSize () > 0)
+            {
+                $this->_removeButton ('delete');
+            }
+        }
 	}
 
 	public function getHeaderText ()
