@@ -33,7 +33,7 @@ class EasySoftware_ERP_Model_Cron_Customer extends EasySoftware_ERP_Model_Cron_A
 
         $collection->getSelect ()
             ->joinLeft(
-                array ('erp' => EasySoftware_ERP_Helper_Data::CUSTOMER_TABLE)
+                array ('erp' => EasySoftware_ERP_Helper_Data::CUSTOMER_TABLE),
                 'e.entity_id = erp.customer_id',
                 array ()
             )
