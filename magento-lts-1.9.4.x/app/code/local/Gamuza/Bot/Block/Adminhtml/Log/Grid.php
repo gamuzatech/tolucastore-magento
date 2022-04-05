@@ -106,11 +106,13 @@ class Gamuza_Bot_Block_Adminhtml_Log_Grid extends Mage_Adminhtml_Block_Widget_Gr
 			'header' => Mage::helper ('bot')->__('Created At'),
 			'index'  => 'created_at',
             'type'   => 'datetime',
+            'filter_index' => 'main_table.created_at',
 		));
 		$this->addColumn ('updated_at', array(
 			'header' => Mage::helper ('bot')->__('Updated At'),
 			'index'  => 'updated_at',
             'type'   => 'datetime',
+            'filter_index' => 'main_table.updated_at',
 		));
 
         $this->addColumn ('action', array(
