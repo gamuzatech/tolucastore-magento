@@ -43,7 +43,7 @@ class Gamuza_Bot_Block_Adminhtml_Chat_Grid extends Mage_Adminhtml_Block_Widget_G
 
         foreach (Mage::getModel ('catalog/product')->getCollection ()->addAttributeToSelect ('name') as $product)
         {
-            $products [$product->getId ()] = $product->getName ();
+            $products [$product->getId ()] = $product->getName () . ' ' . $product->getSku ();
         }
 
 		$this->addColumn ('entity_id', array(
