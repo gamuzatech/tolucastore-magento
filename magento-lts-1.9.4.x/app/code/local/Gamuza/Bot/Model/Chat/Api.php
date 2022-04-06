@@ -102,12 +102,12 @@ class Gamuza_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
     {
         $from = preg_replace ('[\D]', null, $from);
         $to   = preg_replace ('[\D]', null, $to);
-
+/*
         if (strpos ($to, $this->_phone) === false)
         {
             return array ('result' => '[ WRONG NUMBER ]');
         }
-
+*/
         Mage::app ()->setCurrentStore (Mage_Core_Model_App::DISTRO_STORE_ID);
 
         $storeId = Mage::app ()->getStore ()->getId ();
