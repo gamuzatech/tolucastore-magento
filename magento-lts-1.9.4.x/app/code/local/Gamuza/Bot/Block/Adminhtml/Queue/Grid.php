@@ -51,6 +51,12 @@ class Gamuza_Bot_Block_Adminhtml_Queue_Grid extends Mage_Adminhtml_Block_Widget_
 		    'index'   => 'name',
 		));
 /*
+		$this->addColumn ('filename', array(
+		    'header'   => Mage::helper ('bot')->__('Filename'),
+		    'index'    => 'filename',
+            'renderer' => 'bot/adminhtml_widget_grid_column_renderer_link',
+            'media'    => 'bot/promotion',
+		));
 		$this->addColumn ('message', array(
 		    'header'  => Mage::helper ('bot')->__('Message'),
 		    'index'   => 'message',

@@ -213,6 +213,7 @@ class Gamuza_Bot_Adminhtml_PromotionController extends Mage_Adminhtml_Controller
                     ->setContactsSent (0)
                     ->setStatus (Gamuza_Bot_Helper_Data::QUEUE_STATUS_PENDING)
                     ->setName ($promotion->getName ())
+                    ->setFilename ($promotion->getFilename ())
                     ->setMessage ($promotion->getMessage ())
                     ->setStartedAt (date ('c'))
                     ->setCreatedAt (date ('c'))
