@@ -44,6 +44,10 @@ $coreConfig->saveConfig ('design/footer/copyright', $copyright);
 $coreConfig->saveConfig (Mage_Catalog_Helper_Category_Flat::XML_PATH_IS_ENABLED_FLAT_CATALOG_CATEGORY, '1');
 $coreConfig->saveConfig (Mage_Catalog_Helper_Product_Flat::XML_PATH_USE_PRODUCT_FLAT,                  '1');
 
+$coreConfig->saveConfig ('catalog/placeholder/image_placeholder',       'default/image.jpg');
+$coreConfig->saveConfig ('catalog/placeholder/small_image_placeholder', 'default/small_image.jpg');
+$coreConfig->saveConfig ('catalog/placeholder/thumbnail_placeholder',   'default/thumbnail.jpg');
+
 $coreConfig->saveConfig (Mage_Catalog_Helper_Data::XML_PATH_SEO_SAVE_HISTORY, '0');
 
 $coreConfig->saveConfig (Mage_CatalogSearch_Model_Fulltext::XML_PATH_CATALOG_SEARCH_TYPE, '3');
