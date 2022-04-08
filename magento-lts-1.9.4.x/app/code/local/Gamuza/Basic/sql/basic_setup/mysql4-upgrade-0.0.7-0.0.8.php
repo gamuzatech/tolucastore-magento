@@ -25,6 +25,11 @@ $installer->addAttribute ('catalog_product', Gamuza_Basic_Helper_Data::PRODUCT_A
     'unique'           => false,
     'is_configurable'  => false,
     'sort_order'       => 1000,
+    'visible_in_advanced_search' => true,
+    'filterable_in_search' => true,
+    'used_for_promo_rules' => true,
+    'used_in_product_listing' => true,
+    'used_for_sort_by' => true,
 ));
 
 $installer->addAttribute ('catalog_product', Gamuza_Basic_Helper_Data::PRODUCT_ATTRIBUTE_COLOR, array(
@@ -44,6 +49,11 @@ $installer->addAttribute ('catalog_product', Gamuza_Basic_Helper_Data::PRODUCT_A
     'unique'           => false,
     'is_configurable'  => true,
     'sort_order'       => 1000,
+    'visible_in_advanced_search' => true,
+    'filterable_in_search' => true,
+    'used_for_promo_rules' => true,
+    'used_in_product_listing' => true,
+    'used_for_sort_by' => true,
 ));
 
 $installer->addAttribute ('catalog_product', Gamuza_Basic_Helper_Data::PRODUCT_ATTRIBUTE_MANUFACTURER, array(
@@ -63,6 +73,11 @@ $installer->addAttribute ('catalog_product', Gamuza_Basic_Helper_Data::PRODUCT_A
     'unique'           => false,
     'is_configurable'  => false,
     'sort_order'       => 1000,
+    'visible_in_advanced_search' => true,
+    'filterable_in_search' => true,
+    'used_for_promo_rules' => true,
+    'used_in_product_listing' => true,
+    'used_for_sort_by' => true,
 ));
 
 $installer->addAttribute ('catalog_product', Gamuza_Basic_Helper_Data::PRODUCT_ATTRIBUTE_SIZE, array(
@@ -82,6 +97,11 @@ $installer->addAttribute ('catalog_product', Gamuza_Basic_Helper_Data::PRODUCT_A
     'unique'           => false,
     'is_configurable'  => true,
     'sort_order'       => 1000,
+    'visible_in_advanced_search' => true,
+    'filterable_in_search' => true,
+    'used_for_promo_rules' => true,
+    'used_in_product_listing' => true,
+    'used_for_sort_by' => true,
 ));
 
 $installer->endSetup ();
