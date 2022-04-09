@@ -111,6 +111,7 @@
             <catalog>
                 <rewrite>
                     <product_option>Gamuza_Basic_Model_Catalog_Product_Option</product_option>
+                    <observer>Gamuza_Basic_Model_Catalog_Observer</observer>
                 </rewrite>
             </catalog>
             <customer>
