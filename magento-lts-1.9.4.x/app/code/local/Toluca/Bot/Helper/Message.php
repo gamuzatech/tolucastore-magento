@@ -148,7 +148,7 @@ class Toluca_Bot_Helper_Message extends Mage_Core_Helper_Abstract
 /*
                 $result = $this->__('Buy also through the *Toluca Store* app at app.toluca.com.br');
 */
-                $siteUrl = Mage::app ()
+                $storeUrl = Mage::app ()
                     ->getStore (Mage_Core_Model_App::DISTRO_STORE_ID)
                     ->getBaseUrl (Mage_Core_Model_Store::URL_TYPE_LINK)
                 ;
@@ -157,7 +157,7 @@ class Toluca_Bot_Helper_Message extends Mage_Core_Helper_Abstract
                     "%s: %s\n\n%s: %s\n\n%s: %s",
                     $this->__('APP'),   self::DEFAULT_APP_URL,
                     $this->__('Robot'), Mage::getStoreConfig ('bot/settings/link_url'),
-                    $this->__('Site'),  $siteUrl,
+                    $this->__('Store'),  $storeUrl,
                 );
 
                 break;
