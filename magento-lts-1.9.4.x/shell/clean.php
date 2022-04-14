@@ -49,10 +49,10 @@ try
 
     $write = Mage::getSingleton('core/resource')->getConnection('core_write');
 
-    $write->delete(Mage::getSingleton('core/resource')->getTableName('core_session'));
+    $write->delete(Mage::getSingleton('core/resource')->getTableName('api/session'));
+    $write->delete(Mage::getSingleton('core/resource')->getTableName('core/session'));
 
     Mage::getModel ('basic/observer')->cleanExpiredQuotes ();
-
     Mage::getModel ('bot/observer')->cleanExpiredChats ();
 }
 catch (Exception $e)
