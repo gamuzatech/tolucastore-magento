@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+/**
+ * @package     Toluca_Comanda
+ * @copyright   Copyright (c) 2022 Gamuza Technologies (http://www.gamuza.com.br/)
+ * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
+ */
+-->
+
+<layout version="0.1.0">
+    <admin_comanda_adminhtml_mesa_index>
+        <reference name="content">
+            <block type="comanda/adminhtml_mesa" name="mesa" />
+        </reference>
+    </admin_comanda_adminhtml_mesa_index>
+</layout>
+

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+/**
+ * @package     Toluca_Comanda
+ * @copyright   Copyright (c) 2022 Gamuza Technologies (http://www.gamuza.com.br/)
+ * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
+ */
+-->
+
+<config>
+    <menu>
+        <toluca module="comanda">
+            <title>Toluca</title>
+            <sort_order>100</sort_order>
+            <children>
+                <comanda module="comanda">
+                    <title>Comanda</title>
+                    <sort_order>100</sort_order>
+                    <children>
+                        <mesa translate="title" module="comanda">
+                            <title>Manage Mesas</title>
+                            <sort_order>0</sort_order>
+                            <action>admin_comanda/adminhtml_mesa</action>
+                        </mesa>
+                    </children>
+                </comanda>
+            </children>
+        </toluca>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <toluca translate="title" module="comanda">
+                        <title>Toluca</title>
+                        <sort_order>1000</sort_order>
+                        <children>
+                            <comanda translate="title" module="comanda">
+                                <title>Comanda</title>
+                                <sort_order>100</sort_order>
+                                <children>
+                                    <mesa translate="title" module="comanda">
+                                        <title>Manage Mesas</title>
+                                        <sort_order>0</sort_order>
+                                    </mesa>
+                                </children>
+                            </comanda>
+                        </children>
+                    </toluca>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <comanda translate="title" module="comanda">
+                                        <title>Toluca Comanda Section</title>
+                                        <sort_order>0</sort_order>
+                                    </comanda>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>
+

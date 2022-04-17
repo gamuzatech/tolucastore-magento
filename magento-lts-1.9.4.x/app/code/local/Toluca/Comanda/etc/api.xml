@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+/**
+ * @package     Toluca_Comanda
+ * @copyright   Copyright (c) 2022 Gamuza Technologies (http://www.gamuza.com.br/)
+ * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
+ */
+-->
+
+<config>
+    <api>
+        <resources>
+            <comanda_mesa translate="title" module="comanda">
+                <model>comanda/mesa_api</model>
+                <title>Comanda Mesa API</title>
+                <acl>comanda/mesa</acl>
+                <methods>
+                    <list translate="title" module="comanda">
+                        <title>Retrieve a list of available mesas</title>
+                        <acl>comanda/mesa/list</acl>
+                        <method>items</method>
+                    </list>
+                </methods>
+            </comanda_mesa>
+        </resources>
+        <acl>
+            <resources>
+                <comanda translate="title" module="comanda">
+                    <title>Toluca Comanda API</title>
+                    <sort_order>0</sort_order>
+                    <mesa translate="title" module="comanda">
+                        <title>Mesa</title>
+                        <list translate="title" module="comanda">
+                            <title>Send a list to the chat</title>
+                        </list>
+                    </mesa>
+                </comanda>
+            </resources>
+        </acl>
+    </api>
+</config>
+
