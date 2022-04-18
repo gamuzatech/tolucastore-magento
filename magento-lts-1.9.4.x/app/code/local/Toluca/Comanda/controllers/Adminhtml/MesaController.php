@@ -108,22 +108,6 @@ class Toluca_Comanda_Adminhtml_MesaController extends Mage_Adminhtml_Controller_
 				    ->save ()
                 ;
 
-                if (!empty ($_FILES ['filename']) && is_uploaded_file ($_FILES ['filename']['tmp_name']))
-                {
-                    $mesaDir = Mage::getBaseDir ('media') . DS . 'comanda' . DS . 'mesa';
-
-                    $image = new Gamuza_File_Uploader ('filename');
-
-                    $image->setAllowedExtensions (array('jpg', 'jpeg', 'png', 'pdf'))
-                        ->setAllowCreateFolders (true)
-                        ->setAllowRenameFiles (true)
-                        ->setFilesDispersion (true)
-                        ->save ($mesaDir)
-                    ;
-
-                    $model->setFilename ($image->getUploadedFilename ())->save ();
-                }
-
 				Mage::getSingleton ('adminhtml/session')->addSuccess (Mage::helper ('comanda')->__('Mesa was successfully saved.'));
 				Mage::getSingleton ('adminhtml/session')->setMesaData (false);
 

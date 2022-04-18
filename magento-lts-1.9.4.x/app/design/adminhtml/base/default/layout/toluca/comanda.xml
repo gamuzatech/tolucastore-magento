@@ -13,5 +13,10 @@
             <block type="comanda/adminhtml_mesa" name="mesa" />
         </reference>
     </admin_comanda_adminhtml_mesa_index>
+    <admin_comanda_adminhtml_item_index>
+        <reference name="content">
+            <block type="comanda/adminhtml_item" name="item" />
+        </reference>
+    </admin_comanda_adminhtml_item_index>
 </layout>
 

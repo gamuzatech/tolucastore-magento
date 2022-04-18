@@ -22,6 +22,11 @@
                             <sort_order>0</sort_order>
                             <action>admin_comanda/adminhtml_mesa</action>
                         </mesa>
+                        <item translate="title" module="comanda">
+                            <title>Manage Items</title>
+                            <sort_order>10</sort_order>
+                            <action>admin_comanda/adminhtml_item</action>
+                        </item>
                     </children>
                 </comanda>
             </children>
@@ -46,6 +51,10 @@
                                         <title>Manage Mesas</title>
                                         <sort_order>0</sort_order>
                                     </mesa>
+                                    <item translate="title" module="comanda">
+                                        <title>Manage Items</title>
+                                        <sort_order>10</sort_order>
+                                    </item>
                                 </children>
                             </comanda>
                         </children>

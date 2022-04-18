@@ -10,7 +10,7 @@
 <config>
     <modules>
         <Toluca_Comanda>
-            <version>0.0.1</version>
+            <version>0.0.2</version>
         </Toluca_Comanda>
     </modules>
     <global>
@@ -35,6 +35,9 @@
                     <mesa>
                         <table>toluca_comanda_mesa</table>
                     </mesa>
+                    <item>
+                        <table>toluca_comanda_item</table>
+                    </item>
                 </entities>
             </comanda_mysql4>
         </models>

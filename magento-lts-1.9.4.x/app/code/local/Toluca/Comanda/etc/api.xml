@@ -22,6 +22,52 @@
                     </list>
                 </methods>
             </comanda_mesa>
+            <comanda_item translate="title" module="comanda">
+                <model>comanda/item_api</model>
+                <title>Comanda Item API</title>
+                <acl>comanda/item</acl>
+                <methods>
+                    <list translate="title" module="comanda">
+                        <title>Retrieve a list of mesa items</title>
+                        <acl>comanda/item/list</acl>
+                        <method>items</method>
+                    </list>
+                    <add translate="title" module="comanda">
+                        <title>Add items for mesa</title>
+                        <acl>comanda/item/add</acl>
+                    </add>
+                    <remove translate="title" module="comanda">
+                        <title>Remove items from mesa</title>
+                        <acl>comanda/item/remove</acl>
+                    </remove>
+                </methods>
+                <faults>
+                    <mesa_not_specified>
+                        <code>100</code>
+                        <message>Requested mesa was not specified.</message>
+                    </mesa_not_specified>
+                    <mesa_not_exists>
+                        <code>200</code>
+                        <message>Requested mesa was not found.</message>
+                    </mesa_not_exists>
+                    <mesa_is_not_enabled>
+                        <code>300</code>
+                        <message>Requested mesa is not enabled.</message>
+                    </mesa_is_not_enabled>
+                    <item_data_not_specified>
+                        <code>400</code>
+                        <message>Requested items data was not specified.</message>
+                    </item_data_not_specified>
+                    <product_not_exists>
+                        <code>500</code>
+                        <message>Requested product was not found.</message>
+                    </product_not_exists>
+                    <invalid_product_qty>
+                        <code>600</code>
+                        <message>Requested product qty is invalid.</message>
+                    </invalid_product_qty>
+                </faults>
+            </comanda_item>
         </resources>
         <acl>
             <resources>
@@ -31,9 +77,21 @@
                     <mesa translate="title" module="comanda">
                         <title>Mesa</title>
                         <list translate="title" module="comanda">
-                            <title>Send a list to the chat</title>
+                            <title>Retrieve a list of available mesas</title>
                         </list>
                     </mesa>
+                    <item translate="title" module="comanda">
+                        <title>Item</title>
+                        <list translate="title" module="comanda">
+                            <title>Retrieve a list of mesa items</title>
+                        </list>
+                        <add translate="title" module="comanda">
+                            <title>Add items for mesa</title>
+                        </add>
+                        <remove translate="title" module="comanda">
+                            <title>Remove items from mesa</title>
+                        </remove>
+                    </item>
                 </comanda>
             </resources>
         </acl>

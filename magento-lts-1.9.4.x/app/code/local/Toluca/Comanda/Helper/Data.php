@@ -8,6 +8,7 @@
 class Toluca_Comanda_Helper_Data extends Mage_Core_Helper_Abstract
 {
     const MESA_TABLE = 'toluca_comanda_mesa';
+    const ITEM_TABLE = 'toluca_comanda_item';
 
     const ORDER_ATTRIBUTE_IS_COMANDA = 'is_comanda';
 

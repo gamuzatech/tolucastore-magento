@@ -32,7 +32,7 @@ class Toluca_Comanda_Block_Adminhtml_Mesa_Edit extends Mage_Adminhtml_Block_Widg
 
         $id = $this->getRequest ()->getParam ('id');
 
-        if ($id > PHP_INT_MAX)
+        if ($id > 0)
         {
             $collection = Mage::getModel ('comanda/item')->getCollection ()
                 ->addFieldToFilter ('mesa_id', array ('eq' => $id))
