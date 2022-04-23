@@ -11,6 +11,8 @@ class Gamuza_Mobile_Model_Cart_Product_Api extends Gamuza_Mobile_Model_Api_Resou
 
     const DISTRO_STORE_ID = Mage_Core_Model_App::DISTRO_STORE_ID;
 
+    protected $_imageCodes = array ('image', 'small_image', 'thumbnail');
+
     /**
      * Base preparation of product data
      *
@@ -461,6 +463,27 @@ class Gamuza_Mobile_Model_Cart_Product_Api extends Gamuza_Mobile_Model_Api_Resou
                 'minimum_description' => $minimumDescription,
                 'minimum_message'     => $minimumMessage,
             );
+
+            foreach ($this->_imageCodes as $code)
+            {
+                $value = $product->getData ($code);
+
+                if (!empty ($value) && !strcmp ($value, 'no_selection'))
+                {
+                    $value = Mage::getSingleton ('mobile/core_design_package')
+                        ->setStore (Mage_Core_Model_App::DISTRO_STORE_ID)
+                        ->setPackageName ('rwd')
+                        ->setTheme ('magento2')
+                        ->getSkinUrl ("images/catalog/product/placeholder/{$code}.jpg")
+                    ;
+                }
+                else if (!empty ($value) && strcmp ($value, 'no_selection'))
+                {
+                    $value = $mediaUrl . 'catalog/product' . $value; // no_cache
+                }
+
+                $productData [$code] = $value;
+            }
 
             $productData ['product_options'] = array ();
 
