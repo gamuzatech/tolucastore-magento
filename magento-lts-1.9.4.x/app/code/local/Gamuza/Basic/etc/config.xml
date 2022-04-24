@@ -10,7 +10,7 @@
 <config>
     <modules>
         <Gamuza_Basic>
-            <version>0.0.13</version>
+            <version>0.0.14</version>
         </Gamuza_Basic>
     </modules>
     <global>
@@ -87,6 +87,11 @@
                     <system_config_source_yesno>Gamuza_Basic_Model_Adminhtml_System_Config_Source_Yesno</system_config_source_yesno>
                 </rewrite>
             </adminhtml>
+            <api>
+                <rewrite>
+                    <session>Gamuza_Basic_Model_Api_Session</session>
+                </rewrite>
+            </api>
             <bundle>
                 <rewrite>
                     <product_attribute_source_price_view>Gamuza_Basic_Model_Bundle_Product_Attribute_Source_Price_View</product_attribute_source_price_view>
