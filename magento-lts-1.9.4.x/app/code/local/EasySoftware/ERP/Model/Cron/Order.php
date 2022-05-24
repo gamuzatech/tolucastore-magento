@@ -281,7 +281,7 @@ $queryDetail = <<< QUERY
         {$qtyOrdered},
         0,
         {$productPrice},
-        {$basePrice},
+        {$baseRowTotal},
         {$baseDiscountAmount},
         {$baseRowTotal},
         'F',
