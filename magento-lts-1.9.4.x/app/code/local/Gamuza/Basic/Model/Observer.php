@@ -32,7 +32,7 @@ class Gamuza_Basic_Model_Observer
 
         {
             $prefix = time ();
-            $token  = md5 (uniqid (rand (), true));
+            $token  = hash ('sha512', uniqid (rand (), true));
 
             $product->setSku ($prefix . '_' . $token);
             $product->setUrlKey ($prefix . '-' . $token);

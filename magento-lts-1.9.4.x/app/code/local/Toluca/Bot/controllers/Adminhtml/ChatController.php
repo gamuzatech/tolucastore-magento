@@ -11,7 +11,7 @@ class Toluca_Bot_Adminhtml_ChatController extends Mage_Adminhtml_Controller_Acti
 
 	protected function _isAllowed ()
 	{
-	    return Mage::getSingleton ('admin/session')->isAllowed ('bot/chat');
+	    return Mage::getSingleton ('admin/session')->isAllowed ('toluca/bot/chat');
 	}
 
 	protected function _initAction ()

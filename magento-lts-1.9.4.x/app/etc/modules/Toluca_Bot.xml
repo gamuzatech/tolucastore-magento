@@ -12,7 +12,6 @@
         <Toluca_Bot>
             <active>true</active>
             <codePool>local</codePool>
-            <version>0.0.1</version>
         </Toluca_Bot>
     </modules>
 </config>

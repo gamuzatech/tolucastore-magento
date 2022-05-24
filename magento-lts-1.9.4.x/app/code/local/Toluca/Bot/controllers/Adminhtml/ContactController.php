@@ -9,7 +9,7 @@ class Toluca_Bot_Adminhtml_ContactController extends Mage_Adminhtml_Controller_A
 {
 	protected function _isAllowed ()
 	{
-	    return Mage::getSingleton ('admin/session')->isAllowed ('bot/contact');
+	    return Mage::getSingleton ('admin/session')->isAllowed ('toluca/bot/contact');
 	}
 
 	protected function _initAction ()

@@ -11,7 +11,7 @@ class Toluca_Bot_Adminhtml_PromotionController extends Mage_Adminhtml_Controller
 {
 	protected function _isAllowed ()
 	{
-	    return Mage::getSingleton ('admin/session')->isAllowed ('bot/promotion');
+	    return Mage::getSingleton ('admin/session')->isAllowed ('toluca/bot/promotion');
 	}
 
 	protected function _initAction ()

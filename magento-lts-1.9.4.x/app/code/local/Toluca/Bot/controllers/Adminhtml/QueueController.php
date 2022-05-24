@@ -9,7 +9,7 @@ class Toluca_Bot_Adminhtml_QueueController extends Mage_Adminhtml_Controller_Act
 {
 	protected function _isAllowed ()
 	{
-	    return Mage::getSingleton ('admin/session')->isAllowed ('bot/queue');
+	    return Mage::getSingleton ('admin/session')->isAllowed ('toluca/bot/queue');
 	}
 
 	protected function _initAction ()

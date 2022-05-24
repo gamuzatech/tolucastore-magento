@@ -21,6 +21,10 @@ header.header.sticky.mm-slideout {
     width: 100%;
 }
 
+.cart-table .product-cart-actions .button {
+    display: inline-block;
+}
+
 .customer-account-login .col2-set .col-1 ul {
     list-style: none;
 }
