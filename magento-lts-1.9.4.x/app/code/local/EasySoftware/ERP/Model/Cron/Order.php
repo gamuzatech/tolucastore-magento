@@ -131,7 +131,10 @@ class EasySoftware_ERP_Model_Cron_Order extends EasySoftware_ERP_Model_Cron_Abst
             : $this->getOrderConfig ('customer_guest_id')
         ;
 
-        $createdAt      = date ('Y-m-d', strtotime ($mageOrder->getCreatedAt ()));
+        $createdAt = Mage::getModel ('core/date')
+            ->date ('Y-m-d', strtotime ($mageOrder->getCreatedAt ()))
+        ;
+
         $subTotal       = $mageOrder->getBaseSubtotal ();
         $discountAmount = $mageOrder->getBaseDiscountAmount ();
         $grandTotal     = $mageOrder->getBaseGrandTotal ();
