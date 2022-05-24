@@ -116,15 +116,15 @@
                 <run><model>erp/cron::runProduct</model></run>
             </easysoftware_erp_product>
             <easysoftware_erp_customer>
-                <schedule><cron_expr>*/5 * * * *</cron_expr></schedule>
+                <schedule><cron_expr>* * * * *</cron_expr></schedule>
                 <run><model>erp/cron::runCustomer</model></run>
             </easysoftware_erp_customer>
             <easysoftware_erp_order>
-                <schedule><cron_expr>*/10 * * * *</cron_expr></schedule>
+                <schedule><cron_expr>* * * * *</cron_expr></schedule>
                 <run><model>erp/cron::runOrder</model></run>
             </easysoftware_erp_order>
             <easysoftware_erp_order_status>
-                <schedule><cron_expr>*/15 * * * *</cron_expr></schedule>
+                <schedule><cron_expr>* * * * *</cron_expr></schedule>
                 <run><model>erp/cron::runOrderStatus</model></run>
             </easysoftware_erp_order_status>
         </jobs>
