@@ -12,7 +12,7 @@ class EasySoftware_ERP_Model_Cron_Group extends EasySoftware_ERP_Model_Cron_Abst
     private function readERPGroupsAPI ()
     {
         $companyId = $this->getStoreConfig ('company_id');
-        $limit     = $this->getQueueConfig ('limit') ?? self::DEFAULT_QUEUE_LIMIT;
+        $limit     = $this->getQueueConfig ('group') ?? self::DEFAULT_QUEUE_LIMIT;
 
 $query = <<< QUERY
     SELECT FIRST {$limit} * FROM GRUPO

@@ -12,7 +12,7 @@ class EasySoftware_ERP_Model_Cron_Brand extends EasySoftware_ERP_Model_Cron_Abst
     private function readERPBrandsAPI ()
     {
         $companyId = $this->getStoreConfig ('company_id');
-        $limit     = $this->getQueueConfig ('limit') ?? self::DEFAULT_QUEUE_LIMIT;
+        $limit     = $this->getQueueConfig ('brand') ?? self::DEFAULT_QUEUE_LIMIT;
 
 $query = <<< QUERY
     SELECT FIRST {$limit} * FROM MARCA

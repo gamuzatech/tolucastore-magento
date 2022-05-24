@@ -10,7 +10,7 @@
 <config>
     <tabs>
         <easysoftware translate="label" module="erp">
-            <label>EasySoftware</label>
+            <label>Easy Software</label>
             <sort_order>1000</sort_order>
         </easysoftware>
     </tabs>

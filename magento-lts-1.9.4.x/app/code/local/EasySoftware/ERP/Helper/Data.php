@@ -17,15 +17,10 @@ class EasySoftware_ERP_Helper_Data extends Mage_Core_Helper_Abstract
 
     const PRODUCT_ATTRIBUTE_ID = 'erp_product_id';
 
-    const QUEUE_LIMIT_30  = 30;
     const QUEUE_LIMIT_60  = 60;
-    const QUEUE_LIMIT_90  = 90;
     const QUEUE_LIMIT_120 = 120;
-    const QUEUE_LIMIT_150 = 150;
     const QUEUE_LIMIT_180 = 180;
-    const QUEUE_LIMIT_210 = 210;
     const QUEUE_LIMIT_240 = 240;
-    const QUEUE_LIMIT_270 = 270;
     const QUEUE_LIMIT_300 = 300;
 
     const STATUS_PENDING = 'pending';

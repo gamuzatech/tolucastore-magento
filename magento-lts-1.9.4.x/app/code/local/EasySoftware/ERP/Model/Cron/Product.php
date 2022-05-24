@@ -12,7 +12,7 @@ class EasySoftware_ERP_Model_Cron_Product extends EasySoftware_ERP_Model_Cron_Ab
     private function readERPProductsAPI ()
     {
         $companyId = $this->getStoreConfig ('company_id');
-        $limit     = $this->getQueueConfig ('limit') ?? self::DEFAULT_QUEUE_LIMIT;
+        $limit     = $this->getQueueConfig ('product') ?? self::DEFAULT_QUEUE_LIMIT;
 
 $query = <<< QUERY
     SELECT FIRST {$limit} * FROM PRODUTO
