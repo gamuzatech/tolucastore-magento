@@ -205,7 +205,7 @@ $queryOrder = <<< QUERY
         'F',
         {$companyId},
         0,
-        'V',
+        'P',
         {$defaultBatchId},
         0,
         0,
