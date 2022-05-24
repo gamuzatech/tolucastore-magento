@@ -11,7 +11,7 @@
     <menu>
         <erp module="erp">
             <title>ERP</title>
-            <sort_order>1000</sort_order>
+            <sort_order>100</sort_order>
             <children>
                 <brand module="erp">
                     <title>Brands</title>
