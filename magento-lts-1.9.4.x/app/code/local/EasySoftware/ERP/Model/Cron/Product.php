@@ -31,7 +31,7 @@ QUERY;
                 ->setExternalSku ($row->REFERENCIA)
                 ->setCompanyId ($row->EMPRESA)
                 ->setName (utf8_encode ($row->DESCRICAO))
-                ->setIsActive (!strcmp ($row->ATIVO, 'S'))
+                ->setIsActive (!strcmp ($row->ATIVO, 'S') && !strcmp ($row->EFISCAL, 'S'))
                 ->setStatus (EasySoftware_ERP_Helper_Data::STATUS_PENDING)
                 ->setMessage (new Zend_Db_Expr ('NULL'))
                 ->setUpdatedAt (date ('c'))
