@@ -51,11 +51,6 @@ class EasySoftware_ERP_Model_Cron_Abstract
         return $this->getHelper ()->getOrderConfig ($key, $storeId);
     }
 
-    protected function getQueueConfig ($key, $storeId = null)
-    {
-        return $this->getHelper ()->getQueueConfig ($key, $storeId);
-    }
-
     protected function getStoreConfig ($key, $storeId = null)
     {
         return $this->getHelper ()->getStoreConfig ($key, $storeId);

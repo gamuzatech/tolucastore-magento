@@ -24,7 +24,8 @@ class EasySoftware_ERP_Model_Cron_Customer extends EasySoftware_ERP_Model_Cron_A
     private function readERPCustomersMagento ()
     {
         $companyId = $this->getStoreConfig ('company_id');
-        $limit     = $this->getQueueConfig ('customer') ?? self::DEFAULT_QUEUE_LIMIT;
+
+        $limit = self::DEFAULT_QUEUE_LIMIT;
 
         $collection = Mage::getModel ('customer/customer')->getCollection ()
             ->addFieldToFilter ('taxvat', array ('notnull' => true))
@@ -62,7 +63,7 @@ class EasySoftware_ERP_Model_Cron_Customer extends EasySoftware_ERP_Model_Cron_A
 
     private function readERPCustomersCollection ()
     {
-        $limit = $this->getQueueConfig ('customer');
+        $limit = self::DEFAULT_QUEUE_LIMIT;
 
         $collection = Mage::getModel ('erp/customer')->getCollection ()
             ->addFieldToFilter ('status', array ('neq' => EasySoftware_ERP_Helper_Data::STATUS_OKAY))

@@ -12,7 +12,8 @@ class EasySoftware_ERP_Model_Cron_Brand extends EasySoftware_ERP_Model_Cron_Abst
     private function readERPBrandsAPI ()
     {
         $companyId = $this->getStoreConfig ('company_id');
-        $limit     = $this->getQueueConfig ('brand') ?? self::DEFAULT_QUEUE_LIMIT;
+
+        $limit = self::DEFAULT_QUEUE_LIMIT;
 
 $query = <<< QUERY
     SELECT FIRST {$limit} * FROM MARCA
@@ -41,7 +42,7 @@ QUERY;
 
     private function readERPBrandsCollection ()
     {
-        $limit = $this->getQueueConfig ('brand');
+        $limit = self::DEFAULT_QUEUE_LIMIT;
 
         $collection = Mage::getModel ('erp/brand')->getCollection ()
             ->addFieldToFilter ('status', array ('neq' => EasySoftware_ERP_Helper_Data::STATUS_OKAY))

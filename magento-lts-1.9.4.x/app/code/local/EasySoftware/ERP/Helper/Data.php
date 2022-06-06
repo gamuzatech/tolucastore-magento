@@ -17,12 +17,6 @@ class EasySoftware_ERP_Helper_Data extends Mage_Core_Helper_Abstract
 
     const PRODUCT_ATTRIBUTE_ID = 'erp_product_id';
 
-    const QUEUE_LIMIT_60  = 60;
-    const QUEUE_LIMIT_120 = 120;
-    const QUEUE_LIMIT_180 = 180;
-    const QUEUE_LIMIT_240 = 240;
-    const QUEUE_LIMIT_300 = 300;
-
     const STATUS_PENDING = 'pending';
     const STATUS_OKAY    = 'okay';
     const STATUS_ERROR   = 'error';
@@ -73,11 +67,6 @@ class EasySoftware_ERP_Helper_Data extends Mage_Core_Helper_Abstract
     public function getOrderConfig ($key, $store = null)
     {
         return Mage::getStoreConfig ("erp/order/{$key}", $store);
-    }
-
-    public function getQueueConfig ($key, $store = null)
-    {
-        return Mage::getStoreConfig ("erp/queue/{$key}", $store);
     }
 
     public function getStoreConfig ($key, $store = null)

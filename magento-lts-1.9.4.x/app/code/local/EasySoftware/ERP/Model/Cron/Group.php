@@ -12,7 +12,8 @@ class EasySoftware_ERP_Model_Cron_Group extends EasySoftware_ERP_Model_Cron_Abst
     private function readERPGroupsAPI ()
     {
         $companyId = $this->getStoreConfig ('company_id');
-        $limit     = $this->getQueueConfig ('group') ?? self::DEFAULT_QUEUE_LIMIT;
+
+        $limit = self::DEFAULT_QUEUE_LIMIT;
 
 $query = <<< QUERY
     SELECT FIRST {$limit} * FROM GRUPO
@@ -41,7 +42,7 @@ QUERY;
 
     private function readERPGroupsCollection ()
     {
-        $limit = $this->getQueueConfig ('group');
+        $limit = self::DEFAULT_QUEUE_LIMIT;
 
         $collection = Mage::getModel ('erp/group')->getCollection ()
             ->addFieldToFilter ('status', array ('neq' => EasySoftware_ERP_Helper_Data::STATUS_OKAY))

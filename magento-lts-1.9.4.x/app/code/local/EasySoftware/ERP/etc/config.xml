@@ -104,15 +104,15 @@
     <crontab>
         <jobs>
             <easysoftware_erp_brand>
-                <schedule><cron_expr>*/5 * * * *</cron_expr></schedule>
+                <schedule><cron_expr>* * * * *</cron_expr></schedule>
                 <run><model>erp/cron::runBrand</model></run>
             </easysoftware_erp_brand>
             <easysoftware_erp_group>
-                <schedule><cron_expr>*/5 * * * *</cron_expr></schedule>
+                <schedule><cron_expr>* * * * *</cron_expr></schedule>
                 <run><model>erp/cron::runGroup</model></run>
             </easysoftware_erp_group>
             <easysoftware_erp_product>
-                <schedule><cron_expr>*/5 * * * *</cron_expr></schedule>
+                <schedule><cron_expr>* * * * *</cron_expr></schedule>
                 <run><model>erp/cron::runProduct</model></run>
             </easysoftware_erp_product>
             <easysoftware_erp_customer>

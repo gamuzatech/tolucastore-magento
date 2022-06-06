@@ -12,7 +12,8 @@ class EasySoftware_ERP_Model_Cron_Order extends EasySoftware_ERP_Model_Cron_Abst
     private function readERPOrdersMagento ()
     {
         $companyId = $this->getStoreConfig ('company_id');
-        $limit     = $this->getQueueConfig ('order') ?? self::DEFAULT_QUEUE_LIMIT;
+
+        $limit = self::DEFAULT_QUEUE_LIMIT;
 
         $collection = Mage::getModel ('sales/order')->getCollection ()
             ->addFieldToFilter ('state', array ('eq' => Mage_Sales_Model_Order::STATE_NEW))
@@ -61,7 +62,7 @@ class EasySoftware_ERP_Model_Cron_Order extends EasySoftware_ERP_Model_Cron_Abst
 
     private function readERPOrdersCollection ()
     {
-        $limit = $this->getQueueConfig ('order');
+        $limit = self::DEFAULT_QUEUE_LIMIT;
 
         $collection = Mage::getModel ('erp/order')->getCollection ()
             ->addFieldToFilter ('status', array ('neq' => EasySoftware_ERP_Helper_Data::STATUS_OKAY))

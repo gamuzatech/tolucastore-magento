@@ -16,7 +16,7 @@ class EasySoftware_ERP_Model_Cron_Order_Status extends EasySoftware_ERP_Model_Cr
             return false;
         }
 
-        $limit = $this->getQueueConfig ('order');
+        $limit = self::DEFAULT_QUEUE_LIMIT;
 
         $collection = Mage::getModel ('erp/order')->getCollection ()
             ->addFieldToFilter ('main_table.status',      array ('eq' => EasySoftware_ERP_Helper_Data::STATUS_OKAY))

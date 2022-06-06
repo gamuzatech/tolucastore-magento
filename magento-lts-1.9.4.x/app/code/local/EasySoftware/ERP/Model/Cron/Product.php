@@ -12,7 +12,8 @@ class EasySoftware_ERP_Model_Cron_Product extends EasySoftware_ERP_Model_Cron_Ab
     private function readERPProductsAPI ()
     {
         $companyId = $this->getStoreConfig ('company_id');
-        $limit     = $this->getQueueConfig ('product') ?? self::DEFAULT_QUEUE_LIMIT;
+
+        $limit = self::DEFAULT_QUEUE_LIMIT;
 
 $query = <<< QUERY
     SELECT FIRST {$limit} * FROM PRODUTO
@@ -42,7 +43,7 @@ QUERY;
 
     private function readERPProductsCollection ()
     {
-        $limit = $this->getQueueConfig ('product');
+        $limit = self::DEFAULT_QUEUE_LIMIT;
 
         $collection = Mage::getModel ('erp/product')->getCollection ()
             ->addFieldToFilter ('status', array ('neq' => EasySoftware_ERP_Helper_Data::STATUS_OKAY))
