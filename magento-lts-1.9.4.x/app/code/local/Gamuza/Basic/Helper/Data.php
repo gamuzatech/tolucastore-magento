@@ -84,7 +84,7 @@ class Gamuza_Basic_Helper_Data extends Mage_Core_Helper_Abstract
 
         return $result;
         */
-        return preg_match ('/(iPad|iPhone|Darwin|Android|okhttp)/i', $_SERVER ['HTTP_USER_AGENT']);
+        return preg_match ('/(iPad|iPhone|Darwin|Android|Dalvik)/i', $_SERVER ['HTTP_USER_AGENT']);
     }
 }
 
