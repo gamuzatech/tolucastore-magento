@@ -46,8 +46,8 @@ class Gamuza_Basic_Model_Eav_Entity_Type extends Mage_Eav_Model_Entity_Type
 
         $isApp = $currentOrder && $currentOrder->getData (Gamuza_Basic_Helper_Data::ORDER_ATTRIBUTE_IS_APP);
 
-        $isBot = Mage::helper ('core')->isModuleEnabled ('Gamuza_Bot')
-            && (!strcmp (Mage::app ()->getRequest ()->getControllerModule (), 'Gamuza_Bot')
+        $isBot = Mage::helper ('core')->isModuleEnabled ('Toluca_Bot')
+            && (!strcmp (Mage::app ()->getRequest ()->getControllerModule (), 'Toluca_Bot')
             xor (!strcmp (Mage::app ()->getRequest ()->getControllerModule (), 'Gamuza_JsonApi')
             && strpos (Mage::app ()->getRequest ()->getRawBody (), self::API_METHOD_BOT_CHAT_MESSAGE) !== false))
         ;
