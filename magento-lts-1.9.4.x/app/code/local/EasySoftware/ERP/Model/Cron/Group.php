@@ -18,7 +18,7 @@ $query = <<< QUERY
     SELECT FIRST {$limit} * FROM GRUPO
     WHERE EMPRESA = {$companyId}
     AND DATAHORA_ENVIADO IS NULL
-    OR DATAHORA_ATUALIZADO > DATAHORA_ENVIADO
+    OR DATEDIFF(SECOND FROM DATAHORA_ATUALIZADO TO DATAHORA_ENVIADO) <> 0
 QUERY;
 
         $result = Mage::helper ('erp')->query ($query);
@@ -126,7 +126,7 @@ QUERY;
 
         if ($result == 1)
         {
-            $group->setSyncedAt ($now)
+            $group->setSyncedAt (date ('c'))
                 ->setStatus (EasySoftware_ERP_Helper_Data::STATUS_OKAY)
                 ->setMessage (new Zend_Db_Expr ('NULL'))
                 ->save ();
