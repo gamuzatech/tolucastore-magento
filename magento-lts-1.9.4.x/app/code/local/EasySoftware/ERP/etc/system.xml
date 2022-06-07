@@ -24,10 +24,28 @@
             <show_in_website>1</show_in_website>
             <show_in_store>1</show_in_store>
             <groups>
+                <about translate="label" module="erp">
+                    <label>About</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <about translate="label" module="erp">
+                            <label>About</label>
+                            <frontend_model>erp/adminhtml_about</frontend_model>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </about>
+                    </fields>
+                </about>
                 <settings translate="label" module="erp">
                     <label>Settings</label>
                     <frontend_type>text</frontend_type>
-                    <sort_order>0</sort_order>
+                    <sort_order>10</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
@@ -54,7 +72,7 @@
                 <firebird translate="label" module="erp">
                     <label>Firebird</label>
                     <frontend_type>text</frontend_type>
-                    <sort_order>10</sort_order>
+                    <sort_order>20</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
