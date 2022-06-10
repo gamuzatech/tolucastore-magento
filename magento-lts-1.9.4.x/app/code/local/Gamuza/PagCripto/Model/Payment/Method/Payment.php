@@ -112,7 +112,7 @@ class Gamuza_PagCripto_Model_Payment_Method_Payment extends Mage_Payment_Model_M
             throw new Exception (Mage::helper ('pagcripto')->__('There was an error in the PAGCRIPTO transaction. Please try again!'));
         }
 
-        // $payment->setSkipOrderProcessing (true);
+        $payment->setSkipOrderProcessing (false);
         $payment->setIsTransactionPending (true);
 
         return $this;

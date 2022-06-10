@@ -109,7 +109,7 @@ class Gamuza_OpenPix_Model_Payment_Method_Payment extends Mage_Payment_Model_Met
             throw new Exception (Mage::helper ('openpix')->__('There was an error in the OPENPIX transaction. Please try again!'));
         }
 
-        // $payment->setSkipOrderProcessing (true);
+        $payment->setSkipOrderProcessing (false);
         $payment->setIsTransactionPending (true);
 
         return $this;
