@@ -371,7 +371,11 @@
             </account_share>
             <create_account>
                 <email_domain><![CDATA[toluca.com.br]]></email_domain>
+                <confirm>0</confirm>
             </create_account>
+            <online_customers>
+                <online_minutes_interval>1</online_minutes_interval>
+            </online_customers>
             <password>
                 <require_admin_user_to_change_user_password>0</require_admin_user_to_change_user_password>
             </password>

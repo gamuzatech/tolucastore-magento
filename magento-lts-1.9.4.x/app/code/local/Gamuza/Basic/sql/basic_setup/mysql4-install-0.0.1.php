@@ -67,8 +67,10 @@ $coreConfig->saveConfig ('cataloginventory/item_options/auto_return', '1');
  */
 $coreConfig->saveConfig (Mage_Customer_Model_Config_Share::XML_PATH_CUSTOMER_ACCOUNT_SHARE, '0');
 $coreConfig->saveConfig (Mage_Customer_Model_Customer::XML_PATH_DEFAULT_EMAIL_DOMAIN, 'toluca.com.br');
+$coreConfig->saveConfig (Mage_Customer_Model_Customer::XML_PATH_IS_CONFIRM, '0');
 
-$coreConfig->saveConfig ('customer/password/require_admin_user_to_change_user_password', 0);
+$coreConfig->saveConfig ('customer/online_customers/online_minutes_interval', '1');
+$coreConfig->saveConfig ('customer/password/require_admin_user_to_change_user_password', '0');
 
 $coreConfig->saveConfig ('customer/address/street_lines',    '4');
 $coreConfig->saveConfig ('customer/address/middlename_show', '0');
