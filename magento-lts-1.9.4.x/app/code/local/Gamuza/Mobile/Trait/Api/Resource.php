@@ -68,6 +68,7 @@ trait Gamuza_Mobile_Trait_Api_Resource
                 ->setCustomerFirstname ($firstName)
                 ->setCustomerLastname ($lastName)
                 ->setCustomerEmail ($customerEmail)
+                ->setCustomerTaxvat (Gamuza_Mobile_Helper_Data::DEFAULT_CUSTOMER_TAXVAT)
                 ->save()
             ;
 
@@ -81,6 +82,7 @@ trait Gamuza_Mobile_Trait_Api_Resource
                 'firstname' => $firstName,
                 'lastname'  => $lastName,
                 'email'     => $customerEmail,
+                'taxvat'    => Gamuza_Mobile_Helper_Data::DEFAULT_CUSTOMER_TAXVAT,
             );
 
             Mage::getModel ('checkout/cart_customer_api')->set ($quote->getId (), $customerData, $storeId);

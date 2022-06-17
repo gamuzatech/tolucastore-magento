@@ -14,5 +14,7 @@ class Gamuza_Mobile_Helper_Data extends Mage_Core_Helper_Abstract
     const ORDER_ATTRIBUTE_STORE_INFO_CODE = 'store_info_code';
 
     const XML_GLOBAL_PAYMENT_MACHINE_TYPES = 'global/payment/machine/types';
+
+    const DEFAULT_CUSTOMER_TAXVAT = '02788178824';
 }
 
