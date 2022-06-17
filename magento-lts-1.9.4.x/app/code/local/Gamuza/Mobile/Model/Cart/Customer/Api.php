@@ -77,12 +77,15 @@ class Gamuza_Mobile_Model_Cart_Customer_Api extends Mage_Checkout_Model_Cart_Cus
                 $this->_fault('customer_address_invalid', implode(PHP_EOL, $validateRes));
             }
 
+            if (!$address->getEmail() && $quote->getCustomerEmail())
+            {
+                $address->setEmail($quote->getCustomerEmail());
+            }
+
             switch($addressMode)
             {
                 case self::ADDRESS_BILLING:
                 {
-                    $address->setEmail($quote->getCustomer()->getEmail());
-
                     if (!$quote->isVirtual())
                     {
                         $usingCase = isset($addressItem['use_for_shipping']) ? (int)$addressItem['use_for_shipping'] : 0;
@@ -114,9 +117,6 @@ class Gamuza_Mobile_Model_Cart_Customer_Api extends Mage_Checkout_Model_Cart_Cus
                             }
                         }
                     }
-
-                    $quote->setCustomerFirstname($address->getFirstname());
-                    $quote->setCustomerLastname($address->getLastname());
 
                     $quote->setBillingAddress($address);
 
