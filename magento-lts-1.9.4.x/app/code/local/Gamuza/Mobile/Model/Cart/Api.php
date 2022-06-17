@@ -227,7 +227,7 @@ class Gamuza_Mobile_Model_Cart_Api extends Mage_Checkout_Model_Api_Resource
 
         try
         {
-            Mage::getSingleton('checkout/session')->setData('PsPayment', serialize($quote->getPayment()->getAdditionalInformation())); // pagseguro_cc
+            Mage::getSingleton('api/session')->setData('PsPayment', serialize($quote->getPayment()->getAdditionalInformation())); // pagseguro_cc
 
             $quote->collectTotals();
 
