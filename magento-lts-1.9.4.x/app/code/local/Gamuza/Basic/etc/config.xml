@@ -317,6 +317,7 @@
         <web>
             <cookie>
                 <cookie_lifetime>86400</cookie_lifetime>
+                <cookie_path><![CDATA[/]]></cookie_path>
             </cookie>
             <session>
                 <use_frontend_sid>0</use_frontend_sid>

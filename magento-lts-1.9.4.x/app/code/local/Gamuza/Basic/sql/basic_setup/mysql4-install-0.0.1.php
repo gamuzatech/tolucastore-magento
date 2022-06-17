@@ -21,6 +21,10 @@ $coreConfig->saveConfig ('general/country/allow', 'BR');
  * Web
  */
 $coreConfig->saveConfig (Mage_Core_Model_Cookie::XML_PATH_COOKIE_LIFETIME, '86400');
+$coreConfig->saveConfig (Mage_Core_Model_Cookie::XML_PATH_COOKIE_PATH, '/');
+
+$coreConfig->saveconfig (Mage_Core_Model_Session_Abstract::XML_PATH_USE_FRONTEND_SID, '0');
+$coreConfig->saveConfig (Mage_Admin_Model_Session::XML_PATH_ALLOW_SID_FOR_ADMIN_AREA, '1');
 
 /**
  * Design
