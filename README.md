@@ -1,9 +1,16 @@
 <img src="https://dl.dropboxusercontent.com/s/qi0b31um3y3nxo6/tolucastore-admin-panel.png" alt="TolucaStore Admin Panel"/>
 
 <p align="center">
-<a href="https://travis-ci.org/openmage/magento-lts"><img src="https://travis-ci.org/openmage/magento-lts.svg" alt="Build Status"></a>
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+<a href="#contributors-"><img src="https://img.shields.io/badge/all_contributors-146-orange.svg?style=flat-square" alt="All Contributors"></a>
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 <a href="https://packagist.org/packages/openmage/magento-lts"><img src="https://poser.pugx.org/openmage/magento-lts/d/total.svg" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/openmage/magento-lts"><img src="https://poser.pugx.org/openmage/magento-lts/license.svg" alt="License"></a>
+<br />
+<img src="https://github.com/openmage/magento-lts/actions/workflows/php.yml/badge.svg" alt="PHP workflow Badge" />
+<img src="https://github.com/openmage/magento-lts/actions/workflows/sonar.yml/badge.svg" alt="Sonar workflow badge" />
+<img src="https://github.com/openmage/magento-lts/actions/workflows/static-code-analyses.yml/badge.svg" alt="Static Code Analyses workflow badge" />
+<img src="https://github.com/openmage/magento-lts/actions/workflows/unit-tests.yml/badge.svg" alt="Unit Tests workflow badge" />
 </p>
 
 # Magento - Long Term Support
@@ -27,10 +34,8 @@ Note, the branches older than `1.9.4.x` and that were created before this strate
 - MySQL 5.6+ (8.0+ recommended)
 - (optional) Redis 5+ (6.x recommended, latest verified compatible 6.0.7 with 20.x)
 
-
 - PHP 7.4 and 8.0 are supported
 - Please be aware that although OpenMage is compatible that 1 or more extensions may not be
-
 
 Installation on PHP 7.2.33 (7.2.x), MySQL 5.7.31-34 (5.7.x) Percona Server and Redis 6.x should work fine and confirmed by users.
 
@@ -39,6 +44,7 @@ If using php 7.2+ then mcrypt needs to be disabled in php.ini or pecl to fallbac
 ## Installation
 
 ### Using Composer
+
 Download the latest archive and extract it, clone the repo, or add a composer dependency to your existing project like so:
 
 ```bash
@@ -73,16 +79,38 @@ git add -A && git commit
 Most important changes will be listed here, all other changes since `19.4.0` can be found in
 [release](https://github.com/OpenMage/magento-lts/releases) notes.
 
-### Performance
-<small>ToDo: Please add performance related changes as run-time cache, ...</small>
+### Between Magento 1.9.4.5 and OpenMage 19.x
+
+- bug fixes and PHP 7.x and 8.0 compatibility
+- added config cache for system.xml #1916
+
+### Between OpenMage 19.x and 20.x
+
+Do not use 20.x.x if you need IE support.
+
+- removed IE conditional comments, IE styles, IE scripts and IE eot files #1073
+- removed frontend default themes (default, modern, iphone, german, french, blank, blue) #1600
+- fixed incorrect datetime in customer block (`$useTimezone` parameter) #1525
+- add redis as a valid option for `global/session_save` #1513
+- possibility to disable global search in backend #1532
+
+For full list of changes, you can [compare tags](https://github.com/OpenMage/magento-lts/compare/1.9.4.x...20.0).
 
 ### New Config Options
+
 - `admin/design/use_legacy_theme`
+- `admin/global_search/enable`
 - `admin/emails/admin_notification_email_template`
 - `catalog/product_image/progressive_threshold`
 - `catalog/search/search_separator`
+- `dev/log/max_level`
+- `newsletter/security/enable_form_key`
+- `sitemap/category/lastmod`
+- `sitemap/page/lastmod`
+- `sitemap/product/lastmod`
 
 ### New Events
+
 - `adminhtml_block_widget_form_init_form_values_after`
 - `adminhtml_block_widget_tabs_html_before`
 - `adminhtml_sales_order_create_save_before`
@@ -92,21 +120,15 @@ Most important changes will be listed here, all other changes since `19.4.0` can
 
 [Full list of events](EVENTS.md)
 
-### New Translations
-
-There are some new or changed translations, if you want add them to your locale pack please check:
-
-- `app/locale/en_US/Adminhtml_LTS.csv`
-- `app/locale/en_US/Core_LTS.csv`
-- `app/locale/en_US/Sales_LTS.csv`
-
 ### Removed Modules
+
 - `Mage_Compiler`
 - `Mage_GoogleBase`
 - `Mage_Xmlconnect`
 - `Phoenix_Moneybookers`
 
 ## Development Environment with ddev
+
 - Install [ddev](https://ddev.com/get-started/)
 - Clone the repository as described in Installation -> Using Git
 - Create a ddev config using ```$ ddev config``` the defaults should be good for you
