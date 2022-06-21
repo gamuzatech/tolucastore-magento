@@ -39,6 +39,7 @@
                     <catalog_product_grid>Gamuza_Basic_Block_Adminhtml_Catalog_Product_Grid</catalog_product_grid>
                     <customer_edit_tabs>Gamuza_Basic_Block_Adminhtml_Customer_Edit_Tabs</customer_edit_tabs>
                     <customer_grid>Gamuza_Basic_Block_Adminhtml_Customer_Grid</customer_grid>
+                    <customer_online_grid>Gamuza_Basic_Block_Adminhtml_Customer_Online_Grid</customer_online_grid>
                     <page_head>Gamuza_Basic_Block_Adminhtml_Page_Head</page_head>
                     <sales_order_grid>Gamuza_Basic_Block_Adminhtml_Sales_Order_Grid</sales_order_grid>
                     <widget_grid_column>Gamuza_Basic_Block_Adminhtml_Widget_Grid_Column</widget_grid_column>
