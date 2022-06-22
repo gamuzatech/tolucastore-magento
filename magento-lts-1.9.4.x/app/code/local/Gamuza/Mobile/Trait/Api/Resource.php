@@ -72,11 +72,6 @@ trait Gamuza_Mobile_Trait_Api_Resource
                 ->save()
             ;
 
-            $quote->setData (Gamuza_Mobile_Helper_Data::ORDER_ATTRIBUTE_IS_APP, true)
-                ->setData (Gamuza_Mobile_Helper_Data::ORDER_ATTRIBUTE_CUSTOMER_INFO_CODE, $customerCode)
-                ->setData (Gamuza_Mobile_Helper_Data::ORDER_ATTRIBUTE_STORE_INFO_CODE, $storeCode)
-            ;
-
             $customerData = array(
                 'mode'      => Mage_Checkout_Model_Type_Onepage::METHOD_GUEST,
                 'firstname' => $firstName,
@@ -87,7 +82,10 @@ trait Gamuza_Mobile_Trait_Api_Resource
 
             Mage::getModel ('checkout/cart_customer_api')->set ($quote->getId (), $customerData, $storeId);
 
-            $quote->setCustomerGroupId (0)
+            $quote->setData (Gamuza_Mobile_Helper_Data::ORDER_ATTRIBUTE_IS_APP, true)
+                ->setData (Gamuza_Mobile_Helper_Data::ORDER_ATTRIBUTE_CUSTOMER_INFO_CODE, $customerCode)
+                ->setData (Gamuza_Mobile_Helper_Data::ORDER_ATTRIBUTE_STORE_INFO_CODE, $storeCode)
+                ->setCustomerGroupId (0)
                 ->setCustomerIsGuest (1)
                 ->save()
             ;
@@ -106,10 +104,10 @@ trait Gamuza_Mobile_Trait_Api_Resource
                         Mage::getStoreConfig ('shipping/origin/street_line3', $storeId),
                         Mage::getStoreConfig ('shipping/origin/street_line4', $storeId),
                     ),
-                    'postcode'   => $shippingPostcode,
                     'city'       => Mage::getStoreConfig ('shipping/origin/city',       $storeId),
                     'region'     => Mage::getStoreConfig ('shipping/origin/region_id',  $storeId),
                     'country_id' => Mage::getStoreConfig ('shipping/origin/country_id', $storeId),
+                    'postcode'   => $shippingPostcode,
                     'telephone'  => null,
                     'fax'        => Mage::getStoreConfig ('general/store_information/phone', $storeId),
                     'use_for_shipping' => 1,
