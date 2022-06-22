@@ -18,6 +18,10 @@
     background: none;
 }
 
+.login-container::before {
+    background: none;
+}
+
 .login-form .logo {
     background: url('../../../images/logo.png') no-repeat;
 }
