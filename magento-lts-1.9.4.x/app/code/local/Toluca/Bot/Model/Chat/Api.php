@@ -176,6 +176,7 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
                 ->setCustomerFirstname ($senderName [0])
                 ->setCustomerLastname ($senderName [1])
                 ->setCustomerEmail (self::DEFAULT_CUSTOMER_EMAIL)
+                ->setCustomerTaxvat (self::DEFAULT_CUSTOMER_TAXVAT)
                 ->save ()
             ;
 
@@ -223,8 +224,8 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
                     'street'     => array ('x', '0', null, 'y'),
                     'city'       => Mage::getStoreConfig ('shipping/origin/city',      $storeId),
                     'region'     => Mage::getStoreConfig ('shipping/origin/region_id', $storeId),
+                    'country_id' => Mage::getStoreConfig ('shipping/origin/country_id', $storeId),
                     'postcode'   => $shippingPostcode,
-                    'country_id' => 'BR',
                     'telephone'  => null,
                     'fax'        => substr ($from, -13),
                     'use_for_shipping' => 1,
@@ -759,8 +760,8 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
                             'street'     => array ($matches [1], $matches [2], null, $matches [3]),
                             'city'       => Mage::getStoreConfig ('shipping/origin/city', $storeId),
                             'region'     => Mage::getStoreConfig ('shipping/origin/region_id', $storeId),
+                            'country_id' => Mage::getStoreConfig ('shipping/origin/country_id', $storeId),
                             'postcode'   => $shippingPostcode,
-                            'country_id' => 'BR',
                             'telephone'  => null,
                             'fax'        => substr ($chat->getNumber (), -13),
                             'use_for_shipping' => 1,
