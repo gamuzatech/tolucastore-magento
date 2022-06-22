@@ -77,7 +77,7 @@ foreach ($entities as $entity)
             'type'     => Varien_Db_Ddl_Table::TYPE_DECIMAL,
             'length'   => '16,8',
             'unsigned' => true,
-            'nullable' => true,
+            'nullable' => false,
             'comment'  => 'PagCripto Amount',
         ));
 }
