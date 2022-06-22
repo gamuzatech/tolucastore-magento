@@ -131,7 +131,8 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
         'base_amount_refunded', 'amount_ordered', 'base_amount_canceled',
         'base_customer_balance_amount', 'base_customer_balance_invoiced', 'base_customer_balance_refunded',
         'customer_balance_amount', 'customer_balance_invoiced', 'customer_balance_refunded',
-        'bs_customer_bal_total_refunded', 'customer_bal_total_refunded'
+        'bs_customer_bal_total_refunded', 'customer_bal_total_refunded',
+        'pagcripto_amount', 'pagcripto_received_amount',
     );
 
     protected $_intAttributes = array(
