@@ -118,6 +118,9 @@ class Gamuza_Mobile_Model_Cart_Customer_Api extends Mage_Checkout_Model_Cart_Cus
                         }
                     }
 
+                    $quote->setCustomerFirstname($address->getFirstname());
+                    $quote->setCustomerLastname($address->getLastname());
+
                     $quote->setBillingAddress($address);
 
                     break;
