@@ -66,7 +66,7 @@ class Gamuza_PagCripto_Model_Payment_Method_Payment extends Mage_Payment_Model_M
             'amount' => $order->getBaseGrandTotal (),
             'description' => sprintf ('%s %s (%s)',
                 Mage::helper ('pagcripto')->__('Order'),
-                $storeName, $order->getIncrementId ()
+                $order->getIncrementId (), $storeName,
             ),
             'callback' => str_replace (':81', '.local', $callbackUrl),
         );

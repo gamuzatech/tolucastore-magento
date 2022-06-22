@@ -106,14 +106,19 @@ class Gamuza_PicPay_Helper_Data extends Mage_Core_Helper_Abstract
 
     public function getOrderReferenceId ($order)
     {
+        /*
         $result = Mage::helper ('core')->formatDate(
             $order->getCreatedAt (),
             Mage_Core_Model_Locale::FORMAT_TYPE_MEDIUM,
             true
         );
+        */
 
         return sprintf ('%s-%s', $order->getIncrementId (),
+            /*
             str_replace (array ('/', ':', ' '), '-', $result))
+            */
+            $order->getProtectCode())
         ;
     }
 }
