@@ -108,10 +108,13 @@ class Gamuza_Mobile_Model_Cart_Api extends Mage_Checkout_Model_Api_Resource
      */
     public function createOrder($store = null, $agreements = null)
     {
-        $incrementId = $this->_createOrder ($store, $agreements);
+        $order = $this->_createOrder ($store, $agreements);
 
         $result = array(
-            'increment_id' => $incrementId,
+            'order' => array(
+                'increment_id' => $order->getIncrementId(),
+                'protect_code' => $order->getProtectCode(),
+            ),
             'pagcripto'    => null,
             'picpay'       => null,
             'openpix'      => null,
@@ -276,7 +279,7 @@ class Gamuza_Mobile_Model_Cart_Api extends Mage_Checkout_Model_Api_Resource
             $this->_fault('create_order_fault', $e->getMessage());
         }
 
-        return $order->getIncrementId();
+        return $order;
     }
 
     /**
