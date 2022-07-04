@@ -1,0 +1,8 @@
+<?php
+/** @var RicardoMartins_PagSeguro_Block_Form_Redirect $this */
+$_code=$this->getMethodCode();
+$_redirModel = Mage::getModel('ricardomartins_pagseguropro/payment_redirect');
+?>
+<ul class="form-list" id="payment_form_<?php echo $_code ?>" style="display:none;">
+    <li><?php echo $_redirModel->getStoreConfig('description');?></li>
+</ul>

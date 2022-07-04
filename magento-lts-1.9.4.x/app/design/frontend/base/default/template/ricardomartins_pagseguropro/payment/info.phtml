@@ -1,0 +1,3 @@
+<?php if($paymentInfo = $this->getPaymentInfo()):?>
+<input type="button" onclick="popWin('<?php echo $paymentInfo['url']?>','payment','');" value="<?php echo $paymentInfo['texto']?>"/>
+<?php endif; ?>

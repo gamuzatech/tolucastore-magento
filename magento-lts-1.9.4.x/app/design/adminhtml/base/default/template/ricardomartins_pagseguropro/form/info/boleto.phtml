@@ -1,0 +1,18 @@
+<?php
+/** @var RicardoMartins_PagSeguroPro_Block_Form_Info_Boleto $this */
+$_info = $this->getInfo();
+$_method = $this->getMethod();
+$_additional = $_info->getAdditionalInformation();
+$_transactionId = $_info->getAdditionalInformation('transaction_id');
+?>
+<strong><?php echo $_method->getTitle();?></strong>
+<br/>
+Id da Transação: <?php echo $_transactionId;?>
+<?php echo sprintf(' | <a href="%s" target="_blank">Ver no PagSeguro</a>', 'https://pagseguro.uol.com.br/transaction/details.jhtml?code=' . $_transactionId);?>
+<br/>
+<a href="<?php echo $_info->getAdditionalInformation('boletoUrl');?>" target="_blank">Exibir Boleto</a>
+<?php if(isset($_additional['net_amount']) && isset($_additional['fee_amount'])):?>
+    <br/>
+    Taxa PagSeguro: <?php echo  Mage::helper('core')->formatCurrency($_additional['fee_amount']);?> <a href="https://pagsegurotransparente.zendesk.com/hc/pt-br/articles/360036394951" title="Mais informações" target="_blank"><?="\u{2139}"?></a> | Total líquido a receber: <?php echo  Mage::helper('core')->formatCurrency($_additional['net_amount']);?>
+    <br/>
+<?php endif;?>
