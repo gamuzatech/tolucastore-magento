@@ -32,6 +32,20 @@ class Gamuza_Mobile_Model_Cart_Api extends Mage_Checkout_Model_Api_Resource
         'price', 'base_price', 'custom_price', 'discount_percent', 'row_total', 'base_row_total', 'row_total_with_discount', 'row_weight'
     );
 
+    protected $_orderAttributes = array(
+        'increment_id', 'protect_code', 'coupon_code',
+        'shipping_method', 'shipping_description',
+        'base_shipping_discount_amount',
+        'base_discount_amount', 'base_shipping_amount', 'base_tax_amount',
+        'base_subtotal', 'base_grand_total',
+        'total_item_count', 'total_qty_ordered',
+        'base_currency_code',
+        'customer_firstname', 'customer_lastname', 'customer_taxvat',
+        'weight', 'bot_type',
+        'is_app', 'is_bot', 'is_zap',
+        'is_openpix', 'is_pagcripto', 'is_picpay',
+    );
+
     /**
      * Retrieve amount information about quote
      *
@@ -111,10 +125,7 @@ class Gamuza_Mobile_Model_Cart_Api extends Mage_Checkout_Model_Api_Resource
         $order = $this->_createOrder ($store, $agreements);
 
         $result = array(
-            'order' => array(
-                'increment_id' => $order->getIncrementId(),
-                'protect_code' => $order->getProtectCode(),
-            ),
+            'order' => $this->_getAttributes ($order, 'order', $this->_orderAttributes),
             'pagcripto'    => null,
             'picpay'       => null,
             'openpix'      => null,
@@ -122,7 +133,7 @@ class Gamuza_Mobile_Model_Cart_Api extends Mage_Checkout_Model_Api_Resource
 
         if (Mage::helper ('core')->isModuleEnabled ('Gamuza_PagCripto'))
         {
-            $transaction = Mage::getModel ('pagcripto/transaction')->load ($incrementId, 'order_increment_id');
+            $transaction = Mage::getModel ('pagcripto/transaction')->load ($order->getIncrementId(), 'order_increment_id');
 
             if ($transaction && $transaction->getId ())
             {
@@ -137,7 +148,7 @@ class Gamuza_Mobile_Model_Cart_Api extends Mage_Checkout_Model_Api_Resource
 
         if (Mage::helper ('core')->isModuleEnabled ('Gamuza_PicPay'))
         {
-            $transaction = Mage::getModel ('picpay/transaction')->load ($incrementId, 'order_increment_id');
+            $transaction = Mage::getModel ('picpay/transaction')->load ($order->getIncrementId(), 'order_increment_id');
 
             if ($transaction && $transaction->getId ())
             {
@@ -150,7 +161,7 @@ class Gamuza_Mobile_Model_Cart_Api extends Mage_Checkout_Model_Api_Resource
 
         if (Mage::helper ('core')->isModuleEnabled ('Gamuza_OpenPix'))
         {
-            $transaction = Mage::getModel ('openpix/transaction')->load ($incrementId, 'order_increment_id');
+            $transaction = Mage::getModel ('openpix/transaction')->load ($order->getIncrementId(), 'order_increment_id');
 
             if ($transaction && $transaction->getId ())
             {
