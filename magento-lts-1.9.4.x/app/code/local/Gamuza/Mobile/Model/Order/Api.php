@@ -27,7 +27,7 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
     }
 
     protected $_orderAttributes = array(
-        'state', 'status', 'coupon_code', 'shipping_description', 'is_virtual',
+        'state', 'status', 'coupon_code', 'protect_code', 'shipping_description', 'is_virtual',
         'base_discount_amount', 'base_discount_canceled',
         'base_discount_invoiced', 'base_discount_refunded',
         'base_grand_total', 'base_shipping_amount',
@@ -269,11 +269,16 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
      * @param string $orderIncrementId
      * @return array
      */
-    public function info($orderIncrementId = null, $store = null)
+    public function info($orderIncrementId = null, $orderProtectCode = null, $store = null)
     {
         if (empty ($orderIncrementId))
         {
             $this->_fault ('order_not_specified');
+        }
+
+        if (empty ($orderProtectCode))
+        {
+            $this->_fault ('code_not_specified');
         }
 
         $order = $this->_initOrder($orderIncrementId);
@@ -483,11 +488,16 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
      * @param  string $comment
      * @return boolean
      */
-    public function rate ($orderIncrementId = null, $stars = null, $comment = null, $store = null)
+    public function rate ($orderIncrementId = null, $orderProtectCode = null, $stars = null, $comment = null, $store = null)
     {
         if (empty ($orderIncrementId))
         {
             $this->_fault ('order_not_specified');
+        }
+
+        if (empty ($orderProtectCode))
+        {
+            $this->_fault ('code_not_specified');
         }
 
         if (empty ($stars))
@@ -539,11 +549,16 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
      * @param  string $store
      * @return boolean
      */
-    public function reorder ($orderIncrementId = null, $store = null)
+    public function reorder ($orderIncrementId = null, $orderProtectCode = null, $store = null)
     {
         if (empty ($orderIncrementId))
         {
             $this->_fault ('order_not_specified');
+        }
+
+        if (empty ($orderProtectCode))
+        {
+            $this->_fault ('code_not_specified');
         }
 
         if (empty ($store))

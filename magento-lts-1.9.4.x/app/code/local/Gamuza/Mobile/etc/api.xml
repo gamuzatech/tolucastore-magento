@@ -482,6 +482,10 @@
                         <code>1000</code>
                         <message>Can not make operation because store is not exists</message>
                     </store_not_exists>
+                    <code_not_specified>
+                        <code>1100</code>
+                        <message>Requested code not specified.</message>
+                    </code_not_specified>
                 </faults>
             </mobile_order>
         </resources>
