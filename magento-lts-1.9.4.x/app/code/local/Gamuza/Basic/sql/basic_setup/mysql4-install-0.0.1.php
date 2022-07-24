@@ -99,6 +99,7 @@ $coreConfig->saveConfig ('sales/gift_options/allow_items', '0');
 /**
  * Sales Email
  */
+/*
 $coreConfig->saveConfig (Mage_Sales_Model_Order::XML_PATH_EMAIL_ENABLED,                   '0');
 $coreConfig->saveConfig (Mage_Sales_Model_Order::XML_PATH_UPDATE_EMAIL_ENABLED,            '0');
 $coreConfig->saveConfig (Mage_Sales_Model_Order_Invoice::XML_PATH_EMAIL_ENABLED,           '0');
@@ -107,6 +108,7 @@ $coreConfig->saveConfig (Mage_Sales_Model_Order_Shipment::XML_PATH_EMAIL_ENABLED
 $coreConfig->saveConfig (Mage_Sales_Model_Order_Shipment::XML_PATH_UPDATE_EMAIL_ENABLED,   '0');
 $coreConfig->saveConfig (Mage_Sales_Model_Order_Creditmemo::XML_PATH_EMAIL_ENABLED,        '0');
 $coreConfig->saveConfig (Mage_Sales_Model_Order_Creditmemo::XML_PATH_UPDATE_EMAIL_ENABLED, '0');
+*/
 
 /**
  * Tax
