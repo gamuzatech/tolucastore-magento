@@ -232,10 +232,6 @@
     </frontend>
     <default>
         <payment>
-            <checkmo>
-                <active>0</active>
-                <model>mobile/payment_method_checkmo</model>
-            </checkmo>
             <cashondelivery>
                 <model>mobile/payment_method_cashondelivery</model>
             </cashondelivery>

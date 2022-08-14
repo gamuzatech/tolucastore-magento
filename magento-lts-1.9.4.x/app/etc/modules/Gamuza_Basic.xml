@@ -22,6 +22,7 @@
                 <Mage_Customer />
                 <Mage_Directory />
                 <Mage_Page />
+                <Mage_Payment />
                 <Mage_Shipping />
                 <Mage_Reports />
                 <Mage_Sales />
