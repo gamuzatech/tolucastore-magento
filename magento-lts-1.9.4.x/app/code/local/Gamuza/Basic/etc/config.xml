@@ -509,12 +509,15 @@
             </tablerate>
         </carriers>
         <payment>
-            <checkmo>
-                <model>0</model>
-            </checkmo>
             <cashondelivery>
                 <active>1</active>
             </cashondelivery>
+            <checkmo>
+                <model>0</model>
+            </checkmo>
+            <purchaseorder>
+                <model>0</model>
+            </purchaseorder>
         </payment>
     </default>
 </config>
