@@ -25,6 +25,9 @@
             <pagseguro_cc>
                 <model>0</model>
             </pagseguro_cc>
+            <pagseguropro_tef>
+                <model>0</model>
+            </pagseguropro_tef>
             <pagseguropro_retry>
                 <model>0</model>
             </pagseguropro_retry>
