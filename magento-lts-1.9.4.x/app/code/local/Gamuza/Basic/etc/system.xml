@@ -31,6 +31,24 @@
                 </store_information>
             </groups>
         </general>
+        <web>
+            <groups>
+                <session>
+                    <fields>
+                        <use_admin_sid translate="label comment">
+                            <label>Use SID on Admin</label>
+                            <comment>Allows admins to stay logged in via SID.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </use_admin_sid>
+                    </fields>
+                </session>
+            </groups>
+        </web>
         <shipping>
             <tab>gamuza</tab>
             <groups>
@@ -181,6 +199,23 @@
                 </tablerate>
             </groups>
         </carriers>
+        <payment>
+            <tab>gamuza</tab>
+            <groups>
+                <!-- checkmo: HIDDEN -->
+                <checkmo translate="label">
+                    <show_in_default>0</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                </checkmo>
+                <!-- free: HIDDEN -->
+                <free translate="label">
+                    <show_in_default>0</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                </free>
+            </groups>
+        </payment>
     </sections>
 </config>
 

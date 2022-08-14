@@ -21,6 +21,10 @@ $coreConfig->saveConfig ('general/country/allow', 'BR');
  * Web
  */
 $coreConfig->saveConfig (Mage_Core_Model_Cookie::XML_PATH_COOKIE_LIFETIME, '86400');
+$coreConfig->saveConfig (Mage_Core_Model_Cookie::XML_PATH_COOKIE_PATH, '/');
+
+$coreConfig->saveconfig (Mage_Core_Model_Session_Abstract::XML_PATH_USE_FRONTEND_SID, '0');
+$coreConfig->saveConfig (Mage_Admin_Model_Session::XML_PATH_ALLOW_SID_FOR_ADMIN_AREA, '1');
 
 /**
  * Design
@@ -67,8 +71,10 @@ $coreConfig->saveConfig ('cataloginventory/item_options/auto_return', '1');
  */
 $coreConfig->saveConfig (Mage_Customer_Model_Config_Share::XML_PATH_CUSTOMER_ACCOUNT_SHARE, '0');
 $coreConfig->saveConfig (Mage_Customer_Model_Customer::XML_PATH_DEFAULT_EMAIL_DOMAIN, 'toluca.com.br');
+$coreConfig->saveConfig (Mage_Customer_Model_Customer::XML_PATH_IS_CONFIRM, '0');
 
-$coreConfig->saveConfig ('customer/password/require_admin_user_to_change_user_password', 0);
+$coreConfig->saveConfig ('customer/online_customers/online_minutes_interval', '1');
+$coreConfig->saveConfig ('customer/password/require_admin_user_to_change_user_password', '0');
 
 $coreConfig->saveConfig ('customer/address/street_lines',    '4');
 $coreConfig->saveConfig ('customer/address/middlename_show', '0');
@@ -93,6 +99,7 @@ $coreConfig->saveConfig ('sales/gift_options/allow_items', '0');
 /**
  * Sales Email
  */
+/*
 $coreConfig->saveConfig (Mage_Sales_Model_Order::XML_PATH_EMAIL_ENABLED,                   '0');
 $coreConfig->saveConfig (Mage_Sales_Model_Order::XML_PATH_UPDATE_EMAIL_ENABLED,            '0');
 $coreConfig->saveConfig (Mage_Sales_Model_Order_Invoice::XML_PATH_EMAIL_ENABLED,           '0');
@@ -101,6 +108,7 @@ $coreConfig->saveConfig (Mage_Sales_Model_Order_Shipment::XML_PATH_EMAIL_ENABLED
 $coreConfig->saveConfig (Mage_Sales_Model_Order_Shipment::XML_PATH_UPDATE_EMAIL_ENABLED,   '0');
 $coreConfig->saveConfig (Mage_Sales_Model_Order_Creditmemo::XML_PATH_EMAIL_ENABLED,        '0');
 $coreConfig->saveConfig (Mage_Sales_Model_Order_Creditmemo::XML_PATH_UPDATE_EMAIL_ENABLED, '0');
+*/
 
 /**
  * Tax

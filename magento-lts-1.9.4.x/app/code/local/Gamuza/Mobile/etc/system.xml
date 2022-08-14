@@ -18,18 +18,6 @@
         <payment>
             <tab>gamuza</tab>
             <groups>
-                <!-- checkmo: DISABLED -->
-                <checkmo translate="label">
-                    <show_in_default>0</show_in_default>
-                    <show_in_website>0</show_in_website>
-                    <show_in_store>0</show_in_store>
-                </checkmo>
-                <!-- free: DISABLED -->
-                <free translate="label">
-                    <show_in_default>0</show_in_default>
-                    <show_in_website>0</show_in_website>
-                    <show_in_store>0</show_in_store>
-                </free>
                 <machineondelivery translate="label">
                     <label>Machine On Delivery Payment</label>
                     <frontend_type>text</frontend_type>
@@ -131,3 +119,4 @@
         </payment>
     </sections>
 </config>
+
