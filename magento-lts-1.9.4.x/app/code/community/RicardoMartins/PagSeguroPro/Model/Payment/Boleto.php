@@ -40,6 +40,9 @@ class RicardoMartins_PagSeguroPro_Model_Payment_Boleto extends RicardoMartins_Pa
     {
         /** @var Mage_Sales_Model_Order $order */
         $order = $payment->getOrder();
+
+        $order->setState(Mage_Sales_Model_Order::STATE_PAYMENT_REVIEW, true);
+
         $helper = Mage::helper('ricardomartins_pagseguropro/internal');
         $rmHelper = Mage::helper('ricardomartins_pagseguro');
 
