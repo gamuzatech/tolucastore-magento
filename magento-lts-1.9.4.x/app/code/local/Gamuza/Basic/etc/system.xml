@@ -202,18 +202,22 @@
         <payment>
             <tab>gamuza</tab>
             <groups>
-                <!-- checkmo: HIDDEN -->
+                <!-- HIDDEN -->
                 <checkmo translate="label">
                     <show_in_default>0</show_in_default>
                     <show_in_website>0</show_in_website>
                     <show_in_store>0</show_in_store>
                 </checkmo>
-                <!-- free: HIDDEN -->
                 <free translate="label">
                     <show_in_default>0</show_in_default>
                     <show_in_website>0</show_in_website>
                     <show_in_store>0</show_in_store>
                 </free>
+                <purchaseorder translate="label">
+                    <show_in_default>0</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                </purchaseorder>
             </groups>
         </payment>
     </sections>
