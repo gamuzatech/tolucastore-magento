@@ -95,4 +95,9 @@ class RicardoMartins_PagSeguroPro_Model_Payment_Boleto extends RicardoMartins_Pa
         }
         return parent::isAvailable($quote);
     }
+
+    public function getInstructions()
+    {
+        return trim($this->getConfigData('instructions'));
+    }
 }

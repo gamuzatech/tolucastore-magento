@@ -66,6 +66,7 @@
                 <model>ricardomartins_pagseguropro/payment_boleto</model>
                 <allowspecific>0</allowspecific>
                 <!--<specificcountry>BR</specificcountry>-->
+                <instructions><![CDATA[O boleto poderá ser impresso após a finalização do pedido.]]></instructions>
             </pagseguropro_boleto>
             <pagseguropro_tef>
                 <active>0</active>
