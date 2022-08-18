@@ -129,9 +129,13 @@ class Gamuza_Mobile_Model_Cart_Api extends Mage_Checkout_Model_Api_Resource
             'pagcripto'    => null,
             'picpay'       => null,
             'openpix'      => null,
+            'pagseguropro' => null,
         );
 
-        if (Mage::helper ('core')->isModuleEnabled ('Gamuza_PagCripto'))
+        $payment = $order->getPayment ();
+
+        if (Mage::helper ('core')->isModuleEnabled ('Gamuza_PagCripto')
+            && !strcmp ($payment->getMethod (), Gamuza_PagCripto_Model_Payment_Method_Payment::CODE))
         {
             $transaction = Mage::getModel ('pagcripto/transaction')->load ($order->getIncrementId(), 'order_increment_id');
 
@@ -146,7 +150,8 @@ class Gamuza_Mobile_Model_Cart_Api extends Mage_Checkout_Model_Api_Resource
             }
         }
 
-        if (Mage::helper ('core')->isModuleEnabled ('Gamuza_PicPay'))
+        if (Mage::helper ('core')->isModuleEnabled ('Gamuza_PicPay')
+            && !strcmp ($payment->getMethod (), Gamuza_PicPay_Model_Payment_Method_Payment::CODE))
         {
             $transaction = Mage::getModel ('picpay/transaction')->load ($order->getIncrementId(), 'order_increment_id');
 
@@ -159,7 +164,8 @@ class Gamuza_Mobile_Model_Cart_Api extends Mage_Checkout_Model_Api_Resource
             }
         }
 
-        if (Mage::helper ('core')->isModuleEnabled ('Gamuza_OpenPix'))
+        if (Mage::helper ('core')->isModuleEnabled ('Gamuza_OpenPix')
+            && !strcmp ($payment->getMethod (), Gamuza_OpenPix_Model_Payment_Method_Payment::CODE))
         {
             $transaction = Mage::getModel ('openpix/transaction')->load ($order->getIncrementId(), 'order_increment_id');
 
@@ -170,6 +176,15 @@ class Gamuza_Mobile_Model_Cart_Api extends Mage_Checkout_Model_Api_Resource
                     'url'    => $transaction->getPaymentLinkUrl (),
                 );
             }
+        }
+
+        if (Mage::helper ('core')->isModuleEnabled ('RicardoMartins_PagSeguroPro')
+            && !strcmp ($payment->getMethod (), RicardoMartins_PagSeguroPro_Model_Payment_Boleto::CODE))
+        {
+            $result ['pagseguropro'] = array (
+                'transaction_id' => $payment->getAdditionalInformation ('transaction_id'),
+                'billet_url'     => $payment->getAdditionalInformation ('boletoUrl'),
+            );
         }
 
         return $result;
