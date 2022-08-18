@@ -430,20 +430,21 @@ class Toluca_Bot_Helper_Message extends Mage_Core_Helper_Abstract
         return $this->__('Thank you for shopping at store *%s*!', $storeName);
     }
 
-    public function getYourOrderNumberText ($incrementId)
+    public function getYourOrderNumberText ($order)
     {
-        return $this->__('Your order number is *%s*', $incrementId);
+        return $this->__('Your order number is *%s-%s*', $order->getIncrementId (), $order->getProtectCode ());
     }
 
     public function getOrderInformationText ($order)
     {
-        $incrementId = $order->getIncrementId ();
-
         $result = null;
 
-        if (Mage::helper ('core')->isModuleEnabled ('Gamuza_PagCripto'))
+        $payment = $order->getPayment ();
+
+        if (Mage::helper ('core')->isModuleEnabled ('Gamuza_PagCripto')
+            && !strcmp ($payment->getMethod (), Gamuza_PagCripto_Model_Payment_Method_Payment::CODE))
         {
-            $transaction = Mage::getModel ('pagcripto/transaction')->load ($incrementId, 'order_increment_id');
+            $transaction = Mage::getModel ('pagcripto/transaction')->load ($order->getIncrementId(), 'order_increment_id');
 
             if ($transaction && $transaction->getId ())
             {
@@ -455,9 +456,10 @@ class Toluca_Bot_Helper_Message extends Mage_Core_Helper_Abstract
             }
         }
 
-        if (Mage::helper ('core')->isModuleEnabled ('Gamuza_PicPay'))
+        if (Mage::helper ('core')->isModuleEnabled ('Gamuza_PicPay')
+            && !strcmp ($payment->getMethod (), Gamuza_PicPay_Model_Payment_Method_Payment::CODE))
         {
-            $transaction = Mage::getModel ('picpay/transaction')->load ($incrementId, 'order_increment_id');
+            $transaction = Mage::getModel ('picpay/transaction')->load ($order->getIncrementId(), 'order_increment_id');
 
             if ($transaction && $transaction->getId ())
             {
@@ -467,9 +469,10 @@ class Toluca_Bot_Helper_Message extends Mage_Core_Helper_Abstract
             }
         }
 
-        if (Mage::helper ('core')->isModuleEnabled ('Gamuza_OpenPix'))
+        if (Mage::helper ('core')->isModuleEnabled ('Gamuza_OpenPix')
+            && !strcmp ($payment->getMethod (), Gamuza_OpenPix_Model_Payment_Method_Payment::CODE))
         {
-            $transaction = Mage::getModel ('openpix/transaction')->load ($incrementId, 'order_increment_id');
+            $transaction = Mage::getModel ('openpix/transaction')->load ($order->getIncrementId(), 'order_increment_id');
 
             if ($transaction && $transaction->getId ())
             {
@@ -477,6 +480,14 @@ class Toluca_Bot_Helper_Message extends Mage_Core_Helper_Abstract
                     . $transaction->getPaymentLinkUrl () . PHP_EOL . PHP_EOL
                 ;
             }
+        }
+
+        if (Mage::helper ('core')->isModuleEnabled ('RicardoMartins_PagSeguroPro')
+            && !strcmp ($payment->getMethod (), RicardoMartins_PagSeguroPro_Model_Payment_Boleto::CODE))
+        {
+            $result .= $this->__('Click on the link to make the payment via PagSeguro:') . PHP_EOL . PHP_EOL
+                . $payment->getAdditionalInformation ('boletoUrl') . PHP_EOL . PHP_EOL
+            ;
         }
 
         if ($order->getPayment ()->getMethod () == Mage_Payment_Model_Method_Banktransfer::PAYMENT_METHOD_BANKTRANSFER_CODE)
