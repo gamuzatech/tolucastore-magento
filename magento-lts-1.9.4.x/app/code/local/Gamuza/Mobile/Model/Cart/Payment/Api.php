@@ -51,6 +51,8 @@ class Gamuza_Mobile_Model_Cart_Payment_Api extends Mage_Checkout_Model_Cart_Paym
                         'base_grand_total' => floatval ($quote->getBaseGrandTotal ()),
                         /* creditcard */
                         'installments' => $this->_getCcAvailableInstallments ($quote, $method),
+                        /* pagseguro */
+                        'session_id' => $this->_getRemoteSessionId ($quote, $method),
                         /* checkmo */
                         'mailing_address' => $method->getConfigData('mailing_address'),
                         /* banktransfer */
