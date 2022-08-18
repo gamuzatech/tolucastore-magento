@@ -50,9 +50,10 @@ class Gamuza_OpenPix_Model_Payment_Method_Payment extends Mage_Payment_Model_Met
         $post = array(
             'correlationID' => $correlationId,
             'value'     => $orderAmount,
-            'comment'   => sprintf ('%s %s (%s)',
+            'comment'   => sprintf ('%s %s-%s (%s)',
                 Mage::helper ('openpix')->__('Order'),
-                $order->getIncrementId (), $storeName,
+                $order->getIncrementId (), $order->getProtectCode(),
+                $storeName,
             ),
             'expiresIn' => self::EXPIRES_IN_SECONDS,
             'customer' => array(
@@ -68,7 +69,7 @@ class Gamuza_OpenPix_Model_Payment_Method_Payment extends Mage_Payment_Model_Met
                 ),
                 array(
                     'key'   => Mage::helper ('openpix')->__('Order'),
-                    'value' => $order->getIncrementId (),
+                    'value' => sprintf ('%s-%s', $order->getIncrementId (), $order->getProtectCode ()),
                 ),
             ),
         );
