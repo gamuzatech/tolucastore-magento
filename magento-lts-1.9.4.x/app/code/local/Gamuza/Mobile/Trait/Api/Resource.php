@@ -163,5 +163,18 @@ trait Gamuza_Mobile_Trait_Api_Resource
     {
         return null;
     }
+
+    public function _getRemoteSessionId ($quote, $method)
+    {
+        $result = null;
+
+        if (Mage::helper ('core')->isModuleEnabled ('RicardoMartins_PagSeguro')
+            && !strcmp ($method->getCode (), RicardoMartins_PagSeguro_Model_Payment_Cc::CODE))
+        {
+            $result = Mage::helper ('ricardomartins_pagseguro')->getSessionId ();
+        }
+
+        return $result;
+    }
 }
 
