@@ -52,6 +52,8 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
         '4' => 'gamuza_pagcripto_payment',
         '5' => 'gamuza_picpay_payment',
         '6' => 'gamuza_openpix_payment',
+
+        '7' => 'pagseguropro_boleto',
     );
 
     protected $_paymentCcTypes = array(
@@ -1120,7 +1122,7 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
 
                     $order = Mage::getModel ('sales/order')->loadByIncrementId ($incrementId);
 
-                    $result = Mage::helper ('bot/message')->getYourOrderNumberText ($incrementId) . PHP_EOL . PHP_EOL
+                    $result = Mage::helper ('bot/message')->getYourOrderNumberText ($order) . PHP_EOL . PHP_EOL
                         . Mage::helper ('bot/message')->getOrderInformationText ($order)
                         . Mage::helper ('bot/message')->getThankYouForShoppingText ($storeName) . PHP_EOL . PHP_EOL
                         . Mage::helper ('bot/message')->getBuyThroughTheAppText ()
