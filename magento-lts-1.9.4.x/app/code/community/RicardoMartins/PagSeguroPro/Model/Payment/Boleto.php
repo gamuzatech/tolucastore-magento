@@ -1,7 +1,9 @@
 <?php
 class RicardoMartins_PagSeguroPro_Model_Payment_Boleto extends RicardoMartins_PagSeguro_Model_Abstract
 {
-    protected $_code = 'pagseguropro_boleto';
+    const CODE = 'pagseguropro_boleto';
+
+    protected $_code = self::CODE;
     protected $_formBlockType = 'ricardomartins_pagseguropro/form_boleto';
     protected $_infoBlockType = 'ricardomartins_pagseguropro/form_info_boleto';
     protected $_isGateway = true;
