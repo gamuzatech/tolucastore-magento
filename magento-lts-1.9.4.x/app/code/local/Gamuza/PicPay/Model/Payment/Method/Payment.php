@@ -36,14 +36,10 @@ class Gamuza_PicPay_Model_Payment_Method_Payment extends Mage_Payment_Model_Meth
         /**
          * Transaction
          */
-        $storeCode = Mage::app ()->getStore ($order->getStoreId ())->getCode ();
-
         $callbackUrl = Mage::getUrl ('picpay/payment/callback', array(
             '_secure' => true,
             '_nosid'  => true,
-            '_query'  => array(
-                '___store' => $storeCode
-            )
+            '_store' => $order->getStoreId (),
         ));
 
         $customerTaxvat = preg_replace ('[\D]', '', $order->getCustomerTaxvat ());
@@ -54,7 +50,7 @@ class Gamuza_PicPay_Model_Payment_Method_Payment extends Mage_Payment_Model_Meth
 
         $post = array(
             'referenceId' => Mage::helper ('picpay')->getOrderReferenceId ($order),
-            'callbackUrl' => str_replace (':8080', '.local', $callbackUrl),
+            'callbackUrl' => $callbackUrl,
             'returnUrl'   => null,
             'value'       => floatval ($order->getBaseGrandTotal ()),
             'expiresAt'   => null,

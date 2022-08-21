@@ -51,14 +51,10 @@ class Gamuza_PagCripto_Model_Payment_Method_Payment extends Mage_Payment_Model_M
          */
         $storeName = Mage::getStoreConfig (Mage_Core_Model_Store::XML_PATH_STORE_STORE_NAME);
 
-        $storeCode = Mage::app ()->getStore ($order->getStoreId ())->getCode ();
-
         $callbackUrl = Mage::getUrl ('picpay/payment/callback', array(
             '_secure' => true,
             '_nosid'  => true,
-            '_query'  => array(
-                '___store' => $storeCode
-            )
+            '_store' => $order->getStoreId (),
         ));
 
         $post = array(
@@ -68,7 +64,7 @@ class Gamuza_PagCripto_Model_Payment_Method_Payment extends Mage_Payment_Model_M
                 Mage::helper ('pagcripto')->__('Order'),
                 $order->getIncrementId (), $storeName,
             ),
-            'callback' => str_replace (':81', '.local', $callbackUrl),
+            'callback' => $callbackUrl,
         );
 
         try
