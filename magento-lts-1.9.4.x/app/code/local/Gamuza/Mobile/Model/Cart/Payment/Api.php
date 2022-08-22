@@ -49,6 +49,7 @@ class Gamuza_Mobile_Model_Cart_Payment_Api extends Mage_Checkout_Model_Cart_Paym
                         'title' => $method->getTitle(),
                         'cc_types' => $this->_getPaymentMethodAvailableCcTypes($method),
                         'base_grand_total' => floatval ($quote->getBaseGrandTotal ()),
+                        'installment_limit' => intval ($method->getConfigData ('installment_limit')),
                         /* creditcard */
                         'installments' => $this->_getCcAvailableInstallments ($quote, $method),
                         /* pagseguro */
