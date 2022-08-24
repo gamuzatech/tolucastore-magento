@@ -111,7 +111,9 @@ class RicardoMartins_PagSeguroPro_Helper_Retry extends Mage_Core_Helper_Abstract
         $code = Mage::getModel('ricardomartins_pagseguropro/retry')->sendRetryPaymentRequest($order);
 
         if (false !== $code) {
-            return 'https://pagseguro.uol.com.br/v2/checkout/payment.html?code=' . $code;
+            $sandbox = strpos($order->getCustomerEmail(), '@sandbox.pagseguro') !== false;
+            $sandbox = ($sandbox) ? 'sandbox.' : '';
+            return "https://{$sandbox}pagseguro.uol.com.br/v2/checkout/payment.html?code={$code}";
         }
 
         return false;

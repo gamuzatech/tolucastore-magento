@@ -21,7 +21,9 @@ class RicardoMartins_PagSeguroPro_Model_Retry extends RicardoMartins_PagSeguro_M
     public function sendRetryPaymentRequest($order)
     {
         $rHelper = Mage::helper('ricardomartins_pagseguropro/retry');
-        if (!$rHelper->isRetryEnabled()) {
+        $helper = Mage::helper('ricardomartins_pagseguro');
+        $canRetry = method_exists($helper, 'canRetryOrder') && $helper->canRetryOrder($order);
+        if (!$canRetry) {
             return false;
         }
         $iHelper = Mage::helper('ricardomartins_pagseguropro/internal');

@@ -1,4 +1,28 @@
 #Histórico de Alterações
+
+** v. 3.5.4 - 9 Jul 2021 **
+- Opção de Download do boleto em PDF adicionado (sugerido por Frederico Marques de Castro @fredpiuma)
+- Botões da tela de sucesso (ver boleto, download boleto e clique para realizar pagamento) agora seguem o padrão de botões do magento. Ao atualizar, veja se os botões estão 'ok' na sua tela de sucesso.
+
+** v. 3.5.3 - 12 Mai 2021 **
+- Pix adicionado aos meios de pagamento aceitos no pagamento com redirect (por Fábio da Diamix)
+
+** v. 3.5.2 - 17 Mar 2021 **
+- Suporte a atualização manual de pedidos
+- Suporte a atualização automatica de pedidos (depende do modulo principal 3.11.x) 
+- Correção de link de retentativa quebrado em ambiente Sandbox
+- Correção em falha ao criar um pedido do tipo Kiosk em ambiente de Sandbox
+
+** v. 3.5.1 - 28 Abr 2020**
+- Correção em meio de pagamento "Redirecionar para o PagSeguro" que não funcionava em Magento < 1.9.1.0, gerando exceção na chamada do método queueNewOrderEmail. (Reportado por Anderson Aguiar) 
+
+** v. 3.5.0 - 28 Abr 2020**
+- Agora é possível escolher o URL de Redirect no checkout "Pagar com PagSeguro" (Redirect)
+- Retentativa e Recuperação de pedidos deixa de ser beta
+
+**v. 3.4.6 - 10 Abr 2020**
+- Adicionado compatibilidade com IWD Checkout (requer modulo principal >= 3.8.2)
+
 **v. 3.4.5 - 21 Nov 2019**
 - Melhorias nos blocos que exibem informações dos pedidos feitos com Boleto e TEF no admin. 
   - Agora é possível clicar para ver o pedido no PagSeguro

@@ -11,6 +11,8 @@
  */
 class RicardoMartins_PagSeguroPro_Model_Payment_Redirect extends RicardoMartins_PagSeguro_Model_Abstract
 {
+    const XML_PATH_REDIRECTURL = 'payment/pagseguropro_redirect/redirectURL';
+
     protected $_code = 'pagseguropro_redirect';
     protected $_formBlockType = 'ricardomartins_pagseguropro/form_redirect';
     protected $_infoBlockType = 'ricardomartins_pagseguropro/form_info_redirect';
@@ -101,8 +103,11 @@ class RicardoMartins_PagSeguroPro_Model_Payment_Redirect extends RicardoMartins_
         if (isset($returnXml->code)) {
             $code = (string)$returnXml->code;
             $redirUrl = 'https://pagseguro.uol.com.br/v2/checkout/payment.html?code=' . $code;
+            if (method_exists($rmHelper, 'isSandbox') && $rmHelper->isSandbox()) {
+                $redirUrl = 'https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code=' . $code;
+            }
             $payment->setAdditionalInformation(array('redirect_url' => $redirUrl));
-            $order->queueNewOrderEmail();
+            $order->sendNewOrderEmail();
             $this->setRedirectUrl($redirUrl);
         }
 

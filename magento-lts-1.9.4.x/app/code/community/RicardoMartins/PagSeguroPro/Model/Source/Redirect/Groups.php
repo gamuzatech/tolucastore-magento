@@ -16,7 +16,8 @@ class RicardoMartins_PagSeguroPro_Model_Source_Redirect_Groups
     {
         $options = array(
             array('value' => 'CREDIT_CARD',    'label' => 'Cartões de Crédito'),
-            array('value' => 'BOLETO', 'label' => 'Boleto')
+            array('value' => 'BOLETO', 'label' => 'Boleto'),
+            array('value' => 'PIX', 'label' => 'Pix')
         );
 
         return $options;

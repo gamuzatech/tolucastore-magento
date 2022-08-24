@@ -2,7 +2,7 @@
 <config>
     <modules>
         <RicardoMartins_PagSeguroPro>
-            <version>3.4.5</version>
+            <version>3.5.4</version>
         </RicardoMartins_PagSeguroPro>
     </modules>
     <global>
@@ -67,6 +67,7 @@
                 <allowspecific>0</allowspecific>
                 <!--<specificcountry>BR</specificcountry>-->
                 <instructions><![CDATA[O boleto poderá ser impresso após a finalização do pedido.]]></instructions>
+                <pdf_download>1</pdf_download>
             </pagseguropro_boleto>
             <pagseguropro_tef>
                 <active>0</active>
@@ -91,6 +92,7 @@
                 <enabled>1</enabled>
                 <model>ricardomartins_pagseguropro/payment_redirect</model>
                 <title>PagSeguro - Pagar no PagSeguro</title>
+                <redirectURL>checkout/onepage/success</redirectURL>
                 <payment_action>order</payment_action>
                 <description><![CDATA[Você será redirecionado para o PagSeguro onde poderá escolher a forma de pagamento desejada.]]></description>
                 <order_status>pending</order_status>

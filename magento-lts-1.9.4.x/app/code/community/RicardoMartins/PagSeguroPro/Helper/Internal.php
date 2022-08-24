@@ -89,6 +89,10 @@ class RicardoMartins_PagSeguroPro_Helper_Internal extends Mage_Core_Helper_Abstr
         $params['shippingAddressRequired'] = false;
         $params['paymentMethod'] = 'redirect';
 
+        if ($redirectURL = Mage::getStoreConfig(RicardoMartins_PagSeguroPro_Model_Payment_Redirect::XML_PATH_REDIRECTURL)) {
+            $params['redirectURL'] = Mage::getUrl($redirectURL, array('_secure'=>true));
+        }
+
         return $params;
     }
 

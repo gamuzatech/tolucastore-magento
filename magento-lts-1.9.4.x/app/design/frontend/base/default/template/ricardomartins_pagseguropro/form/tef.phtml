@@ -1,8 +1,11 @@
 <?php
 $_helper = Mage::helper('ricardomartins_pagseguropro');
 $_code=$this->getMethodCode();
+
+# IWD Checkout compatibility fix
+$iwdEnabled = method_exists(Mage::helper('ricardomartins_pagseguro'), 'isIwdEnabled') && Mage::helper('ricardomartins_pagseguro')->isIwdEnabled();
 ?>
-<ul class="form-list" id="payment_form_<?php echo $_code ?>" style="display:none;">
+<ul class="form-list" id="payment_form_<?php echo $_code ?>" style="<?php echo (!$iwdEnabled)?'display:none;':'';?>">
 <?php /*
     <li>
         <div class="input-box">

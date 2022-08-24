@@ -14,6 +14,7 @@ class RicardoMartins_PagSeguroPro_Block_Payment_Info extends Mage_Core_Block_Tem
                     return array(
                         'tipo' => 'Boleto',
                         'url' => $order->getPayment()->getAdditionalInformation('boletoUrl'),
+                        'urlPdf' => $this->getBoletoPdfUrl($order->getPayment()),
                         'texto' => 'Clique aqui para imprimir seu boleto',
                     );
                     break;
@@ -27,5 +28,19 @@ class RicardoMartins_PagSeguroPro_Block_Payment_Info extends Mage_Core_Block_Tem
             }
         }
         return false;
+    }
+
+    /**
+     * Checks if option to download PDF Bank Billet is enabled
+     * @return bool
+     */
+    public function showDownloadPdf()
+    {
+        return Mage::getStoreConfigFlag('payment/pagseguropro_boleto/pdf_download');
+    }
+    
+    public function getBoletoPdfUrl($payment)
+    {
+        return str_replace('print.', 'download_pdf.', $payment->getAdditionalInformation('boletoUrl'));
     }
 }
