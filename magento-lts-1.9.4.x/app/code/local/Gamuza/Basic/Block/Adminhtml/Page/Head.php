@@ -29,5 +29,15 @@ class Gamuza_Basic_Block_Adminhtml_Page_Head extends Gamuza_Basic_Block_Page_Htm
     {
         return Mage::getSingleton('core/session')->getFormKey();
     }
+
+    /**
+     * Retrieve Timeout Delay from Config
+     *
+     * @return string
+     */
+    public function getLoadingTimeout()
+    {
+        return (int)Mage::getStoreConfig('admin/design/loading_timeout');
+    }
 }
 
