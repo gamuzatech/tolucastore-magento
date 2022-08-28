@@ -10,6 +10,10 @@
     vertical-align: middle;
 }
 
+.grid tr.filter .range div.date {
+    display: inline;
+}
+
 .header-top {
     border-bottom: 1px solid #3a565f;
 }
