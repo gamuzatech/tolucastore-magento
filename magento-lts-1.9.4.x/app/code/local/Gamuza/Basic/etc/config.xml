@@ -42,7 +42,6 @@
                     <customer_online_grid>Gamuza_Basic_Block_Adminhtml_Customer_Online_Grid</customer_online_grid>
                     <page_head>Gamuza_Basic_Block_Adminhtml_Page_Head</page_head>
                     <sales_order_grid>Gamuza_Basic_Block_Adminhtml_Sales_Order_Grid</sales_order_grid>
-                    <widget_grid_column>Gamuza_Basic_Block_Adminhtml_Widget_Grid_Column</widget_grid_column>
                     <sales_order_create_customer_grid>Gamuza_Basic_Block_Adminhtml_Sales_Order_Create_Customer_Grid</sales_order_create_customer_grid>
                     <sales_order_creditmemo_view>Gamuza_Basic_Block_Adminhtml_Sales_Order_Creditmemo_View</sales_order_creditmemo_view>
                     <sales_order_invoice_view>Gamuza_Basic_Block_Adminhtml_Sales_Order_Invoice_View</sales_order_invoice_view>
@@ -50,6 +49,7 @@
                     <sales_order_view>Gamuza_Basic_Block_Adminhtml_Sales_Order_View</sales_order_view>
                     <sales_order_view_info>Gamuza_Basic_Block_Adminhtml_Sales_Order_View_Info</sales_order_view_info>
                     <template>Gamuza_Basic_Block_Adminhtml_Template</template>
+                    <widget_grid_column>Gamuza_Basic_Block_Adminhtml_Widget_Grid_Column</widget_grid_column>
                 </rewrite>
             </adminhtml>
             <customer>
