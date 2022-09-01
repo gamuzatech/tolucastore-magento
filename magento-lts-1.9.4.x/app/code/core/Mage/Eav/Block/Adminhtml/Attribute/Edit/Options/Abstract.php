@@ -15,7 +15,7 @@
  * @category   Mage
  * @package    Mage_Eav
  * @copyright  Copyright (c) 2006-2020 Magento, Inc. (http://www.magento.com)
- * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @license    https://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
 /**
@@ -85,7 +85,7 @@ abstract class Mage_Eav_Block_Adminhtml_Attribute_Edit_Options_Abstract extends 
     /**
      * Retrieve stores collection with default store
      *
-     * @return Mage_Core_Model_Mysql4_Store_Collection
+     * @return Mage_Core_Model_Resource_Store_Collection
      */
     public function getStores()
     {

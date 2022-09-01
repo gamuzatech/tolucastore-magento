@@ -297,7 +297,7 @@ class Mage_Adminhtml_Block_Widget_Grid extends Mage_Adminhtml_Block_Widget
     /**
      * set collection object
      *
-     * @param Varien_Data_Collection $collection
+     * @param Varien_Data_Collection|Varien_Data_Collection_Db $collection
      */
     public function setCollection($collection)
     {
@@ -307,7 +307,7 @@ class Mage_Adminhtml_Block_Widget_Grid extends Mage_Adminhtml_Block_Widget
     /**
      * get collection object
      *
-     * @return Varien_Data_Collection
+     * @return Varien_Data_Collection|Varien_Data_Collection_Db
      */
     public function getCollection()
     {
@@ -484,6 +484,8 @@ class Mage_Adminhtml_Block_Widget_Grid extends Mage_Adminhtml_Block_Widget
     }
 
     /**
+     * Add filter
+     *
      * @param Mage_Adminhtml_Block_Widget_Grid_Column $column
      * @return $this
      */
@@ -496,7 +498,14 @@ class Mage_Adminhtml_Block_Widget_Grid extends Mage_Adminhtml_Block_Widget
             } else {
                 $cond = $column->getFilter()->getCondition();
                 if ($field && $cond !== null) {
-                    $this->getCollection()->addFieldToFilter($field , $cond);
+                    $filtered = array_map(static function ($value) {
+                        return is_object($value) ? $value->__toString() : $value;
+                    }, array_values($cond));
+                    if (in_array('\'%NULL%\'', $filtered, true) || in_array('NULL', $filtered, true)) {
+                        $this->getCollection()->addFieldToFilter($field, ['null' => true]);
+                    } else {
+                        $this->getCollection()->addFieldToFilter($field, $cond);
+                    }
                 }
             }
         }
@@ -601,6 +610,8 @@ class Mage_Adminhtml_Block_Widget_Grid extends Mage_Adminhtml_Block_Widget
     }
 
     /**
+     * Prepeare columns for grid
+     *
      * @return $this
      */
     protected function _prepareColumns()
