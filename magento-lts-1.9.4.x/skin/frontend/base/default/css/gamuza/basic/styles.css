@@ -33,6 +33,28 @@ header.header.sticky.mm-slideout {
     background-color: #54217c;
 }
 
+.logo {
+    padding: 10px 0 10px 0;
+    width: 100%;
+}
+
+.logo .large {
+    max-height: 115px;
+}
+
+.logo .small {
+    margin: 0 auto;
+    max-height: 115px;
+}
+
+.nav-primary {
+    margin-top: 0;
+}
+
+.page-header-container .store-language-container {
+    display: none;
+}
+
 #somediv {
     display: table;
 }
