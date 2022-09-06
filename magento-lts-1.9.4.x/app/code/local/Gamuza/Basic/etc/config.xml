@@ -60,6 +60,7 @@
             <page>
                 <rewrite>
                     <html_head>Gamuza_Basic_Block_Page_Html_Head</html_head>
+                    <html_header>Gamuza_Basic_Block_Page_Html_Header</html_header>
                 </rewrite>
             </page>
             <aoe_scheduler>
