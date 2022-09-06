@@ -37,11 +37,6 @@ $coreConfig->saveConfig ('design/header/logo_src',       'images/logo.png');
 $coreConfig->saveConfig ('design/header/logo_src_small', 'images/logo.png');
 $coreConfig->saveConfig ('design/header/logo_alt',       'Toluca Store Commerce');
 
-$copyright = Mage::helper ('basic')->__('Toluca Store&trade; is a trademark of Gamuza Technologies.') . '<br/>'
-    . Mage::helper ('basic')->__('Copyright &copy; %s Gamuza Technologies. All rights reserved.', date('Y'));
-
-$coreConfig->saveConfig ('design/footer/copyright', $copyright);
-
 /**
  * Catalog
  */

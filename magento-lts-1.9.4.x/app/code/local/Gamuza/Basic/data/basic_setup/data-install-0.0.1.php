@@ -100,5 +100,15 @@ $pt_BR_SQL = file_get_contents (Mage::getConfig ()->getOptions ()->getLocaleDir 
 
 Mage::getSingleton ('core/resource')->getConnection ('core_write')->query ($pt_BR_SQL);
 
+/**
+ * Design
+ */
+Mage::app()->getTranslator()->init(Mage_Core_Model_App_Area::AREA_ADMINHTML, true);
+
+$copyright = Mage::helper ('basic')->__('Toluca Store&trade; is a trademark of Gamuza Technologies.') . '<br/>'
+    . Mage::helper ('basic')->__('Copyright &copy; %s Gamuza Technologies. All rights reserved.', date('Y'));
+
+$coreConfig->saveConfig ('design/footer/copyright', $copyright);
+
 $installer->endSetup();
 
