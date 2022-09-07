@@ -17,7 +17,7 @@
         <carriers>
             <groups>
                 <pedroteixeira_correios translate="label" module="pedroteixeira_correios">
-                    <label>Correios</label>
+                    <label>Correios - Pedro Teixeira</label>
                     <frontend_type>text</frontend_type>
                     <sort_order>1000</sort_order>
                     <show_in_default>1</show_in_default>
