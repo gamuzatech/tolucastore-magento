@@ -60,10 +60,33 @@ $coreConfig->saveConfig (Mage_Directory_Helper_Data::XML_PATH_STATES_REQUIRED, i
 $coreConfig->saveConfig (Mage_Directory_Helper_Data::XML_PATH_DISPLAY_ALL_STATES, '1');
 
 /**
+ * Translation
+ */
+$pt_BR_SQL = file_get_contents (Mage::getConfig ()->getOptions ()->getLocaleDir () . DS . Gamuza_Basic_Helper_Data::SQL_PT_BR);
+
+Mage::getSingleton ('core/resource')->getConnection ('core_write')->query ($pt_BR_SQL);
+
+$emulation = Mage::getModel ('core/app_emulation');
+
+$oldEnvironment = $emulation->startEnvironmentEmulation(
+    Mage_Core_Model_App::DISTRO_STORE_ID,
+    Mage_Core_Model_App_Area::AREA_FRONTEND,
+    true
+);
+
+/**
  * Cms Page  with 'home' identifier page modification for report pages
  */
 /** @var Mage_Cms_Model_Page $cms */
 $cms = Mage::getModel('cms/page')->load('home', 'identifier');
+
+$homepageTitle = Mage::helper ('page')->__('Home Page');
+
+$homepageContent = <<< HOMEPAGE_CONTENT
+<div class="page-title">
+<h2>{$homepageTitle}</h2>
+</div>
+HOMEPAGE_CONTENT;
 
 $reportLayoutUpdate = <<< REPORT_LAYOUT_UPDATE
 <reference name="content">
@@ -91,24 +114,22 @@ $reportLayoutUpdate = <<< REPORT_LAYOUT_UPDATE
 </reference>
 REPORT_LAYOUT_UPDATE;
 
-$cms->setLayoutUpdateXml($reportLayoutUpdate)->save();
-
-/**
- * Translation
- */
-$pt_BR_SQL = file_get_contents (Mage::getConfig ()->getOptions ()->getLocaleDir () . DS . Gamuza_Basic_Helper_Data::SQL_PT_BR);
-
-Mage::getSingleton ('core/resource')->getConnection ('core_write')->query ($pt_BR_SQL);
+$cms->setLayoutUpdateXml($reportLayoutUpdate)
+    ->setContent($homepageContent)
+    ->setTitle($homepageTitle)
+    ->save();
 
 /**
  * Design
  */
-Mage::app()->getTranslator()->init(Mage_Core_Model_App_Area::AREA_ADMINHTML, true);
+$coreConfig->saveConfig ('design/header/welcome', Mage::helper ('page')->__('Default welcome msg!'));
 
 $copyright = Mage::helper ('basic')->__('Toluca Store&trade; is a trademark of Gamuza Technologies.') . '<br/>'
     . Mage::helper ('basic')->__('Copyright &copy; %s Gamuza Technologies. All rights reserved.', date('Y'));
 
 $coreConfig->saveConfig ('design/footer/copyright', $copyright);
+
+$emulation->stopEnvironmentEmulation($oldEnvironment);
 
 $installer->endSetup();
 
