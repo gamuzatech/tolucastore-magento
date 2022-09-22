@@ -155,7 +155,7 @@ class Mage_Paypal_Model_Payment_Transaction extends Mage_Core_Model_Abstract
             $info = [];
         }
         if ($key) {
-            return (isset($info[$key]) ? $info[$key] : null);
+            return $info[$key] ?? null;
         }
         return $info;
     }
@@ -196,7 +196,6 @@ class Mage_Paypal_Model_Payment_Transaction extends Mage_Core_Model_Abstract
     /**
      * Verify data required for saving
      * @return $this
-     * @throws Mage_Core_Exception
      */
     protected function _beforeSave()
     {
