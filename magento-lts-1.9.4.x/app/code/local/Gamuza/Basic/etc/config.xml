@@ -478,7 +478,7 @@
             </adminnotification>
             <backup>
                 <enabled>1</enabled>
-                <type>media</type>
+                <type>db</type>
                 <maintenance>0</maintenance>
             </backup>
         </system>
