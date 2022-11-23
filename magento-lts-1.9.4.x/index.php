@@ -82,7 +82,7 @@ if (file_exists($maintenanceFile)) {
     }
 }
 
-$httpXOriginalHost = Mage::app()->getRequest()->getServer('HTTP_X_ORIGINAL_HOST');
+$httpXOriginalHost = Mage::app()->getRequest()->getServer('HTTP_X_FORWARDED_HOST');
 
 if (!empty($httpXOriginalHost)) {
     foreach (Mage::app()->getStores(false, false) as $store) {
