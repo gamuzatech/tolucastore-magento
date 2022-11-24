@@ -98,6 +98,8 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
         // parent::__construct ();
 
         $this->_phone = preg_replace ('[\D]', null, Mage::getStoreConfig ('general/store_information/phone'));
+
+        $this->_orderReview = Mage::getStoreConfigFlag ('bot/checkout/order_review');
     }
 
     public function message ($botType, $from, $to, $senderName, $senderMessage)
@@ -968,6 +970,13 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
                         ->setUpdatedAt (date ('c'))
                         ->save ()
                     ;
+
+                    if (!$this->_orderReview)
+                    {
+                        $body = self::COMMAND_OK;
+
+                        goto __checkoutCreateOrder;
+                    }
                 }
                 else
                 {
@@ -1017,6 +1026,13 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
                         ->setUpdatedAt (date ('c'))
                         ->save ()
                     ;
+
+                    if (!$this->_orderReview)
+                    {
+                        $body = self::COMMAND_OK;
+
+                        goto __checkoutCreateOrder;
+                    }
                 }
                 else
                 {
@@ -1056,6 +1072,13 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
                         ->setUpdatedAt (date ('c'))
                         ->save ()
                     ;
+
+                    if (!$this->_orderReview)
+                    {
+                        $body = self::COMMAND_OK;
+
+                        goto __checkoutCreateOrder;
+                    }
                 }
                 else
                 {
@@ -1093,6 +1116,13 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
                         ->setUpdatedAt (date ('c'))
                         ->save ()
                     ;
+
+                    if (!$this->_orderReview)
+                    {
+                        $body = self::COMMAND_OK;
+
+                        goto __checkoutCreateOrder;
+                    }
                 }
                 else
                 {
@@ -1103,6 +1133,8 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
             }
             case Toluca_Bot_Helper_Data::STATUS_CHECKOUT:
             {
+                __checkoutCreateOrder:
+
                 if (!strcmp (strtolower (trim ($body)), self::COMMAND_OK))
                 {
                     Mage::app ()->getStore ()->setConfig (Mage_Checkout_Helper_Data::XML_PATH_GUEST_CHECKOUT, '1');
@@ -1122,7 +1154,7 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
 
                     $order = Mage::getModel ('sales/order')->loadByIncrementId ($incrementId);
 
-                    $result = Mage::helper ('bot/message')->getYourOrderNumberText ($order) . PHP_EOL . PHP_EOL
+                    $result .= Mage::helper ('bot/message')->getYourOrderNumberText ($order) . PHP_EOL . PHP_EOL
                         . Mage::helper ('bot/message')->getOrderInformationText ($order)
                         . Mage::helper ('bot/message')->getThankYouForShoppingText ($storeName) . PHP_EOL . PHP_EOL
                         . Mage::helper ('bot/message')->getBuyThroughTheAppText ()
@@ -1540,7 +1572,10 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
             }
         }
 
-        $result .= Mage::helper ('bot/message')->getEnterToConfirmOrderText ();
+        if ($this->_orderReview)
+        {
+            $result .= Mage::helper ('bot/message')->getEnterToConfirmOrderText ();
+        }
 
         return $result;
     }
