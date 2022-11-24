@@ -23,6 +23,26 @@ class Gamuza_Basic_Block_Adminhtml_Sales_Order_View extends Mage_Adminhtml_Block
         $order = $this->getOrder ();
 
         /**
+         * Print
+         */
+        if ($order->getData('is_printed'))
+        {
+            $coreHelper = Mage::helper ('core');
+
+            $confirmationMessage = $coreHelper->jsQuoteEscape(
+                Mage::helper ('basic')->__('Are you sure?')
+            );
+
+            $onclickJs = sprintf ("confirmSetLocation ('%s', '%s');", $confirmationMessage, $this->getPrintUrl ());
+
+            $this->addButton ('order_print', array(
+                'label'   => Mage::helper ('basic')->__('Print'),
+                'class'   => 'scalable go',
+                'onclick' => $onclickJs,
+            ), 1);
+        }
+
+        /**
          * Prepare
          */
         if (!strcmp ($order->getState (), Mage_Sales_Model_Order::STATE_NEW) && !strcmp ($order->getStatus (), Gamuza_Basic_Model_Order::STATUS_PENDING))
@@ -77,6 +97,11 @@ class Gamuza_Basic_Block_Adminhtml_Sales_Order_View extends Mage_Adminhtml_Block
     public function getDeliveredStatusUrl ()
     {
         return $this->getUrl ('*/*/deliveredStatus');
+    }
+
+    public function getPrintUrl ()
+    {
+        return $this->getUrl ('*/*/print');
     }
 }
 
