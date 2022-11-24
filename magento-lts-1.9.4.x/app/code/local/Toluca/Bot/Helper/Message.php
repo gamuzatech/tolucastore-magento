@@ -299,7 +299,7 @@ class Toluca_Bot_Helper_Message extends Mage_Core_Helper_Abstract
     {
         $storeName = Mage::getStoreConfig (Mage_Core_Model_Store::XML_PATH_STORE_STORE_NAME);
 
-        return $this->__('*Welcome* to the automatic attendance of *%s*!', $storeName);
+        return $this->__('*Welcome* to the robot of *%s*!', $storeName);
     }
 
     public function getTypeCommandToContinueText ($command)
