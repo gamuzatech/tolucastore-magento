@@ -756,7 +756,7 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
                 if (preg_match ('/(.*)\s([\d]{1,})\s(.*)/', $street, $matches) == '1'
                     || preg_match ('/(.*)\s([\d]{1,})/', $street, $matches) == '1')
                 {
-                    $streetDistrict = empty ($matches [3]) ? $matches [3] : '------';
+                    $streetDistrict = !empty ($matches [3]) ? $matches [3] : '------';
 
                     Mage::getModel ('checkout/cart_customer_api')->setAddresses ($chat->getQuoteId (), array(
                         array(
