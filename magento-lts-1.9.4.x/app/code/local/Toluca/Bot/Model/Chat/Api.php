@@ -272,7 +272,7 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
 
             $this->_saveMessage ($result, $chat);
 
-            return array ('result' => $result);
+            return array ('result' => $result, 'muted' => 1);
         }
 
         switch ($chat->getStatus ())
