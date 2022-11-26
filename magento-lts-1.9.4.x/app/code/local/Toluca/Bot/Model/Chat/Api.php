@@ -925,8 +925,6 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
 
                 if (!empty ($this->_paymentMethods [$paymentId]) && $this->_getAllowedPayment ($paymentMethods, $paymentId))
                 {
-                    $chatStatus = Toluca_Bot_Helper_Data::STATUS_CHECKOUT;
-
                     switch ($this->_paymentMethods [$paymentId])
                     {
                         case 'cashondelivery':
@@ -965,6 +963,8 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
 
                             $result = $this->_getCheckoutReview ($chat->getQuoteId (), $storeId) . PHP_EOL . PHP_EOL;
 
+                            $chatStatus = Toluca_Bot_Helper_Data::STATUS_CHECKOUT;
+
                             break;
                         }
                     }
@@ -974,7 +974,7 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
                         ->save ()
                     ;
 
-                    if (!$this->_orderReview)
+                    if ($chatStatus == Toluca_Bot_Helper_Data::STATUS_CHECKOUT && !$this->_orderReview)
                     {
                         $body = self::COMMAND_OK;
 
