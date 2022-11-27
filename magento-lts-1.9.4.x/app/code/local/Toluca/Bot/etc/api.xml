@@ -26,6 +26,12 @@
                         <method>whatsappUrl</method>
                     </whatsapp_url>
                 </methods>
+                <faults translate="message" module="bot">
+                    <data_invalid>
+                        <code>100</code>
+                        <message>Invalid data given. Details in error message.</message>
+                    </data_invalid>
+                </faults>
             </bot_info>
             <bot_config translate="title" module="bot">
                 <model>bot/config_api</model>
@@ -38,6 +44,12 @@
                         <method>basicAuth</method>
                     </basic_auth>
                 </methods>
+                <faults translate="message" module="bot">
+                    <data_invalid>
+                        <code>100</code>
+                        <message>Invalid data given. Details in error message.</message>
+                    </data_invalid>
+                </faults>
             </bot_config>
             <bot_contact translate="title" module="bot">
                 <model>bot/contact_api</model>
