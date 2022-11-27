@@ -87,14 +87,18 @@ $httpXOriginalHost = Mage::app()->getRequest()->getServer('HTTP_X_FORWARDED_HOST
 if (!empty($httpXOriginalHost)) {
     foreach (Mage::app()->getStores(false, false) as $store) {
         if (strpos($store->getBaseUrl(), $httpXOriginalHost) !== false) {
-            Mage::getModel('core/cookie')->set(
-                'abuse_interstitial', $httpXOriginalHost,
-                null, null, $httpXOriginalHost, true, false
-            );
             $httpHost = Mage::app()->getRequest()->getServer('HTTP_HOST');
             $_SERVER['HTTP_X_INBOUND_HOST'] = $httpHost;
             $_SERVER['HTTP_HOST'] = $httpXOriginalHost;
             $mageRunCode = $store->getCode();
+            setcookie('abuse_interstitial', $httpXOriginalHost, [
+                'expires' => time() + 86400,
+                'path' => '/',
+                'domain' => null,
+                'secure' => true,
+                'httponly' => false,
+                'samesite' => 'None'
+            ]);
             break;
         }
     }
