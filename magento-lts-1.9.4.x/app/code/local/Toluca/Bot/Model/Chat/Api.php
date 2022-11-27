@@ -754,8 +754,10 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
                 $street = Mage::helper ('core')->removeAccents ($body);
 
                 if (preg_match ('/(.*)\s([\d]{1,})\s(.*)/', $street, $matches) == '1'
-                    || preg_match ('/(.*)\s([\d]{1,})/', $street, $matches) == '1')
+                    || preg_match ('/(.*)\s([\d]{1,})/', $street, $matches) == '1'
+                    || preg_match ('/(.*)/', $street, $matches) == '1')
                 {
+                    $streetNumber   = !empty ($matches [2]) ? $matches [2] : '------';
                     $streetDistrict = !empty ($matches [3]) ? $matches [3] : '------';
 
                     Mage::getModel ('checkout/cart_customer_api')->setAddresses ($chat->getQuoteId (), array(
@@ -764,7 +766,7 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
                             'firstname'  => $senderName [0],
                             'lastname'   => $senderName [1],
                             'company'    => null,
-                            'street'     => array ($matches [1], $matches [2], null, $streetDistrict),
+                            'street'     => array ($matches [1], $streetNumber, null, $streetDistrict),
                             'city'       => Mage::getStoreConfig ('shipping/origin/city', $storeId),
                             'region'     => Mage::getStoreConfig ('shipping/origin/region_id', $storeId),
                             'country_id' => Mage::getStoreConfig ('shipping/origin/country_id', $storeId),
