@@ -10,6 +10,35 @@
 <config>
     <api>
         <resources>
+            <bot_info translate="title" module="bot">
+                <model>bot/info_api</model>
+                <title>Bot Information API</title>
+                <acl>bot/info</acl>
+                <methods>
+                    <store_url translate="title" module="bot">
+                        <title>Set a store URL for the bot</title>
+                        <acl>bot/info/store_url</acl>
+                        <method>storeUrl</method>
+                    </store_url>
+                    <whatsapp_url translate="title" module="bot">
+                        <title>Set a whatsapp URL for the bot</title>
+                        <acl>bot/info/whatsapp_url</acl>
+                        <method>whatsappUrl</method>
+                    </whatsapp_url>
+                </methods>
+            </bot_info>
+            <bot_config translate="title" module="bot">
+                <model>bot/config_api</model>
+                <title>Bot Config API</title>
+                <acl>bot/config</acl>
+                <methods>
+                    <basic_auth translate="title" module="bot">
+                        <title>Set a basic auth for the bot</title>
+                        <acl>bot/config/basic_auth</acl>
+                        <method>basicAuth</method>
+                    </basic_auth>
+                </methods>
+            </bot_config>
             <bot_chat translate="title" module="bot">
                 <model>bot/chat_api</model>
                 <title>Bot Chat API</title>
@@ -27,6 +56,21 @@
                 <bot translate="title" module="bot">
                     <title>Toluca Bot API</title>
                     <sort_order>0</sort_order>
+                    <info translate="title" module="bot">
+                        <title>Information</title>
+                        <store_url translate="title" module="bot">
+                            <title>Set a store URL for the bot</title>
+                        </store_url>
+                        <whatsapp_url translate="title" module="bot">
+                            <title>Set a whatsapp URL for the bot</title>
+                        </whatsapp_url>
+                    </info>
+                    <config translate="title" module="bot">
+                        <title>Config</title>
+                        <basic_auth translate="title" module="bot">
+                            <title>Set a basic auth for the bot</title>
+                        </basic_auth>
+                    </config>
                     <chat translate="title" module="bot">
                         <title>Chat</title>
                         <message translate="title" module="bot">

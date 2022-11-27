@@ -48,6 +48,9 @@ class Toluca_Bot_Helper_Data extends Mage_Core_Helper_Abstract
     const STATUS_ORDER    = 'order';
     const STATUS_ZAP      = 'zap';
 
+    const XML_PATH_BOT_INFORMATION_STORE_URL    = 'bot/information/store_url';
+    const XML_PATH_BOT_INFORMATION_WHATSAPP_URL = 'bot/information/whatsapp_url';
+
     const XML_PATH_BOT_BASIC_AUTH_ACTIVE   = 'bot/basic_auth/active';
     const XML_PATH_BOT_BASIC_AUTH_USERNAME = 'bot/basic_auth/username';
     const XML_PATH_BOT_BASIC_AUTH_PASSWORD = 'bot/basic_auth/password';
