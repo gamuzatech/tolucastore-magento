@@ -39,6 +39,36 @@
                     </basic_auth>
                 </methods>
             </bot_config>
+            <bot_contact translate="title" module="bot">
+                <model>bot/contact_api</model>
+                <title>Bot Contact API</title>
+                <acl>bot/contact</acl>
+                <methods>
+                    <add translate="title" module="bot">
+                        <title>Add a contact for the bot</title>
+                        <acl>bot/contact/add</acl>
+                    </add>
+                    <list translate="title" module="bot">
+                        <title>List contacts from the bot</title>
+                        <acl>bot/contact/list</acl>
+                        <method>items</method>
+                    </list>
+                </methods>
+                <faults translate="message" module="bot">
+                    <invalid_contact_data>
+                        <code>100</code>
+                        <message>Contact's data is not valid.</message>
+                    </invalid_contact_data>
+                    <data_invalid>
+                        <code>200</code>
+                        <message>Invalid data given. Details in error message.</message>
+                    </data_invalid>
+                    <add_contact_fault>
+                        <code>300</code>
+                        <message>Contact(s) could not be added. </message>
+                    </add_contact_fault>
+                </faults>
+            </bot_contact>
             <bot_chat translate="title" module="bot">
                 <model>bot/chat_api</model>
                 <title>Bot Chat API</title>
@@ -71,6 +101,15 @@
                             <title>Set a basic auth for the bot</title>
                         </basic_auth>
                     </config>
+                    <contact translate="title" module="bot">
+                        <title>Contact</title>
+                        <add translate="title" module="bot">
+                            <title>Add a contact for the bot</title>
+                        </add>
+                        <list translate="title" module="bot">
+                            <title>List contacts from the bot</title>
+                        </list>
+                    </contact>
                     <chat translate="title" module="bot">
                         <title>Chat</title>
                         <message translate="title" module="bot">
