@@ -279,6 +279,15 @@
         </events>
     </adminhtml>
     <frontend>
+        <routers>
+            <basic_express>
+                <use>standard</use>
+                <args>
+                    <module>Gamuza_Basic</module>
+                    <frontName>express</frontName>
+                </args>
+            </basic_express>
+        </routers>
         <translate>
             <modules>
                 <Gamuza_Basic>
@@ -325,6 +334,12 @@
                 <use_frontend_sid>0</use_frontend_sid>
                 <use_admin_sid>1</use_admin_sid>
             </session>
+            <routers>
+                <basic_express>
+                    <area>frontend</area>
+                    <class>Gamuza_Basic_Controller_Router_Express</class>
+                </basic_express>
+            </routers>
         </web>
         <design>
             <head>
@@ -346,6 +361,7 @@
         </design>
         <catalog>
             <frontend>
+                <list_allow_all>1</list_allow_all>
                 <flat_catalog_category>1</flat_catalog_category>
                 <flat_catalog_product>1</flat_catalog_product>
             </frontend>
