@@ -153,12 +153,14 @@ class Toluca_Bot_Helper_Message extends Mage_Core_Helper_Abstract
                     ->getBaseUrl (Mage_Core_Model_Store::URL_TYPE_LINK)
                 ;
 */
+                $storeUrl    = sprintf ('%s/express', Mage::getStoreConfig (Toluca_Bot_Helper_Data::XML_PATH_BOT_INFORMATION_STORE_URL));
+                $whatsappUrl = sprintf ('%s?text=%s', Mage::getStoreConfig (Toluca_Bot_Helper_Data::XML_PATH_BOT_INFORMATION_WHATSAPP_URL), $this->__('hi'));
+
                 $result = sprintf (
                     "%s: %s\n\n%s: %s\n\n%s: %s",
                     $this->__('APP'),   self::DEFAULT_APP_URL,
-                    $this->__('Store'), Mage::getStoreConfig (Toluca_Bot_Helper_Data::XML_PATH_BOT_INFORMATION_STORE_URL),
-                    $this->__('Robot'), Mage::getStoreConfig (Toluca_Bot_Helper_Data::XML_PATH_BOT_INFORMATION_WHATSAPP_URL)
-                        . sprintf ('?text=%s', $this->__('hi')),
+                    $this->__('Store'), $storeUrl,
+                    $this->__('Robot'), $whatsappUrl,
                 );
 
                 break;
