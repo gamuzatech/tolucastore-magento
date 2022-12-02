@@ -1533,14 +1533,14 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
 
         $info = Mage::getModel ('checkout/cart_api')->info ($quoteId, $storeId);
 
-        $result .= sprintf ('*%s*: %s', Mage::helper ('bot')->__('Shipping Address'), implode (' ', explode ("\n", $info ['shipping_address']['street'])))
+        $result .= sprintf ('*%s*: %s', Mage::helper ('bot')->__('Address'), implode (' ', explode ("\n", $info ['shipping_address']['street'])))
             . PHP_EOL . PHP_EOL
         ;
 
         $shippingDescription = $info ['shipping_address']['shipping_description'];
         $shippingAmount      = Mage::helper ('core')->currency ($info ['shipping_address']['shipping_amount'], true, false);
 
-        $result .= sprintf ('*%s*: %s *%s*', Mage::helper ('bot')->__('Shipping Method'), $shippingDescription, $shippingAmount)
+        $result .= sprintf ('*%s*: %s *%s*', Mage::helper ('bot')->__('Shipping'), $shippingDescription, $shippingAmount)
             . PHP_EOL . PHP_EOL
         ;
 
@@ -1549,7 +1549,7 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
 
         $grandTotal = Mage::helper ('core')->currency ($info ['shipping_address']['grand_total'], true, false);
 
-        $result .= sprintf ('*%s*: %s  *%s*', Mage::helper ('bot')->__('Payment Method'), $paymentTitle, $grandTotal)
+        $result .= sprintf ('*%s*: %s  *%s*', Mage::helper ('bot')->__('Payment'), $paymentTitle, $grandTotal)
             . PHP_EOL . PHP_EOL
         ;
 
