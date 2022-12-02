@@ -225,7 +225,12 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
                     'firstname'  => $senderName [0],
                     'lastname'   => $senderName [1],
                     'company'    => null,
-                    'street'     => array ('x', '0', null, 'y'),
+                    'street'     => array (
+                        Mage::getStoreConfig ('shipping/origin/street_line1', $storeId),
+                        Mage::getStoreConfig ('shipping/origin/street_line2', $storeId),
+                        Mage::getStoreConfig ('shipping/origin/street_line3', $storeId),
+                        Mage::getStoreConfig ('shipping/origin/street_line4', $storeId),
+                    ),
                     'city'       => Mage::getStoreConfig ('shipping/origin/city',      $storeId),
                     'region'     => Mage::getStoreConfig ('shipping/origin/region_id', $storeId),
                     'country_id' => Mage::getStoreConfig ('shipping/origin/country_id', $storeId),
