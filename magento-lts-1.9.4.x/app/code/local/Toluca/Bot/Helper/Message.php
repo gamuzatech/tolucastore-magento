@@ -314,6 +314,11 @@ class Toluca_Bot_Helper_Message extends Mage_Core_Helper_Abstract
         return $this->__('Or type *%s* to go to cart:', $command);
     }
 
+    public function getTypeCommandToChooseDeliveryOrRetireText ($command)
+    {
+        return $this->__('Or type *%s* to choose delivery or retire:', $command);
+    }
+
     public function getProductsForCategoryText ($categoryName)
     {
         return $this->__('Here is the list of our products for category *%s*:', $categoryName);

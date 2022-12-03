@@ -397,7 +397,7 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
                                 . $this->_getCartReview ($chat->getQuoteId (), $storeId)
                                 . Mage::helper ('bot/message')->getTypeListToCategoriesText (self::COMMAND_ZERO) . PHP_EOL . PHP_EOL
                                 . Mage::helper ('bot/message')->getTypeClearToRestartText (self::COMMAND_ONE) . PHP_EOL . PHP_EOL
-                                . Mage::helper ('bot/message')->getTypeCommandToContinueText (self::COMMAND_OK)
+                                . Mage::helper ('bot/message')->getTypeCommandToChooseDeliveryOrRetireText (self::COMMAND_OK)
                             ;
 
                             $chat->setStatus (Toluca_Bot_Helper_Data::STATUS_CART)
@@ -677,7 +677,7 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
                         . $this->_getCartReview ($chat->getQuoteId (), $storeId)
                         . Mage::helper ('bot/message')->getTypeListToCategoriesText (self::COMMAND_ZERO) . PHP_EOL . PHP_EOL
                         . Mage::helper ('bot/message')->getTypeClearToRestartText (self::COMMAND_ONE) . PHP_EOL . PHP_EOL
-                        . Mage::helper ('bot/message')->getTypeCommandToContinueText (self::COMMAND_OK)
+                        . Mage::helper ('bot/message')->getTypeCommandToChooseDeliveryOrRetireText (self::COMMAND_OK)
                     ;
 
                     $chat->setStatus (Toluca_Bot_Helper_Data::STATUS_CART)
@@ -736,9 +736,42 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
 
                 if (!strcmp (strtolower (trim ($body)), self::COMMAND_OK))
                 {
+                    /*
                     $result = Mage::helper ('bot/message')->getPleaseEnterTheAddressText ();
+                    */
 
+                    $shippingMethods = Mage::getModel ('checkout/cart_shipping_api')->getShippingMethodsList ($chat->getQuoteId (), $storeId);
+
+                    foreach ($shippingMethods as $id => $method)
+                    {
+                        if (!in_array ($method ['code'], $this->_shippingMethods))
+                        {
+                            unset ($shippingMethods [$id]);
+                        }
+                    }
+
+                    $result = Mage::helper ('bot/message')->getEnterDeliveryMethodText () . PHP_EOL . PHP_EOL;
+
+                    foreach ($shippingMethods as $method)
+                    {
+                        foreach ($this->_shippingMethods as $_id => $_method)
+                        {
+                            if (!strcmp ($method ['code'], $_method))
+                            {
+                                $strLen = self::SHIPPING_ID_LENGTH - strlen ($_id);
+                                $strPad = str_pad ("", $strLen, ' ', STR_PAD_RIGHT);
+
+                                $shippingPrice = Mage::helper ('core')->currency ($method ['price'], true, false);
+
+                                $result .= sprintf ("*%s*%s%s *%s*", $_id, $strPad, $method ['method_title'], $shippingPrice) . PHP_EOL;
+                            }
+                        }
+                    }
+
+                    /*
                     $chat->setStatus (Toluca_Bot_Helper_Data::STATUS_ADDRESS)
+                    */
+                    $chat->setStatus (Toluca_Bot_Helper_Data::STATUS_SHIPPING)
                         ->setUpdatedAt (date ('c'))
                         ->save ()
                     ;
@@ -749,7 +782,7 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
                 $result = $this->_getCartReview ($chat->getQuoteId (), $storeId)
                     . Mage::helper ('bot/message')->getTypeListToCategoriesText (self::COMMAND_ZERO) . PHP_EOL . PHP_EOL
                     . Mage::helper ('bot/message')->getTypeClearToRestartText (self::COMMAND_ONE) . PHP_EOL . PHP_EOL
-                    . Mage::helper ('bot/message')->getTypeCommandToContinueText (self::COMMAND_OK)
+                    . Mage::helper ('bot/message')->getTypeCommandToChooseDeliveryOrRetireText (self::COMMAND_OK)
                 ;
 
                 break;
@@ -781,6 +814,43 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
                             'use_for_shipping' => 1,
                         )
                     ), $storeId);
+
+                    $paymentMethods = Mage::getModel ('bot/checkout_cart_payment_api')->getPaymentMethodsList ($chat->getQuoteId (), $storeId);
+
+                    foreach ($paymentMethods as $id => $method)
+                    {
+                        if (!in_array ($method ['code'], $this->_paymentMethods))
+                        {
+                            unset ($paymentMethods [$id]);
+                        }
+                    }
+
+                    $result = Mage::helper ('bot/message')->getEnterPaymentMethodText () . PHP_EOL . PHP_EOL;
+
+                    $quote = Mage::getModel ('sales/quote')->load ($chat->getQuoteId ());
+
+                    foreach ($paymentMethods as $method)
+                    {
+                        foreach ($this->_paymentMethods as $_id => $_method)
+                        {
+                            if (!strcmp ($method ['code'], $_method))
+                            {
+                                $strLen = self::PAYMENT_ID_LENGTH - strlen ($_id);
+                                $strPad = str_pad ("", $strLen, ' ', STR_PAD_RIGHT);
+
+                                $paymentPrice = Mage::helper ('core')->currency ($quote->getBaseGrandTotal (), true, false);
+
+                                $result .= sprintf ("*%s*%s%s *%s*", $_id, $strPad, $method ['title'], $paymentPrice) . PHP_EOL;
+                            }
+                        }
+                    }
+
+                    $chat->setStatus (Toluca_Bot_Helper_Data::STATUS_PAYMENT)
+                        ->setUpdatedAt (date ('c'))
+                        ->save ()
+                    ;
+
+                    break;
 
                     $shippingMethods = Mage::getModel ('checkout/cart_shipping_api')->getShippingMethodsList ($chat->getQuoteId (), $storeId);
 
@@ -845,6 +915,18 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
 
                     if (count ($paymentMethods) > 0)
                     {
+                        if (strcmp ($this->_shippingMethods [$shippingId], 'pickup_store') != 0)
+                        {
+                            $result = Mage::helper ('bot/message')->getPleaseEnterTheAddressText ();
+
+                            $chat->setStatus (Toluca_Bot_Helper_Data::STATUS_ADDRESS)
+                                ->setUpdatedAt (date ('c'))
+                                ->save ()
+                            ;
+
+                            break;
+                        }
+
                         $result = Mage::helper ('bot/message')->getEnterPaymentMethodText () . PHP_EOL . PHP_EOL;
 
                         $quote = Mage::getModel ('sales/quote')->load ($chat->getQuoteId ());

@@ -37,6 +37,7 @@
 "Please enter the product option code:","Por favor digite o código da opção do produto:"
 "Or type *%s* to continue:","Ou digite *%s* para continuar:"
 "Or type *%s* to go to cart:","Ou digite *%s* para ir para o carrinho:"
+"Or type *%s* to choose delivery or retire:","Ou digite *%s* para escolher entrega ou retira:"
 "Or type *%s* to clean your shopping cart:","Ou digite *%s* para limpar o seu carrinho:"
 "Option","Opção"
 "Please enter the values codes to option: *%s*","Por favor digite os códigos do valores para a opção: *%s*"
