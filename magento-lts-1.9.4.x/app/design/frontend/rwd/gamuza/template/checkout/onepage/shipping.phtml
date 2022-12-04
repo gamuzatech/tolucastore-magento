@@ -57,27 +57,27 @@
                     </li>
             <?php $_streetValidationClass = $this->helper('customer/address')->getAttributeValidationClass('street'); ?>
                     <li class="wide">
-                        <label for="shipping:street1" class="required"><em>*</em><?php echo $this->__('Street Address') ?></label>
+                        <label for="shipping:street_1" class="required"><em>*</em><?php echo $this->__('Street Address') ?></label>
                         <div class="input-box">
-                            <input type="text" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Street Address')) ?>" name="shipping[street][]" id="shipping:street1" value="<?php echo $this->escapeHtml($this->getAddress()->getStreet(1)) ?>" class="input-text <?php echo $_streetValidationClass ?>" onchange="shipping.setSameAsBilling(false);" />
+                            <input type="text" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Street Address')) ?>" name="shipping[street][]" id="shipping:street_1" value="<?php echo $this->escapeHtml($this->getAddress()->getStreet(1)) ?>" class="input-text <?php echo $_streetValidationClass ?>" onchange="shipping.setSameAsBilling(false);" />
                         </div>
                     </li>
                     <li class="wide">
-                        <label for="shipping:street2" class="required"><em>*</em><?php echo $this->__('Number') ?></label>
+                        <label for="shipping:street_2" class="required"><em>*</em><?php echo $this->__('Number') ?></label>
                         <div class="input-box">
-                            <input type="text" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Number')) ?>" name="shipping[street][]" id="shipping:street2" value="<?php echo $this->escapeHtml($this->getAddress()->getStreet(2)) ?>" class="input-text <?php echo $_streetValidationClass ?>" onchange="shipping.setSameAsBilling(false);" />
+                            <input type="text" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Number')) ?>" name="shipping[street][]" id="shipping:street_2" value="<?php echo $this->escapeHtml($this->getAddress()->getStreet(2)) ?>" class="input-text <?php echo $_streetValidationClass ?>" onchange="shipping.setSameAsBilling(false);" />
                         </div>
                     </li>
                     <li class="wide">
-                        <label for="shipping:street3"><?php echo $this->__('Complement') ?></label>
+                        <label for="shipping:street_3"><?php echo $this->__('Complement') ?></label>
                         <div class="input-box">
-                            <input type="text" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Complement')) ?>" name="shipping[street][]" id="shipping:street3" value="<?php echo $this->escapeHtml($this->getAddress()->getStreet(3)) ?>" class="input-text" onchange="shipping.setSameAsBilling(false);" />
+                            <input type="text" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Complement')) ?>" name="shipping[street][]" id="shipping:street_3" value="<?php echo $this->escapeHtml($this->getAddress()->getStreet(3)) ?>" class="input-text" onchange="shipping.setSameAsBilling(false);" />
                         </div>
                     </li>
                     <li class="wide">
-                        <label for="shipping:street4" class="required"><em>*</em><?php echo $this->__('District') ?></label>
+                        <label for="shipping:street_4" class="required"><em>*</em><?php echo $this->__('District') ?></label>
                         <div class="input-box">
-                            <input type="text" title="<?php echo Mage::helper('core')->quoteEscape($this->__('District')) ?>" name="shipping[street][]" id="shipping:street4" value="<?php echo $this->escapeHtml($this->getAddress()->getStreet(4)) ?>" class="input-text <?php echo $_streetValidationClass ?>" onchange="shipping.setSameAsBilling(false);" />
+                            <input type="text" title="<?php echo Mage::helper('core')->quoteEscape($this->__('District')) ?>" name="shipping[street][]" id="shipping:street_4" value="<?php echo $this->escapeHtml($this->getAddress()->getStreet(4)) ?>" class="input-text <?php echo $_streetValidationClass ?>" onchange="shipping.setSameAsBilling(false);" />
                         </div>
                     </li>
             <?php /* $_streetValidationClass = trim(str_replace('required-entry', '', $_streetValidationClass)); ?>
