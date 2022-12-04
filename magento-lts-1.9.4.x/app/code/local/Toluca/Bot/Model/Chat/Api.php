@@ -98,6 +98,8 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
         // parent::__construct ();
 
         $this->_phone = preg_replace ('[\D]', null, Mage::getStoreConfig ('general/store_information/phone'));
+
+        $this->_orderReview = Mage::getStoreConfigFlag ('bot/checkout/order_review');
     }
 
     public function message ($botType, $from, $to, $senderName, $senderMessage)
@@ -223,7 +225,12 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
                     'firstname'  => $senderName [0],
                     'lastname'   => $senderName [1],
                     'company'    => null,
-                    'street'     => array ('x', '0', null, 'y'),
+                    'street'     => array (
+                        Mage::getStoreConfig ('shipping/origin/street_line1', $storeId),
+                        Mage::getStoreConfig ('shipping/origin/street_line2', $storeId),
+                        Mage::getStoreConfig ('shipping/origin/street_line3', $storeId),
+                        Mage::getStoreConfig ('shipping/origin/street_line4', $storeId),
+                    ),
                     'city'       => Mage::getStoreConfig ('shipping/origin/city',      $storeId),
                     'region'     => Mage::getStoreConfig ('shipping/origin/region_id', $storeId),
                     'country_id' => Mage::getStoreConfig ('shipping/origin/country_id', $storeId),
@@ -270,7 +277,7 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
 
             $this->_saveMessage ($result, $chat);
 
-            return array ('result' => $result);
+            return array ('result' => $result, 'muted' => 1);
         }
 
         switch ($chat->getStatus ())
@@ -751,15 +758,20 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
             {
                 $street = Mage::helper ('core')->removeAccents ($body);
 
-                if (preg_match ('/(.*)\s([\d]{1,})\s(.*)/', $street, $matches) == '1')
+                if (preg_match ('/(.*)\s([\d]{1,})\s(.*)/', $street, $matches) == '1'
+                    || preg_match ('/(.*)\s([\d]{1,})/', $street, $matches) == '1'
+                    || preg_match ('/(.*)/', $street, $matches) == '1')
                 {
+                    $streetNumber   = !empty ($matches [2]) ? $matches [2] : '------';
+                    $streetDistrict = !empty ($matches [3]) ? $matches [3] : '------';
+
                     Mage::getModel ('checkout/cart_customer_api')->setAddresses ($chat->getQuoteId (), array(
                         array(
                             'mode'       => 'billing',
                             'firstname'  => $senderName [0],
                             'lastname'   => $senderName [1],
                             'company'    => null,
-                            'street'     => array ($matches [1], $matches [2], null, $matches [3]),
+                            'street'     => array ($matches [1], $streetNumber, null, $streetDistrict),
                             'city'       => Mage::getStoreConfig ('shipping/origin/city', $storeId),
                             'region'     => Mage::getStoreConfig ('shipping/origin/region_id', $storeId),
                             'country_id' => Mage::getStoreConfig ('shipping/origin/country_id', $storeId),
@@ -920,8 +932,6 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
 
                 if (!empty ($this->_paymentMethods [$paymentId]) && $this->_getAllowedPayment ($paymentMethods, $paymentId))
                 {
-                    $chatStatus = Toluca_Bot_Helper_Data::STATUS_CHECKOUT;
-
                     switch ($this->_paymentMethods [$paymentId])
                     {
                         case 'cashondelivery':
@@ -960,6 +970,8 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
 
                             $result = $this->_getCheckoutReview ($chat->getQuoteId (), $storeId) . PHP_EOL . PHP_EOL;
 
+                            $chatStatus = Toluca_Bot_Helper_Data::STATUS_CHECKOUT;
+
                             break;
                         }
                     }
@@ -968,6 +980,13 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
                         ->setUpdatedAt (date ('c'))
                         ->save ()
                     ;
+
+                    if ($chatStatus == Toluca_Bot_Helper_Data::STATUS_CHECKOUT && !$this->_orderReview)
+                    {
+                        $body = self::COMMAND_OK;
+
+                        goto __checkoutCreateOrder;
+                    }
                 }
                 else
                 {
@@ -1017,6 +1036,13 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
                         ->setUpdatedAt (date ('c'))
                         ->save ()
                     ;
+
+                    if (!$this->_orderReview)
+                    {
+                        $body = self::COMMAND_OK;
+
+                        goto __checkoutCreateOrder;
+                    }
                 }
                 else
                 {
@@ -1056,6 +1082,13 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
                         ->setUpdatedAt (date ('c'))
                         ->save ()
                     ;
+
+                    if (!$this->_orderReview)
+                    {
+                        $body = self::COMMAND_OK;
+
+                        goto __checkoutCreateOrder;
+                    }
                 }
                 else
                 {
@@ -1093,6 +1126,13 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
                         ->setUpdatedAt (date ('c'))
                         ->save ()
                     ;
+
+                    if (!$this->_orderReview)
+                    {
+                        $body = self::COMMAND_OK;
+
+                        goto __checkoutCreateOrder;
+                    }
                 }
                 else
                 {
@@ -1103,6 +1143,8 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
             }
             case Toluca_Bot_Helper_Data::STATUS_CHECKOUT:
             {
+                __checkoutCreateOrder:
+
                 if (!strcmp (strtolower (trim ($body)), self::COMMAND_OK))
                 {
                     Mage::app ()->getStore ()->setConfig (Mage_Checkout_Helper_Data::XML_PATH_GUEST_CHECKOUT, '1');
@@ -1122,7 +1164,7 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
 
                     $order = Mage::getModel ('sales/order')->loadByIncrementId ($incrementId);
 
-                    $result = Mage::helper ('bot/message')->getYourOrderNumberText ($order) . PHP_EOL . PHP_EOL
+                    $result .= Mage::helper ('bot/message')->getYourOrderNumberText ($order) . PHP_EOL . PHP_EOL
                         . Mage::helper ('bot/message')->getOrderInformationText ($order)
                         . Mage::helper ('bot/message')->getThankYouForShoppingText ($storeName) . PHP_EOL . PHP_EOL
                         . Mage::helper ('bot/message')->getBuyThroughTheAppText ()
@@ -1491,14 +1533,14 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
 
         $info = Mage::getModel ('checkout/cart_api')->info ($quoteId, $storeId);
 
-        $result .= sprintf ('*%s*: %s', Mage::helper ('bot')->__('Shipping Address'), implode (' ', explode ("\n", $info ['shipping_address']['street'])))
+        $result .= sprintf ('*%s*: %s', Mage::helper ('bot')->__('Address'), implode (' ', explode ("\n", $info ['shipping_address']['street'])))
             . PHP_EOL . PHP_EOL
         ;
 
         $shippingDescription = $info ['shipping_address']['shipping_description'];
         $shippingAmount      = Mage::helper ('core')->currency ($info ['shipping_address']['shipping_amount'], true, false);
 
-        $result .= sprintf ('*%s*: %s *%s*', Mage::helper ('bot')->__('Shipping Method'), $shippingDescription, $shippingAmount)
+        $result .= sprintf ('*%s*: %s *%s*', Mage::helper ('bot')->__('Shipping'), $shippingDescription, $shippingAmount)
             . PHP_EOL . PHP_EOL
         ;
 
@@ -1507,7 +1549,7 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
 
         $grandTotal = Mage::helper ('core')->currency ($info ['shipping_address']['grand_total'], true, false);
 
-        $result .= sprintf ('*%s*: %s  *%s*', Mage::helper ('bot')->__('Payment Method'), $paymentTitle, $grandTotal)
+        $result .= sprintf ('*%s*: %s  *%s*', Mage::helper ('bot')->__('Payment'), $paymentTitle, $grandTotal)
             . PHP_EOL . PHP_EOL
         ;
 
@@ -1540,7 +1582,10 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
             }
         }
 
-        $result .= Mage::helper ('bot/message')->getEnterToConfirmOrderText ();
+        if ($this->_orderReview)
+        {
+            $result .= Mage::helper ('bot/message')->getEnterToConfirmOrderText ();
+        }
 
         return $result;
     }

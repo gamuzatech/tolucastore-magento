@@ -132,5 +132,33 @@ class Gamuza_Basic_Adminhtml_Sales_OrderController extends Mage_Adminhtml_Sales_
 
         $this->_redirect ('*/sales_order/view', array ('order_id' => $order->getId ()));
     }
+
+    /**
+     * Print order status
+     */
+    public function printAction()
+    {
+        if ($order = $this->_initOrder ())
+        {
+            try
+            {
+                $order->setData('is_printed', 0)->save ();
+
+                $this->_getSession()->addSuccess ($this->__('The order notification has been sent.'));
+            }
+            catch (Mage_Core_Exception $e)
+            {
+                $this->_getSession ()->addError ($e->getMessage ());
+            }
+            catch (Exception $e)
+            {
+                $this->_getSession ()->addError ($this->__('Failed to send the order notification.'));
+
+                // Mage::logException ($e);
+            }
+        }
+
+        $this->_redirect ('*/sales_order/view', array ('order_id' => $order->getId ()));
+    }
 }
 

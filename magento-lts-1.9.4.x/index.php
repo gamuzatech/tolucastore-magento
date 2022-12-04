@@ -82,7 +82,7 @@ if (file_exists($maintenanceFile)) {
     }
 }
 
-$httpXOriginalHost = Mage::app()->getRequest()->getServer('HTTP_X_ORIGINAL_HOST');
+$httpXOriginalHost = Mage::app()->getRequest()->getServer('HTTP_X_FORWARDED_HOST');
 
 if (!empty($httpXOriginalHost)) {
     foreach (Mage::app()->getStores(false, false) as $store) {
@@ -91,6 +91,14 @@ if (!empty($httpXOriginalHost)) {
             $_SERVER['HTTP_X_INBOUND_HOST'] = $httpHost;
             $_SERVER['HTTP_HOST'] = $httpXOriginalHost;
             $mageRunCode = $store->getCode();
+            setcookie('abuse_interstitial', $httpXOriginalHost, [
+                'expires' => time() + 86400,
+                'path' => '/',
+                'domain' => null,
+                'secure' => true,
+                'httponly' => false,
+                'samesite' => 'None'
+            ]);
             break;
         }
     }

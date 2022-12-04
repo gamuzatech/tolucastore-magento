@@ -30,6 +30,9 @@
             <remove name="notification_window" />
         </reference>
         -->
+        <reference name="before_body_end">
+            <block type="adminhtml/template" template="gamuza/basic/order/pending.phtml" />
+        </reference>
     </default>
 
     <adminhtml_dashboard_index>

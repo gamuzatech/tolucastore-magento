@@ -40,6 +40,7 @@ $coreConfig->saveConfig ('design/header/logo_alt',       'Toluca Store Commerce'
 /**
  * Catalog
  */
+$coreConfig->saveConfig ('catalog/frontend/list_allow_all', '1');
 $coreConfig->saveConfig (Mage_Catalog_Helper_Category_Flat::XML_PATH_IS_ENABLED_FLAT_CATALOG_CATEGORY, '1');
 $coreConfig->saveConfig (Mage_Catalog_Helper_Product_Flat::XML_PATH_USE_PRODUCT_FLAT,                  '1');
 
@@ -134,7 +135,7 @@ $coreConfig->saveConfig ('system/smtp/disable',                '1');
 $coreConfig->saveConfig ('system/log/enable_log',              '2');
 $coreConfig->saveConfig ('system/adminnotification/use_https', '2');
 $coreConfig->saveConfig ('system/backup/enabled',              '1');
-$coreConfig->saveConfig ('system/backup/type',                 'media');
+$coreConfig->saveConfig ('system/backup/type',                 'db');
 $coreConfig->saveConfig ('system/backup/maintenance',          '0');
 
 /**
