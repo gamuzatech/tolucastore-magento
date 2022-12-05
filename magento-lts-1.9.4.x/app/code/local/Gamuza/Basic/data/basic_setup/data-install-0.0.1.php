@@ -24,6 +24,15 @@ $installer->updateAttribute ('catalog_product', 'short_description', 'frontend_i
 $installer->updateAttribute ('catalog_product', 'url_key',           'frontend_input', 'label');
 $installer->updateAttribute ('catalog_product', 'tax_class_id',      'default_value',  '0');
 
+$rootCategoryId = Mage::getModel ('core/store')
+    ->load (Mage_Core_Model_App::DISTRO_STORE_ID)
+    ->getRootCategoryId ();
+
+$rootCategory = Mage::getModel ('catalog/category')->load ($rootCategoryId)
+    ->setIsAnchor (true)
+    ->setPageLayout ('two_columns_left')
+    ->save ();
+
 /**
  * Customer
  */

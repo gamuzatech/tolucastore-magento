@@ -43,14 +43,5 @@ $installer->addAttribute ('catalog_category', Gamuza_Basic_Helper_Data::CATEGORY
     'sort_order'       => 1000,
 ));
 
-$rootCategoryId = Mage::getModel ('core/store')
-    ->load (Mage_Core_Model_App::DISTRO_STORE_ID)
-    ->getRootCategoryId ();
-
-$rootCategory = Mage::getModel ('catalog/category')->load ($rootCategoryId)
-    ->setIsAnchor (true)
-    ->setPageLayout ('two_columns_left')
-    ->save ();
-
 $installer->endSetup ();
 
