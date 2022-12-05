@@ -28,6 +28,11 @@ class Gamuza_Basic_ExpressController extends Mage_Catalog_CategoryController
      */
     protected function _initCategory()
     {
+        if (!Mage::getStoreConfigFlag(Gamuza_Basic_Helper_Data::XML_PATH_CATALOG_EXPRESS_ACTIVE))
+        {
+            return false;
+        }
+
         Mage::dispatchEvent('catalog_controller_category_init_before', array('controller_action' => $this));
 
         $rootCategoryId = Mage::app()->getStore()->getRootCategoryId();

@@ -375,6 +375,9 @@
                 <date_fields_order><![CDATA[d,m,y]]></date_fields_order>
                 <time_format>24h</time_format>
             </custom_options>
+            <express>
+                <active>1</active>
+            </express>
         </catalog>
         <cataloginventory>
             <options>

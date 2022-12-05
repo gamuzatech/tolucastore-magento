@@ -45,6 +45,8 @@ class Gamuza_Basic_Helper_Data extends Mage_Core_Helper_Abstract
 
     const SQL_PT_BR = 'pt_BR' . DS . 'sql' . DS . 'sql_pt_br_19_utf8.txt';
 
+    const XML_PATH_CATALOG_EXPRESS_ACTIVE = 'catalog/express/active';
+
     public function getLocaleCode ($scope = 'default', $scope_id = 0)
     {
         $read = Mage::getSingleton('core/resource')->getConnection('core_read');
