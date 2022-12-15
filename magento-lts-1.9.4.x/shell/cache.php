@@ -33,14 +33,14 @@ umask(0);
 
 try
 {
-    $cacheTypes = Mage::helper('core')->getCacheTypes();
-
     if ($argc != 1)
     {
         array_shift($argv);
 
         $argv = array_flip($argv);
     }
+
+    $cacheTypes = Mage::helper('core')->getCacheTypes();
 
     foreach($cacheTypes as $type => $value)
     {
