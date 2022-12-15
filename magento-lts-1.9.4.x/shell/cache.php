@@ -39,16 +39,21 @@ try
     {
         array_shift($argv);
 
-        $cacheTypes = array_flip($argv);
+        $argv = array_flip($argv);
     }
 
     foreach($cacheTypes as $type => $value)
     {
+        $cacheTypes[$type] = 1;
+
+        if (!array_key_exists($type, $argv))
+        {
+            continue; // skip
+        }
+
         Mage::app()->getCacheInstance()->cleanType($type);
 
         Mage::dispatchEvent('adminhtml_cache_refresh_type', array('type' => $type));
-
-        $cacheTypes[$type] = 1;
     }
 
     Mage::app()->saveUseCache($cacheTypes);
