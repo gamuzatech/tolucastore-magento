@@ -35,6 +35,7 @@ try
 {
     Mage::getModel ('backup/observer')->scheduledBackup ();
 
+    /*
     $point = date ('Y-m-d', strtotime ('-7 days'));
 
     foreach (Mage::getModel ('backup/fs_collection') as $fs)
@@ -48,6 +49,7 @@ try
             if ($backup && $backup->getId ()) $backup->deleteFile();
         }
     }
+    */
 }
 catch (Exception $e)
 {
