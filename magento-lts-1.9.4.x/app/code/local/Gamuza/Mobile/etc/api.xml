@@ -12,7 +12,7 @@
         <resources>
             <!-- Core -->
             <mobile_magento translate="title" module="mobile">
-                <model>core/magento_api</model>
+                <model>mobile/magento_api</model>
                 <title>Magento Info API</title>
                 <acl>mobile/magento</acl>
                 <methods>
@@ -20,6 +20,10 @@
                         <title>Get info about current Magento installation</title>
                         <acl>mobile/magento/info</acl>
                     </info>
+                    <cache translate="title" module="basic">
+                        <title>Refresh info about current Magento cache</title>
+                        <acl>mobile/magento/cache</acl>
+                    </cache>
                 </methods>
             </mobile_magento>
             <!-- Catalog -->
@@ -509,6 +513,9 @@
                         <info translate="title" module="mobile">
                             <title>Retrieve info about current Magento installation</title>
                         </info>
+                        <cache translate="title" module="basic">
+                            <title>Refresh info about current Magento cache</title>
+                        </cache>
                     </magento>
                     <!-- Catalog -->
                     <product translate="title" module="mobile">
