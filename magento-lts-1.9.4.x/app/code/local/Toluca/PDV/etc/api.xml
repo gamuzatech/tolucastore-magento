@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+/**
+ * @package     Toluca_PDV
+ * @copyright   Copyright (c) 2022 Gamuza Technologies (http://www.gamuza.com.br/)
+ * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
+ */
+-->
+
+<config>
+    <api>
+        <resources>
+            <!-- Cashier -->
+            <pdv_item translate="title" module="pdv">
+                <model>pdv/item_api</model>
+                <title>PDV Cashier API</title>
+                <acl>pdv/item</acl>
+                <methods>
+                    <list translate="title" module="pdv">
+                        <title>List available cashiers</title>
+                        <acl>pdv/item/list</acl>
+                        <method>items</method>
+                    </list>
+                    <info translate="title" module="pdv">
+                        <title>Get cashier information</title>
+                        <acl>pdv/item/info</acl>
+                    </info>
+                    <open translate="title" module="pdv">
+                        <title>Open a cashier</title>
+                        <acl>pdv/item/open</acl>
+                    </open>
+                    <reinforce translate="title" module="pdv">
+                        <title>Reinforce a cashier</title>
+                        <acl>pdv/item/reinforce</acl>
+                    </reinforce>
+                    <bleed translate="title" module="pdv">
+                        <title>Bleed a cashier</title>
+                        <acl>pdv/item/bleed</acl>
+                    </bleed>
+                    <close translate="title" module="pdv">
+                        <title>Close a cashier</title>
+                        <acl>pdv/item/close</acl>
+                    </close>
+                </methods>
+                <faults translate="message" module="pdv">
+                    <item_not_specified>
+                        <code>100</code>
+                        <message>Requested cashier ID was not specified.</message>
+                    </item_not_specified>
+                    <amount_not_specified>
+                        <code>200</code>
+                        <message>Requested cashier amount was not specified.</message>
+                    </amount_not_specified>
+                    <user_not_specified>
+                        <code>300</code>
+                        <message>Requested user ID was not specified.</message>
+                    </user_not_specified>
+                    <password_not_specified>
+                        <code>400</code>
+                        <message>Requested user password was not specified.</message>
+                    </password_not_specified>
+                    <item_not_exists>
+                        <code>500</code>
+                        <message>Requested cashier was not found.</message>
+                    </item_not_exists>
+                    <user_not_exists>
+                        <code>600</code>
+                        <message>Requested user was not found.</message>
+                    </user_not_exists>
+                    <item_already_opened>
+                        <code>700</code>
+                        <message>Requested cashier is already opened.</message>
+                    </item_already_opened>
+                    <item_already_closed>
+                        <code>800</code>
+                        <message>Requested cashier is already closed.</message>
+                    </item_already_closed>
+                    <user_invalid_password>
+                        <code>900</code>
+                        <message>User password is invalid.</message>
+                    </user_invalid_password>
+                    <item_invalid_amount>
+                        <code>1000</code>
+                        <message>Cashier amount is invalid.</message>
+                    </item_invalid_amount>
+                </faults>
+            </pdv_item>
+        </resources>
+        <acl>
+            <resources>
+                <pdv translate="title" module="pdv">
+                    <title>PDV API</title>
+                    <sort_order>0</sort_order>
+                    <!-- Cashier -->
+                    <item translate="title" module="pdv">
+                        <title>Cashier</title>
+                        <list translate="title" module="pdv">
+                            <title>List available cashiers</title>
+                        </list>
+                        <info translate="title" module="pdv">
+                            <title>Get cashier information</title>
+                        </info>
+                        <open translate="title" module="pdv">
+                            <title>Open a cashier</title>
+                        </open>
+                        <reinforce translate="title" module="pdv">
+                            <title>Reinforce a cashier</title>
+                        </reinforce>
+                        <bleed translate="title" module="pdv">
+                            <title>Bleed a cashier</title>
+                        </bleed>
+                        <close translate="title" module="pdv">
+                            <title>Close a cashier</title>
+                        </close>
+                    </item>
+                </pdv>
+            </resources>
+        </acl>
+    </api>
+</config>
+
