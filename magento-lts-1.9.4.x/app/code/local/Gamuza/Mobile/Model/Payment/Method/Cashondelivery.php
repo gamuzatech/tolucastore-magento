@@ -44,6 +44,11 @@ class Gamuza_Mobile_Model_Payment_Method_Cashondelivery extends Mage_Payment_Mod
             $info->setAdditionalInformation('cash_amount', $data->getCashAmount());
         }
 
+        if ($data->getChangeType() !== null)
+        {
+            $info->setAdditionalInformation('change_amount', 0);
+        }
+
         return $this;
     }
 
@@ -62,8 +67,9 @@ class Gamuza_Mobile_Model_Payment_Method_Cashondelivery extends Mage_Payment_Mod
 
         $info = $this->getInfoInstance();
         $errorMsg = false;
-        $availableTypes = array('0', '1');
 /*
+        $availableTypes = array('0', '1');
+
         if (!in_array($info->getAdditionalInformation('change_type'), $availableTypes))
         {
             $errorMsg = Mage::helper('payment')->__('Change type is not allowed for this payment method.');
@@ -80,6 +86,8 @@ class Gamuza_Mobile_Model_Payment_Method_Cashondelivery extends Mage_Payment_Mod
             {
                 $errorMsg = Mage::helper('payment')->__('Cash amount must be equal or greater than %s.', Mage::helper('core')->currency(ceil($baseGrandTotal), true, false));
             }
+
+            $info->setAdditionalInformation('change_amount', $cashAmount - $baseGrandTotal);
         }
 
         if($errorMsg)
