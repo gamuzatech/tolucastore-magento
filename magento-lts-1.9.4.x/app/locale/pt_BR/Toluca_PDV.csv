@@ -31,4 +31,5 @@
 "Cashier amount is invalid.","Valor do Caixa inválido."
 "Closed amount is invalid. Difference of %s.","Valor de Fechamento inválido. Diferença de %s."
 "Bleed amount is invalid. Allowed only %s.","Valor da Sangria inválida. Permitido somente %s."
+"Cash On Delivery","Dinheiro na Entrega"
 

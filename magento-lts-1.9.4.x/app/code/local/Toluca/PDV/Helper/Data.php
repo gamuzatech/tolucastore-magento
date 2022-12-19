@@ -15,5 +15,7 @@ class Toluca_PDV_Helper_Data extends Mage_Core_Helper_Abstract
 
     const STATUS_CLOSED = 0;
     const STATUS_OPENED = 1;
+
+    const XML_PATH_PDV_PAYMENT_METHOD_CASHONDELIVERY = 'pdv/payment_method/cashondelivery';
 }
 
