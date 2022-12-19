@@ -193,6 +193,15 @@ class Toluca_PDV_Model_Item_Api extends Mage_Api_Model_Resource_Abstract
             ->save ()
         ;
 
+        $history = Mage::getModel ('pdv/history')
+            ->setTypeId (Toluca_PDV_Helper_Data::HISTORY_TYPE_OPEN)
+            ->setItemId ($item->getId ())
+            ->setUserId ($user->getId ())
+            ->setAmount ($amount)
+            ->setCreatedAt (date ('c'))
+            ->save ()
+        ;
+
         return true;
     }
 
@@ -256,6 +265,15 @@ class Toluca_PDV_Model_Item_Api extends Mage_Api_Model_Resource_Abstract
         }
 
         $item->setReinforcedAmount ($reinforcedAmount + $amount)
+            ->save ()
+        ;
+
+        $history = Mage::getModel ('pdv/history')
+            ->setTypeId (Toluca_PDV_Helper_Data::HISTORY_TYPE_REINFORCE)
+            ->setItemId ($item->getId ())
+            ->setUserId ($user->getId ())
+            ->setAmount ($amount)
+            ->setCreatedAt (date ('c'))
             ->save ()
         ;
 
@@ -340,6 +358,15 @@ class Toluca_PDV_Model_Item_Api extends Mage_Api_Model_Resource_Abstract
             ->save ()
         ;
 
+        $history = Mage::getModel ('pdv/history')
+            ->setTypeId (Toluca_PDV_Helper_Data::HISTORY_TYPE_BLEED)
+            ->setItemId ($item->getId ())
+            ->setUserId ($user->getId ())
+            ->setAmount (- $amount)
+            ->setCreatedAt (date ('c'))
+            ->save ()
+        ;
+
         return true;
     }
 
@@ -421,6 +448,15 @@ class Toluca_PDV_Model_Item_Api extends Mage_Api_Model_Resource_Abstract
         $item->setStatus (Toluca_PDV_Helper_Data::STATUS_CLOSED)
             ->setClosedAmount ($amount)
             ->setClosedAt (date ('c'))
+            ->save ()
+        ;
+
+        $history = Mage::getModel ('pdv/history')
+            ->setTypeId (Toluca_PDV_Helper_Data::HISTORY_TYPE_CLOSE)
+            ->setItemId ($item->getId ())
+            ->setUserId ($user->getId ())
+            ->setAmount ($amount)
+            ->setCreatedAt (date ('c'))
             ->save ()
         ;
 

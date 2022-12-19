@@ -18,5 +18,10 @@
             <block type="pdv/adminhtml_user" name="user" />
         </reference>
     </admin_pdv_adminhtml_user_index>
+    <admin_pdv_adminhtml_history_index>
+        <reference name="content">
+            <block type="pdv/adminhtml_history" name="history" />
+        </reference>
+    </admin_pdv_adminhtml_history_index>
 </layout>
 

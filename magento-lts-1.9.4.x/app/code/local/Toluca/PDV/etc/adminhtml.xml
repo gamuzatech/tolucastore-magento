@@ -27,6 +27,11 @@
                             <sort_order>10</sort_order>
                             <action>admin_pdv/adminhtml_user</action>
                         </user>
+                        <history translate="title" module="pdv">
+                            <title>Manage History</title>
+                            <sort_order>20</sort_order>
+                            <action>admin_pdv/adminhtml_history</action>
+                        </history>
                     </children>
                 </pdv>
             </children>
@@ -55,6 +60,10 @@
                                         <title>Manage Users</title>
                                         <sort_order>10</sort_order>
                                     </user>
+                                    <history translate="title" module="pdv">
+                                        <title>Manage History</title>
+                                        <sort_order>20</sort_order>
+                                    </history>
                                 </children>
                             </pdv>
                         </children>

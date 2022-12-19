@@ -10,7 +10,7 @@
 <config>
     <modules>
         <Toluca_PDV>
-            <version>0.0.3</version>
+            <version>0.0.4</version>
         </Toluca_PDV>
     </modules>
     <global>
@@ -38,6 +38,9 @@
                     <user>
                         <table>toluca_pdv_user</table>
                     </user>
+                    <history>
+                        <table>toluca_pdv_history</table>
+                    </history>
                 </entities>
             </pdv_mysql4>
         </models>
