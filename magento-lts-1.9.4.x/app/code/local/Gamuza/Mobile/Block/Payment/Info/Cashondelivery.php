@@ -54,7 +54,8 @@ class Gamuza_Mobile_Block_Payment_Info_Cashondelivery extends Mage_Payment_Block
 
         if ($this->getInfo()->getAdditionalInformation('change_type') && $this->getInfo()->getAdditionalInformation('cash_amount'))
         {
-            $data[Mage::helper('payment')->__('Change To Amount')] = Mage::helper('core')->currency ($this->getInfo()->getAdditionalInformation('cash_amount'), true, false);
+            $data[Mage::helper('payment')->__('Cash Amount')]   = Mage::helper('core')->currency ($this->getInfo()->getAdditionalInformation('cash_amount'), true, false);
+            $data[Mage::helper('payment')->__('Change Amount')] = Mage::helper('core')->currency ($this->getInfo()->getAdditionalInformation('change_amount'), true, false);
         }
 
         return $transport->setData(array_merge($data, $transport->getData()));
