@@ -7,6 +7,14 @@
 
 class Toluca_PDV_Block_Adminhtml_History_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
+    protected $_countTotals = true;
+
+    protected $_isExport = true;
+
+    public $_fieldsTotals = array(
+        'amount' => 0,
+    );
+
 	public function __construct ()
 	{
 		parent::__construct ();
@@ -25,6 +33,11 @@ class Toluca_PDV_Block_Adminhtml_History_Grid extends Mage_Adminhtml_Block_Widge
 
 		return parent::_prepareCollection ();
 	}
+
+    public function getTotals ()
+    {
+        return $this->helper ('pdv')->getTotals ($this);
+    }
 
     protected function _getStore()
     {

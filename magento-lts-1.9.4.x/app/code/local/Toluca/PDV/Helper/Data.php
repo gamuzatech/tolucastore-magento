@@ -26,5 +26,23 @@ class Toluca_PDV_Helper_Data extends Mage_Core_Helper_Abstract
     const STATUS_OPENED = 1;
 
     const XML_PATH_PDV_PAYMENT_METHOD_CASHONDELIVERY = 'pdv/payment_method/cashondelivery';
+
+    public function getTotals (Mage_Adminhtml_Block_Widget_Grid $grid)
+    {
+        $fieldsTotals = $grid->_fieldsTotals;
+
+        foreach ($grid->getCollection () as $item)
+        {
+            foreach ($fieldsTotals as $id => $value)
+            {
+                $fieldsTotals [$id] += floatval ($item->getData ($id));
+            }
+        }
+
+        $object = new Varien_Object ();
+        $object->addData ($fieldsTotals);
+
+        return $object;
+    }
 }
 
