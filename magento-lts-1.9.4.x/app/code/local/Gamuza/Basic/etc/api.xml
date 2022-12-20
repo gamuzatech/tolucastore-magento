@@ -20,6 +20,10 @@
                         <title>Get info about current Magento installation</title>
                         <acl>basic/magento/info</acl>
                     </info>
+                    <backup translate="title" module="basic">
+                        <title>Backup info about current Magento installation</title>
+                        <acl>basic/magento/backup</acl>
+                    </backup>
                     <cache translate="title" module="basic">
                         <title>Refresh info about current Magento cache</title>
                         <acl>basic/magento/cache</acl>
@@ -42,6 +46,9 @@
                         <info translate="title" module="basic">
                             <title>Retrieve info about current Magento installation</title>
                         </info>
+                        <backup translate="title" module="basic">
+                            <title>Backup info about current Magento installation</title>
+                        </backup>
                         <cache translate="title" module="basic">
                             <title>Refresh info about current Magento cache</title>
                         </cache>
