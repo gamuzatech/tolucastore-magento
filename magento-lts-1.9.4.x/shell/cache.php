@@ -33,40 +33,9 @@ umask(0);
 
 try
 {
-    if ($argc != 1)
-    {
-        array_shift($argv);
+    array_shift($argv);
 
-        $argv = array_flip($argv);
-    }
-
-    $cacheTypes = Mage::helper('core')->getCacheTypes();
-
-    foreach($cacheTypes as $type => $value)
-    {
-        $cacheTypes[$type] = 1;
-
-        if (!array_key_exists($type, $argv))
-        {
-            continue; // skip
-        }
-
-        Mage::app()->getCacheInstance()->cleanType($type);
-
-        Mage::dispatchEvent('adminhtml_cache_refresh_type', array('type' => $type));
-    }
-
-    Mage::app()->saveUseCache($cacheTypes);
-
-    if ($argc != 1) exit(0);
-
-    Mage::app()->cleanCache();
-
-    Mage::dispatchEvent('adminhtml_cache_flush_system');
-
-    Mage::app()->getCacheInstance()->flush();
-
-    Mage::dispatchEvent('adminhtml_cache_flush_all');
+    Mage::getModel ('mobile/magento_api')->cache ($argv);
 }
 catch (Exception $e)
 {

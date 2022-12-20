@@ -35,7 +35,7 @@ class Gamuza_Mobile_Model_Magento_Api extends Mage_Core_Model_Magento_Api
 
         Mage::app()->saveUseCache($cacheTypes);
 
-        if (empty($codes))
+        if (!empty($codes))
         {
             return true;
         }
