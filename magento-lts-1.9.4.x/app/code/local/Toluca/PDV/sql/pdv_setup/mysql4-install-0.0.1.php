@@ -53,28 +53,28 @@ SQLBLOCK;
             'comment'  => 'Status',
         ));
     $installer->getConnection ()
-        ->addColumn ($table, 'opened_amount', array(
+        ->addColumn ($table, 'open_amount', array(
             'type'     => Varien_Db_Ddl_Table::TYPE_DECIMAL,
             'length'   => '12,4',
             'unsigned' => true,
             'nullable' => false,
-            'comment'  => 'Opened Amount',
+            'comment'  => 'Open Amount',
         ));
     $installer->getConnection ()
-        ->addColumn ($table, 'reinforced_amount', array(
+        ->addColumn ($table, 'reinforce_amount', array(
             'type'     => Varien_Db_Ddl_Table::TYPE_DECIMAL,
             'length'   => '12,4',
             'unsigned' => true,
             'nullable' => false,
-            'comment'  => 'Reinforced Amount',
+            'comment'  => 'Reinforce Amount',
         ));
     $installer->getConnection ()
-        ->addColumn ($table, 'bleeded_amount', array(
+        ->addColumn ($table, 'bleed_amount', array(
             'type'     => Varien_Db_Ddl_Table::TYPE_DECIMAL,
             'length'   => '12,4',
             'unsigned' => true,
             'nullable' => false,
-            'comment'  => 'Bleeded Amount',
+            'comment'  => 'Bleed Amount',
         ));
     $installer->getConnection ()
         ->addColumn ($table, 'money_amount', array(
@@ -85,20 +85,20 @@ SQLBLOCK;
             'comment'  => 'Money Amount',
         ));
     $installer->getConnection ()
-        ->addColumn ($table, 'changed_amount', array(
+        ->addColumn ($table, 'change_amount', array(
             'type'     => Varien_Db_Ddl_Table::TYPE_DECIMAL,
             'length'   => '12,4',
             'unsigned' => true,
             'nullable' => false,
-            'comment'  => 'Changed Amount',
+            'comment'  => 'Change Amount',
         ));
     $installer->getConnection ()
-        ->addColumn ($table, 'closed_amount', array(
+        ->addColumn ($table, 'close_amount', array(
             'type'     => Varien_Db_Ddl_Table::TYPE_DECIMAL,
             'length'   => '12,4',
             'unsigned' => true,
             'nullable' => false,
-            'comment'  => 'Closed Amount',
+            'comment'  => 'Close Amount',
         ));
     $installer->getConnection ()
         ->addColumn ($table, 'opened_at', array(

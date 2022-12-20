@@ -46,13 +46,13 @@ class Toluca_PDV_Model_Item_Api extends Mage_Api_Model_Resource_Abstract
                 'updated_at' => $item->getUpdatedAt (),
                 'opened_at' => $item->getOpenedAt (),
                 'closed_at' => $item->getClosedAt (),
-                'opened_amount'     => floatval ($item->getOpenedAmount ()),
-                'reinforced_amount' => floatval ($item->getReinforcedAmount ()),
-                'bleeded_amount'    => floatval ($item->getBleededAmount ()),
-                'money_amount'      => floatval ($item->getMoneyAmount ()),
-                'changed_amount'    => floatval ($item->getChangedAmount ()),
-                'closed_amount'     => floatval ($item->getClosedAmount ()),
-                'order_amount'      => floatval ($item->getOrderAmount ()),
+                'open_amount'      => floatval ($item->getOpenAmount ()),
+                'reinforce_amount' => floatval ($item->getReinforceAmount ()),
+                'bleed_amount'     => floatval ($item->getBleedAmount ()),
+                'money_amount'     => floatval ($item->getMoneyAmount ()),
+                'change_amount'    => floatval ($item->getChangeAmount ()),
+                'close_amount'     => floatval ($item->getCloseAmount ()),
+                'order_amount'     => floatval ($item->getOrderAmount ()),
             );
         }
 
@@ -88,13 +88,13 @@ class Toluca_PDV_Model_Item_Api extends Mage_Api_Model_Resource_Abstract
             'updated_at' => $item->getUpdatedAt (),
             'opened_at' => $item->getOpenedAt (),
             'closed_at' => $item->getClosedAt (),
-            'opened_amount'     => floatval ($item->getOpenedAmount ()),
-            'reinforced_amount' => floatval ($item->getReinforcedAmount ()),
-            'bleeded_amount'    => floatval ($item->getBleededAmount ()),
-            'money_amount'      => floatval ($item->getMoneyAmount ()),
-            'changed_amount'    => floatval ($item->getChangedAmount ()),
-            'closed_amount'     => floatval ($item->getClosedAmount ()),
-            'order_amount'      => floatval ($item->getOrderAmount ()),
+            'open_amount'      => floatval ($item->getOpenAmount ()),
+            'reinforce_amount' => floatval ($item->getReinforceAmount ()),
+            'bleed_amount'     => floatval ($item->getBleedAmount ()),
+            'money_amount'     => floatval ($item->getMoneyAmount ()),
+            'change_amount'    => floatval ($item->getChangeAmount ()),
+            'close_amount'     => floatval ($item->getCloseAmount ()),
+            'order_amount'     => floatval ($item->getOrderAmount ()),
         );
 
         $user = Mage::getModel ('pdv/user')->load ($item->getUserId ());
@@ -156,7 +156,7 @@ class Toluca_PDV_Model_Item_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('item_not_exists');
         }
 
-        if ($item->getStatus () == Toluca_PDV_Helper_Data::STATUS_OPENED)
+        if ($item->getStatus () == Toluca_PDV_Helper_Data::ITEM_STATUS_OPENED)
         {
             $this->_fault ('item_already_opened');
         }
@@ -180,14 +180,14 @@ class Toluca_PDV_Model_Item_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('user_invalid_password');
         }
 
-        $item->setStatus (Toluca_PDV_Helper_Data::STATUS_OPENED)
+        $item->setStatus (Toluca_PDV_Helper_Data::ITEM_STATUS_OPENED)
             ->setUserId ($user_id)
-            ->setOpenedAmount ($amount)
-            ->setReinforcedAmount (0)
-            ->setBleededAmount (0)
+            ->setOpenAmount ($amount)
+            ->setReinforceAmount (0)
+            ->setBleedAmount (0)
             ->setMoneyAmount (0)
-            ->setChangedAmount (0)
-            ->setClosedAmount (0)
+            ->setChangeAmount (0)
+            ->setCloseAmount (0)
             ->setOpenedAt (date ('c'))
             ->setClosedAt (new Zend_Db_Expr ('NULL'))
             ->save ()
@@ -238,12 +238,12 @@ class Toluca_PDV_Model_Item_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('item_not_exists');
         }
 
-        if ($item->getStatus () == Toluca_PDV_Helper_Data::STATUS_CLOSED)
+        if ($item->getStatus () == Toluca_PDV_Helper_Data::ITEM_STATUS_CLOSED)
         {
             $this->_fault ('item_already_closed');
         }
 
-        $reinforcedAmount = floatval ($item->getReinforcedAmount ());
+        $reinforceAmount = floatval ($item->getReinforceAmount ());
 
         $user = Mage::getModel ('pdv/user')->getCollection ()
             ->addFieldToFilter ('is_active', array ('eq' => true))
@@ -264,7 +264,7 @@ class Toluca_PDV_Model_Item_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('user_invalid_password');
         }
 
-        $item->setReinforcedAmount ($reinforcedAmount + $amount)
+        $item->setReinforceAmount ($reinforceAmount + $amount)
             ->save ()
         ;
 
@@ -313,24 +313,24 @@ class Toluca_PDV_Model_Item_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('item_not_exists');
         }
 
-        if ($item->getStatus () == Toluca_PDV_Helper_Data::STATUS_CLOSED)
+        if ($item->getStatus () == Toluca_PDV_Helper_Data::ITEM_STATUS_CLOSED)
         {
             $this->_fault ('item_already_closed');
         }
 
-        $openedAmount = floatval ($item->getOpenedAmount ());
-        $reinforcedAmount = floatval ($item->getReinforcedAmount ());
-        $bleededAmount  = floatval ($item->getBleededAmount ());
+        $openAmount = floatval ($item->getOpenAmount ());
+        $reinforceAmount = floatval ($item->getReinforceAmount ());
+        $bleedAmount  = floatval ($item->getBleedAmount ());
         $moneyAmount  = floatval ($item->getMoneyAmount ());
-        $changedAmount = floatval ($item->getChangedAmount ());
+        $changeAmount = floatval ($item->getChangeAmount ());
 
-        $closedAmount = ((($openedAmount + $reinforcedAmount) - $bleededAmount) + $moneyAmount) - $changedAmount;
+        $closeAmount = ((($openAmount + $reinforceAmount) - $bleedAmount) + $moneyAmount) - $changeAmount;
 
-        if ($amount > $closedAmount)
+        if ($amount > $closeAmount)
         {
-            $closedAmount = Mage::helper ('core')->currency ($closedAmount, true, false);
+            $closeAmount = Mage::helper ('core')->currency ($closeAmount, true, false);
 
-            $message = Mage::helper ('pdv')->__('Bleed amount is invalid. Allowed only %s.', $closedAmount);
+            $message = Mage::helper ('pdv')->__('Bleed amount is invalid. Allowed only %s.', $closeAmount);
 
             $this->_fault ('item_invalid_amount', $message);
         }
@@ -354,7 +354,7 @@ class Toluca_PDV_Model_Item_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('user_invalid_password');
         }
 
-        $item->setBleededAmount ($bleededAmount + $amount)
+        $item->setBleedAmount ($bleedAmount + $amount)
             ->save ()
         ;
 
@@ -403,25 +403,25 @@ class Toluca_PDV_Model_Item_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('item_not_exists');
         }
 
-        if ($item->getStatus () == Toluca_PDV_Helper_Data::STATUS_CLOSED)
+        if ($item->getStatus () == Toluca_PDV_Helper_Data::ITEM_STATUS_CLOSED)
         {
             $this->_fault ('item_already_closed');
         }
 
-        $openedAmount = floatval ($item->getOpenedAmount ());
-        $reinforcedAmount = floatval ($item->getReinforcedAmount ());
-        $bleededAmount  = floatval ($item->getBleededAmount ());
-        $moneyAmount  = floatval ($item->getMoneyAmount ());
-        $changedAmount = floatval ($item->getChangedAmount ());
+        $openAmount      = floatval ($item->getOpenAmount ());
+        $reinforceAmount = floatval ($item->getReinforceAmount ());
+        $bleedAmount     = floatval ($item->getBleedAmount ());
+        $moneyAmount     = floatval ($item->getMoneyAmount ());
+        $changeAmount    = floatval ($item->getChangeAmount ());
 
-        $closedAmount = ((($openedAmount + $reinforcedAmount) - $bleededAmount) + $moneyAmount) - $changedAmount;
-        $differenceAmount = $amount - $closedAmount;
+        $closeAmount = ((($openAmount + $reinforceAmount) - $bleedAmount) + $moneyAmount) - $changeAmount;
+        $differenceAmount = $amount - $closeAmount;
 
         if ($differenceAmount != 0)
         {
             $differenceAmount = Mage::helper ('core')->currency ($differenceAmount, true, false);
 
-            $message = Mage::helper ('pdv')->__('Closed amount is invalid. Difference of %s.', $differenceAmount);
+            $message = Mage::helper ('pdv')->__('Close amount is invalid. Difference of %s.', $differenceAmount);
 
             $this->_fault ('item_invalid_amount', $message);
         }
@@ -445,8 +445,8 @@ class Toluca_PDV_Model_Item_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('user_invalid_password');
         }
 
-        $item->setStatus (Toluca_PDV_Helper_Data::STATUS_CLOSED)
-            ->setClosedAmount ($amount)
+        $item->setStatus (Toluca_PDV_Helper_Data::ITEM_STATUS_CLOSED)
+            ->setCloseAmount ($amount)
             ->setClosedAt (date ('c'))
             ->save ()
         ;

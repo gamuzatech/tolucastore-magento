@@ -18,8 +18,8 @@ class Toluca_PDV_Model_Adminhtml_System_Config_Source_Item_Status
     public function toOptionArray()
     {
         $result = array(
-            array ('value' => Toluca_PDV_Helper_Data::STATUS_CLOSED, 'label' => Mage::helper ('pdv')->__('Closed')),
-            array ('value' => Toluca_PDV_Helper_Data::STATUS_OPENED, 'label' => Mage::helper ('pdv')->__('Opened')),
+            array ('value' => Toluca_PDV_Helper_Data::ITEM_STATUS_CLOSED, 'label' => Mage::helper ('pdv')->__('Closed')),
+            array ('value' => Toluca_PDV_Helper_Data::ITEM_STATUS_OPENED, 'label' => Mage::helper ('pdv')->__('Opened')),
         );
 
         return $result;
@@ -33,8 +33,8 @@ class Toluca_PDV_Model_Adminhtml_System_Config_Source_Item_Status
     public function toArray()
     {
         $result = array(
-            Toluca_PDV_Helper_Data::STATUS_CLOSED => Mage::helper ('pdv')->__('Closed'),
-            Toluca_PDV_Helper_Data::STATUS_OPENED => Mage::helper ('pdv')->__('Opened'),
+            Toluca_PDV_Helper_Data::ITEM_STATUS_CLOSED => Mage::helper ('pdv')->__('Closed'),
+            Toluca_PDV_Helper_Data::ITEM_STATUS_OPENED => Mage::helper ('pdv')->__('Opened'),
         );
 
         return $result;

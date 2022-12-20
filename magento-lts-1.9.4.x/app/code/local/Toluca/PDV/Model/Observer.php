@@ -66,7 +66,7 @@ class Toluca_PDV_Model_Observer
             ;
 
             $item->setMoneyAmount (floatval ($item->getMoneyAmount ()) + $amount)
-                ->setChangedAmount (floatval ($item->getChangedAmount ()) + $changeAmount)
+                ->setChangeAmount (floatval ($item->getChangeAmount ()) + $changeAmount)
                 ->setUpdatedAt (date ('c'))
                 ->save ()
             ;

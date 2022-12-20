@@ -14,6 +14,9 @@ class Toluca_PDV_Helper_Data extends Mage_Core_Helper_Abstract
     const ORDER_ATTRIBUTE_IS_PDV = 'is_pdv';
     const ORDER_ATTRIBUTE_PDV_ID = 'pdv_id';
 
+    const ITEM_STATUS_CLOSED = 0;
+    const ITEM_STATUS_OPENED = 1;
+
     const HISTORY_TYPE_OPEN      = 'open';
     const HISTORY_TYPE_REINFORCE = 'reinforce';
     const HISTORY_TYPE_BLEED     = 'bleed';
@@ -21,9 +24,6 @@ class Toluca_PDV_Helper_Data extends Mage_Core_Helper_Abstract
     const HISTORY_TYPE_CHANGE    = 'change';
     const HISTORY_TYPE_ORDER     = 'order';
     const HISTORY_TYPE_CLOSE     = 'close';
-
-    const STATUS_CLOSED = 0;
-    const STATUS_OPENED = 1;
 
     const XML_PATH_PDV_PAYMENT_METHOD_CASHONDELIVERY = 'pdv/payment_method/cashondelivery';
 

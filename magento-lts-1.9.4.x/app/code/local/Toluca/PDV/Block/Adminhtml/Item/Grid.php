@@ -12,12 +12,12 @@ class Toluca_PDV_Block_Adminhtml_Item_Grid extends Mage_Adminhtml_Block_Widget_G
     protected $_isExport = true;
 
     public $_fieldsTotals = array(
-        'opened_amount' => 0,
-        'reinforced_amount' => 0,
-        'bleeded_amount' => 0,
+        'open_amount' => 0,
+        'reinforce_amount' => 0,
+        'bleed_amount' => 0,
         'money_amount' => 0,
-        'changed_amount' => 0,
-        'closed_amount' => 0,
+        'change_amount' => 0,
+        'close_amount' => 0,
     );
 
 	public function __construct ()
@@ -107,25 +107,25 @@ class Toluca_PDV_Block_Adminhtml_Item_Grid extends Mage_Adminhtml_Block_Widget_G
 			'index'  => 'closed_at',
             'type'   => 'datetime',
 		));
-		$this->addColumn ('opened_amount', array(
-		    'header'  => Mage::helper ('pdv')->__('Opened Amount'),
+		$this->addColumn ('open_amount', array(
+		    'header'  => Mage::helper ('pdv')->__('Open Amount'),
 		    'align'   => 'right',
 	        'type'    => 'price',
-		    'index'   => 'opened_amount',
+		    'index'   => 'open_amount',
             'currency_code' => $store->getBaseCurrency()->getCode(),
 		));
-		$this->addColumn ('reinforced_amount', array(
-		    'header'  => Mage::helper ('pdv')->__('Reinforced Amount'),
+		$this->addColumn ('reinforce_amount', array(
+		    'header'  => Mage::helper ('pdv')->__('Reinforce Amount'),
 		    'align'   => 'right',
 	        'type'    => 'price',
-		    'index'   => 'reinforced_amount',
+		    'index'   => 'reinforce_amount',
             'currency_code' => $store->getBaseCurrency()->getCode(),
 		));
-		$this->addColumn ('bleeded_amount', array(
-		    'header'  => Mage::helper ('pdv')->__('Bleeded Amount'),
+		$this->addColumn ('bleed_amount', array(
+		    'header'  => Mage::helper ('pdv')->__('Bleed Amount'),
 		    'align'   => 'right',
 	        'type'    => 'price',
-		    'index'   => 'bleeded_amount',
+		    'index'   => 'bleed_amount',
             'currency_code' => $store->getBaseCurrency()->getCode(),
 		));
 		$this->addColumn ('money_amount', array(
@@ -135,18 +135,18 @@ class Toluca_PDV_Block_Adminhtml_Item_Grid extends Mage_Adminhtml_Block_Widget_G
 		    'index'   => 'money_amount',
             'currency_code' => $store->getBaseCurrency()->getCode(),
 		));
-		$this->addColumn ('changed_amount', array(
-		    'header'  => Mage::helper ('pdv')->__('Changed Amount'),
+		$this->addColumn ('change_amount', array(
+		    'header'  => Mage::helper ('pdv')->__('Change Amount'),
 		    'align'   => 'right',
 	        'type'    => 'price',
-		    'index'   => 'changed_amount',
+		    'index'   => 'change_amount',
             'currency_code' => $store->getBaseCurrency()->getCode(),
 		));
-		$this->addColumn ('closed_amount', array(
-		    'header'  => Mage::helper ('pdv')->__('Closed Amount'),
+		$this->addColumn ('close_amount', array(
+		    'header'  => Mage::helper ('pdv')->__('Close Amount'),
 		    'align'   => 'right',
 	        'type'    => 'price',
-		    'index'   => 'closed_amount',
+		    'index'   => 'close_amount',
             'currency_code' => $store->getBaseCurrency()->getCode(),
 		));
 
