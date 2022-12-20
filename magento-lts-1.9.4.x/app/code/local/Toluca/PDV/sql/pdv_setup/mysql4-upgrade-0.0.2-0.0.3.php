@@ -29,9 +29,6 @@ foreach ($entities as $entity)
     $installer->addAttribute ($entity, Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_IS_PDV, $options);
 }
 
-/**
- * Order Table
- */
 $options = array(
     'type'     => Varien_Db_Ddl_Table::TYPE_INTEGER,
     'length'   => 11,
@@ -41,7 +38,10 @@ $options = array(
     'required' => false,
 );
 
-$installer->addAttribute (Mage_Sales_Model_Order::ENTITY, Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_ID, $options);
+foreach ($entities as $entity)
+{
+    $installer->addAttribute ($entity, Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_ID, $options);
+}
 
 $installer->endSetup ();
 
