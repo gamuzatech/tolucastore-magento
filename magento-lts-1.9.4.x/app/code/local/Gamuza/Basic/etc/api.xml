@@ -32,6 +32,10 @@
                         <title>Clean info about current Magento quote</title>
                         <acl>basic/magento/clean</acl>
                     </clean>
+                    <logout translate="title" module="basic">
+                        <title>Logout info about current Magento session</title>
+                        <acl>basic/magento/logout</acl>
+                    </logout>
                 </methods>
             </basic_magento>
         </resources>
@@ -55,6 +59,10 @@
                         <clean translate="title" module="basic">
                             <title>Clean info about current Magento quote</title>
                         </clean>
+                        <logout translate="title" module="basic">
+                            <title>Logout info about current Magento session</title>
+                            <acl>basic/magento/logout</acl>
+                        </logout>
                     </magento>
                 </basic>
             </resources>

@@ -85,5 +85,29 @@ class Gamuza_Basic_Model_Magento_Api extends Mage_Core_Model_Magento_Api
 
         return true;
     }
+
+    public function logout ()
+    {
+        // Mage::app()->cleanAllSessions();
+
+        $dir = Mage::app()->getConfig()->getOptions()->getSessionDir();
+
+        $dh  = scandir($dir);
+
+        foreach ($dh as $file)
+        {
+            if (strpos ($file, 'sess_') !== false)
+            {
+                unlink ($dir . DS . $file);
+            }
+        }
+
+        $write = Mage::getSingleton('core/resource')->getConnection('core_write');
+
+        $write->delete(Mage::getSingleton('core/resource')->getTableName('api/session'));
+        $write->delete(Mage::getSingleton('core/resource')->getTableName('core/session'));
+
+        return true;
+    }
 }
 
