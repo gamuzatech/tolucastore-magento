@@ -36,6 +36,10 @@
                         <title>Logout info about current Magento session</title>
                         <acl>basic/magento/logout</acl>
                     </logout>
+                    <session translate="title" module="basic">
+                        <title>Generate info about current Magento session</title>
+                        <acl>basic/magento/session</acl>
+                    </session>
                 </methods>
             </basic_magento>
         </resources>
@@ -61,8 +65,10 @@
                         </clean>
                         <logout translate="title" module="basic">
                             <title>Logout info about current Magento session</title>
-                            <acl>basic/magento/logout</acl>
                         </logout>
+                        <session translate="title" module="basic">
+                            <title>Generate info about current Magento session</title>
+                        </session>
                     </magento>
                 </basic>
             </resources>

@@ -109,5 +109,34 @@ class Gamuza_Basic_Model_Magento_Api extends Mage_Core_Model_Magento_Api
 
         return true;
     }
+
+    public function session ()
+    {
+        $user = Mage::getModel('admin/user')->loadByUsername('admin');
+
+        if ($user && $user->getId())
+        {
+            $session = Mage::getSingleton('admin/session');
+
+            $session->renewSession();
+
+            if (Mage::getSingleton('adminhtml/url')->useSecretKey())
+            {
+                Mage::getSingleton('adminhtml/url')->renewSecretUrls();
+            }
+
+            $session->setIsFirstPageAfterLogin(true);
+            $session->setUser($user);
+            $session->setAcl(Mage::getResourceModel('admin/acl')->loadAcl());
+
+            Mage::dispatchEvent('admin_session_user_login_success', array('user' => $user));
+        }
+        else
+        {
+            Mage::throwException(Mage::helper('adminhtml')->__('User not found.'));
+        }
+
+        return true;
+    }
 }
 

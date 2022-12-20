@@ -35,29 +35,7 @@ try
 {
     if (!strcmp(php_sapi_name(), 'cli'))
     {
-        $user = Mage::getModel('admin/user')->loadByUsername('admin');
-
-        if ($user && $user->getId())
-        {
-            $session = Mage::getSingleton('admin/session');
-
-            $session->renewSession();
-
-            if (Mage::getSingleton('adminhtml/url')->useSecretKey())
-            {
-                Mage::getSingleton('adminhtml/url')->renewSecretUrls();
-            }
-
-            $session->setIsFirstPageAfterLogin(true);
-            $session->setUser($user);
-            $session->setAcl(Mage::getResourceModel('admin/acl')->loadAcl());
-
-            Mage::dispatchEvent('admin_session_user_login_success', array('user' => $user));
-        }
-        else
-        {
-            Mage::throwException(Mage::helper('adminhtml')->__('User not found.'));
-        }
+        Mage::getModel ('basic/magento_api')->session ();
     }
 }
 catch (Exception $e)
