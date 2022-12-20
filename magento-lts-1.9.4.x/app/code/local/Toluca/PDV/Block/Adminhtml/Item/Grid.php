@@ -7,6 +7,19 @@
 
 class Toluca_PDV_Block_Adminhtml_Item_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
+    protected $_countTotals = true;
+
+    protected $_isExport = true;
+
+    public $_fieldsTotals = array(
+        'opened_amount' => 0,
+        'reinforced_amount' => 0,
+        'bleeded_amount' => 0,
+        'money_amount' => 0,
+        'changed_amount' => 0,
+        'closed_amount' => 0,
+    );
+
 	public function __construct ()
 	{
 		parent::__construct ();
@@ -25,6 +38,11 @@ class Toluca_PDV_Block_Adminhtml_Item_Grid extends Mage_Adminhtml_Block_Widget_G
 
 		return parent::_prepareCollection ();
 	}
+
+    public function getTotals ()
+    {
+        return $this->helper ('pdv')->getTotals ($this);
+    }
 
     protected function _getStore()
     {
