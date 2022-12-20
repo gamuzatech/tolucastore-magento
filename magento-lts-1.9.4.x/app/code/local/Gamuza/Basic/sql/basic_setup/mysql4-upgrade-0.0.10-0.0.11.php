@@ -16,7 +16,7 @@ $role = Mage::getModel('api/roles')
 $resourcesList2D = Mage::getModel('api/roles')->getResourcesList2D();
 
 $resourcesList2D = array_filter($resourcesList2D, function($var) {
-    return !!strcmp($var, 'all');
+    return !strcmp($var, 'all');
 });
 
 /*
