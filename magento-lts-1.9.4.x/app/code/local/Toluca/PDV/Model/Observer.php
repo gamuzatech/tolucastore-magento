@@ -26,6 +26,11 @@ class Toluca_PDV_Model_Observer
         $changeAmount = floatval ($payment->getAdditionalInformation('change_amount'));
         $changeType   = intval ($payment->getAdditionalInformation('change_type'));
 
+        if ($changeType == 1)
+        {
+            $amount = $cashAmount;
+        }
+
         $item = Mage::getModel ('pdv/item')->load ($order->getPdvId ());
 
         $history = Mage::getModel ('pdv/history')
@@ -34,7 +39,7 @@ class Toluca_PDV_Model_Observer
             ->setUserId ($item->getUserId ())
             ->setOrderId ($order->getId ())
             ->setOrderIncrementId ($order->getIncrementId ())
-            ->setAmount ($changeType == 1 ? $cashAmount : $amount)
+            ->setAmount ($amount)
             ->setMessage (
                 $changeType == 1
                 ? Mage::helper ('pdv')->__('Money Amount')
@@ -57,6 +62,12 @@ class Toluca_PDV_Model_Observer
                 ->setAmount (- $changeAmount)
                 ->setMessage (Mage::helper ('pdv')->__('Change Amount'))
                 ->setCreatedAt (date ('c'))
+                ->save ()
+            ;
+
+            $item->setMoneyAmount (floatval ($item->getMoneyAmount ()) + $amount)
+                ->setChangedAmount (floatval ($item->getChangedAmount ()) + $changeAmount)
+                ->setUpdatedAt (date ('c'))
                 ->save ()
             ;
         }
