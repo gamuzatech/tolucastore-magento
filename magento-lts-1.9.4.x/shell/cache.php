@@ -35,7 +35,7 @@ try
 {
     array_shift($argv);
 
-    Mage::getModel ('mobile/magento_api')->cache ($argv);
+    Mage::getModel ('basic/magento_api')->cache ($argv);
 }
 catch (Exception $e)
 {

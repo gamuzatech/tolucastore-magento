@@ -10,22 +10,6 @@
 <config>
     <api>
         <resources>
-            <!-- Core -->
-            <mobile_magento translate="title" module="mobile">
-                <model>mobile/magento_api</model>
-                <title>Magento Info API</title>
-                <acl>mobile/magento</acl>
-                <methods>
-                    <info translate="title" module="mobile">
-                        <title>Get info about current Magento installation</title>
-                        <acl>mobile/magento/info</acl>
-                    </info>
-                    <cache translate="title" module="basic">
-                        <title>Refresh info about current Magento cache</title>
-                        <acl>mobile/magento/cache</acl>
-                    </cache>
-                </methods>
-            </mobile_magento>
             <!-- Catalog -->
             <mobile_product translate="title" module="mobile">
                 <title>Mobile Product API</title>
@@ -508,15 +492,6 @@
                 <mobile translate="title" module="mobile">
                     <title>Mobile API</title>
                     <sort_order>0</sort_order>
-                    <magento translate="title" module="mobile">
-                        <title>Magento Info</title>
-                        <info translate="title" module="mobile">
-                            <title>Retrieve info about current Magento installation</title>
-                        </info>
-                        <cache translate="title" module="basic">
-                            <title>Refresh info about current Magento cache</title>
-                        </cache>
-                    </magento>
                     <!-- Catalog -->
                     <product translate="title" module="mobile">
                         <title>Product</title>
