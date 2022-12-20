@@ -455,7 +455,7 @@ class Toluca_PDV_Model_Item_Api extends Mage_Api_Model_Resource_Abstract
             ->setTypeId (Toluca_PDV_Helper_Data::HISTORY_TYPE_CLOSE)
             ->setItemId ($item->getId ())
             ->setUserId ($user->getId ())
-            ->setAmount ($amount)
+            ->setAmount (- $amount)
             ->setCreatedAt (date ('c'))
             ->save ()
         ;
