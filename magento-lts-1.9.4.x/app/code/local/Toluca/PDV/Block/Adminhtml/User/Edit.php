@@ -29,6 +29,14 @@ class Toluca_PDV_Block_Adminhtml_User_Edit extends Mage_Adminhtml_Block_Widget_F
 				editForm.submit ($('edit_form').action + 'back/edit/');
 			}
 		";
+
+        $user = Mage::registry ('user_data');
+
+        if ($user && $user->getId () && $user->getItemStatus () == Toluca_PDV_Helper_Data::STATUS_OPENED)
+        {
+            $this->_removeButton ('save');
+            $this->_removeButton ('saveandcontinue');
+        }
 	}
 
 	public function getHeaderText ()

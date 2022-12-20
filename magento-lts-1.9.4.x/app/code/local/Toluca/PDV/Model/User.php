@@ -11,5 +11,18 @@ class Toluca_PDV_Model_User extends Mage_Core_Model_Abstract
     {
         $this->_init ('pdv/user');
     }
+
+    public function getItemStatus ()
+    {
+        if ($this->getId () && $this->getItemId ())
+        {
+            $item = Mage::getModel ('pdv/item')->load ($this->getItemId ());
+
+            if ($item && $item->getId ())
+            {
+                return $item->getStatus ();
+            }
+        }
+    }
 }
 
