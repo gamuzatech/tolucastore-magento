@@ -33,8 +33,7 @@ umask(0);
 
 try
 {
-    Mage::getModel ('basic/observer')->cleanExpiredQuotes ();
-    Mage::getModel ('bot/observer')->cleanExpiredChats ();
+    Mage::getModel ('basic/magento_api')->clean ();
 }
 catch (Exception $e)
 {

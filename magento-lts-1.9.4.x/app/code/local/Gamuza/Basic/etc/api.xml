@@ -24,6 +24,10 @@
                         <title>Refresh info about current Magento cache</title>
                         <acl>basic/magento/cache</acl>
                     </cache>
+                    <clean translate="title" module="basic">
+                        <title>Clean info about current Magento quote</title>
+                        <acl>basic/magento/clean</acl>
+                    </clean>
                 </methods>
             </basic_magento>
         </resources>
@@ -41,6 +45,9 @@
                         <cache translate="title" module="basic">
                             <title>Refresh info about current Magento cache</title>
                         </cache>
+                        <clean translate="title" module="basic">
+                            <title>Clean info about current Magento quote</title>
+                        </clean>
                     </magento>
                 </basic>
             </resources>
