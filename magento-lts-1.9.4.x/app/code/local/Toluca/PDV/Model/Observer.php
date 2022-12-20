@@ -39,6 +39,7 @@ class Toluca_PDV_Model_Observer
             ->setUserId ($item->getUserId ())
             ->setOrderId ($order->getId ())
             ->setOrderIncrementId ($order->getIncrementId ())
+            ->setPaymentMethod ($payment->getMethod ())
             ->setAmount ($amount)
             ->setMessage (
                 $changeType == 1
@@ -59,6 +60,7 @@ class Toluca_PDV_Model_Observer
                 ->setUserId ($item->getUserId ())
                 ->setOrderId ($order->getId ())
                 ->setOrderIncrementId ($order->getIncrementId ())
+                ->setPaymentMethod ($payment->getMethod ())
                 ->setAmount (- $changeAmount)
                 ->setMessage (Mage::helper ('pdv')->__('Change Amount'))
                 ->setCreatedAt (date ('c'))

@@ -62,6 +62,14 @@ SQLBLOCK;
             'comment'  => 'Order Increment ID',
         ));
     $installer->getConnection ()
+        ->addColumn ($table, 'payment_method', array(
+            'type'     => Varien_Db_Ddl_Table::TYPE_TEXT,
+            'length'   => 255,
+            'unsigned' => true,
+            'nullable' => false,
+            'comment'  => 'Payment Method',
+        ));
+    $installer->getConnection ()
         ->addColumn ($table, 'amount', array(
             'type'     => Varien_Db_Ddl_Table::TYPE_DECIMAL,
             'length'   => '12,4',

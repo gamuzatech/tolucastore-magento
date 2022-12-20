@@ -89,6 +89,12 @@ class Toluca_PDV_Block_Adminhtml_History_Grid extends Mage_Adminhtml_Block_Widge
 		    'header'  => Mage::helper ('pdv')->__('Order Inc. ID'),
 		    'index'   => 'order_increment_id',
 		));
+		$this->addColumn ('payment_method', array(
+		    'header'  => Mage::helper ('pdv')->__('Payment Method'),
+		    'index'   => 'payment_method',
+            'type'    => 'options',
+            'options' => Mage::getModel ('pdv/adminhtml_system_config_source_payment_allmethods')->toArray (),
+		));
 		$this->addColumn ('created_at', array(
 			'header' => Mage::helper ('pdv')->__('Created At'),
 			'index'  => 'created_at',
