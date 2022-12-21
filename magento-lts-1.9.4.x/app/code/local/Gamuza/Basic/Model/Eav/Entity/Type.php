@@ -51,7 +51,11 @@ class Gamuza_Basic_Model_Eav_Entity_Type extends Mage_Eav_Model_Entity_Type
         $isPdv = $currentOrder && $currentOrder->getData (Gamuza_Basic_Helper_Data::ORDER_ATTRIBUTE_IS_PDV);
         $isSat = $currentOrder && $currentOrder->getData (Gamuza_Basic_Helper_Data::ORDER_ATTRIBUTE_IS_SAT);
 
-        if ($isMobile || $isApp)
+        if ($isMobile)
+        {
+            $suffix = Gamuza_Basic_Helper_Data::ORDER_SUFFIX_MOBILE;
+        }
+        else if ($isApp)
         {
             $suffix = Gamuza_Basic_Helper_Data::ORDER_SUFFIX_APP;
         }
