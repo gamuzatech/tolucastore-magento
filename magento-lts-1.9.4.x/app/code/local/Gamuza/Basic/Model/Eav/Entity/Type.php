@@ -23,7 +23,7 @@ class Gamuza_Basic_Model_Eav_Entity_Type extends Mage_Eav_Model_Entity_Type
     {
         $result = parent::fetchNewIncrementId ($storeId);
 
-        $suffix = null;
+        $suffix = Gamuza_Basic_Helper_Data::ORDER_SUFFIX_OTHER;
 
         if ($storeId == Mage_Core_Model_App::ADMIN_STORE_ID)
         {
@@ -32,10 +32,6 @@ class Gamuza_Basic_Model_Eav_Entity_Type extends Mage_Eav_Model_Entity_Type
         else if ($storeId == Mage_Core_Model_App::DISTRO_STORE_ID)
         {
             $suffix = Gamuza_Basic_Helper_Data::ORDER_SUFFIX_STORE;
-        }
-        else
-        {
-            $suffix = Gamuza_Basic_Helper_Data::ORDER_SUFFIX_OTHER;
         }
 
         $isMobile = Mage::helper ('basic')->isMobile ();
@@ -52,6 +48,9 @@ class Gamuza_Basic_Model_Eav_Entity_Type extends Mage_Eav_Model_Entity_Type
             && strpos (Mage::app ()->getRequest ()->getRawBody (), self::API_METHOD_BOT_CHAT_MESSAGE) !== false))
         ;
 
+        $isPdv = $currentOrder && $currentOrder->getData (Gamuza_Basic_Helper_Data::ORDER_ATTRIBUTE_IS_PDV);
+        $isSat = $currentOrder && $currentOrder->getData (Gamuza_Basic_Helper_Data::ORDER_ATTRIBUTE_IS_SAT);
+
         if ($isMobile || $isApp)
         {
             $suffix = Gamuza_Basic_Helper_Data::ORDER_SUFFIX_APP;
@@ -59,6 +58,14 @@ class Gamuza_Basic_Model_Eav_Entity_Type extends Mage_Eav_Model_Entity_Type
         else if ($isBot)
         {
             $suffix = Gamuza_Basic_Helper_Data::ORDER_SUFFIX_BOT;
+        }
+        else if ($isPdv)
+        {
+            $suffix = Gamuza_Basic_Helper_Data::ORDER_SUFFIX_PDV;
+        }
+        else if ($isSat)
+        {
+            $suffix = Gamuza_Basic_Helper_Data::ORDER_SUFFIX_SAT;
         }
 
         return sprintf ('%s-%s', $result, $suffix);
