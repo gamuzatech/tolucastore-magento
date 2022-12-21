@@ -19,7 +19,7 @@ trait Gamuza_Mobile_Trait_Api_Resource
         $storeId = Mage_Core_Model_App::DISTRO_STORE_ID;
 
         $customerDomain = Mage::getStoreConfig (Mage_Customer_Model_Customer::XML_PATH_DEFAULT_EMAIL_DOMAIN);
-        $customerEmail  = sprintf ('%s@%s', $store, $customerDomain);
+        $customerEmail  = sprintf ('%s+%s@%s', Gamuza_Mobile_Helper_Data::CUSTOMER_EMAIL_PREFIX, $store, $customerDomain);
 
         /** @var $quote Mage_Sales_Model_Quote */
         $quote = Mage::getModel("sales/quote")
