@@ -23,6 +23,8 @@ class Gamuza_Basic_Model_Eav_Entity_Type extends Mage_Eav_Model_Entity_Type
     {
         $result = parent::fetchNewIncrementId ($storeId);
 
+        $quote = $this->getQuote();
+
         $suffix = Gamuza_Basic_Helper_Data::ORDER_SUFFIX_OTHER;
 
         if ($storeId == Mage_Core_Model_App::ADMIN_STORE_ID)
@@ -36,11 +38,7 @@ class Gamuza_Basic_Model_Eav_Entity_Type extends Mage_Eav_Model_Entity_Type
 
         $isMobile = Mage::helper ('basic')->isMobile ();
 
-        $orderId = Mage::app ()->getRequest ()->getParam ('order_id');
-
-        $currentOrder = Mage::getModel ('sales/order')->load ($orderId);
-
-        $isApp = $currentOrder && $currentOrder->getData (Gamuza_Basic_Helper_Data::ORDER_ATTRIBUTE_IS_APP);
+        $isApp = $quote->getData (Gamuza_Basic_Helper_Data::ORDER_ATTRIBUTE_IS_APP);
 
         $isBot = Mage::helper ('core')->isModuleEnabled ('Toluca_Bot')
             && (!strcmp (Mage::app ()->getRequest ()->getControllerModule (), 'Toluca_Bot')
@@ -48,8 +46,8 @@ class Gamuza_Basic_Model_Eav_Entity_Type extends Mage_Eav_Model_Entity_Type
             && strpos (Mage::app ()->getRequest ()->getRawBody (), self::API_METHOD_BOT_CHAT_MESSAGE) !== false))
         ;
 
-        $isPdv = $currentOrder && $currentOrder->getData (Gamuza_Basic_Helper_Data::ORDER_ATTRIBUTE_IS_PDV);
-        $isSat = $currentOrder && $currentOrder->getData (Gamuza_Basic_Helper_Data::ORDER_ATTRIBUTE_IS_SAT);
+        $isPdv = $quote->getData (Gamuza_Basic_Helper_Data::ORDER_ATTRIBUTE_IS_PDV);
+        $isSat = $quote->getData (Gamuza_Basic_Helper_Data::ORDER_ATTRIBUTE_IS_SAT);
 
         if ($isMobile)
         {
