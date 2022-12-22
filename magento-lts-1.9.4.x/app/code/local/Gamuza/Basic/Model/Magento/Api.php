@@ -10,6 +10,8 @@
  */
 class Gamuza_Basic_Model_Magento_Api extends Mage_Core_Model_Magento_Api
 {
+    const DEFAULT_ADMIN_USER = 'admin';
+
     public function backup ()
     {
         Mage::getModel ('backup/observer')->scheduledBackup ();
@@ -112,7 +114,9 @@ class Gamuza_Basic_Model_Magento_Api extends Mage_Core_Model_Magento_Api
 
     public function session ()
     {
-        $user = Mage::getModel('admin/user')->loadByUsername('admin');
+        $result = null;
+
+        $user = Mage::getModel('admin/user')->loadByUsername(self::DEFAULT_ADMIN_USER);
 
         if ($user && $user->getId())
         {
@@ -130,13 +134,15 @@ class Gamuza_Basic_Model_Magento_Api extends Mage_Core_Model_Magento_Api
             $session->setAcl(Mage::getResourceModel('admin/acl')->loadAcl());
 
             Mage::dispatchEvent('admin_session_user_login_success', array('user' => $user));
+
+            $result = $session->getEncryptedSessionId ();
         }
         else
         {
-            Mage::throwException(Mage::helper('adminhtml')->__('User not found.'));
+            $this->_fault('user_not_exists');
         }
 
-        return true;
+        return $result;
     }
 }
 

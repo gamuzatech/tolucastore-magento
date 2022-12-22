@@ -41,6 +41,12 @@
                         <acl>basic/magento/session</acl>
                     </session>
                 </methods>
+                <faults>
+                    <user_not_exists>
+                        <code>100</code>
+                        <message>Requested user was not found.</message>
+                    </user_not_exists>
+                </faults>
             </basic_magento>
         </resources>
         <acl>
