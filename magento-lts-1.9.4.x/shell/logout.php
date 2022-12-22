@@ -33,7 +33,7 @@ umask(0);
 
 try
 {
-    Mage::getModel ('basic/magento_api')->backup ();
+    Mage::getModel ('basic/magento_api')->logout ();
 }
 catch (Exception $e)
 {

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+/**
+ * @package     Gamuza_Basic
+ * @copyright   Copyright (c) 2022 Gamuza Technologies (http://www.gamuza.com.br/)
+ * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
+ */
+-->
+
+<config>
+    <api>
+        <resources>
+            <!-- Core -->
+            <basic_magento translate="title" module="basic">
+                <model>basic/magento_api</model>
+                <title>Magento Info API</title>
+                <acl>basic/magento</acl>
+                <methods>
+                    <info translate="title" module="basic">
+                        <title>Get info about current Magento installation</title>
+                        <acl>basic/magento/info</acl>
+                    </info>
+                    <backup translate="title" module="basic">
+                        <title>Backup info about current Magento installation</title>
+                        <acl>basic/magento/backup</acl>
+                    </backup>
+                    <cache translate="title" module="basic">
+                        <title>Refresh info about current Magento cache</title>
+                        <acl>basic/magento/cache</acl>
+                    </cache>
+                    <clean translate="title" module="basic">
+                        <title>Clean info about current Magento quote</title>
+                        <acl>basic/magento/clean</acl>
+                    </clean>
+                    <logout translate="title" module="basic">
+                        <title>Logout info about current Magento session</title>
+                        <acl>basic/magento/logout</acl>
+                    </logout>
+                    <session translate="title" module="basic">
+                        <title>Generate info about current Magento session</title>
+                        <acl>basic/magento/session</acl>
+                    </session>
+                </methods>
+                <faults>
+                    <user_not_exists>
+                        <code>100</code>
+                        <message>Requested user was not found.</message>
+                    </user_not_exists>
+                </faults>
+            </basic_magento>
+        </resources>
+        <acl>
+            <resources>
+                <basic translate="title" module="basic">
+                    <title>Basic API</title>
+                    <sort_order>0</sort_order>
+                    <!-- Core -->
+                    <magento translate="title" module="basic">
+                        <title>Magento Info</title>
+                        <info translate="title" module="basic">
+                            <title>Retrieve info about current Magento installation</title>
+                        </info>
+                        <backup translate="title" module="basic">
+                            <title>Backup info about current Magento installation</title>
+                        </backup>
+                        <cache translate="title" module="basic">
+                            <title>Refresh info about current Magento cache</title>
+                        </cache>
+                        <clean translate="title" module="basic">
+                            <title>Clean info about current Magento quote</title>
+                        </clean>
+                        <logout translate="title" module="basic">
+                            <title>Logout info about current Magento session</title>
+                        </logout>
+                        <session translate="title" module="basic">
+                            <title>Generate info about current Magento session</title>
+                        </session>
+                    </magento>
+                </basic>
+            </resources>
+        </acl>
+    </api>
+</config>
+

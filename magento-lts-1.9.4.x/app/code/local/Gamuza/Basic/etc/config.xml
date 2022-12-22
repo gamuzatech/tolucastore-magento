@@ -143,6 +143,11 @@
                     <quote_address>Gamuza_Basic_Model_Sales_Quote_Address</quote_address>
                 </rewrite>
             </sales>
+            <sales_resource>
+                <rewrite>
+                    <quote>Gamuza_Basic_Model_Sales_Resource_Quote</quote>
+                </rewrite>
+            </sales_resource>
         </models>
         <resources>
             <basic_setup>

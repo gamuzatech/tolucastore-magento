@@ -14,12 +14,17 @@ class Gamuza_Basic_Helper_Data extends Mage_Core_Helper_Abstract
 
     const ORDER_ATTRIBUTE_IS_APP = 'is_app';
     const ORDER_ATTRIBUTE_IS_BOT = 'is_bot';
+    const ORDER_ATTRIBUTE_IS_PDV = 'is_pdv';
+    const ORDER_ATTRIBUTE_IS_SAT = 'is_sat';
 
     const ORDER_SUFFIX_APP    = 'APP';
     const ORDER_SUFFIX_BOT    = 'BOT';
+    const ORDER_SUFFIX_PDV    = 'PDV';
+    const ORDER_SUFFIX_SAT    = 'SAT';
     const ORDER_SUFFIX_ADMIN  = 'ADMIN';
     const ORDER_SUFFIX_STORE  = 'STORE';
     const ORDER_SUFFIX_OTHER  = 'OTHER';
+    const ORDER_SUFFIX_MOBILE = 'MOBILE';
 
     const PRODUCT_ATTRIBUTE_BRAND = 'brand';
     const PRODUCT_ATTRIBUTE_COLOR = 'color';

@@ -4,11 +4,14 @@ class Gamuza_Basic_Controller_Router_Express extends Mage_Core_Controller_Varien
 {
     public function match(Zend_Controller_Request_Http $request)
     {
-        $request->setModuleName('express')
-            ->setControllerName('express')
-            ->setActionName('view');
+        if (strpos ($request->getPathInfo (), '/express') !== false)
+        {
+            $request->setModuleName('express')
+                ->setControllerName('express')
+                ->setActionName('view');
 
-        return true;
+            return true;
+        }
     }
 }
 
