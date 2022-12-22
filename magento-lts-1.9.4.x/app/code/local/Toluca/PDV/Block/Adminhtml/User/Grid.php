@@ -40,6 +40,10 @@ class Toluca_PDV_Block_Adminhtml_User_Grid extends Mage_Adminhtml_Block_Widget_G
             'type'    => 'options',
             'options' => self::getItems (),
 		));
+		$this->addColumn ('code', array(
+		    'header'  => Mage::helper ('pdv')->__('Code'),
+		    'index'   => 'code',
+		));
 		$this->addColumn ('name', array(
 		    'header'  => Mage::helper ('pdv')->__('Name'),
 		    'index'   => 'name',

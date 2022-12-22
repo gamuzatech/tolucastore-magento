@@ -109,6 +109,10 @@ class Toluca_PDV_Adminhtml_UserController extends Mage_Adminhtml_Controller_Acti
 				    ->save ()
                 ;
 
+                $code = hash ('crc32', $model->getId ());
+
+                $model->setCode ($code)->save ();
+
 				Mage::getSingleton ('adminhtml/session')->addSuccess (Mage::helper ('pdv')->__('User was successfully saved.'));
 				Mage::getSingleton ('adminhtml/session')->setUserData (false);
 

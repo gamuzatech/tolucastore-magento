@@ -31,6 +31,13 @@ SQLBLOCK;
             'comment'  => 'User ID',
         ));
     $installer->getConnection ()
+        ->addColumn ($table, 'code', array(
+            'type'     => Varien_Db_Ddl_Table::TYPE_TEXT,
+            'length'   => 255,
+            'nullable' => false,
+            'comment'  => 'Code',
+        ));
+    $installer->getConnection ()
         ->addColumn ($table, 'name', array(
             'type'     => Varien_Db_Ddl_Table::TYPE_TEXT,
             'length'   => 255,
