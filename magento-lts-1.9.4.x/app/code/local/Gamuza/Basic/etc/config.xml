@@ -10,7 +10,7 @@
 <config>
     <modules>
         <Gamuza_Basic>
-            <version>0.0.14</version>
+            <version>0.0.15</version>
         </Gamuza_Basic>
     </modules>
     <global>
@@ -30,6 +30,7 @@
             </basic>
             <adminhtml>
                 <rewrite>
+                    <api_user_grid>Gamuza_Basic_Block_Adminhtml_Api_User_Grid</api_user_grid>
                     <backup>Gamuza_Basic_Block_Adminhtml_Backup</backup>
                     <catalog_category_tree>Gamuza_Basic_Block_Adminhtml_Catalog_Category_Tree</catalog_category_tree>
                     <catalog_category_tabs>Gamuza_Basic_Block_Adminhtml_Catalog_Category_Tabs</catalog_category_tabs>
@@ -41,6 +42,7 @@
                     <customer_grid>Gamuza_Basic_Block_Adminhtml_Customer_Grid</customer_grid>
                     <customer_online_grid>Gamuza_Basic_Block_Adminhtml_Customer_Online_Grid</customer_online_grid>
                     <page_head>Gamuza_Basic_Block_Adminhtml_Page_Head</page_head>
+                    <permissions_user_grid>Gamuza_Basic_Block_Adminhtml_Permissions_User_Grid</permissions_user_grid>
                     <sales_order_grid>Gamuza_Basic_Block_Adminhtml_Sales_Order_Grid</sales_order_grid>
                     <sales_order_create_customer_grid>Gamuza_Basic_Block_Adminhtml_Sales_Order_Create_Customer_Grid</sales_order_create_customer_grid>
                     <sales_order_creditmemo_view>Gamuza_Basic_Block_Adminhtml_Sales_Order_Creditmemo_View</sales_order_creditmemo_view>
@@ -83,6 +85,16 @@
                     </eav_entity_attribute_option_value>
                 </entities>
             </basic_mysql4>
+            <admin>
+                <rewrite>
+                    <user>Gamuza_Basic_Model_Admin_User</user>
+                </rewrite>
+            </admin>
+            <api>
+                <rewrite>
+                    <user>Gamuza_Basic_Model_Api_User</user>
+                </rewrite>
+            </api>
             <adminhtml>
                 <rewrite>
                     <system_config_source_product_options_type>Gamuza_Basic_Model_Adminhtml_System_Config_Source_Product_Options_Type</system_config_source_product_options_type>
