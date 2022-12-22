@@ -22,11 +22,11 @@
                             <sort_order>0</sort_order>
                             <action>admin_pdv/adminhtml_item</action>
                         </item>
-                        <user translate="title" module="pdv">
-                            <title>Manage Users</title>
+                        <operator translate="title" module="pdv">
+                            <title>Manage Operators</title>
                             <sort_order>10</sort_order>
-                            <action>admin_pdv/adminhtml_user</action>
-                        </user>
+                            <action>admin_pdv/adminhtml_operator</action>
+                        </operator>
                         <history translate="title" module="pdv">
                             <title>Manage History</title>
                             <sort_order>20</sort_order>
@@ -56,10 +56,10 @@
                                         <title>Manage Cashiers</title>
                                         <sort_order>0</sort_order>
                                     </item>
-                                    <user translate="title" module="pdv">
-                                        <title>Manage Users</title>
+                                    <operator translate="title" module="pdv">
+                                        <title>Manage Operators</title>
                                         <sort_order>10</sort_order>
-                                    </user>
+                                    </operator>
                                     <history translate="title" module="pdv">
                                         <title>Manage History</title>
                                         <sort_order>20</sort_order>

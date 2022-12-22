@@ -93,13 +93,13 @@ class Toluca_PDV_Block_Adminhtml_Item_Grid extends Mage_Adminhtml_Block_Widget_G
             'type'   => 'datetime',
 		));
 */
-		$this->addColumn ('user_id', array(
-		    'header'  => Mage::helper ('pdv')->__('User'),
+		$this->addColumn ('operator_id', array(
+		    'header'  => Mage::helper ('pdv')->__('Operator'),
 		    'align'   => 'right',
 	        'type'    => 'number',
-		    'index'   => 'user_id',
+		    'index'   => 'operator_id',
             'type'    => 'options',
-            'options' => self::getUsers (),
+            'options' => self::getOperators (),
 		));
 		$this->addColumn ('opened_at', array(
 			'header' => Mage::helper ('pdv')->__('Opened At'),
@@ -182,13 +182,13 @@ class Toluca_PDV_Block_Adminhtml_Item_Grid extends Mage_Adminhtml_Block_Widget_G
         // nothing here
 	}
 
-    public static function getUsers ()
+    public static function getOperators ()
     {
         $result = array ();
 
-        foreach (Mage::getModel ('pdv/user')->getCollection () as $user)
+        foreach (Mage::getModel ('pdv/operator')->getCollection () as $operator)
         {
-            $result [$user->getId ()] = sprintf ('%s - %s', $user->getId (), $user->getName ());
+            $result [$operator->getId ()] = sprintf ('%s - %s', $operator->getId (), $operator->getName ());
         }
 
         return $result;

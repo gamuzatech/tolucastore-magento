@@ -8,12 +8,12 @@
 class Toluca_PDV_Helper_Data extends Mage_Core_Helper_Abstract
 {
     const ITEM_TABLE    = 'toluca_pdv_item';
-    const USER_TABLE    = 'toluca_pdv_user';
+    const OPERATOR_TABLE = 'toluca_pdv_operator';
     const HISTORY_TABLE = 'toluca_pdv_history';
 
     const ORDER_ATTRIBUTE_IS_PDV = 'is_pdv';
     const ORDER_ATTRIBUTE_PDV_ID = 'pdv_id';
-    const ORDER_ATTRIBUTE_PDV_USER_ID = 'pdv_user_id';
+    const ORDER_ATTRIBUTE_OPERATOR_ID = 'operator_id';
 
     const ITEM_STATUS_CLOSED = 0;
     const ITEM_STATUS_OPENED = 1;

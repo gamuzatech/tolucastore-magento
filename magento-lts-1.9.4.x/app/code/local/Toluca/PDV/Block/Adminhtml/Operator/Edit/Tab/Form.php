@@ -5,7 +5,7 @@
  * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
  */
 
-class Toluca_PDV_Block_Adminhtml_User_Edit_Tab_Form
+class Toluca_PDV_Block_Adminhtml_Operator_Edit_Tab_Form
     extends Mage_Adminhtml_Block_Widget_Form
 {
 	protected function _prepareForm ()
@@ -13,14 +13,14 @@ class Toluca_PDV_Block_Adminhtml_User_Edit_Tab_Form
 		$form = new Varien_Data_Form ();
 		$this->setForm ($form);
 
-		$fieldset = $form->addFieldset ('pdv_form', array ('legend' => Mage::helper ('pdv')->__('User Information')));
+		$fieldset = $form->addFieldset ('pdv_form', array ('legend' => Mage::helper ('pdv')->__('Operator Information')));
 
 		$fieldset->addField ('item_id', 'select', array(
 	        'label'    => Mage::helper ('pdv')->__('Cashier'),
 	        'class'    => 'required-entry validate-select',
 	        'name'     => 'item_id',
 	        'required' => true,
-            'options'  => Toluca_PDV_Block_Adminhtml_User_Grid::getItems (),
+            'options'  => Toluca_PDV_Block_Adminhtml_Operator_Grid::getItems (),
 		));
 		$fieldset->addField ('name', 'text', array(
 		    'label'    => Mage::helper ('pdv')->__('Name'),
@@ -42,15 +42,15 @@ class Toluca_PDV_Block_Adminhtml_User_Edit_Tab_Form
             'options'  => Mage::getModel ('adminhtml/system_config_source_yesno')->toArray (),
 		));
 
-		if (Mage::getSingleton ('adminhtml/session')->getUserData ())
+		if (Mage::getSingleton ('adminhtml/session')->getOperatorData ())
 		{
-			$form->setValues (Mage::getSingleton ('adminhtml/session')->getUserData ());
+			$form->setValues (Mage::getSingleton ('adminhtml/session')->getOperatorData ());
 
-			Mage::getSingleton ('adminhtml/session')->setUserData (null);
+			Mage::getSingleton ('adminhtml/session')->setOperatorData (null);
 		}
-		else if (Mage::registry ('user_data'))
+		else if (Mage::registry ('operator_data'))
         {
-		    $form->setValues (Mage::registry ('user_data')->getData ());
+		    $form->setValues (Mage::registry ('operator_data')->getData ());
 		}
 
         $form->getElement ('password')->setValue ('');

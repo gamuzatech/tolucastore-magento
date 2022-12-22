@@ -8,7 +8,7 @@
 $installer = $this;
 $installer->startSetup ();
 
-function addPDVUserTable ($installer, $model, $comment)
+function addPDVOperatorTable ($installer, $model, $comment)
 {
     $table = $installer->getTable ($model);
 
@@ -72,7 +72,7 @@ SQLBLOCK;
         ));
 }
 
-addPDVUserTable ($installer, Toluca_PDV_Helper_Data::USER_TABLE, 'Toluca PDV User');
+addPDVOperatorTable ($installer, Toluca_PDV_Helper_Data::OPERATOR_TABLE, 'Toluca PDV Operator');
 
 $installer->endSetup ();
 

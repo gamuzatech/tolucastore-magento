@@ -5,19 +5,19 @@
  * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
  */
 
-class Toluca_PDV_Adminhtml_UserController extends Mage_Adminhtml_Controller_Action
+class Toluca_PDV_Adminhtml_OperatorController extends Mage_Adminhtml_Controller_Action
 {
 	protected function _isAllowed ()
 	{
-	    return Mage::getSingleton ('admin/session')->isAllowed ('toluca/pdv/user');
+	    return Mage::getSingleton ('admin/session')->isAllowed ('toluca/pdv/operator');
 	}
 
 	protected function _initAction ()
 	{
-		$this->loadLayout ()->_setActiveMenu ('pdv/user')
+		$this->loadLayout ()->_setActiveMenu ('pdv/operator')
             ->_addBreadcrumb(
-                Mage::helper ('pdv')->__('Users Manager'),
-                Mage::helper ('pdv')->__('Users Manager')
+                Mage::helper ('pdv')->__('Operators Manager'),
+                Mage::helper ('pdv')->__('Operators Manager')
             )
         ;
 
@@ -27,7 +27,7 @@ class Toluca_PDV_Adminhtml_UserController extends Mage_Adminhtml_Controller_Acti
 	public function indexAction ()
 	{
 	    $this->_title ($this->__('PDV'));
-	    $this->_title ($this->__('Users Manager'));
+	    $this->_title ($this->__('Operators Manager'));
 
 		$this->_initAction ();
 
@@ -37,26 +37,26 @@ class Toluca_PDV_Adminhtml_UserController extends Mage_Adminhtml_Controller_Acti
 	public function newAction ()
 	{
 	    $this->_title ($this->__('PDV'));
-	    $this->_title ($this->__('Users Manager'));
-	    $this->_title ($this->__('New User'));
+	    $this->_title ($this->__('Operators Manager'));
+	    $this->_title ($this->__('New Operator'));
 
         $id = $this->getRequest ()->getParam ('id');
 
-	    $model = Mage::getModel ('pdv/user')->load ($id);
+	    $model = Mage::getModel ('pdv/operator')->load ($id);
 
-	    $userData = Mage::getSingleton ('adminhtml/session')->getUserData (true);
+	    $operatorData = Mage::getSingleton ('adminhtml/session')->getOperatorData (true);
 
-	    if (!empty ($userData))
+	    if (!empty ($operatorData))
         {
-		    $model->setData ($userData);
+		    $model->setData ($operatorData);
 	    }
 
-	    Mage::register ('user_data', $model);
+	    Mage::register ('operator_data', $model);
 
         $this->_initAction ();
 
-	    $this->_addContent ($this->getLayout ()->createBlock ('pdv/adminhtml_user_edit'));
-        $this->_addLeft ($this->getLayout ()->createBlock ('pdv/adminhtml_user_edit_tabs'));
+	    $this->_addContent ($this->getLayout ()->createBlock ('pdv/adminhtml_operator_edit'));
+        $this->_addLeft ($this->getLayout ()->createBlock ('pdv/adminhtml_operator_edit_tabs'));
 
 	    $this->renderLayout ();
 	}
@@ -64,27 +64,27 @@ class Toluca_PDV_Adminhtml_UserController extends Mage_Adminhtml_Controller_Acti
 	public function editAction ()
 	{
 	    $this->_title ($this->__('PDV'));
-		$this->_title ($this->__('User'));
-	    $this->_title ($this->__('Edit User'));
+		$this->_title ($this->__('Operator'));
+	    $this->_title ($this->__('Edit Operator'));
 
 		$id = $this->getRequest()->getParam ('id');
 
-		$model = Mage::getModel ('pdv/user')->load ($id);
+		$model = Mage::getModel ('pdv/operator')->load ($id);
 
 		if ($model && $model->getId ())
         {
-			Mage::register ('user_data', $model);
+			Mage::register ('operator_data', $model);
 
             $this->_initAction ();
 
-			$this->_addContent ($this->getLayout ()->createBlock ('pdv/adminhtml_user_edit'));
-            $this->_addLeft ($this->getLayout()->createBlock ('pdv/adminhtml_user_edit_tabs'));
+			$this->_addContent ($this->getLayout ()->createBlock ('pdv/adminhtml_operator_edit'));
+            $this->_addLeft ($this->getLayout()->createBlock ('pdv/adminhtml_operator_edit_tabs'));
 
 			$this->renderLayout();
 		}
 		else
         {
-			Mage::getSingleton ('adminhtml/session')->addError (Mage::helper ('pdv')->__('User does not exist.'));
+			Mage::getSingleton ('adminhtml/session')->addError (Mage::helper ('pdv')->__('Operator does not exist.'));
 
 			$this->_redirect ('*/*/index');
 		}
@@ -102,7 +102,7 @@ class Toluca_PDV_Adminhtml_UserController extends Mage_Adminhtml_Controller_Acti
 
                 $postData ['password'] = Mage::helper ('core')->getHash ($postData ['password'], true);
 
-				$model = Mage::getModel ('pdv/user')
+				$model = Mage::getModel ('pdv/operator')
 				    ->addData ($postData)
                     ->setData ($id ? 'updated_at' : 'created_at', date ('c'))
 				    ->setId ($id)
@@ -113,8 +113,8 @@ class Toluca_PDV_Adminhtml_UserController extends Mage_Adminhtml_Controller_Acti
 
                 $model->setCode ($code)->save ();
 
-				Mage::getSingleton ('adminhtml/session')->addSuccess (Mage::helper ('pdv')->__('User was successfully saved.'));
-				Mage::getSingleton ('adminhtml/session')->setUserData (false);
+				Mage::getSingleton ('adminhtml/session')->addSuccess (Mage::helper ('pdv')->__('Operator was successfully saved.'));
+				Mage::getSingleton ('adminhtml/session')->setOperatorData (false);
 
 				if ($this->getRequest()->getParam ('back'))
                 {
@@ -130,7 +130,7 @@ class Toluca_PDV_Adminhtml_UserController extends Mage_Adminhtml_Controller_Acti
 			catch (Exception $e)
             {
 				Mage::getSingleton ('adminhtml/session')->addError ($e->getMessage ());
-				Mage::getSingleton ('adminhtml/session')->setUserData ($this->getRequest ()->getPost ());
+				Mage::getSingleton ('adminhtml/session')->setOperatorData ($this->getRequest ()->getPost ());
 
 				$this->_redirect ('*/*/edit', array ('id' => $this->getRequest ()->getParam ('id')));
 

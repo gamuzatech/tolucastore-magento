@@ -55,22 +55,22 @@
                         <code>200</code>
                         <message>Requested cashier amount was not specified.</message>
                     </amount_not_specified>
-                    <user_not_specified>
+                    <operator_not_specified>
                         <code>300</code>
-                        <message>Requested user ID was not specified.</message>
-                    </user_not_specified>
+                        <message>Requested operator ID was not specified.</message>
+                    </operator_not_specified>
                     <password_not_specified>
                         <code>400</code>
-                        <message>Requested user password was not specified.</message>
+                        <message>Requested operator password was not specified.</message>
                     </password_not_specified>
                     <item_not_exists>
                         <code>500</code>
                         <message>Requested cashier was not found.</message>
                     </item_not_exists>
-                    <user_not_exists>
+                    <operator_not_exists>
                         <code>600</code>
-                        <message>Requested user was not found.</message>
-                    </user_not_exists>
+                        <message>Requested operator was not found.</message>
+                    </operator_not_exists>
                     <item_already_opened>
                         <code>700</code>
                         <message>Requested cashier is already opened.</message>
@@ -79,10 +79,10 @@
                         <code>800</code>
                         <message>Requested cashier is already closed.</message>
                     </item_already_closed>
-                    <user_invalid_password>
+                    <operator_invalid_password>
                         <code>900</code>
-                        <message>User password is invalid.</message>
-                    </user_invalid_password>
+                        <message>Operator password is invalid.</message>
+                    </operator_invalid_password>
                     <item_invalid_amount>
                         <code>1000</code>
                         <message>Cashier amount is invalid.</message>

@@ -15,7 +15,7 @@ class Toluca_PDV_Model_Observer
         $order   = $event->getOrder ();
         $payment = $order->getPayment ();
 
-        if (!$order->getIsPdv () || !$order->getPdvId () || !$order->getPdvUserId ())
+        if (!$order->getIsPdv () || !$order->getPdvId () || !$order->getOperatorId ())
         {
             return $this; // cancel
         }
@@ -32,12 +32,12 @@ class Toluca_PDV_Model_Observer
         }
 
         $item = Mage::getModel ('pdv/item')->load ($order->getPdvId ());
-        $user = Mage::getModel ('pdv/user')->load ($order->getPdvUserId ());
+        $operator = Mage::getModel ('pdv/operator')->load ($order->getOperatorId ());
 
         $history = Mage::getModel ('pdv/history')
             ->setTypeId (Toluca_PDV_Helper_Data::HISTORY_TYPE_ORDER)
             ->setItemId ($item->getId ())
-            ->setUserId ($user->getId ())
+            ->setOperatorId ($operator->getId ())
             ->setOrderId ($order->getId ())
             ->setOrderIncrementId ($order->getIncrementId ())
             ->setPaymentMethod ($payment->getMethod ())
@@ -58,7 +58,7 @@ class Toluca_PDV_Model_Observer
             $history = Mage::getModel ('pdv/history')
                 ->setTypeId (Toluca_PDV_Helper_Data::HISTORY_TYPE_ORDER)
                 ->setItemId ($item->getId ())
-                ->setUserId ($user->getId ())
+                ->setOperatorId ($operator->getId ())
                 ->setOrderId ($order->getId ())
                 ->setOrderIncrementId ($order->getIncrementId ())
                 ->setPaymentMethod ($payment->getMethod ())

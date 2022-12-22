@@ -18,10 +18,10 @@ class Toluca_PDV_Model_Item_Api extends Mage_Api_Model_Resource_Abstract
 
         $collection->getSelect ()
             ->joinLeft (
-                array ('user' => Mage::getSingleton ('core/resource')->getTableName ('pdv/user')),
-                'main_table.user_id = user.entity_id',
+                array ('operator' => Mage::getSingleton ('core/resource')->getTableName ('pdv/operator')),
+                'main_table.operator_id = operator.entity_id',
                 array (
-                    'user_name' => 'user.name'
+                    'operator_name' => 'operator.name'
                 )
             )
             ->joinLeft (
@@ -40,8 +40,8 @@ class Toluca_PDV_Model_Item_Api extends Mage_Api_Model_Resource_Abstract
                 'name'       => $item->getName (),
                 'is_active'  => boolval ($item->getIsActive ()),
                 'status'     => intval ($item->getStatus ()),
-                'user_id'    => intval ($item->getUserId ()),
-                'user_name'  => $item->getUserName (),
+                'operator_id'    => intval ($item->getOperatorId ()),
+                'operator_name'  => $item->getOperatorName (),
                 'created_at' => $item->getCreatedAt (),
                 'updated_at' => $item->getUpdatedAt (),
                 'opened_at' => $item->getOpenedAt (),
@@ -82,8 +82,8 @@ class Toluca_PDV_Model_Item_Api extends Mage_Api_Model_Resource_Abstract
             'name'       => $item->getName (),
             'is_active'  => boolval ($item->getIsActive ()),
             'status'     => intval ($item->getStatus ()),
-            'user_id'    => intval ($item->getUserId ()),
-            'user_name'  => $item->getUserName (),
+            'operator_id'    => intval ($item->getOperatorId ()),
+            'operator_name'  => $item->getOperatorName (),
             'created_at' => $item->getCreatedAt (),
             'updated_at' => $item->getUpdatedAt (),
             'opened_at' => $item->getOpenedAt (),
@@ -97,11 +97,11 @@ class Toluca_PDV_Model_Item_Api extends Mage_Api_Model_Resource_Abstract
             'order_amount'     => floatval ($item->getOrderAmount ()),
         );
 
-        $user = Mage::getModel ('pdv/user')->load ($item->getUserId ());
+        $operator = Mage::getModel ('pdv/operator')->load ($item->getOperatorId ());
 
-        if ($user && $user->getId ())
+        if ($operator && $operator->getId ())
         {
-            $result ['user_name'] = $user->getName ();
+            $result ['operator_name'] = $operator->getName ();
         }
 
         $collection = Mage::getModel ('sales/order')->getCollection ()
@@ -123,7 +123,7 @@ class Toluca_PDV_Model_Item_Api extends Mage_Api_Model_Resource_Abstract
         return $result;
     }
 
-    public function open ($item_id, $amount, $user_id, $password)
+    public function open ($item_id, $amount, $operator_id, $password)
     {
         if (empty ($item_id))
         {
@@ -135,9 +135,9 @@ class Toluca_PDV_Model_Item_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('amount_not_specified');
         }
 
-        if (empty ($user_id))
+        if (empty ($operator_id))
         {
-            $this->_fault ('user_not_specified');
+            $this->_fault ('operator_not_specified');
         }
 
         if (empty ($password))
@@ -161,27 +161,27 @@ class Toluca_PDV_Model_Item_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('item_already_opened');
         }
 
-        $user = Mage::getModel ('pdv/user')->getCollection ()
+        $operator = Mage::getModel ('pdv/operator')->getCollection ()
             ->addFieldToFilter ('is_active', array ('eq' => true))
-            ->addFieldToFilter ('entity_id', array ('eq' => $user_id))
+            ->addFieldToFilter ('entity_id', array ('eq' => $operator_id))
             ->addFieldToFilter ('item_id',   array ('eq' => $item_id))
             ->getFirstItem ()
         ;
 
-        if (!$user || !$user->getId ())
+        if (!$operator || !$operator->getId ())
         {
-            $this->_fault ('user_not_exists');
+            $this->_fault ('operator_not_exists');
         }
 
         $password = Mage::helper ('core')->getHash ($password, true);
 
-        if (strcmp ($password, $user->getPassword ()) != 0)
+        if (strcmp ($password, $operator->getPassword ()) != 0)
         {
-            $this->_fault ('user_invalid_password');
+            $this->_fault ('operator_invalid_password');
         }
 
         $item->setStatus (Toluca_PDV_Helper_Data::ITEM_STATUS_OPENED)
-            ->setUserId ($user_id)
+            ->setOperatorId ($operator_id)
             ->setOpenAmount ($amount)
             ->setReinforceAmount (0)
             ->setBleedAmount (0)
@@ -196,7 +196,7 @@ class Toluca_PDV_Model_Item_Api extends Mage_Api_Model_Resource_Abstract
         $history = Mage::getModel ('pdv/history')
             ->setTypeId (Toluca_PDV_Helper_Data::HISTORY_TYPE_OPEN)
             ->setItemId ($item->getId ())
-            ->setUserId ($user->getId ())
+            ->setOperatorId ($operator->getId ())
             ->setAmount ($amount)
             ->setCreatedAt (date ('c'))
             ->save ()
@@ -205,7 +205,7 @@ class Toluca_PDV_Model_Item_Api extends Mage_Api_Model_Resource_Abstract
         return true;
     }
 
-    public function reinforce ($item_id, $amount, $user_id, $password)
+    public function reinforce ($item_id, $amount, $operator_id, $password)
     {
         if (empty ($item_id))
         {
@@ -217,9 +217,9 @@ class Toluca_PDV_Model_Item_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('amount_not_specified');
         }
 
-        if (empty ($user_id))
+        if (empty ($operator_id))
         {
-            $this->_fault ('user_not_specified');
+            $this->_fault ('operator_not_specified');
         }
 
         if (empty ($password))
@@ -245,23 +245,23 @@ class Toluca_PDV_Model_Item_Api extends Mage_Api_Model_Resource_Abstract
 
         $reinforceAmount = floatval ($item->getReinforceAmount ());
 
-        $user = Mage::getModel ('pdv/user')->getCollection ()
+        $operator = Mage::getModel ('pdv/operator')->getCollection ()
             ->addFieldToFilter ('is_active', array ('eq' => true))
-            ->addFieldToFilter ('entity_id', array ('eq' => $user_id))
+            ->addFieldToFilter ('entity_id', array ('eq' => $operator_id))
             ->addFieldToFilter ('item_id',   array ('eq' => $item_id))
             ->getFirstItem ()
         ;
 
-        if (!$user || !$user->getId ())
+        if (!$operator || !$operator->getId ())
         {
-            $this->_fault ('user_not_exists');
+            $this->_fault ('operator_not_exists');
         }
 
         $password = Mage::helper ('core')->getHash ($password, true);
 
-        if (strcmp ($password, $user->getPassword ()) != 0)
+        if (strcmp ($password, $operator->getPassword ()) != 0)
         {
-            $this->_fault ('user_invalid_password');
+            $this->_fault ('operator_invalid_password');
         }
 
         $item->setReinforceAmount ($reinforceAmount + $amount)
@@ -271,7 +271,7 @@ class Toluca_PDV_Model_Item_Api extends Mage_Api_Model_Resource_Abstract
         $history = Mage::getModel ('pdv/history')
             ->setTypeId (Toluca_PDV_Helper_Data::HISTORY_TYPE_REINFORCE)
             ->setItemId ($item->getId ())
-            ->setUserId ($user->getId ())
+            ->setOperatorId ($operator->getId ())
             ->setAmount ($amount)
             ->setCreatedAt (date ('c'))
             ->save ()
@@ -280,7 +280,7 @@ class Toluca_PDV_Model_Item_Api extends Mage_Api_Model_Resource_Abstract
         return true;
     }
 
-    public function bleed ($item_id, $amount, $user_id, $password)
+    public function bleed ($item_id, $amount, $operator_id, $password)
     {
         if (empty ($item_id))
         {
@@ -292,9 +292,9 @@ class Toluca_PDV_Model_Item_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('amount_not_specified');
         }
 
-        if (empty ($user_id))
+        if (empty ($operator_id))
         {
-            $this->_fault ('user_not_specified');
+            $this->_fault ('operator_not_specified');
         }
 
         if (empty ($password))
@@ -335,23 +335,23 @@ class Toluca_PDV_Model_Item_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('item_invalid_amount', $message);
         }
 
-        $user = Mage::getModel ('pdv/user')->getCollection ()
+        $operator = Mage::getModel ('pdv/operator')->getCollection ()
             ->addFieldToFilter ('is_active', array ('eq' => true))
-            ->addFieldToFilter ('entity_id', array ('eq' => $user_id))
+            ->addFieldToFilter ('entity_id', array ('eq' => $operator_id))
             ->addFieldToFilter ('item_id',   array ('eq' => $item_id))
             ->getFirstItem ()
         ;
 
-        if (!$user || !$user->getId ())
+        if (!$operator || !$operator->getId ())
         {
-            $this->_fault ('user_not_exists');
+            $this->_fault ('operator_not_exists');
         }
 
         $password = Mage::helper ('core')->getHash ($password, true);
 
-        if (strcmp ($password, $user->getPassword ()) != 0)
+        if (strcmp ($password, $operator->getPassword ()) != 0)
         {
-            $this->_fault ('user_invalid_password');
+            $this->_fault ('operator_invalid_password');
         }
 
         $item->setBleedAmount ($bleedAmount + $amount)
@@ -361,7 +361,7 @@ class Toluca_PDV_Model_Item_Api extends Mage_Api_Model_Resource_Abstract
         $history = Mage::getModel ('pdv/history')
             ->setTypeId (Toluca_PDV_Helper_Data::HISTORY_TYPE_BLEED)
             ->setItemId ($item->getId ())
-            ->setUserId ($user->getId ())
+            ->setOperatorId ($operator->getId ())
             ->setAmount (- $amount)
             ->setCreatedAt (date ('c'))
             ->save ()
@@ -370,7 +370,7 @@ class Toluca_PDV_Model_Item_Api extends Mage_Api_Model_Resource_Abstract
         return true;
     }
 
-    public function close ($item_id, $amount, $user_id, $password)
+    public function close ($item_id, $amount, $operator_id, $password)
     {
         if (empty ($item_id))
         {
@@ -382,9 +382,9 @@ class Toluca_PDV_Model_Item_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('amount_not_specified');
         }
 
-        if (empty ($user_id))
+        if (empty ($operator_id))
         {
-            $this->_fault ('user_not_specified');
+            $this->_fault ('operator_not_specified');
         }
 
         if (empty ($password))
@@ -426,23 +426,23 @@ class Toluca_PDV_Model_Item_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('item_invalid_amount', $message);
         }
 
-        $user = Mage::getModel ('pdv/user')->getCollection ()
+        $operator = Mage::getModel ('pdv/operator')->getCollection ()
             ->addFieldToFilter ('is_active', array ('eq' => true))
-            ->addFieldToFilter ('entity_id', array ('eq' => $user_id))
+            ->addFieldToFilter ('entity_id', array ('eq' => $operator_id))
             ->addFieldToFilter ('item_id',   array ('eq' => $item_id))
             ->getFirstItem ()
         ;
 
-        if (!$user || !$user->getId ())
+        if (!$operator || !$operator->getId ())
         {
-            $this->_fault ('user_not_exists');
+            $this->_fault ('operator_not_exists');
         }
 
         $password = Mage::helper ('core')->getHash ($password, true);
 
-        if (strcmp ($password, $user->getPassword ()) != 0)
+        if (strcmp ($password, $operator->getPassword ()) != 0)
         {
-            $this->_fault ('user_invalid_password');
+            $this->_fault ('operator_invalid_password');
         }
 
         $item->setStatus (Toluca_PDV_Helper_Data::ITEM_STATUS_CLOSED)
@@ -454,7 +454,7 @@ class Toluca_PDV_Model_Item_Api extends Mage_Api_Model_Resource_Abstract
         $history = Mage::getModel ('pdv/history')
             ->setTypeId (Toluca_PDV_Helper_Data::HISTORY_TYPE_CLOSE)
             ->setItemId ($item->getId ())
-            ->setUserId ($user->getId ())
+            ->setOperatorId ($operator->getId ())
             ->setAmount (- $amount)
             ->setCreatedAt (date ('c'))
             ->save ()
@@ -463,16 +463,16 @@ class Toluca_PDV_Model_Item_Api extends Mage_Api_Model_Resource_Abstract
         return true;
     }
 
-    public function quote ($item_id, $user_id, $customer_id)
+    public function quote ($item_id, $operator_id, $customer_id)
     {
         if (empty ($item_id))
         {
             $this->_fault ('item_not_specified');
         }
 
-        if (empty ($user_id))
+        if (empty ($operator_id))
         {
-            $this->_fault ('user_not_specified');
+            $this->_fault ('operator_not_specified');
         }
 
         if (empty ($customer_id))
@@ -487,11 +487,11 @@ class Toluca_PDV_Model_Item_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('item_not_exists');
         }
 
-        $user = Mage::getModel ('pdv/user')->load ($user_id);
+        $operator = Mage::getModel ('pdv/operator')->load ($operator_id);
 
-        if (!$user || !$user->getId ())
+        if (!$operator || !$operator->getId ())
         {
-            $this->_fault ('user_not_exists');
+            $this->_fault ('operator_not_exists');
         }
 
         $customer = Mage::getModel ('customer/customer')->load ($customer_id);
@@ -536,7 +536,7 @@ class Toluca_PDV_Model_Item_Api extends Mage_Api_Model_Resource_Abstract
 
         $quote->setData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_IS_PDV, true)
             ->setData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_ID, $item_id)
-            ->setData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_USER_ID, $user_id)
+            ->setData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_OPERATOR_ID, $operator_id)
             ->setCustomerGroupId (0)
             ->setCustomerIsGuest (1)
             ->save ()

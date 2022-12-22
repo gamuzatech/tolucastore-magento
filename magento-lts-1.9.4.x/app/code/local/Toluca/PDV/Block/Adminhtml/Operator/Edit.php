@@ -5,17 +5,17 @@
  * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
  */
 
-class Toluca_PDV_Block_Adminhtml_User_Edit extends Mage_Adminhtml_Block_Widget_Form_Container
+class Toluca_PDV_Block_Adminhtml_Operator_Edit extends Mage_Adminhtml_Block_Widget_Form_Container
 {
 	public function __construct ()
 	{
 		parent::__construct ();
 
 		$this->_blockGroup = 'pdv';
-		$this->_controller = 'adminhtml_user';
+		$this->_controller = 'adminhtml_operator';
 		$this->_objectId   = 'entity_id';
 
-		$this->_updateButton ('save', 'label', Mage::helper ('pdv')->__('Save User'));
+		$this->_updateButton ('save', 'label', Mage::helper ('pdv')->__('Save Operator'));
         $this->_removeButton ('delete');
 
 		$this->_addButton ('saveandcontinue', array(
@@ -30,9 +30,9 @@ class Toluca_PDV_Block_Adminhtml_User_Edit extends Mage_Adminhtml_Block_Widget_F
 			}
 		";
 
-        $user = Mage::registry ('user_data');
+        $operator = Mage::registry ('operator_data');
 
-        if ($user && $user->getId () && $user->getItemStatus () == Toluca_PDV_Helper_Data::ITEM_STATUS_OPENED)
+        if ($operator && $operator->getId () && $operator->getItemStatus () == Toluca_PDV_Helper_Data::ITEM_STATUS_OPENED)
         {
             $this->_removeButton ('save');
             $this->_removeButton ('saveandcontinue');
@@ -41,15 +41,15 @@ class Toluca_PDV_Block_Adminhtml_User_Edit extends Mage_Adminhtml_Block_Widget_F
 
 	public function getHeaderText ()
 	{
-        $user = Mage::registry ('user_data');
+        $operator = Mage::registry ('operator_data');
 
-		if ($user && $user->getId ())
+		if ($operator && $operator->getId ())
         {
-		    return Mage::helper ('pdv')->__("Edit User '%s'", $this->htmlEscape ($user->getId ()));
+		    return Mage::helper ('pdv')->__("Edit Operator '%s'", $this->htmlEscape ($operator->getId ()));
 		}
 		else
         {
-		     return Mage::helper ('pdv')->__('Add New User');
+		     return Mage::helper ('pdv')->__('Add New Operator');
 		}
 	}
 }

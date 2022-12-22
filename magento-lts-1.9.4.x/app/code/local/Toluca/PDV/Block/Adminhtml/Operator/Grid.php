@@ -5,13 +5,13 @@
  * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
  */
 
-class Toluca_PDV_Block_Adminhtml_User_Grid extends Mage_Adminhtml_Block_Widget_Grid
+class Toluca_PDV_Block_Adminhtml_Operator_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
 	public function __construct ()
 	{
 		parent::__construct ();
 
-		$this->setId ('pdvUserGrid');
+		$this->setId ('pdvOperatorGrid');
 		$this->setDefaultSort ('entity_id');
 		$this->setDefaultDir ('DESC');
 		$this->setSaveParametersInSession (true);
@@ -19,7 +19,7 @@ class Toluca_PDV_Block_Adminhtml_User_Grid extends Mage_Adminhtml_Block_Widget_G
 
 	protected function _prepareCollection ()
 	{
-		$collection = Mage::getModel ('pdv/user')->getCollection ();
+		$collection = Mage::getModel ('pdv/operator')->getCollection ();
 
 		$this->setCollection ($collection);
 
