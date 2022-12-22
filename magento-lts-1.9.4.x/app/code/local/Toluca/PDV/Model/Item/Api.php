@@ -462,5 +462,132 @@ class Toluca_PDV_Model_Item_Api extends Mage_Api_Model_Resource_Abstract
 
         return true;
     }
+
+    public function quote ($item_id, $user_id, $customer_id)
+    {
+        if (empty ($item_id))
+        {
+            $this->_fault ('item_not_specified');
+        }
+
+        if (empty ($user_id))
+        {
+            $this->_fault ('user_not_specified');
+        }
+
+        if (empty ($customer_id))
+        {
+            $this->_fault ('customer_not_specified');
+        }
+
+        $item = Mage::getModel ('pdv/item')->load ($item_id);
+
+        if (!$item || !$item->getId ())
+        {
+            $this->_fault ('item_not_exists');
+        }
+
+        $user = Mage::getModel ('pdv/user')->load ($user_id);
+
+        if (!$user || !$user->getId ())
+        {
+            $this->_fault ('user_not_exists');
+        }
+
+        $customer = Mage::getModel ('customer/customer')->load ($customer_id);
+
+        if (!$customer || !$customer->getId ())
+        {
+            $this->_fault ('customer_not_exists');
+        }
+
+        $customerBillingAddress  = $customer->getDefaultBillingAddress ();
+        $customerShippingAddress = $customer->getDefaultShippingAddress ();
+
+        if (!$customerBillingAddress || !$customerBillingAddress->getId ())
+        {
+            $this->_fault ('customer_billing_address_not_exists');
+        }
+
+        if (!$customerShippingAddress || !$customerShippingAddress->getId ())
+        {
+            $this->_fault ('customer_shipping_address_not_exists');
+        }
+
+        $storeId = Mage::app ()->getStore ()->getId ();
+
+        $remoteIp = Mage::helper ('core/http')->getRemoteAddr (false);
+
+        $customerCode   = hash ('crc32', $item->getId ()); // by pdv_id
+        $customerDomain = Mage::getStoreConfig (Mage_Customer_Model_Customer::XML_PATH_DEFAULT_EMAIL_DOMAIN);
+        $customerEmail  = sprintf ('pdv+%s@%s', $customerCode, $customerDomain);
+
+        $quote = Mage::getModel ('sales/quote')
+            ->setStoreId ($storeId)
+            ->setIsActive (true)
+            ->setIsMultiShipping (false)
+            ->setRemoteIp ($remoteIp)
+            ->setCustomerFirstname ($customer->getFirstname ())
+            ->setCustomerLastname ($customer->getLastname ())
+            ->setCustomerEmail ($customerEmail)
+            ->setCustomerTaxvat ($customer->getTaxvat ())
+            ->save ()
+        ;
+
+        $quote->setData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_IS_PDV, true)
+            ->setData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_ID, $item_id)
+            ->setData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_USER_ID, $user_id)
+            ->setCustomerGroupId (0)
+            ->setCustomerIsGuest (1)
+            ->save ()
+        ;
+
+        $customerData = array(
+            'mode'      => Mage_Checkout_Model_Type_Onepage::METHOD_GUEST,
+            'firstname' => $customer->getFirstname (),
+            'lastname'  => $customer->getLastname (),
+            'email'     => $customerEmail,
+            'taxvat'    => $customer->getTaxvat (),
+        );
+
+        Mage::getModel ('checkout/cart_customer_api')->set ($quote->getId (), $customerData, $storeId);
+
+        $customerBillingPostcode  = preg_replace ('[\D]', null, $customerBillingAddress->getPostcode ());
+        $customerShippingPostcode = preg_replace ('[\D]', null, $customerShippingAddress->getPostcode ());
+
+        $customerBillingFax  = preg_replace ('[\D]', null, $customerBillingAddress->getFax ());
+        $customerShippingFax = preg_replace ('[\D]', null, $customerShippingAddress->getFax ());
+
+        Mage::getModel ('checkout/cart_customer_api')->setAddresses ($quote->getId (), array(
+            array(
+                'mode'       => 'billing',
+                'firstname'  => $customerBillingAddress->getFirstname (),
+                'lastname'   => $customerBillingAddress->getLastname (),
+                'company'    => null,
+                'street'     => $customerBillingAddress->getStreet (),
+                'city'       => $customerBillingAddress->getCity (),
+                'region'     => $customerBillingAddress->getRegionId (),
+                'country_id' => $customerBillingAddress->getCountryId (),
+                'postcode'   => $customerBillingPostcode,
+                'telephone'  => null,
+                'fax'        => $customerBillingFax,
+            ),
+            array(
+                'mode'       => 'shipping',
+                'firstname'  => $customerShippingAddress->getFirstname (),
+                'lastname'   => $customerShippingAddress->getLastname (),
+                'company'    => null,
+                'street'     => $customerShippingAddress->getStreet (),
+                'city'       => $customerShippingAddress->getCity (),
+                'region'     => $customerShippingAddress->getRegionId (),
+                'country_id' => $customerShippingAddress->getCountryId (),
+                'postcode'   => $customerShippingPostcode,
+                'telephone'  => null,
+                'fax'        => $customerShippingFax,
+            ),
+        ), $storeId);
+
+        return true;
+    }
 }
 

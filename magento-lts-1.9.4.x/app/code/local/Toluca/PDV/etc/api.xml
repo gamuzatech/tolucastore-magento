@@ -41,6 +41,10 @@
                         <title>Close a cashier</title>
                         <acl>pdv/item/close</acl>
                     </close>
+                    <quote translate="title" module="pdv">
+                        <title>Create a new quote for cashier</title>
+                        <acl>pdv/item/quote</acl>
+                    </quote>
                 </methods>
                 <faults translate="message" module="pdv">
                     <item_not_specified>
@@ -83,6 +87,22 @@
                         <code>1000</code>
                         <message>Cashier amount is invalid.</message>
                     </item_invalid_amount>
+                    <customer_not_specified>
+                        <code>1100</code>
+                        <message>Requested customer was not specified.</message>
+                    </customer_not_specified>
+                    <customer_not_exists>
+                        <code>1200</code>
+                        <message>Requested customer was not found.</message>
+                    </customer_not_exists>
+                    <customer_billing_address_not_exists>
+                        <code>1300</code>
+                        <message>Requested customer billing address was not found.</message>
+                    </customer_billing_address_not_exists>
+                    <customer_shipping_address_not_exists>
+                        <code>1400</code>
+                        <message>Requested customer shipping address was not found.</message>
+                    </customer_shipping_address_not_exists>
                 </faults>
             </pdv_item>
         </resources>
@@ -112,6 +132,9 @@
                         <close translate="title" module="pdv">
                             <title>Close a cashier</title>
                         </close>
+                        <quote translate="title" module="pdv">
+                            <title>Create a new quote for cashier</title>
+                        </quote>
                     </item>
                 </pdv>
             </resources>
