@@ -15,7 +15,11 @@ class Toluca_PDV_Model_Observer
         $order   = $event->getOrder ();
         $payment = $order->getPayment ();
 
-        if (!$order->getIsPdv () || !$order->getPdvId () || !$order->getOperatorId ())
+        $orderIsPdv         = $order->getData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_IS_PDV);
+        $orderPdvCashierId  = $order->getData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_CASHIER_ID);
+        $orderPdvOperatorId = $order->getData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_OPERATOR_ID);
+
+        if (!$orderIsPdv || !$orderPdvCashierId || !$orderPdvOperatorId)
         {
             return $this; // cancel
         }
@@ -31,8 +35,8 @@ class Toluca_PDV_Model_Observer
             $amount = $cashAmount;
         }
 
-        $cashier = Mage::getModel ('pdv/cashier')->load ($order->getPdvId ());
-        $operator = Mage::getModel ('pdv/operator')->load ($order->getOperatorId ());
+        $cashier = Mage::getModel ('pdv/cashier')->load ($orderPdvCashierId);
+        $operator = Mage::getModel ('pdv/operator')->load ($orderPdvOperatorId);
 
         $history = Mage::getModel ('pdv/history')
             ->setTypeId (Toluca_PDV_Helper_Data::HISTORY_TYPE_ORDER)

@@ -10,7 +10,7 @@
  */
 class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
 {
-    public function cashiers ()
+    public function items ()
     {
         $result = array ();
 
@@ -26,7 +26,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             )
             ->joinLeft (
                 array ('order' => Mage::getSingleton ('core/resource')->getTableName ('sales/order')),
-                'main_table.entity_id = order.pdv_id AND order.is_pdv = 1',
+                'main_table.entity_id = order.pdv_cashier_id AND order.is_pdv = 1',
                 array (
                     'order_amount' => 'SUM(order.base_grand_total)'
                 )
@@ -106,7 +106,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
 
         $collection = Mage::getModel ('sales/order')->getCollection ()
             ->addFieldToFilter ('is_pdv', array ('eq' => true))
-            ->addFieldToFilter ('pdv_id', array ('eq' => $cashier->getId ()))
+            ->addFieldToFilter ('pdv_cashier_id', array ('eq' => $cashier->getId ()))
         ;
 
         $collection->getSelect ()
@@ -535,8 +535,8 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         ;
 
         $quote->setData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_IS_PDV, true)
-            ->setData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_ID, $cashier_id)
-            ->setData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_OPERATOR_ID, $operator_id)
+            ->setData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_CASHIER_ID, $cashier_id)
+            ->setData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_OPERATOR_ID, $operator_id)
             ->setCustomerGroupId (0)
             ->setCustomerIsGuest (1)
             ->save ()

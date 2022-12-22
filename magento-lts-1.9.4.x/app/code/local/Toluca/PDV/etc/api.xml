@@ -19,7 +19,7 @@
                     <list translate="title" module="pdv">
                         <title>List available cashiers</title>
                         <acl>pdv/cashier/list</acl>
-                        <method>cashiers</method>
+                        <method>items</method>
                     </list>
                     <info translate="title" module="pdv">
                         <title>Get cashier information</title>
