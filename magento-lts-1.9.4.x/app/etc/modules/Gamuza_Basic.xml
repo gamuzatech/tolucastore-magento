@@ -13,6 +13,8 @@
             <active>true</active>
             <codePool>local</codePool>
             <depends>
+                <Mage_Admin />
+                <Mage_Api />
                 <Mage_Adminhtml />
                 <Mage_Bundle />
                 <Mage_Catalog />

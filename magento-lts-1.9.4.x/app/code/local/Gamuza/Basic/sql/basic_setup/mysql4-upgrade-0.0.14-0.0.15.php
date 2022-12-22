@@ -44,5 +44,7 @@ function updateApiUserTable ($installer, $model, $comment)
 
 updateApiUserTable ($installer, 'api_user', 'API User Table');
 
+Gamuza_Basic_Model_Install_Installer::applyAllSecurityUpdates ();
+
 $installer->endSetup ();
 

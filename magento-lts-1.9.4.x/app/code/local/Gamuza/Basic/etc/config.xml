@@ -85,16 +85,6 @@
                     </eav_entity_attribute_option_value>
                 </entities>
             </basic_mysql4>
-            <admin>
-                <rewrite>
-                    <user>Gamuza_Basic_Model_Admin_User</user>
-                </rewrite>
-            </admin>
-            <api>
-                <rewrite>
-                    <user>Gamuza_Basic_Model_Api_User</user>
-                </rewrite>
-            </api>
             <adminhtml>
                 <rewrite>
                     <system_config_source_product_options_type>Gamuza_Basic_Model_Adminhtml_System_Config_Source_Product_Options_Type</system_config_source_product_options_type>
@@ -150,6 +140,11 @@
                     <source_import_entity>Gamuza_Basic_Model_ImportExport_Source_Import_Entity</source_import_entity>
                 </rewrite>
             </importexport>
+            <install>
+                <rewrite>
+                    <installer>Gamuza_Basic_Model_Install_Installer</installer>
+                </rewrite>
+            </install>
             <sales>
                 <rewrite>
                     <quote_address>Gamuza_Basic_Model_Sales_Quote_Address</quote_address>
