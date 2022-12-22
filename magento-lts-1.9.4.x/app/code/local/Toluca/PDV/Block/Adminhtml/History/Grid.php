@@ -56,17 +56,17 @@ class Toluca_PDV_Block_Adminhtml_History_Grid extends Mage_Adminhtml_Block_Widge
 	        'type'   => 'number',
 		    'index'  => 'entity_id',
 		));
-		$this->addColumn ('item_id', array(
+		$this->addColumn ('cashier_id', array(
 		    'header'  => Mage::helper ('pdv')->__('Cashier'),
-		    'index'   => 'item_id',
+		    'index'   => 'cashier_id',
             'type'    => 'options',
-            'options' => Toluca_PDV_Block_Adminhtml_Operator_Grid::getItems (),
+            'options' => Toluca_PDV_Block_Adminhtml_Operator_Grid::getCashiers (),
 		));
 		$this->addColumn ('operator_id', array(
 		    'header'  => Mage::helper ('pdv')->__('Operator'),
 		    'index'   => 'operator_id',
             'type'    => 'options',
-            'options' => Toluca_PDV_Block_Adminhtml_Item_Grid::getOperators (),
+            'options' => Toluca_PDV_Block_Adminhtml_Cashier_Grid::getOperators (),
 		));
 		$this->addColumn ('type_id', array(
 		    'header'  => Mage::helper ('pdv')->__('Type'),

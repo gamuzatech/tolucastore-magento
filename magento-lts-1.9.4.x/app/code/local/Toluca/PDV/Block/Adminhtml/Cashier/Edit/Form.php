@@ -5,7 +5,7 @@
  * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
  */
 
-class Toluca_PDV_Block_Adminhtml_Item_Edit_Form extends Mage_Adminhtml_Block_Widget_Form
+class Toluca_PDV_Block_Adminhtml_Cashier_Edit_Form extends Mage_Adminhtml_Block_Widget_Form
 {
         protected function _prepareForm ()
         {

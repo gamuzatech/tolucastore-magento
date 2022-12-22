@@ -15,12 +15,12 @@ class Toluca_PDV_Block_Adminhtml_Operator_Edit_Tab_Form
 
 		$fieldset = $form->addFieldset ('pdv_form', array ('legend' => Mage::helper ('pdv')->__('Operator Information')));
 
-		$fieldset->addField ('item_id', 'select', array(
+		$fieldset->addField ('cashier_id', 'select', array(
 	        'label'    => Mage::helper ('pdv')->__('Cashier'),
 	        'class'    => 'required-entry validate-select',
-	        'name'     => 'item_id',
+	        'name'     => 'cashier_id',
 	        'required' => true,
-            'options'  => Toluca_PDV_Block_Adminhtml_Operator_Grid::getItems (),
+            'options'  => Toluca_PDV_Block_Adminhtml_Operator_Grid::getCashiers (),
 		));
 		$fieldset->addField ('name', 'text', array(
 		    'label'    => Mage::helper ('pdv')->__('Name'),

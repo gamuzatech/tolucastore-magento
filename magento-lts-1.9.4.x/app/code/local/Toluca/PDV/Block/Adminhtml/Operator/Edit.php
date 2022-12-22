@@ -32,7 +32,7 @@ class Toluca_PDV_Block_Adminhtml_Operator_Edit extends Mage_Adminhtml_Block_Widg
 
         $operator = Mage::registry ('operator_data');
 
-        if ($operator && $operator->getId () && $operator->getItemStatus () == Toluca_PDV_Helper_Data::ITEM_STATUS_OPENED)
+        if ($operator && $operator->getId () && $operator->getCashierStatus () == Toluca_PDV_Helper_Data::CASHIER_STATUS_OPENED)
         {
             $this->_removeButton ('save');
             $this->_removeButton ('saveandcontinue');

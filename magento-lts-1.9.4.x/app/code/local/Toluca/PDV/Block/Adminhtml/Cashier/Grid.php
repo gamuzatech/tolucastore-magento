@@ -5,7 +5,7 @@
  * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
  */
 
-class Toluca_PDV_Block_Adminhtml_Item_Grid extends Mage_Adminhtml_Block_Widget_Grid
+class Toluca_PDV_Block_Adminhtml_Cashier_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
     protected $_countTotals = true;
 
@@ -24,7 +24,7 @@ class Toluca_PDV_Block_Adminhtml_Item_Grid extends Mage_Adminhtml_Block_Widget_G
 	{
 		parent::__construct ();
 
-		$this->setId ('pdvItemGrid');
+		$this->setId ('pdvCashierGrid');
 		$this->setDefaultSort ('entity_id');
 		$this->setDefaultDir ('DESC');
 		$this->setSaveParametersInSession (true);
@@ -32,7 +32,7 @@ class Toluca_PDV_Block_Adminhtml_Item_Grid extends Mage_Adminhtml_Block_Widget_G
 
 	protected function _prepareCollection ()
 	{
-		$collection = Mage::getModel ('pdv/item')->getCollection ();
+		$collection = Mage::getModel ('pdv/cashier')->getCollection ();
 
 		$this->setCollection ($collection);
 
@@ -79,7 +79,7 @@ class Toluca_PDV_Block_Adminhtml_Item_Grid extends Mage_Adminhtml_Block_Widget_G
 		    'header'  => Mage::helper ('pdv')->__('Status'),
 		    'index'   => 'status',
             'type'    => 'options',
-            'options' => Mage::getModel ('pdv/adminhtml_system_config_source_item_status')->toArray (),
+            'options' => Mage::getModel ('pdv/adminhtml_system_config_source_cashier_status')->toArray (),
 		));
 /*
 		$this->addColumn ('created_at', array(

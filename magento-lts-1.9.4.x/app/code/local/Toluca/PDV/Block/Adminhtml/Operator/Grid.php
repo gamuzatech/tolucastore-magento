@@ -34,11 +34,11 @@ class Toluca_PDV_Block_Adminhtml_Operator_Grid extends Mage_Adminhtml_Block_Widg
 	        'type'   => 'number',
 		    'index'  => 'entity_id',
 		));
-		$this->addColumn ('item_id', array(
+		$this->addColumn ('cashier_id', array(
 		    'header'  => Mage::helper ('pdv')->__('Cashier'),
-		    'index'   => 'item_id',
+		    'index'   => 'cashier_id',
             'type'    => 'options',
-            'options' => self::getItems (),
+            'options' => self::getCashiers (),
 		));
 		$this->addColumn ('code', array(
 		    'header'  => Mage::helper ('pdv')->__('Code'),
@@ -93,13 +93,13 @@ class Toluca_PDV_Block_Adminhtml_Operator_Grid extends Mage_Adminhtml_Block_Widg
         // nothing here
 	}
 
-    public static function getItems ()
+    public static function getCashiers ()
     {
         $result = array ();
 
-        foreach (Mage::getModel ('pdv/item')->getCollection () as $item)
+        foreach (Mage::getModel ('pdv/cashier')->getCollection () as $cashier)
         {
-            $result [$item->getId ()] = sprintf ('%s - %s', $item->getId (), $item->getName ());
+            $result [$cashier->getId ()] = sprintf ('%s - %s', $cashier->getId (), $cashier->getName ());
         }
 
         return $result;

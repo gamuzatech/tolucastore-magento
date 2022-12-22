@@ -5,7 +5,7 @@
  * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
  */
 
-class Toluca_PDV_Block_Adminhtml_Item_Edit_Tab_Form
+class Toluca_PDV_Block_Adminhtml_Cashier_Edit_Tab_Form
     extends Mage_Adminhtml_Block_Widget_Form
 {
     const FORMAT_TYPE_MEDIUM = Mage_Core_Model_Locale::FORMAT_TYPE_MEDIUM;
@@ -39,15 +39,15 @@ class Toluca_PDV_Block_Adminhtml_Item_Edit_Tab_Form
 	        'name'     => 'updated_at',
 		));
 
-		if (Mage::getSingleton ('adminhtml/session')->getItemData ())
+		if (Mage::getSingleton ('adminhtml/session')->getCashierData ())
 		{
-			$form->setValues (Mage::getSingleton ('adminhtml/session')->getItemData ());
+			$form->setValues (Mage::getSingleton ('adminhtml/session')->getCashierData ());
 
-			Mage::getSingleton ('adminhtml/session')->setItemData (null);
+			Mage::getSingleton ('adminhtml/session')->setCashierData (null);
 		}
-		else if (Mage::registry ('item_data'))
+		else if (Mage::registry ('cashier_data'))
         {
-		    $form->setValues (Mage::registry ('item_data')->getData ());
+		    $form->setValues (Mage::registry ('cashier_data')->getData ());
 		}
 
         $createdAt = $form->getElement ('created_at')->getValue ();

@@ -12,15 +12,15 @@ class Toluca_PDV_Model_Operator extends Mage_Core_Model_Abstract
         $this->_init ('pdv/operator');
     }
 
-    public function getItemStatus ()
+    public function getCashierStatus ()
     {
-        if ($this->getId () && $this->getItemId ())
+        if ($this->getId () && $this->getCashierId ())
         {
-            $item = Mage::getModel ('pdv/item')->load ($this->getItemId ());
+            $cashier = Mage::getModel ('pdv/cashier')->load ($this->getCashierId ());
 
-            if ($item && $item->getId ())
+            if ($cashier && $cashier->getId ())
             {
-                return $item->getStatus ();
+                return $cashier->getStatus ();
             }
         }
     }

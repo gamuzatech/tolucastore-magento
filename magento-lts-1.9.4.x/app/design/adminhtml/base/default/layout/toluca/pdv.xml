@@ -8,11 +8,11 @@
 -->
 
 <layout version="0.1.0">
-    <admin_pdv_adminhtml_item_index>
+    <admin_pdv_adminhtml_cashier_index>
         <reference name="content">
-            <block type="pdv/adminhtml_item" name="item" />
+            <block type="pdv/adminhtml_cashier" name="cashier" />
         </reference>
-    </admin_pdv_adminhtml_item_index>
+    </admin_pdv_adminhtml_cashier_index>
     <admin_pdv_adminhtml_operator_index>
         <reference name="content">
             <block type="pdv/adminhtml_operator" name="operator" />

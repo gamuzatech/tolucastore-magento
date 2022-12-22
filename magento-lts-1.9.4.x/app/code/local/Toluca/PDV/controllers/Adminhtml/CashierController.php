@@ -5,16 +5,16 @@
  * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
  */
 
-class Toluca_PDV_Adminhtml_ItemController extends Mage_Adminhtml_Controller_Action
+class Toluca_PDV_Adminhtml_CashierController extends Mage_Adminhtml_Controller_Action
 {
 	protected function _isAllowed ()
 	{
-	    return Mage::getSingleton ('admin/session')->isAllowed ('toluca/pdv/item');
+	    return Mage::getSingleton ('admin/session')->isAllowed ('toluca/pdv/cashier');
 	}
 
 	protected function _initAction ()
 	{
-		$this->loadLayout ()->_setActiveMenu ('pdv/item')
+		$this->loadLayout ()->_setActiveMenu ('pdv/cashier')
             ->_addBreadcrumb(
                 Mage::helper ('pdv')->__('Cashiers Manager'),
                 Mage::helper ('pdv')->__('Cashiers Manager')
@@ -38,25 +38,25 @@ class Toluca_PDV_Adminhtml_ItemController extends Mage_Adminhtml_Controller_Acti
 	{
 	    $this->_title ($this->__('PDV'));
 	    $this->_title ($this->__('Cashiers Manager'));
-	    $this->_title ($this->__('New Item'));
+	    $this->_title ($this->__('New Cashier'));
 
         $id = $this->getRequest ()->getParam ('id');
 
-	    $model = Mage::getModel ('pdv/item')->load ($id);
+	    $model = Mage::getModel ('pdv/cashier')->load ($id);
 
-	    $itemData = Mage::getSingleton ('adminhtml/session')->getItemData (true);
+	    $cashierData = Mage::getSingleton ('adminhtml/session')->getCashierData (true);
 
-	    if (!empty ($itemData))
+	    if (!empty ($cashierData))
         {
-		    $model->setData ($itemData);
+		    $model->setData ($cashierData);
 	    }
 
-	    Mage::register ('item_data', $model);
+	    Mage::register ('cashier_data', $model);
 
         $this->_initAction ();
 
-	    $this->_addContent ($this->getLayout ()->createBlock ('pdv/adminhtml_item_edit'));
-        $this->_addLeft ($this->getLayout ()->createBlock ('pdv/adminhtml_item_edit_tabs'));
+	    $this->_addContent ($this->getLayout ()->createBlock ('pdv/adminhtml_cashier_edit'));
+        $this->_addLeft ($this->getLayout ()->createBlock ('pdv/adminhtml_cashier_edit_tabs'));
 
 	    $this->renderLayout ();
 	}
@@ -64,27 +64,27 @@ class Toluca_PDV_Adminhtml_ItemController extends Mage_Adminhtml_Controller_Acti
 	public function editAction ()
 	{
 	    $this->_title ($this->__('PDV'));
-		$this->_title ($this->__('Item'));
-	    $this->_title ($this->__('Edit Item'));
+		$this->_title ($this->__('Cashier'));
+	    $this->_title ($this->__('Edit Cashier'));
 
 		$id = $this->getRequest()->getParam ('id');
 
-		$model = Mage::getModel ('pdv/item')->load ($id);
+		$model = Mage::getModel ('pdv/cashier')->load ($id);
 
 		if ($model && $model->getId ())
         {
-			Mage::register ('item_data', $model);
+			Mage::register ('cashier_data', $model);
 
             $this->_initAction ();
 
-			$this->_addContent ($this->getLayout ()->createBlock ('pdv/adminhtml_item_edit'));
-            $this->_addLeft ($this->getLayout()->createBlock ('pdv/adminhtml_item_edit_tabs'));
+			$this->_addContent ($this->getLayout ()->createBlock ('pdv/adminhtml_cashier_edit'));
+            $this->_addLeft ($this->getLayout()->createBlock ('pdv/adminhtml_cashier_edit_tabs'));
 
 			$this->renderLayout();
 		}
 		else
         {
-			Mage::getSingleton ('adminhtml/session')->addError (Mage::helper ('pdv')->__('Item does not exist.'));
+			Mage::getSingleton ('adminhtml/session')->addError (Mage::helper ('pdv')->__('Cashier does not exist.'));
 
 			$this->_redirect ('*/*/index');
 		}
@@ -100,7 +100,7 @@ class Toluca_PDV_Adminhtml_ItemController extends Mage_Adminhtml_Controller_Acti
             {
                 $id = $this->getRequest ()->getParam ('id');
 
-				$model = Mage::getModel ('pdv/item')
+				$model = Mage::getModel ('pdv/cashier')
 				    ->addData ($postData)
                     ->setData ($id ? 'updated_at' : 'created_at', date ('c'))
 				    ->setId ($id)
@@ -112,7 +112,7 @@ class Toluca_PDV_Adminhtml_ItemController extends Mage_Adminhtml_Controller_Acti
                 $model->setCode ($code)->save ();
 
 				Mage::getSingleton ('adminhtml/session')->addSuccess (Mage::helper ('pdv')->__('Cashier was successfully saved.'));
-				Mage::getSingleton ('adminhtml/session')->setItemData (false);
+				Mage::getSingleton ('adminhtml/session')->setCashierData (false);
 
 				if ($this->getRequest()->getParam ('back'))
                 {
@@ -128,7 +128,7 @@ class Toluca_PDV_Adminhtml_ItemController extends Mage_Adminhtml_Controller_Acti
 			catch (Exception $e)
             {
 				Mage::getSingleton ('adminhtml/session')->addError ($e->getMessage ());
-				Mage::getSingleton ('adminhtml/session')->setItemData ($this->getRequest ()->getPost ());
+				Mage::getSingleton ('adminhtml/session')->setCashierData ($this->getRequest ()->getPost ());
 
 				$this->_redirect ('*/*/edit', array ('id' => $this->getRequest ()->getParam ('id')));
 

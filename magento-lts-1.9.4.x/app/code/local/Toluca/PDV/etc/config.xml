@@ -32,9 +32,9 @@
             <pdv_mysql4>
                 <class>Toluca_PDV_Model_Mysql4</class>
                 <entities>
-                    <item>
-                        <table>toluca_pdv_item</table>
-                    </item>
+                    <cashier>
+                        <table>toluca_pdv_cashier</table>
+                    </cashier>
                     <operator>
                         <table>toluca_pdv_operator</table>
                     </operator>

@@ -31,12 +31,12 @@ class Toluca_PDV_Model_Observer
             $amount = $cashAmount;
         }
 
-        $item = Mage::getModel ('pdv/item')->load ($order->getPdvId ());
+        $cashier = Mage::getModel ('pdv/cashier')->load ($order->getPdvId ());
         $operator = Mage::getModel ('pdv/operator')->load ($order->getOperatorId ());
 
         $history = Mage::getModel ('pdv/history')
             ->setTypeId (Toluca_PDV_Helper_Data::HISTORY_TYPE_ORDER)
-            ->setItemId ($item->getId ())
+            ->setCashierId ($cashier->getId ())
             ->setOperatorId ($operator->getId ())
             ->setOrderId ($order->getId ())
             ->setOrderIncrementId ($order->getIncrementId ())
@@ -57,7 +57,7 @@ class Toluca_PDV_Model_Observer
         {
             $history = Mage::getModel ('pdv/history')
                 ->setTypeId (Toluca_PDV_Helper_Data::HISTORY_TYPE_ORDER)
-                ->setItemId ($item->getId ())
+                ->setCashierId ($cashier->getId ())
                 ->setOperatorId ($operator->getId ())
                 ->setOrderId ($order->getId ())
                 ->setOrderIncrementId ($order->getIncrementId ())
@@ -68,8 +68,8 @@ class Toluca_PDV_Model_Observer
                 ->save ()
             ;
 
-            $item->setMoneyAmount (floatval ($item->getMoneyAmount ()) + $amount)
-                ->setChangeAmount (floatval ($item->getChangeAmount ()) + $changeAmount)
+            $cashier->setMoneyAmount (floatval ($cashier->getMoneyAmount ()) + $amount)
+                ->setChangeAmount (floatval ($cashier->getChangeAmount ()) + $changeAmount)
                 ->setUpdatedAt (date ('c'))
                 ->save ()
             ;

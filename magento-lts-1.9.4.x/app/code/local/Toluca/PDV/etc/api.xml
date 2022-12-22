@@ -11,46 +11,46 @@
     <api>
         <resources>
             <!-- Cashier -->
-            <pdv_item translate="title" module="pdv">
-                <model>pdv/item_api</model>
+            <pdv_cashier translate="title" module="pdv">
+                <model>pdv/cashier_api</model>
                 <title>PDV Cashier API</title>
-                <acl>pdv/item</acl>
+                <acl>pdv/cashier</acl>
                 <methods>
                     <list translate="title" module="pdv">
                         <title>List available cashiers</title>
-                        <acl>pdv/item/list</acl>
-                        <method>items</method>
+                        <acl>pdv/cashier/list</acl>
+                        <method>cashiers</method>
                     </list>
                     <info translate="title" module="pdv">
                         <title>Get cashier information</title>
-                        <acl>pdv/item/info</acl>
+                        <acl>pdv/cashier/info</acl>
                     </info>
                     <open translate="title" module="pdv">
                         <title>Open a cashier</title>
-                        <acl>pdv/item/open</acl>
+                        <acl>pdv/cashier/open</acl>
                     </open>
                     <reinforce translate="title" module="pdv">
                         <title>Reinforce a cashier</title>
-                        <acl>pdv/item/reinforce</acl>
+                        <acl>pdv/cashier/reinforce</acl>
                     </reinforce>
                     <bleed translate="title" module="pdv">
                         <title>Bleed a cashier</title>
-                        <acl>pdv/item/bleed</acl>
+                        <acl>pdv/cashier/bleed</acl>
                     </bleed>
                     <close translate="title" module="pdv">
                         <title>Close a cashier</title>
-                        <acl>pdv/item/close</acl>
+                        <acl>pdv/cashier/close</acl>
                     </close>
                     <quote translate="title" module="pdv">
                         <title>Create a new quote for cashier</title>
-                        <acl>pdv/item/quote</acl>
+                        <acl>pdv/cashier/quote</acl>
                     </quote>
                 </methods>
                 <faults translate="message" module="pdv">
-                    <item_not_specified>
+                    <cashier_not_specified>
                         <code>100</code>
                         <message>Requested cashier ID was not specified.</message>
-                    </item_not_specified>
+                    </cashier_not_specified>
                     <amount_not_specified>
                         <code>200</code>
                         <message>Requested cashier amount was not specified.</message>
@@ -63,30 +63,30 @@
                         <code>400</code>
                         <message>Requested operator password was not specified.</message>
                     </password_not_specified>
-                    <item_not_exists>
+                    <cashier_not_exists>
                         <code>500</code>
                         <message>Requested cashier was not found.</message>
-                    </item_not_exists>
+                    </cashier_not_exists>
                     <operator_not_exists>
                         <code>600</code>
                         <message>Requested operator was not found.</message>
                     </operator_not_exists>
-                    <item_already_opened>
+                    <cashier_already_opened>
                         <code>700</code>
                         <message>Requested cashier is already opened.</message>
-                    </item_already_opened>
-                    <item_already_closed>
+                    </cashier_already_opened>
+                    <cashier_already_closed>
                         <code>800</code>
                         <message>Requested cashier is already closed.</message>
-                    </item_already_closed>
+                    </cashier_already_closed>
                     <operator_invalid_password>
                         <code>900</code>
                         <message>Operator password is invalid.</message>
                     </operator_invalid_password>
-                    <item_invalid_amount>
+                    <cashier_invalid_amount>
                         <code>1000</code>
                         <message>Cashier amount is invalid.</message>
-                    </item_invalid_amount>
+                    </cashier_invalid_amount>
                     <customer_not_specified>
                         <code>1100</code>
                         <message>Requested customer was not specified.</message>
@@ -104,7 +104,7 @@
                         <message>Requested customer shipping address was not found.</message>
                     </customer_shipping_address_not_exists>
                 </faults>
-            </pdv_item>
+            </pdv_cashier>
         </resources>
         <acl>
             <resources>
@@ -112,7 +112,7 @@
                     <title>PDV API</title>
                     <sort_order>0</sort_order>
                     <!-- Cashier -->
-                    <item translate="title" module="pdv">
+                    <cashier translate="title" module="pdv">
                         <title>Cashier</title>
                         <list translate="title" module="pdv">
                             <title>List available cashiers</title>
@@ -135,7 +135,7 @@
                         <quote translate="title" module="pdv">
                             <title>Create a new quote for cashier</title>
                         </quote>
-                    </item>
+                    </cashier>
                 </pdv>
             </resources>
         </acl>

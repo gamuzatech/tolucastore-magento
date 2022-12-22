@@ -7,7 +7,7 @@
 
 class Toluca_PDV_Helper_Data extends Mage_Core_Helper_Abstract
 {
-    const ITEM_TABLE    = 'toluca_pdv_item';
+    const CASHIER_TABLE  = 'toluca_pdv_cashier';
     const OPERATOR_TABLE = 'toluca_pdv_operator';
     const HISTORY_TABLE = 'toluca_pdv_history';
 
@@ -15,8 +15,8 @@ class Toluca_PDV_Helper_Data extends Mage_Core_Helper_Abstract
     const ORDER_ATTRIBUTE_PDV_ID = 'pdv_id';
     const ORDER_ATTRIBUTE_OPERATOR_ID = 'operator_id';
 
-    const ITEM_STATUS_CLOSED = 0;
-    const ITEM_STATUS_OPENED = 1;
+    const CASHIER_STATUS_CLOSED = 0;
+    const CASHIER_STATUS_OPENED = 1;
 
     const HISTORY_TYPE_OPEN      = 'open';
     const HISTORY_TYPE_REINFORCE = 'reinforce';
@@ -32,11 +32,11 @@ class Toluca_PDV_Helper_Data extends Mage_Core_Helper_Abstract
     {
         $fieldsTotals = $grid->_fieldsTotals;
 
-        foreach ($grid->getCollection () as $item)
+        foreach ($grid->getCollection () as $cashier)
         {
             foreach ($fieldsTotals as $id => $value)
             {
-                $fieldsTotals [$id] += floatval ($item->getData ($id));
+                $fieldsTotals [$id] += floatval ($cashier->getData ($id));
             }
         }
 

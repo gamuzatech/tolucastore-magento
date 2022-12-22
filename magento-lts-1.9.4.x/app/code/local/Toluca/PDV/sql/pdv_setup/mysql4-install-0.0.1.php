@@ -8,7 +8,7 @@
 $installer = $this;
 $installer->startSetup ();
 
-function addPDVItemTable ($installer, $model, $comment)
+function addPDVCashierTable ($installer, $model, $comment)
 {
     $table = $installer->getTable ($model);
 
@@ -133,7 +133,7 @@ SQLBLOCK;
         ));
 }
 
-addPDVItemTable ($installer, Toluca_PDV_Helper_Data::ITEM_TABLE, 'Toluca PDV Item');
+addPDVCashierTable ($installer, Toluca_PDV_Helper_Data::CASHIER_TABLE, 'Toluca PDV Cashier');
 
 $installer->endSetup ();
 

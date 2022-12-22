@@ -5,14 +5,14 @@
  * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
  */
 
-class Toluca_PDV_Block_Adminhtml_Item_Edit extends Mage_Adminhtml_Block_Widget_Form_Container
+class Toluca_PDV_Block_Adminhtml_Cashier_Edit extends Mage_Adminhtml_Block_Widget_Form_Container
 {
 	public function __construct ()
 	{
 		parent::__construct ();
 
 		$this->_blockGroup = 'pdv';
-		$this->_controller = 'adminhtml_item';
+		$this->_controller = 'adminhtml_cashier';
 		$this->_objectId   = 'entity_id';
 
 		$this->_updateButton ('save', 'label', Mage::helper ('pdv')->__('Save Cashier'));
@@ -30,9 +30,9 @@ class Toluca_PDV_Block_Adminhtml_Item_Edit extends Mage_Adminhtml_Block_Widget_F
 			}
 		";
 
-        $item = Mage::registry ('item_data');
+        $cashier = Mage::registry ('cashier_data');
 
-        if ($item && $item->getId () && $item->getStatus () == Toluca_PDV_Helper_Data::ITEM_STATUS_OPENED)
+        if ($cashier && $cashier->getId () && $cashier->getStatus () == Toluca_PDV_Helper_Data::CASHIER_STATUS_OPENED)
         {
             $this->_removeButton ('save');
             $this->_removeButton ('saveandcontinue');
@@ -41,11 +41,11 @@ class Toluca_PDV_Block_Adminhtml_Item_Edit extends Mage_Adminhtml_Block_Widget_F
 
 	public function getHeaderText ()
 	{
-        $item = Mage::registry ('item_data');
+        $cashier = Mage::registry ('cashier_data');
 
-		if ($item && $item->getId ())
+		if ($cashier && $cashier->getId ())
         {
-		    return Mage::helper ('pdv')->__("Edit Cashier '%s'", $this->htmlEscape ($item->getId ()));
+		    return Mage::helper ('pdv')->__("Edit Cashier '%s'", $this->htmlEscape ($cashier->getId ()));
 		}
 		else
         {

@@ -17,11 +17,11 @@
                     <title>PDV</title>
                     <sort_order>100</sort_order>
                     <children>
-                        <item translate="title" module="pdv">
+                        <cashier translate="title" module="pdv">
                             <title>Manage Cashiers</title>
                             <sort_order>0</sort_order>
-                            <action>admin_pdv/adminhtml_item</action>
-                        </item>
+                            <action>admin_pdv/adminhtml_cashier</action>
+                        </cashier>
                         <operator translate="title" module="pdv">
                             <title>Manage Operators</title>
                             <sort_order>10</sort_order>
@@ -52,10 +52,10 @@
                                 <title>PDV</title>
                                 <sort_order>100</sort_order>
                                 <children>
-                                    <item translate="title" module="pdv">
+                                    <cashier translate="title" module="pdv">
                                         <title>Manage Cashiers</title>
                                         <sort_order>0</sort_order>
-                                    </item>
+                                    </cashier>
                                     <operator translate="title" module="pdv">
                                         <title>Manage Operators</title>
                                         <sort_order>10</sort_order>
