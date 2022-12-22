@@ -17,6 +17,6 @@ class Gamuza_Mobile_Helper_Data extends Mage_Core_Helper_Abstract
 
     const DEFAULT_CUSTOMER_TAXVAT = '02788178824';
 
-    const CUSTOMER_EMAIL_PREFIX = 'app';
+    const XML_PATH_DEFAULT_EMAIL_PREFIX = 'customer/create_account/email_prefix';
 }
 
