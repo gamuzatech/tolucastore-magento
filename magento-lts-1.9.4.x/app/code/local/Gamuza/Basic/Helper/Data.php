@@ -7,6 +7,9 @@
 
 class Gamuza_Basic_Helper_Data extends Mage_Core_Helper_Abstract
 {
+    const DEFAULT_ADMIN_USER = 'admin';
+    const DEFAULT_API_USER   = 'tolucastore';
+
     const CATEGORY_ATTRIBUTE_SKU = 'sku';
 
     const CUSTOMER_GENDER_MALE   = 1;

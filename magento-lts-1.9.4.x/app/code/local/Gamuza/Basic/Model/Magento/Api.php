@@ -10,8 +10,6 @@
  */
 class Gamuza_Basic_Model_Magento_Api extends Mage_Core_Model_Magento_Api
 {
-    const DEFAULT_ADMIN_USER = 'admin';
-
     public function backup ()
     {
         Mage::getModel ('backup/observer')->scheduledBackup ();
@@ -116,7 +114,7 @@ class Gamuza_Basic_Model_Magento_Api extends Mage_Core_Model_Magento_Api
     {
         $result = null;
 
-        $user = Mage::getModel('admin/user')->loadByUsername(self::DEFAULT_ADMIN_USER);
+        $user = Mage::getModel('admin/user')->loadByUsername(Gamuza_Basic_Helper_Data::DEFAULT_ADMIN_USER);
 
         if ($user && $user->getId())
         {
