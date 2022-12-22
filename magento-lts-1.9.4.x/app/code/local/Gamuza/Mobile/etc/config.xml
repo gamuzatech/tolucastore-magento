@@ -231,6 +231,11 @@
         </translate>
     </frontend>
     <default>
+        <customer>
+            <create_account>
+                <email_prefix>app</email_prefix>
+            </create_account>
+        </customer>
         <payment>
             <cashondelivery>
                 <model>mobile/payment_method_cashondelivery</model>
