@@ -23,6 +23,7 @@
                 <Mage_Core />
                 <Mage_Customer />
                 <Mage_Directory />
+                <Mage_Install />
                 <Mage_Page />
                 <Mage_Payment />
                 <Mage_Shipping />
