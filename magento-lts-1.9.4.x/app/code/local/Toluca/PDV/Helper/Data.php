@@ -7,6 +7,8 @@
 
 class Toluca_PDV_Helper_Data extends Mage_Core_Helper_Abstract
 {
+    const DEFAULT_API_USER = 'tolucastorepdv';
+
     const CASHIER_TABLE  = 'toluca_pdv_cashier';
     const OPERATOR_TABLE = 'toluca_pdv_operator';
     const HISTORY_TABLE = 'toluca_pdv_history';
