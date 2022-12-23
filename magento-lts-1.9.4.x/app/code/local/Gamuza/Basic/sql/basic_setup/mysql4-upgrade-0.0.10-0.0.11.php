@@ -9,7 +9,7 @@ $installer = new Mage_Core_Model_Resource_Setup ('basic_setup');
 $installer->startSetup ();
 
 $role = Mage::getModel('api/roles')
-    ->setName('Toluca Store')
+    ->setName('Toluca Store Desktop')
     ->setRoleType('G')
     ->save();
 
@@ -61,9 +61,9 @@ catch (Exception $e)
 $user = Mage::getModel('api/user')
     ->loadByUsername(Gamuza_Basic_Helper_Data::DEFAULT_API_USER)
     ->setUsername(Gamuza_Basic_Helper_Data::DEFAULT_API_USER)
-    ->setFirstname('Toluca')
-    ->setLastname('Store')
-    ->setEmail('store@toluca.com.br')
+    ->setFirstname('Toluca Store')
+    ->setLastname('Desktop')
+    ->setEmail('desktop@toluca.com.br')
     ->setApiKey(hash('sha512', uniqid(rand(), true)))
     ->setIsActive(true)
     ->save();
