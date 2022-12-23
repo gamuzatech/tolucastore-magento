@@ -514,7 +514,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('customer_shipping_address_not_exists');
         }
 
-        $storeId = Mage::app ()->getStore ()->getId ();
+        $storeId = Mage_Core_Model_App::DISTRO_STORE_ID;
 
         $remoteIp = Mage::helper ('core/http')->getRemoteAddr (false);
 

@@ -47,5 +47,10 @@ class Toluca_PDV_Helper_Data extends Mage_Core_Helper_Abstract
 
         return $object;
     }
+
+    public function isPDV ()
+    {
+        return strpos ($_SERVER ['HTTP_USER_AGENT'], 'TolucaStorePDV') !== false;
+    }
 }
 

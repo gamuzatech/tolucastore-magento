@@ -7,14 +7,15 @@
 
 class Toluca_PDV_Model_Observer
 {
-    const API_METHOD_PDV_CASHIER_QUOTE = 'pdv_cashier.quote';
-
     const XML_PATH_PDV_PAYMENT_METHOD_CASHONDELIVERY = Toluca_PDV_Helper_Data::XML_PATH_PDV_PAYMENT_METHOD_CASHONDELIVERY;
 
     public function controllerActionPredispatch ($observer)
     {
-        if (!strcmp (Mage::app ()->getRequest ()->getControllerModule (), 'Gamuza_JsonApi')
-            && strpos (Mage::app ()->getRequest ()->getRawBody (), self::API_METHOD_PDV_CASHIER_QUOTE) !== false)
+        $controllerModule = Mage::app ()->getRequest ()->getControllerModule ();
+
+        $isPdv = Mage::helper ('pdv')->isPDV ();
+
+        if (!strcmp ($controllerModule, 'Gamuza_JsonApi') && $isPdv)
         {
             Mage::app ()->getStore ()->setConfig (
                 Toluca_PDV_Helper_Data::XML_PATH_DEFAULT_EMAIL_PREFIX, 'pdv'
