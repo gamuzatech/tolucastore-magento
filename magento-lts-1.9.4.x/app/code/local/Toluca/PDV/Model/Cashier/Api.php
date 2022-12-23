@@ -518,9 +518,10 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
 
         $remoteIp = Mage::helper ('core/http')->getRemoteAddr (false);
 
-        $customerCode   = hash ('crc32', $cashier->getId ()); // by pdv_id
+        $customerPrefix = Mage::getStoreConfig (Toluca_PDV_Helper_Data::XML_PATH_DEFAULT_EMAIL_PREFIX);
+        $customerCode   = hash ('crc32', $cashier->getId ()); // use pdv_id instead customer_id
         $customerDomain = Mage::getStoreConfig (Mage_Customer_Model_Customer::XML_PATH_DEFAULT_EMAIL_DOMAIN);
-        $customerEmail  = sprintf ('pdv+%s@%s', $customerCode, $customerDomain);
+        $customerEmail  = sprintf ('%s+%s@%s', $customerPrefix, $customerCode, $customerDomain);
 
         $quote = Mage::getModel ('sales/quote')
             ->setStoreId ($storeId)

@@ -26,6 +26,8 @@ class Toluca_PDV_Helper_Data extends Mage_Core_Helper_Abstract
     const HISTORY_TYPE_ORDER     = 'order';
     const HISTORY_TYPE_CLOSE     = 'close';
 
+    const XML_PATH_DEFAULT_EMAIL_PREFIX = 'customer/create_account/email_prefix';
+
     const XML_PATH_PDV_PAYMENT_METHOD_CASHONDELIVERY = 'pdv/payment_method/cashondelivery';
 
     public function getTotals (Mage_Adminhtml_Block_Widget_Grid $grid)

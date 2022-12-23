@@ -90,6 +90,14 @@
             </sales_convert_order>
         </fieldsets>
         <events>
+            <controller_action_predispatch>
+                <observers>
+                    <toluca_pdv_controller_action_predispatch>
+                        <class>pdv/observer</class>
+                        <method>controllerActionPredispatch</method>
+                    </toluca_pdv_controller_action_predispatch>
+                </observers>
+            </controller_action_predispatch>
             <sales_order_place_after>
                 <observers>
                     <pdv_sales_order_place_after>
