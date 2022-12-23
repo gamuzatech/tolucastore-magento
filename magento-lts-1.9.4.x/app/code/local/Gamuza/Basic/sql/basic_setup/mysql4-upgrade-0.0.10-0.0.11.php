@@ -59,8 +59,8 @@ catch (Exception $e)
 }
 
 $user = Mage::getModel('api/user')
-    ->loadByUsername('tolucastore')
-    ->setUsername('tolucastore')
+    ->loadByUsername(Gamuza_Basic_Helper_Data::DEFAULT_API_USER)
+    ->setUsername(Gamuza_Basic_Helper_Data::DEFAULT_API_USER)
     ->setFirstname('Toluca')
     ->setLastname('Store')
     ->setEmail('store@toluca.com.br')
