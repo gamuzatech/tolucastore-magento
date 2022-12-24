@@ -37,6 +37,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         {
             $result [] = array(
                 'entity_id'  => intval ($cashier->getId ()),
+                'code'       => $cashier->getCode (),
                 'name'       => $cashier->getName (),
                 'is_active'  => boolval ($cashier->getIsActive ()),
                 'status'     => intval ($cashier->getStatus ()),
@@ -79,6 +80,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
 
         $result = array(
             'entity_id'  => intval ($cashier->getId ()),
+            'code'       => $cashier->getCode (),
             'name'       => $cashier->getName (),
             'is_active'  => boolval ($cashier->getIsActive ()),
             'status'     => intval ($cashier->getStatus ()),
