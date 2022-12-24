@@ -125,54 +125,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
 
     public function open ($amount, $operator_id, $password)
     {
-        if (empty ($amount))
-        {
-            $this->_fault ('amount_not_specified');
-        }
-
-        if (!is_numeric ($amount))
-        {
-            $this->_fault ('cashier_invalid_amount');
-        }
-
-        if (empty ($operator_id))
-        {
-            $this->_fault ('operator_not_specified');
-        }
-
-        if (empty ($password))
-        {
-            $this->_fault ('password_not_specified');
-        }
-
-        $operator = Mage::getModel ('pdv/operator')->getCollection ()
-            ->addFieldToFilter ('is_active', array ('eq' => true))
-            ->addFieldToFilter ('entity_id', array ('eq' => $operator_id))
-            ->getFirstItem ()
-        ;
-
-        if (!$operator || !$operator->getId ())
-        {
-            $this->_fault ('operator_not_exists');
-        }
-
-        $password = Mage::helper ('core')->getHash ($password, true);
-
-        if (strcmp ($password, $operator->getPassword ()) != 0)
-        {
-            $this->_fault ('operator_invalid_password');
-        }
-
-        $cashier = Mage::getModel ('pdv/cashier')->getCollection ()
-            ->addFieldToFilter ('is_active', array ('eq' => true))
-            ->addFieldToFilter ('entity_id', array ('eq' => $operator->getCashierId ()))
-            ->getFirstItem ()
-        ;
-
-        if (!$cashier || !$cashier->getId ())
-        {
-            $this->_fault ('cashier_not_exists');
-        }
+        $cashier = $this->_getCashier ($amount, $operator_id, $password);
 
         if ($cashier->getStatus () == Toluca_PDV_Helper_Data::CASHIER_STATUS_OPENED)
         {
@@ -588,6 +541,60 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         ), $storeId);
 
         return true;
+    }
+
+    protected function _getCashier ($amount, $operator_id, $password)
+    {
+        if (empty ($amount))
+        {
+            $this->_fault ('amount_not_specified');
+        }
+
+        if (!is_numeric ($amount))
+        {
+            $this->_fault ('cashier_invalid_amount');
+        }
+
+        if (empty ($operator_id))
+        {
+            $this->_fault ('operator_not_specified');
+        }
+
+        if (empty ($password))
+        {
+            $this->_fault ('password_not_specified');
+        }
+
+        $operator = Mage::getModel ('pdv/operator')->getCollection ()
+            ->addFieldToFilter ('is_active', array ('eq' => true))
+            ->addFieldToFilter ('entity_id', array ('eq' => $operator_id))
+            ->getFirstItem ()
+        ;
+
+        if (!$operator || !$operator->getId ())
+        {
+            $this->_fault ('operator_not_exists');
+        }
+
+        $password = Mage::helper ('core')->getHash ($password, true);
+
+        if (strcmp ($password, $operator->getPassword ()) != 0)
+        {
+            $this->_fault ('operator_invalid_password');
+        }
+
+        $cashier = Mage::getModel ('pdv/cashier')->getCollection ()
+            ->addFieldToFilter ('is_active', array ('eq' => true))
+            ->addFieldToFilter ('entity_id', array ('eq' => $operator->getCashierId ()))
+            ->getFirstItem ()
+        ;
+
+        if (!$cashier || !$cashier->getId ())
+        {
+            $this->_fault ('cashier_not_exists');
+        }
+
+        return $cashier;
     }
 }
 
