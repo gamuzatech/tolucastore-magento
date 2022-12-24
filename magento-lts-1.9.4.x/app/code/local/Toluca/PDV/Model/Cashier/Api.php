@@ -133,7 +133,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         }
 
         $cashier->setStatus (Toluca_PDV_Helper_Data::CASHIER_STATUS_OPENED)
-            ->setOperatorId ($operator->getId ())
+            ->setOperatorId ($operator_id)
             ->setOpenAmount ($amount)
             ->setReinforceAmount (0)
             ->setBleedAmount (0)
@@ -148,47 +148,18 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         $history = Mage::getModel ('pdv/history')
             ->setTypeId (Toluca_PDV_Helper_Data::HISTORY_TYPE_OPEN)
             ->setCashierId ($cashier->getId ())
-            ->setOperatorId ($operator->getId ())
+            ->setOperatorId ($operator_id)
             ->setAmount ($amount)
             ->setCreatedAt (date ('c'))
             ->save ()
         ;
 
-        return $cashier->getId ();
+        return intval ($cashier->getId ());
     }
 
-    public function reinforce ($cashier_id, $amount, $operator_id, $password)
+    public function reinforce ($amount, $operator_id, $password)
     {
-        if (empty ($cashier_id))
-        {
-            $this->_fault ('cashier_not_specified');
-        }
-
-        if (empty ($amount))
-        {
-            $this->_fault ('amount_not_specified');
-        }
-
-        if (empty ($operator_id))
-        {
-            $this->_fault ('operator_not_specified');
-        }
-
-        if (empty ($password))
-        {
-            $this->_fault ('password_not_specified');
-        }
-
-        $cashier = Mage::getModel ('pdv/cashier')->getCollection ()
-            ->addFieldToFilter ('is_active', array ('eq' => true))
-            ->addFieldToFilter ('entity_id', array ('eq' => $cashier_id))
-            ->getFirstItem ()
-        ;
-
-        if (!$cashier || !$cashier->getId ())
-        {
-            $this->_fault ('cashier_not_exists');
-        }
+        $cashier = $this->_getCashier ($amount, $operator_id, $password);
 
         if ($cashier->getStatus () == Toluca_PDV_Helper_Data::CASHIER_STATUS_CLOSED)
         {
@@ -197,25 +168,6 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
 
         $reinforceAmount = floatval ($cashier->getReinforceAmount ());
 
-        $operator = Mage::getModel ('pdv/operator')->getCollection ()
-            ->addFieldToFilter ('is_active', array ('eq' => true))
-            ->addFieldToFilter ('entity_id', array ('eq' => $operator_id))
-            ->addFieldToFilter ('cashier_id',   array ('eq' => $cashier_id))
-            ->getFirstItem ()
-        ;
-
-        if (!$operator || !$operator->getId ())
-        {
-            $this->_fault ('operator_not_exists');
-        }
-
-        $password = Mage::helper ('core')->getHash ($password, true);
-
-        if (strcmp ($password, $operator->getPassword ()) != 0)
-        {
-            $this->_fault ('operator_invalid_password');
-        }
-
         $cashier->setReinforceAmount ($reinforceAmount + $amount)
             ->save ()
         ;
@@ -223,7 +175,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         $history = Mage::getModel ('pdv/history')
             ->setTypeId (Toluca_PDV_Helper_Data::HISTORY_TYPE_REINFORCE)
             ->setCashierId ($cashier->getId ())
-            ->setOperatorId ($operator->getId ())
+            ->setOperatorId ($operator_id)
             ->setAmount ($amount)
             ->setCreatedAt (date ('c'))
             ->save ()
@@ -234,36 +186,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
 
     public function bleed ($cashier_id, $amount, $operator_id, $password)
     {
-        if (empty ($cashier_id))
-        {
-            $this->_fault ('cashier_not_specified');
-        }
-
-        if (empty ($amount))
-        {
-            $this->_fault ('amount_not_specified');
-        }
-
-        if (empty ($operator_id))
-        {
-            $this->_fault ('operator_not_specified');
-        }
-
-        if (empty ($password))
-        {
-            $this->_fault ('password_not_specified');
-        }
-
-        $cashier = Mage::getModel ('pdv/cashier')->getCollection ()
-            ->addFieldToFilter ('is_active', array ('eq' => true))
-            ->addFieldToFilter ('entity_id', array ('eq' => $cashier_id))
-            ->getFirstItem ()
-        ;
-
-        if (!$cashier || !$cashier->getId ())
-        {
-            $this->_fault ('cashier_not_exists');
-        }
+        $cashier = $this->_getCashier ($amount, $operator_id, $password);
 
         if ($cashier->getStatus () == Toluca_PDV_Helper_Data::CASHIER_STATUS_CLOSED)
         {
@@ -287,25 +210,6 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('cashier_invalid_amount', $message);
         }
 
-        $operator = Mage::getModel ('pdv/operator')->getCollection ()
-            ->addFieldToFilter ('is_active', array ('eq' => true))
-            ->addFieldToFilter ('entity_id', array ('eq' => $operator_id))
-            ->addFieldToFilter ('cashier_id',   array ('eq' => $cashier_id))
-            ->getFirstItem ()
-        ;
-
-        if (!$operator || !$operator->getId ())
-        {
-            $this->_fault ('operator_not_exists');
-        }
-
-        $password = Mage::helper ('core')->getHash ($password, true);
-
-        if (strcmp ($password, $operator->getPassword ()) != 0)
-        {
-            $this->_fault ('operator_invalid_password');
-        }
-
         $cashier->setBleedAmount ($bleedAmount + $amount)
             ->save ()
         ;
@@ -313,7 +217,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         $history = Mage::getModel ('pdv/history')
             ->setTypeId (Toluca_PDV_Helper_Data::HISTORY_TYPE_BLEED)
             ->setCashierId ($cashier->getId ())
-            ->setOperatorId ($operator->getId ())
+            ->setOperatorId ($operator_id)
             ->setAmount (- $amount)
             ->setCreatedAt (date ('c'))
             ->save ()
@@ -322,38 +226,9 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         return true;
     }
 
-    public function close ($cashier_id, $amount, $operator_id, $password)
+    public function close ($amount, $operator_id, $password)
     {
-        if (empty ($cashier_id))
-        {
-            $this->_fault ('cashier_not_specified');
-        }
-
-        if (empty ($amount))
-        {
-            $this->_fault ('amount_not_specified');
-        }
-
-        if (empty ($operator_id))
-        {
-            $this->_fault ('operator_not_specified');
-        }
-
-        if (empty ($password))
-        {
-            $this->_fault ('password_not_specified');
-        }
-
-        $cashier = Mage::getModel ('pdv/cashier')->getCollection ()
-            ->addFieldToFilter ('is_active', array ('eq' => true))
-            ->addFieldToFilter ('entity_id', array ('eq' => $cashier_id))
-            ->getFirstItem ()
-        ;
-
-        if (!$cashier || !$cashier->getId ())
-        {
-            $this->_fault ('cashier_not_exists');
-        }
+        $cashier = $this->_getCashier ($amount, $operator_id, $password);
 
         if ($cashier->getStatus () == Toluca_PDV_Helper_Data::CASHIER_STATUS_CLOSED)
         {
@@ -378,25 +253,6 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('cashier_invalid_amount', $message);
         }
 
-        $operator = Mage::getModel ('pdv/operator')->getCollection ()
-            ->addFieldToFilter ('is_active', array ('eq' => true))
-            ->addFieldToFilter ('entity_id', array ('eq' => $operator_id))
-            ->addFieldToFilter ('cashier_id',   array ('eq' => $cashier_id))
-            ->getFirstItem ()
-        ;
-
-        if (!$operator || !$operator->getId ())
-        {
-            $this->_fault ('operator_not_exists');
-        }
-
-        $password = Mage::helper ('core')->getHash ($password, true);
-
-        if (strcmp ($password, $operator->getPassword ()) != 0)
-        {
-            $this->_fault ('operator_invalid_password');
-        }
-
         $cashier->setStatus (Toluca_PDV_Helper_Data::CASHIER_STATUS_CLOSED)
             ->setCloseAmount ($amount)
             ->setClosedAt (date ('c'))
@@ -406,7 +262,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         $history = Mage::getModel ('pdv/history')
             ->setTypeId (Toluca_PDV_Helper_Data::HISTORY_TYPE_CLOSE)
             ->setCashierId ($cashier->getId ())
-            ->setOperatorId ($operator->getId ())
+            ->setOperatorId ($operator_id)
             ->setAmount (- $amount)
             ->setCreatedAt (date ('c'))
             ->save ()
