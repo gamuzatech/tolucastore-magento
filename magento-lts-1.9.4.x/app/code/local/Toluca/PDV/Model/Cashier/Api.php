@@ -131,7 +131,11 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
 
         if ($cashier->getStatus () == Toluca_PDV_Helper_Data::CASHIER_STATUS_OPENED)
         {
+            /*
             $this->_fault ('cashier_already_opened');
+            */
+
+            return intval ($cashier->getId ());
         }
 
         $cashier->setStatus (Toluca_PDV_Helper_Data::CASHIER_STATUS_OPENED)
