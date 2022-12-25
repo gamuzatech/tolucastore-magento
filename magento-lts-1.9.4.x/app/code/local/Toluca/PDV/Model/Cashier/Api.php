@@ -16,7 +16,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
     {
         // parent::__construct ();
 
-        $this->_defaultCustomerId = intval (Mage::getStoreConfig (Toluca_PDV_Helper_Data::XML_PATH_PDV_SETTING_DEFAULT_CUSTOMER));
+        $this->_defaultCustomerId = Mage::getStoreConfig (Toluca_PDV_Helper_Data::XML_PATH_PDV_SETTING_DEFAULT_CUSTOMER);
     }
 
     public function items ()
@@ -65,7 +65,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
                 'change_amount'    => floatval ($cashier->getChangeAmount ()),
                 'close_amount'     => floatval ($cashier->getCloseAmount ()),
                 'order_amount'     => floatval ($cashier->getOrderAmount ()),
-                'default_customer_id' => $this->_defaultCustomerId,
+                'default_customer_id' => intval ($this->_defaultCustomerId),
             );
         }
 
@@ -110,7 +110,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             'change_amount'    => floatval ($cashier->getChangeAmount ()),
             'close_amount'     => floatval ($cashier->getCloseAmount ()),
             'order_amount'     => floatval ($cashier->getOrderAmount ()),
-            'default_customer_id' => $this->_defaultCustomerId,
+            'default_customer_id' => intval ($this->_defaultCustomerId),
         );
 
         $operator = Mage::getModel ('pdv/operator')->load ($cashier->getOperatorId ());
