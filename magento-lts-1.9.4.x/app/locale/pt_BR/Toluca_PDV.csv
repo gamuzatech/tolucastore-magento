@@ -47,5 +47,6 @@
 "Requested customer shipping address was not found.","Endereço de Cobrança do Cliente solicitado não foi encontrado."
 "Close amount is invalid. Difference of %s.","Valor de Fechamento inválido. Diferença de %s."
 "Bleed amount is invalid. Allowed only %s.","Valor da Sangria inválida. Permitido somente %s."
+"Default Customer","Cliente Padrão"
 "Cash On Delivery","Dinheiro na Entrega"
 
