@@ -187,7 +187,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             ->save ()
         ;
 
-        return true;
+        return intval ($cashier->getId ());
     }
 
     public function bleed ($cashier_id, $amount, $operator_id, $password)
@@ -229,7 +229,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             ->save ()
         ;
 
-        return true;
+        return intval ($cashier->getId ());
     }
 
     public function close ($amount, $operator_id, $password)
@@ -274,7 +274,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             ->save ()
         ;
 
-        return true;
+        return intval ($cashier->getId ());
     }
 
     public function quote ($cashier_id, $operator_id, $customer_id)
@@ -402,7 +402,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             ),
         ), $storeId);
 
-        return true;
+        return intval ($cashier->getId ());
     }
 
     protected function _getCashier ($amount, $operator_id, $password)
