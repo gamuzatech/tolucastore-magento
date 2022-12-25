@@ -190,7 +190,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         return intval ($cashier->getId ());
     }
 
-    public function bleed ($cashier_id, $amount, $operator_id, $password)
+    public function bleed ($amount, $operator_id, $password)
     {
         $cashier = $this->_getCashier ($amount, $operator_id, $password);
 
