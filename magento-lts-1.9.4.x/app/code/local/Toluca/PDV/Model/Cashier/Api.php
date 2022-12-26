@@ -140,7 +140,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         return $result;
     }
 
-    public function open ($amount, $operator_id, $password)
+    public function open ($amount, $operator_id, $password, $message)
     {
         $cashier = $this->_getCashier ($amount, $operator_id, $password);
 
@@ -171,6 +171,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             ->setCashierId ($cashier->getId ())
             ->setOperatorId ($operator_id)
             ->setAmount ($amount)
+            ->setMessage ($message)
             ->setCreatedAt (date ('c'))
             ->save ()
         ;
@@ -178,7 +179,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         return intval ($cashier->getId ());
     }
 
-    public function reinforce ($amount, $operator_id, $password)
+    public function reinforce ($amount, $operator_id, $password, $message)
     {
         $cashier = $this->_getCashier ($amount, $operator_id, $password);
 
@@ -198,6 +199,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             ->setCashierId ($cashier->getId ())
             ->setOperatorId ($operator_id)
             ->setAmount ($amount)
+            ->setMessage ($message)
             ->setCreatedAt (date ('c'))
             ->save ()
         ;
@@ -205,7 +207,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         return intval ($cashier->getId ());
     }
 
-    public function bleed ($amount, $operator_id, $password)
+    public function bleed ($amount, $operator_id, $password, $message)
     {
         $cashier = $this->_getCashier ($amount, $operator_id, $password);
 
@@ -240,6 +242,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             ->setCashierId ($cashier->getId ())
             ->setOperatorId ($operator_id)
             ->setAmount (- $amount)
+            ->setMessage ($message)
             ->setCreatedAt (date ('c'))
             ->save ()
         ;
@@ -247,7 +250,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         return intval ($cashier->getId ());
     }
 
-    public function close ($amount, $operator_id, $password)
+    public function close ($amount, $operator_id, $password, $message)
     {
         $cashier = $this->_getCashier ($amount, $operator_id, $password);
 
@@ -285,6 +288,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             ->setCashierId ($cashier->getId ())
             ->setOperatorId ($operator_id)
             ->setAmount (- $amount)
+            ->setMessage ($message)
             ->setCreatedAt (date ('c'))
             ->save ()
         ;
