@@ -48,6 +48,8 @@ class Gamuza_Mobile_Model_Product_Api extends Mage_Catalog_Model_Api_Resource
         'volume_comprimento',
         'volume_largura',
         'weight',
+        'created_at',
+        'updated_at',
     );
 
     protected $_descCodes  = array ('description', 'short_description');
