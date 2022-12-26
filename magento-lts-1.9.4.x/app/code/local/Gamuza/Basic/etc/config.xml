@@ -211,6 +211,15 @@
                 </observers>
             </catalog_product_save_after>
         </events>
+        <sales>
+            <quote>
+                <item>
+                    <product_attributes>
+                        <image/>
+                    </product_attributes>
+                </item>
+            </quote>
+        </sales>
         <basic>
             <product>
                 <options>
