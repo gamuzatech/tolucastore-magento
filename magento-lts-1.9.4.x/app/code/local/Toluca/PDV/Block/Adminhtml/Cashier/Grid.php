@@ -61,6 +61,12 @@ class Toluca_PDV_Block_Adminhtml_Cashier_Grid extends Mage_Adminhtml_Block_Widge
 	        'type'   => 'number',
 		    'index'  => 'entity_id',
 		));
+		$this->addColumn ('quote_id', array(
+		    'header' => Mage::helper ('pdv')->__('Quote ID'),
+		    'align'  => 'right',
+	        'type'   => 'number',
+		    'index'  => 'quote_id',
+		));
 		$this->addColumn ('code', array(
 		    'header'  => Mage::helper ('pdv')->__('Code'),
 		    'index'   => 'code',

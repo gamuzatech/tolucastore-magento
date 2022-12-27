@@ -47,6 +47,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         {
             $result [] = array(
                 'entity_id'  => intval ($cashier->getId ()),
+                'quote_id'   => intval ($cashier->getQuoteId ()),
                 'code'       => $cashier->getCode (),
                 'name'       => $cashier->getName (),
                 'is_active'  => boolval ($cashier->getIsActive ()),
@@ -92,6 +93,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
 
         $result = array(
             'entity_id'  => intval ($cashier->getId ()),
+            'quote_id'   => intval ($cashier->getQuoteId ()),
             'code'       => $cashier->getCode (),
             'name'       => $cashier->getName (),
             'is_active'  => boolval ($cashier->getIsActive ()),
@@ -365,7 +367,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         {
             $quote->afterLoad ();
 
-            return intval ($quote->getId ());
+            goto __returnQuoteId;
         }
 
         $quote = Mage::getModel ('sales/quote')
@@ -432,6 +434,12 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
                 'fax'        => $customerShippingFax,
             ),
         ), $storeId);
+
+    __returnQuoteId:
+
+        $cashier->setQuoteId ($quote->getId ())
+            ->save ()
+        ;
 
         return intval ($quote->getId ());
     }
