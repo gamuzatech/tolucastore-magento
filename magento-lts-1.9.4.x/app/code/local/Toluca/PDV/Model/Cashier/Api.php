@@ -356,6 +356,18 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         $customerDomain = Mage::getStoreConfig (Mage_Customer_Model_Customer::XML_PATH_DEFAULT_EMAIL_DOMAIN);
         $customerEmail  = sprintf ('%s+%s@%s', $customerPrefix, $customerCode, $customerDomain);
 
+        $quote = Mage::getModel('sales/quote')
+            ->setStoreId ($storeId)
+            ->load ($customerEmail, 'customer_email')
+        ;
+
+        if ($quote && $quote->getId ())
+        {
+            $quote->afterLoad ();
+
+            return intval ($quote->getId ());
+        }
+
         $quote = Mage::getModel ('sales/quote')
             ->setStoreId ($storeId)
             ->setIsActive (true)
@@ -421,7 +433,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             ),
         ), $storeId);
 
-        return intval ($cashier->getId ());
+        return intval ($quote->getId ());
     }
 
     protected function _getCashier ($amount, $operator_id, $password)
