@@ -32,6 +32,11 @@ class Gamuza_Mobile_Model_Cart_Api extends Mage_Checkout_Model_Api_Resource
         'price', 'base_price', 'custom_price', 'discount_percent', 'row_total', 'base_row_total', 'row_total_with_discount', 'row_weight'
     );
 
+    protected $_boolAttributes = array(
+        'is_app', 'is_bot', 'is_zap', 'is_pdv',
+        'is_openpix', 'is_pagcripto', 'is_picpay',
+    );
+
     protected $_orderAttributes = array(
         'increment_id', 'protect_code', 'coupon_code',
         'shipping_method', 'shipping_description',
@@ -42,7 +47,7 @@ class Gamuza_Mobile_Model_Cart_Api extends Mage_Checkout_Model_Api_Resource
         'base_currency_code',
         'customer_firstname', 'customer_lastname', 'customer_taxvat',
         'weight', 'bot_type',
-        'is_app', 'is_bot', 'is_zap',
+        'is_app', 'is_bot', 'is_zap', 'is_pdv',
         'is_openpix', 'is_pagcripto', 'is_picpay',
     );
 
@@ -131,6 +136,14 @@ class Gamuza_Mobile_Model_Cart_Api extends Mage_Checkout_Model_Api_Resource
             'openpix'      => null,
             'pagseguropro' => null,
         );
+
+        foreach ($this->_boolAttributes as $code)
+        {
+            if (array_key_exists ($code, $result ['order']))
+            {
+                $result ['order'][$code] = boolval ($result ['order'][$code]);
+            }
+        }
 
         $payment = $order->getPayment ();
 
