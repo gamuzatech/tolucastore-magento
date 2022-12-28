@@ -35,12 +35,20 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
                 )
             )
             ->joinLeft (
+                array ('quote' => Mage::getSingleton ('core/resource')->getTableName ('sales/quote')),
+                'main_table.entity_id = quote.pdv_cashier_id AND quote.is_pdv = 1 AND quote.pdv_operator_id = operator.entity_id',
+                array (
+                    'quote_id' => 'quote.entity_id'
+                )
+            )
+            ->joinLeft (
                 array ('order' => Mage::getSingleton ('core/resource')->getTableName ('sales/order')),
-                'main_table.entity_id = order.pdv_cashier_id AND order.is_pdv = 1',
+                'main_table.entity_id = order.pdv_cashier_id AND order.is_pdv = 1 AND order.pdv_operator_id = operator.entity_id',
                 array (
                     'order_amount' => 'SUM(order.base_grand_total)'
                 )
             )
+            ->group ('main_table.entity_id')
         ;
 
         foreach ($collection as $cashier)
@@ -123,9 +131,21 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             $result ['operator_name'] = $operator->getName ();
         }
 
+        $collection = Mage::getModel ('sales/quote')->getCollection ()
+            ->addFieldToFilter ('is_pdv', array ('eq' => true))
+            ->addFieldToFilter ('pdv_cashier_id', array ('eq' => $cashier->getId ()))
+            ->addFieldToFilter ('pdv_operator_id', array ('eq' => $cashier->getOperatorId ()))
+        ;
+
+        if ($collection->getSize () > 0)
+        {
+            $result ['quote_id'] = intval ($collection->getFirstItem ()->getId ());
+        }
+
         $collection = Mage::getModel ('sales/order')->getCollection ()
             ->addFieldToFilter ('is_pdv', array ('eq' => true))
             ->addFieldToFilter ('pdv_cashier_id', array ('eq' => $cashier->getId ()))
+            ->addFieldToFilter ('pdv_operator_id', array ('eq' => $cashier->getOperatorId ()))
         ;
 
         $collection->getSelect ()
@@ -367,7 +387,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         {
             $quote->afterLoad ();
 
-            goto __returnQuoteId;
+            return $quote->getId ();
         }
 
         $quote = Mage::getModel ('sales/quote')
@@ -434,12 +454,6 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
                 'fax'        => $customerShippingFax,
             ),
         ), $storeId);
-
-    __returnQuoteId:
-
-        $cashier->setQuoteId ($quote->getId ())
-            ->save ()
-        ;
 
         return intval ($quote->getId ());
     }

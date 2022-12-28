@@ -34,6 +34,16 @@ class Toluca_PDV_Block_Adminhtml_Cashier_Grid extends Mage_Adminhtml_Block_Widge
 	{
 		$collection = Mage::getModel ('pdv/cashier')->getCollection ();
 
+        $collection->getSelect ()
+            ->joinLeft (
+                array ('quote' => Mage::getSingleton ('core/resource')->getTableName ('sales/quote')),
+                'main_table.entity_id = quote.pdv_cashier_id AND quote.is_pdv = 1 AND quote.pdv_operator_id = main_table.operator_id',
+                array (
+                    'quote_id' => 'quote.entity_id'
+                )
+            )
+        ;
+
 		$this->setCollection ($collection);
 
 		return parent::_prepareCollection ();
@@ -66,6 +76,7 @@ class Toluca_PDV_Block_Adminhtml_Cashier_Grid extends Mage_Adminhtml_Block_Widge
 		    'align'  => 'right',
 	        'type'   => 'number',
 		    'index'  => 'quote_id',
+            'filter_index' => 'quote.entity_id',
 		));
 		$this->addColumn ('code', array(
 		    'header'  => Mage::helper ('pdv')->__('Code'),
