@@ -38,7 +38,8 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
                 array ('quote' => Mage::getSingleton ('core/resource')->getTableName ('sales/quote')),
                 'main_table.entity_id = quote.pdv_cashier_id AND quote.is_pdv = 1 AND quote.pdv_operator_id = operator.entity_id',
                 array (
-                    'quote_id' => 'quote.entity_id'
+                    'current_customer_id' => 'quote.customer_id',
+                    'current_quote_id'    => 'quote.entity_id',
                 )
             )
             ->joinLeft (
@@ -55,7 +56,6 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         {
             $result [] = array(
                 'entity_id'  => intval ($cashier->getId ()),
-                'quote_id'   => intval ($cashier->getQuoteId ()),
                 'code'       => $cashier->getCode (),
                 'name'       => $cashier->getName (),
                 'is_active'  => boolval ($cashier->getIsActive ()),
@@ -75,6 +75,8 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
                 'close_amount'     => floatval ($cashier->getCloseAmount ()),
                 'order_amount'     => floatval ($cashier->getOrderAmount ()),
                 'default_customer_id' => intval ($this->_defaultCustomerId),
+                'current_customer_id' => intval ($cashier->getCurrentCustomerId ()),
+                'current_quote_id'    => intval ($cashier->getCurrentQuoteId ()),
             );
         }
 
@@ -101,7 +103,6 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
 
         $result = array(
             'entity_id'  => intval ($cashier->getId ()),
-            'quote_id'   => intval ($cashier->getQuoteId ()),
             'code'       => $cashier->getCode (),
             'name'       => $cashier->getName (),
             'is_active'  => boolval ($cashier->getIsActive ()),
@@ -121,6 +122,8 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             'close_amount'     => floatval ($cashier->getCloseAmount ()),
             'order_amount'     => floatval ($cashier->getOrderAmount ()),
             'default_customer_id' => intval ($this->_defaultCustomerId),
+            'current_customer_id' => 0,
+            'current_quote_id'    => 0,
         );
 
         $operator = Mage::getModel ('pdv/operator')->load ($cashier->getOperatorId ());
@@ -139,7 +142,8 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
 
         if ($collection->getSize () > 0)
         {
-            $result ['quote_id'] = intval ($collection->getFirstItem ()->getId ());
+            $result ['current_customer_id'] = intval ($collection->getFirstItem ()->getCustomerId ());
+            $result ['current_quote_id']    = intval ($collection->getFirstItem ()->getId ());
         }
 
         $collection = Mage::getModel ('sales/order')->getCollection ()
@@ -372,7 +376,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         $storeId = Mage_Core_Model_App::DISTRO_STORE_ID;
 
         $remoteIp = Mage::helper ('core/http')->getRemoteAddr (false);
-
+/*
         $customerPrefix = Mage::getStoreConfig (Toluca_PDV_Helper_Data::XML_PATH_DEFAULT_EMAIL_PREFIX);
         $customerCode   = hash ('crc32', $cashier->getId ()); // use pdv_id instead customer_id
         $customerDomain = Mage::getStoreConfig (Mage_Customer_Model_Customer::XML_PATH_DEFAULT_EMAIL_DOMAIN);
@@ -382,6 +386,14 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             ->setStoreId ($storeId)
             ->load ($customerEmail, 'customer_email')
         ;
+*/
+        $collection = Mage::getModel ('sales/quote')->getCollection ()
+            ->addFieldToFilter ('pdv_cashier_id',  array ('eq' => $cashier_id))
+            ->addFieldToFilter ('pdv_operator_id', array ('eq' => $operator_id))
+            ->addFieldToFilter ('customer_id',     array ('eq' => $customer_id))
+        ;
+
+        $quote = $collection->getFirstItem ();
 
         if ($quote && $quote->getId ())
         {
@@ -411,10 +423,11 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         ;
 
         $customerData = array(
-            'mode'      => Mage_Checkout_Model_Type_Onepage::METHOD_GUEST,
+            'mode'      => Mage_Checkout_Model_Type_Onepage::METHOD_CUSTOMER,
+            'entity_id' => $customer->getId (),
             'firstname' => $customer->getFirstname (),
             'lastname'  => $customer->getLastname (),
-            'email'     => $customerEmail,
+            'email'     => $customer->getEmail(),
             'taxvat'    => $customer->getTaxvat (),
         );
 
