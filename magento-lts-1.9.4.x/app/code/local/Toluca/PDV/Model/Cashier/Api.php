@@ -376,7 +376,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         $storeId = Mage_Core_Model_App::DISTRO_STORE_ID;
 
         $remoteIp = Mage::helper ('core/http')->getRemoteAddr (false);
-/*
+
         $customerPrefix = Mage::getStoreConfig (Toluca_PDV_Helper_Data::XML_PATH_DEFAULT_EMAIL_PREFIX);
         $customerCode   = hash ('crc32', $cashier->getId ()); // use pdv_id instead customer_id
         $customerDomain = Mage::getStoreConfig (Mage_Customer_Model_Customer::XML_PATH_DEFAULT_EMAIL_DOMAIN);
@@ -386,7 +386,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             ->setStoreId ($storeId)
             ->load ($customerEmail, 'customer_email')
         ;
-*/
+/*
         $collection = Mage::getModel ('sales/quote')->getCollection ()
             ->addFieldToFilter ('pdv_cashier_id',  array ('eq' => $cashier_id))
             ->addFieldToFilter ('pdv_operator_id', array ('eq' => $operator_id))
@@ -394,7 +394,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         ;
 
         $quote = $collection->getFirstItem ();
-
+*/
         if ($quote && $quote->getId ())
         {
             $quote->afterLoad ();
@@ -423,11 +423,13 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         ;
 
         $customerData = array(
-            'mode'      => Mage_Checkout_Model_Type_Onepage::METHOD_CUSTOMER,
+            'mode'      => Mage_Checkout_Model_Type_Onepage::METHOD_GUEST,
+            /*
             'entity_id' => $customer->getId (),
+            */
             'firstname' => $customer->getFirstname (),
             'lastname'  => $customer->getLastname (),
-            'email'     => $customer->getEmail(),
+            'email'     => $customerEmail,
             'taxvat'    => $customer->getTaxvat (),
         );
 
