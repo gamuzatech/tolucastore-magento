@@ -21,6 +21,8 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
 
     public function items ()
     {
+        $customerEmail = Mage::helper ('pdv')->getCustomerEmail ('%');
+
         $result = array ();
 
         $collection = Mage::getModel ('pdv/cashier')->getCollection ();
@@ -36,7 +38,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             )
             ->joinLeft (
                 array ('quote' => Mage::getSingleton ('core/resource')->getTableName ('sales/quote')),
-                'main_table.entity_id = quote.pdv_cashier_id AND quote.is_pdv = 1 AND quote.pdv_operator_id = operator.entity_id',
+                "main_table.entity_id = quote.pdv_cashier_id AND quote.is_pdv = 1 AND quote.pdv_operator_id = operator.entity_id AND quote.customer_email LIKE '{$customerEmail}'",
                 array (
                     'current_customer_id' => 'quote.pdv_customer_id',
                     'current_quote_id'    => 'quote.entity_id',
@@ -44,7 +46,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             )
             ->joinLeft (
                 array ('order' => Mage::getSingleton ('core/resource')->getTableName ('sales/order')),
-                'main_table.entity_id = order.pdv_cashier_id AND order.is_pdv = 1 AND order.pdv_operator_id = operator.entity_id',
+                "main_table.entity_id = order.pdv_cashier_id AND order.is_pdv = 1 AND order.pdv_operator_id = operator.entity_id AND order.customer_email LIKE '{$customerEmail}'",
                 array (
                     'order_amount' => 'SUM(order.base_grand_total)'
                 )
@@ -101,6 +103,8 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('cashier_not_exists');
         }
 
+        $customerEmail = Mage::helper ('pdv')->getCustomerEmail ('%');
+
         $result = array(
             'entity_id'  => intval ($cashier->getId ()),
             'code'       => $cashier->getCode (),
@@ -136,6 +140,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
 
         $collection = Mage::getModel ('sales/quote')->getCollection ()
             ->addFieldToFilter ('is_pdv', array ('eq' => true))
+            ->addFieldToFilter ('customer_email', array ('like' => $customerEmail))
             ->addFieldToFilter ('pdv_cashier_id', array ('eq' => $cashier->getId ()))
             ->addFieldToFilter ('pdv_operator_id', array ('eq' => $cashier->getOperatorId ()))
         ;
@@ -148,6 +153,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
 
         $collection = Mage::getModel ('sales/order')->getCollection ()
             ->addFieldToFilter ('is_pdv', array ('eq' => true))
+            ->addFieldToFilter ('customer_email', array ('like' => $customerEmail))
             ->addFieldToFilter ('pdv_cashier_id', array ('eq' => $cashier->getId ()))
             ->addFieldToFilter ('pdv_operator_id', array ('eq' => $cashier->getOperatorId ()))
         ;
@@ -377,10 +383,10 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
 
         $remoteIp = Mage::helper ('core/http')->getRemoteAddr (false);
 
-        $customerPrefix = Mage::getStoreConfig (Toluca_PDV_Helper_Data::XML_PATH_DEFAULT_EMAIL_PREFIX);
-        $customerCode   = hash ('crc32', $cashier->getId ()); // use pdv_id instead customer_id
-        $customerDomain = Mage::getStoreConfig (Mage_Customer_Model_Customer::XML_PATH_DEFAULT_EMAIL_DOMAIN);
-        $customerEmail  = sprintf ('%s+%s@%s', $customerPrefix, $customerCode, $customerDomain);
+        /**
+         * NOTE: cashier_id instead customer_id
+         */
+        $customerEmail = Mage::helper ('pdv')->getCustomerEmail ($cashier->getId ());
 
         $quote = Mage::getModel('sales/quote')
             ->setStoreId ($storeId)

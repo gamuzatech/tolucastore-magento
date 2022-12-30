@@ -53,6 +53,16 @@ class Toluca_PDV_Helper_Data extends Mage_Core_Helper_Abstract
         return $object;
     }
 
+    public function getCustomerEmail ($customerId)
+    {
+        $customerPrefix = Mage::getStoreConfig (Toluca_PDV_Helper_Data::XML_PATH_DEFAULT_EMAIL_PREFIX);
+        $customerDomain = Mage::getStoreConfig (Mage_Customer_Model_Customer::XML_PATH_DEFAULT_EMAIL_DOMAIN);
+
+        $customerCode = intval ($customerId) > 0 ? hash ('crc32', $customerId) : $customerId;
+
+        return sprintf ('%s+%s@%s', $customerPrefix, $customerCode, $customerDomain);
+    }
+
     public function isPDV ()
     {
         return strpos ($_SERVER ['HTTP_USER_AGENT'], 'TolucaStorePDV') !== false;

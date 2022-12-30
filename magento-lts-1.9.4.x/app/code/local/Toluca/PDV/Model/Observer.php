@@ -15,7 +15,7 @@ class Toluca_PDV_Model_Observer
 
         $isPdv = Mage::helper ('pdv')->isPDV ();
 
-        if (!strcmp ($controllerModule, 'Gamuza_JsonApi') && $isPdv)
+        if (!strcmp ($controllerModule, 'Toluca_PDV') || $isPdv)
         {
             Mage::app ()->getStore ()->setConfig (
                 Toluca_PDV_Helper_Data::XML_PATH_DEFAULT_EMAIL_PREFIX, 'pdv'
