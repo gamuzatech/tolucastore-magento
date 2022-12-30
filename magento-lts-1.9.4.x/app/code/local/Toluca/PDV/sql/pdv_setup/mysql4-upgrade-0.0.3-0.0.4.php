@@ -39,6 +39,14 @@ SQLBLOCK;
             'comment'  => 'Operator ID',
         ));
     $installer->getConnection ()
+        ->addColumn ($table, 'customer_id', array(
+            'type'     => Varien_Db_Ddl_Table::TYPE_INTEGER,
+            'length'   => 11,
+            'unsigned' => true,
+            'nullable' => false,
+            'comment'  => 'Customer ID',
+        ));
+    $installer->getConnection ()
         ->addColumn ($table, 'type_id', array(
             'type'     => Varien_Db_Ddl_Table::TYPE_TEXT,
             'length'   => 255,

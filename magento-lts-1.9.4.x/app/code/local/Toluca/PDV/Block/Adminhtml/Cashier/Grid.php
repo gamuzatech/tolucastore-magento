@@ -39,7 +39,7 @@ class Toluca_PDV_Block_Adminhtml_Cashier_Grid extends Mage_Adminhtml_Block_Widge
                 array ('quote' => Mage::getSingleton ('core/resource')->getTableName ('sales/quote')),
                 'main_table.entity_id = quote.pdv_cashier_id AND quote.is_pdv = 1 AND quote.pdv_operator_id = main_table.operator_id',
                 array (
-                    'customer_id' => 'GROUP_CONCAT(quote.customer_id)',
+                    'customer_id' => 'GROUP_CONCAT(quote.pdv_customer_id)',
                     'quote_id'    => 'GROUP_CONCAT(quote.entity_id)',
                 )
             )

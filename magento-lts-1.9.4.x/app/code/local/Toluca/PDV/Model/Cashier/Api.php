@@ -38,7 +38,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
                 array ('quote' => Mage::getSingleton ('core/resource')->getTableName ('sales/quote')),
                 'main_table.entity_id = quote.pdv_cashier_id AND quote.is_pdv = 1 AND quote.pdv_operator_id = operator.entity_id',
                 array (
-                    'current_customer_id' => 'quote.customer_id',
+                    'current_customer_id' => 'quote.pdv_customer_id',
                     'current_quote_id'    => 'quote.entity_id',
                 )
             )
@@ -142,7 +142,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
 
         if ($collection->getSize () > 0)
         {
-            $result ['current_customer_id'] = intval ($collection->getFirstItem ()->getCustomerId ());
+            $result ['current_customer_id'] = intval ($collection->getFirstItem ()->getPdvCustomerId ());
             $result ['current_quote_id']    = intval ($collection->getFirstItem ()->getId ());
         }
 
@@ -417,6 +417,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         $quote->setData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_IS_PDV, true)
             ->setData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_CASHIER_ID, $cashier_id)
             ->setData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_OPERATOR_ID, $operator_id)
+            ->setData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_CUSTOMER_ID, $customer_id)
             ->setCustomerGroupId (0)
             ->setCustomerIsGuest (1)
             ->save ()

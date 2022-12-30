@@ -68,6 +68,12 @@ class Toluca_PDV_Block_Adminhtml_History_Grid extends Mage_Adminhtml_Block_Widge
             'type'    => 'options',
             'options' => Toluca_PDV_Block_Adminhtml_Cashier_Grid::getOperators (),
 		));
+		$this->addColumn ('customer_id', array(
+		    'header'  => Mage::helper ('pdv')->__('Customer'),
+		    'index'   => 'customer_id',
+            'type'    => 'options',
+            'options' => self::getCustomers (),
+		));
 		$this->addColumn ('type_id', array(
 		    'header'  => Mage::helper ('pdv')->__('Type'),
 		    'index'   => 'type_id',
@@ -133,5 +139,21 @@ class Toluca_PDV_Block_Adminhtml_History_Grid extends Mage_Adminhtml_Block_Widge
 	{
         // nothing here
 	}
+
+    public static function getCustomers ()
+    {
+        $result = array ();
+
+        $collection = Mage::getModel ('customer/customer')->getCollection ()
+            ->addNameToSelect()
+        ;
+
+        foreach ($collection as $customer)
+        {
+            $result [$customer->getId ()] = sprintf ('%s - %s', $customer->getId (), $customer->getName ());
+        }
+
+        return $result;
+    }
 }
 
