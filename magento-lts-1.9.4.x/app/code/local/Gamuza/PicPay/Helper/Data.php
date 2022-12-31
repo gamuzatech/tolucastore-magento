@@ -5,8 +5,6 @@
  * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
  */
 
-ini_set ('serialize_precision', 4);
-
 class Gamuza_PicPay_Helper_Data extends Mage_Core_Helper_Abstract
 {
     const API_PAYMENTS_URL               = 'https://appws.picpay.com/ecommerce/public/payments';

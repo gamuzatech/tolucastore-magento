@@ -5,8 +5,6 @@
  * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
  */
 
-ini_set ('serialize_precision', 4);
-
 class Gamuza_PagCripto_Helper_Data extends Mage_Core_Helper_Abstract
 {
     const PAYMENT_IMAGE_PREFIX = 'images/gamuza/pagcripto/';
