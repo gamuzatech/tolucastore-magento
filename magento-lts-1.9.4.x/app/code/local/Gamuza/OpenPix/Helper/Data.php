@@ -5,8 +5,6 @@
  * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
  */
 
-ini_set ('serialize_precision', 4);
-
 class Gamuza_OpenPix_Helper_Data extends Mage_Core_Helper_Abstract
 {
     const API_PAYMENT_CHARGE_URL = 'https://api.openpix.com.br/api/openpix/v1/charge';
