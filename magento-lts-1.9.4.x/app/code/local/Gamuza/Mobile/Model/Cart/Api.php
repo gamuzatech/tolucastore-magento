@@ -189,6 +189,7 @@ class Gamuza_Mobile_Model_Cart_Api extends Mage_Checkout_Model_Api_Resource
                 $result ['openpix'] = array (
                     'status' => $transaction->getStatus (),
                     'url'    => $transaction->getPaymentLinkUrl (),
+                    'qrcode_image_url' => $transaction->getQrcodeImageUrl (),
                 );
             }
         }
