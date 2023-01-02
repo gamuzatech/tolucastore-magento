@@ -173,6 +173,8 @@ class Gamuza_Mobile_Model_Cart_Api extends Mage_Checkout_Model_Api_Resource
                 $result ['picpay'] = array (
                     'status' => $transaction->getStatus (),
                     'url'    => $transaction->getPaymentUrl (),
+                    'qrcode_content' => $transaction->getQrcodeContent (),
+                    'qrcode_base64'  => $transaction->getQrcodeBase64 (),
                 );
             }
         }
