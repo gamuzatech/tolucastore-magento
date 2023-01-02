@@ -88,6 +88,8 @@ class Gamuza_PicPay_Model_Payment_Method_Payment extends Mage_Payment_Model_Meth
                 /* Result */
                 ->setExpiresAt ($result->expiresAt)
                 ->setPaymentUrl ($result->paymentUrl)
+                ->setQrcodeContent ($result->qrcode->content)
+                ->setQrcodeBase64 ($result->qrcode->base64)
                 ->setStatus (Gamuza_PicPay_Helper_Data::API_PAYMENT_STATUS_CREATED)
                 ->setAuthorizationId (new Zend_Db_Expr ('NULL'))
                 ->setCancellationId (new Zend_Db_Expr ('NULL'))
