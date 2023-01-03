@@ -55,11 +55,11 @@ class Gamuza_Mobile_Model_Cart_Product_Api extends Gamuza_Mobile_Model_Api_Resou
 
         foreach ($productsData as $productItem)
         {
-            if (isset($productItem['product_id']))
+            if (isset($productItem['product_id']) && intval($productItem['product_id']) > 0)
             {
                 $productByItem = $this->_getProduct($productItem['product_id'], self::DISTRO_STORE_ID, "id");
             }
-            else if (isset($productItem['sku']))
+            else if (isset($productItem['sku']) && strlen($productItem['sku']) > 0)
             {
                 $productByItem = $this->_getProduct($productItem['sku'], self::DISTRO_STORE_ID, "sku");
             }
@@ -183,11 +183,11 @@ class Gamuza_Mobile_Model_Cart_Product_Api extends Gamuza_Mobile_Model_Api_Resou
 
         foreach ($productsData as $productItem)
         {
-            if (isset($productItem['product_id']))
+            if (isset($productItem['product_id']) && intval($productItem['product_id']) > 0)
             {
                 $productByItem = $this->_getProduct($productItem['product_id'], self::DISTRO_STORE_ID, "id");
             }
-            else if (isset($productItem['sku']))
+            else if (isset($productItem['sku']) && strlen($productItem['sku']) > 0)
             {
                 $productByItem = $this->_getProduct($productItem['sku'], self::DISTRO_STORE_ID, "sku");
             }
@@ -288,11 +288,11 @@ class Gamuza_Mobile_Model_Cart_Product_Api extends Gamuza_Mobile_Model_Api_Resou
 
         foreach ($productsData as $productItem)
         {
-            if (isset($productItem['product_id']))
+            if (isset($productItem['product_id']) && intval($productItem['product_id']) > 0)
             {
                 $productByItem = $this->_getProduct($productItem['product_id'], self::DISTRO_STORE_ID, "id");
             }
-            else if (isset($productItem['sku']))
+            else if (isset($productItem['sku']) && strlen($productItem['sku']) > 0)
             {
                 $productByItem = $this->_getProduct($productItem['sku'], self::DISTRO_STORE_ID, "sku");
             }
