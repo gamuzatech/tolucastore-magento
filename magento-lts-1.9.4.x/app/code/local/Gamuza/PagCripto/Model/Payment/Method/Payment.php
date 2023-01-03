@@ -71,6 +71,13 @@ class Gamuza_PagCripto_Model_Payment_Method_Payment extends Mage_Payment_Model_M
         {
             $result = Mage::helper ('pagcripto')->api (Gamuza_PagCripto_Helper_Data::API_PAYMENT_CREATE_URL, $post, null, $order->getStoreId ());
 
+            if (empty ($result) || !is_array ($result)
+                || !array_key_exists ('payment-details', $result)
+                || !array_key_exists ('customer-details', $result))
+            {
+                throw new Exception (Mage::helper ('pagcripto')->__('Receveid an empty PagCripto transaction.'));
+            }
+
             $paymentDetailsAddress = $result ['payment-details']['address'];
             $paymentDetailsAmount = $result ['payment-details']['amount'];
             $paymentDetailsPaymentRequest = $result ['payment-details']['payment_request'];

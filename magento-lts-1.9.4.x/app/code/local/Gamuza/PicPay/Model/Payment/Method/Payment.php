@@ -68,6 +68,11 @@ class Gamuza_PicPay_Model_Payment_Method_Payment extends Mage_Payment_Model_Meth
         {
             $result = Mage::helper ('picpay')->api (Gamuza_PicPay_Helper_Data::API_PAYMENTS_URL, $post, null, $order->getStoreId ());
 
+            if (empty ($result) || !is_object ($result))
+            {
+                throw new Exception (Mage::helper ('picpay')->__('Receveid an empty PICPAY transaction.'));
+            }
+
             $payment->setData (Gamuza_PicPay_Helper_Data::PAYMENT_ATTRIBUTE_PICPAY_URL, $result->paymentUrl)
                 ->setData (Gamuza_PicPay_Helper_Data::PAYMENT_ATTRIBUTE_PICPAY_STATUS, Gamuza_PicPay_Helper_Data::API_PAYMENT_STATUS_CREATED)
                 ->save ()
