@@ -78,6 +78,11 @@ class Gamuza_OpenPix_Model_Payment_Method_Payment extends Mage_Payment_Model_Met
         {
             $result = Mage::helper ('openpix')->api (Gamuza_OpenPix_Helper_Data::API_PAYMENT_CHARGE_URL, $post, null, $order->getStoreId ());
 
+            if (empty ($result) || !is_object ($result))
+            {
+                throw new Exception (Mage::helper ('openpix')->__('Receveid an empty OPENPIX transaction.'));
+            }
+
             $payment->setData (Gamuza_OpenPix_Helper_Data::PAYMENT_ATTRIBUTE_OPENPIX_URL, $result->charge->paymentLinkUrl)
                 ->setData (Gamuza_OpenPix_Helper_Data::PAYMENT_ATTRIBUTE_OPENPIX_STATUS, Gamuza_OpenPix_Helper_Data::API_PAYMENT_STATUS_ACTIVE)
                 ->setData (Gamuza_OpenPix_Helper_Data::PAYMENT_ATTRIBUTE_OPENPIX_TRANSACTION_ID, $result->charge->transactionID)
