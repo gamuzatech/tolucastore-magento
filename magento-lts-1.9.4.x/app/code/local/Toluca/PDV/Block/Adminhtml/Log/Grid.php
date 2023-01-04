@@ -5,7 +5,7 @@
  * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
  */
 
-class Toluca_PDV_Block_Adminhtml_History_Grid extends Mage_Adminhtml_Block_Widget_Grid
+class Toluca_PDV_Block_Adminhtml_Log_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
     protected $_countTotals = true;
 
@@ -19,7 +19,7 @@ class Toluca_PDV_Block_Adminhtml_History_Grid extends Mage_Adminhtml_Block_Widge
 	{
 		parent::__construct ();
 
-		$this->setId ('pdvHistoryGrid');
+		$this->setId ('pdvLogGrid');
 		$this->setDefaultSort ('entity_id');
 		$this->setDefaultDir ('DESC');
 		$this->setSaveParametersInSession (true);
@@ -27,7 +27,7 @@ class Toluca_PDV_Block_Adminhtml_History_Grid extends Mage_Adminhtml_Block_Widge
 
 	protected function _prepareCollection ()
 	{
-		$collection = Mage::getModel ('pdv/history')->getCollection ();
+		$collection = Mage::getModel ('pdv/log')->getCollection ();
 
 		$this->setCollection ($collection);
 
@@ -78,7 +78,7 @@ class Toluca_PDV_Block_Adminhtml_History_Grid extends Mage_Adminhtml_Block_Widge
 		    'header'  => Mage::helper ('pdv')->__('Type'),
 		    'index'   => 'type_id',
             'type'    => 'options',
-            'options' => Mage::getModel ('pdv/adminhtml_system_config_source_history_type')->toArray (),
+            'options' => Mage::getModel ('pdv/adminhtml_system_config_source_log_type')->toArray (),
 		));
 		$this->addColumn ('amount', array(
 		    'header'  => Mage::helper ('pdv')->__('Amount'),

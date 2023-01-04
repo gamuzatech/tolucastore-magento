@@ -8,7 +8,7 @@
 $installer = $this;
 $installer->startSetup ();
 
-function addPDVHistoryTable ($installer, $model, $comment)
+function addPDVLogTable ($installer, $model, $comment)
 {
     $table = $installer->getTable ($model);
 
@@ -104,7 +104,7 @@ SQLBLOCK;
         ));
 }
 
-addPDVHistoryTable ($installer, Toluca_PDV_Helper_Data::HISTORY_TABLE, 'Toluca PDV History');
+addPDVLogTable ($installer, Toluca_PDV_Helper_Data::LOG_TABLE, 'Toluca PDV Log');
 
 $installer->endSetup ();
 

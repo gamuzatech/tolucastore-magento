@@ -5,11 +5,11 @@
  * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
  */
 
-class Toluca_PDV_Model_Mysql4_History extends Mage_Core_Model_Mysql4_Abstract
+class Toluca_PDV_Model_Log extends Mage_Core_Model_Abstract
 {
     protected function _construct ()
     {
-        $this->_init ('pdv/history', 'entity_id');
+        $this->_init ('pdv/log');
     }
 }
 

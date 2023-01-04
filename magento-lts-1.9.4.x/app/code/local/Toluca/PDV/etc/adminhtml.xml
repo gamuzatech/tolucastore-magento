@@ -32,11 +32,11 @@
                             <sort_order>30</sort_order>
                             <action>admin_pdv/adminhtml_total</action>
                         </total>
-                        <history translate="title" module="pdv">
-                            <title>Manage History</title>
+                        <log translate="title" module="pdv">
+                            <title>Manage Logs</title>
                             <sort_order>40</sort_order>
-                            <action>admin_pdv/adminhtml_history</action>
-                        </history>
+                            <action>admin_pdv/adminhtml_log</action>
+                        </log>
                     </children>
                 </pdv>
             </children>
@@ -69,10 +69,10 @@
                                         <title>Manage Totals</title>
                                         <sort_order>30</sort_order>
                                     </total>
-                                    <history translate="title" module="pdv">
-                                        <title>Manage History</title>
+                                    <log translate="title" module="pdv">
+                                        <title>Manage Logs</title>
                                         <sort_order>40</sort_order>
-                                    </history>
+                                    </log>
                                 </children>
                             </pdv>
                         </children>

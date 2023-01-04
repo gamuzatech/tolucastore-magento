@@ -5,14 +5,14 @@
  * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
  */
 
-class Toluca_PDV_Block_Adminhtml_History extends Mage_Adminhtml_Block_Widget_Grid_Container
+class Toluca_PDV_Block_Adminhtml_Log extends Mage_Adminhtml_Block_Widget_Grid_Container
 {
 	public function __construct ()
 	{
 	    $this->_blockGroup = 'pdv';
-	    $this->_controller = 'adminhtml_history';
+	    $this->_controller = 'adminhtml_log';
 
-	    $this->_headerText = Mage::helper ('pdv')->__('History Manager');
+	    $this->_headerText = Mage::helper ('pdv')->__('Logs Manager');
 
 	    parent::__construct();
 

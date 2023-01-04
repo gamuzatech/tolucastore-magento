@@ -23,10 +23,10 @@
             <block type="pdv/adminhtml_total" name="total" />
         </reference>
     </admin_pdv_adminhtml_total_index>
-    <admin_pdv_adminhtml_history_index>
+    <admin_pdv_adminhtml_log_index>
         <reference name="content">
-            <block type="pdv/adminhtml_history" name="history" />
+            <block type="pdv/adminhtml_log" name="log" />
         </reference>
-    </admin_pdv_adminhtml_history_index>
+    </admin_pdv_adminhtml_log_index>
 </layout>
 
