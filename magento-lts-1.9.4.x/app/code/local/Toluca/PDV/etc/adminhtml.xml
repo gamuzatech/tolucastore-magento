@@ -27,9 +27,14 @@
                             <sort_order>10</sort_order>
                             <action>admin_pdv/adminhtml_operator</action>
                         </operator>
+                        <total translate="title" module="pdv">
+                            <title>Manage Totals</title>
+                            <sort_order>30</sort_order>
+                            <action>admin_pdv/adminhtml_total</action>
+                        </total>
                         <history translate="title" module="pdv">
                             <title>Manage History</title>
-                            <sort_order>20</sort_order>
+                            <sort_order>40</sort_order>
                             <action>admin_pdv/adminhtml_history</action>
                         </history>
                     </children>
@@ -60,9 +65,13 @@
                                         <title>Manage Operators</title>
                                         <sort_order>10</sort_order>
                                     </operator>
+                                    <total translate="title" module="pdv">
+                                        <title>Manage Totals</title>
+                                        <sort_order>30</sort_order>
+                                    </total>
                                     <history translate="title" module="pdv">
                                         <title>Manage History</title>
-                                        <sort_order>20</sort_order>
+                                        <sort_order>40</sort_order>
                                     </history>
                                 </children>
                             </pdv>

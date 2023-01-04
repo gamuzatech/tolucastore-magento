@@ -1,14 +1,14 @@
 <?php
 /**
  * @package     Toluca_PDV
- * @copyright   Copyright (c) 2022 Gamuza Technologies (http://www.gamuza.com.br/)
+ * @copyright   Copyright (c) 2023 Gamuza Technologies (http://www.gamuza.com.br/)
  * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
  */
 
 $installer = $this;
 $installer->startSetup ();
 
-function addPDVCashierTable ($installer, $model, $comment)
+function addPDVTotalTable ($installer, $model, $comment)
 {
     $table = $installer->getTable ($model);
 
@@ -23,6 +23,14 @@ SQLBLOCK;
     $installer->run ($sqlBlock);
 
     $installer->getConnection ()
+        ->addColumn ($table, 'cashier_id', array(
+            'type'     => Varien_Db_Ddl_Table::TYPE_INTEGER,
+            'length'   => 11,
+            'unsigned' => true,
+            'nullable' => false,
+            'comment'  => 'Cashier ID',
+        ));
+    $installer->getConnection ()
         ->addColumn ($table, 'operator_id', array(
             'type'     => Varien_Db_Ddl_Table::TYPE_INTEGER,
             'length'   => 11,
@@ -30,43 +38,7 @@ SQLBLOCK;
             'nullable' => false,
             'comment'  => 'Operator ID',
         ));
-    $installer->getConnection ()
-        ->addColumn ($table, 'total_id', array(
-            'type'     => Varien_Db_Ddl_Table::TYPE_INTEGER,
-            'length'   => 11,
-            'unsigned' => true,
-            'nullable' => false,
-            'comment'  => 'Total ID',
-        ));
-    $installer->getConnection ()
-        ->addColumn ($table, 'code', array(
-            'type'     => Varien_Db_Ddl_Table::TYPE_TEXT,
-            'length'   => 255,
-            'nullable' => false,
-            'comment'  => 'Code',
-        ));
-    $installer->getConnection ()
-        ->addColumn ($table, 'name', array(
-            'type'     => Varien_Db_Ddl_Table::TYPE_TEXT,
-            'length'   => 255,
-            'nullable' => false,
-            'comment'  => 'Name',
-        ));
-    $installer->getConnection ()
-        ->addColumn ($table, 'is_active', array(
-            'type'     => Varien_Db_Ddl_Table::TYPE_BOOLEAN,
-            'unsigned' => true,
-            'nullable' => false,
-            'comment'  => 'Is Active',
-        ));
-    $installer->getConnection ()
-        ->addColumn ($table, 'status', array(
-            'type'     => Varien_Db_Ddl_Table::TYPE_INTEGER,
-            'length'   => 11,
-            'unsigned' => true,
-            'nullable' => false,
-            'comment'  => 'Status',
-        ));
+
     $installer->getConnection ()
         ->addColumn ($table, 'open_amount', array(
             'type'     => Varien_Db_Ddl_Table::TYPE_DECIMAL,
@@ -92,6 +64,23 @@ SQLBLOCK;
             'comment'  => 'Bleed Amount',
         ));
     $installer->getConnection ()
+        ->addColumn ($table, 'close_amount', array(
+            'type'     => Varien_Db_Ddl_Table::TYPE_DECIMAL,
+            'length'   => '12,4',
+            'unsigned' => true,
+            'nullable' => false,
+            'comment'  => 'Close Amount',
+        ));
+
+    $installer->getConnection ()
+        ->addColumn ($table, 'banktransfer_amount', array(
+            'type'     => Varien_Db_Ddl_Table::TYPE_DECIMAL,
+            'length'   => '12,4',
+            'unsigned' => true,
+            'nullable' => false,
+            'comment'  => 'Bank Transfer Amount',
+        ));
+    $installer->getConnection ()
         ->addColumn ($table, 'money_amount', array(
             'type'     => Varien_Db_Ddl_Table::TYPE_DECIMAL,
             'length'   => '12,4',
@@ -108,17 +97,60 @@ SQLBLOCK;
             'comment'  => 'Change Amount',
         ));
     $installer->getConnection ()
-        ->addColumn ($table, 'close_amount', array(
+        ->addColumn ($table, 'machine_amount', array(
             'type'     => Varien_Db_Ddl_Table::TYPE_DECIMAL,
             'length'   => '12,4',
             'unsigned' => true,
             'nullable' => false,
-            'comment'  => 'Close Amount',
+            'comment'  => 'Machine Amount',
         ));
+
+    $installer->getConnection ()
+        ->addColumn ($table, 'pagcripto_amount', array(
+            'type'     => Varien_Db_Ddl_Table::TYPE_DECIMAL,
+            'length'   => '12,4',
+            'unsigned' => true,
+            'nullable' => false,
+            'comment'  => 'PagCripto Amount',
+        ));
+    $installer->getConnection ()
+        ->addColumn ($table, 'picpay_amount', array(
+            'type'     => Varien_Db_Ddl_Table::TYPE_DECIMAL,
+            'length'   => '12,4',
+            'unsigned' => true,
+            'nullable' => false,
+            'comment'  => 'PicPay Amount',
+        ));
+    $installer->getConnection ()
+        ->addColumn ($table, 'openpix_amount', array(
+            'type'     => Varien_Db_Ddl_Table::TYPE_DECIMAL,
+            'length'   => '12,4',
+            'unsigned' => true,
+            'nullable' => false,
+            'comment'  => 'OpenPIX Amount',
+        ));
+
+    $installer->getConnection ()
+        ->addColumn ($table, 'creditcard_amount', array(
+            'type'     => Varien_Db_Ddl_Table::TYPE_DECIMAL,
+            'length'   => '12,4',
+            'unsigned' => true,
+            'nullable' => false,
+            'comment'  => 'Credit Card Amount',
+        ));
+    $installer->getConnection ()
+        ->addColumn ($table, 'billet_amount', array(
+            'type'     => Varien_Db_Ddl_Table::TYPE_DECIMAL,
+            'length'   => '12,4',
+            'unsigned' => true,
+            'nullable' => false,
+            'comment'  => 'Billet Amount',
+        ));
+
     $installer->getConnection ()
         ->addColumn ($table, 'opened_at', array(
             'type'     => Varien_Db_Ddl_Table::TYPE_DATETIME,
-            'nullable' => true,
+            'nullable' => false,
             'comment'  => 'Opened At',
         ));
     $installer->getConnection ()
@@ -141,7 +173,7 @@ SQLBLOCK;
         ));
 }
 
-addPDVCashierTable ($installer, Toluca_PDV_Helper_Data::CASHIER_TABLE, 'Toluca PDV Cashier');
+addPDVTotalTable ($installer, Toluca_PDV_Helper_Data::TOTAL_TABLE, 'Toluca PDV Total');
 
 $installer->endSetup ();
 
