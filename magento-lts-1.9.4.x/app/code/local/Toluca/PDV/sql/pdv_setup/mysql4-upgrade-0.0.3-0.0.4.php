@@ -39,20 +39,20 @@ SQLBLOCK;
             'comment'  => 'Operator ID',
         ));
     $installer->getConnection ()
-        ->addColumn ($table, 'customer_id', array(
-            'type'     => Varien_Db_Ddl_Table::TYPE_INTEGER,
-            'length'   => 11,
-            'unsigned' => true,
-            'nullable' => false,
-            'comment'  => 'Customer ID',
-        ));
-    $installer->getConnection ()
         ->addColumn ($table, 'type_id', array(
             'type'     => Varien_Db_Ddl_Table::TYPE_TEXT,
             'length'   => 255,
             'unsigned' => true,
             'nullable' => false,
             'comment'  => 'Type ID',
+        ));
+    $installer->getConnection ()
+        ->addColumn ($table, 'customer_id', array(
+            'type'     => Varien_Db_Ddl_Table::TYPE_INTEGER,
+            'length'   => 11,
+            'unsigned' => true,
+            'nullable' => false,
+            'comment'  => 'Customer ID',
         ));
     $installer->getConnection ()
         ->addColumn ($table, 'order_id', array(
@@ -70,6 +70,14 @@ SQLBLOCK;
             'comment'  => 'Order Increment ID',
         ));
     $installer->getConnection ()
+        ->addColumn ($table, 'shipping_method', array(
+            'type'     => Varien_Db_Ddl_Table::TYPE_TEXT,
+            'length'   => 255,
+            'unsigned' => true,
+            'nullable' => false,
+            'comment'  => 'Shipping Method',
+        ));
+    $installer->getConnection ()
         ->addColumn ($table, 'payment_method', array(
             'type'     => Varien_Db_Ddl_Table::TYPE_TEXT,
             'length'   => 255,
@@ -78,11 +86,11 @@ SQLBLOCK;
             'comment'  => 'Payment Method',
         ));
     $installer->getConnection ()
-        ->addColumn ($table, 'amount', array(
+        ->addColumn ($table, 'total_amount', array(
             'type'     => Varien_Db_Ddl_Table::TYPE_DECIMAL,
             'length'   => '12,4',
             'nullable' => false,
-            'comment'  => 'Amount',
+            'comment'  => 'Total Amount',
         ));
     $installer->getConnection ()
         ->addColumn ($table, 'message', array(

@@ -68,32 +68,38 @@ class Toluca_PDV_Block_Adminhtml_Log_Grid extends Mage_Adminhtml_Block_Widget_Gr
             'type'    => 'options',
             'options' => Toluca_PDV_Block_Adminhtml_Cashier_Grid::getOperators (),
 		));
-		$this->addColumn ('customer_id', array(
-		    'header'  => Mage::helper ('pdv')->__('Customer'),
-		    'index'   => 'customer_id',
-            'type'    => 'options',
-            'options' => self::getCustomers (),
-		));
 		$this->addColumn ('type_id', array(
 		    'header'  => Mage::helper ('pdv')->__('Type'),
 		    'index'   => 'type_id',
             'type'    => 'options',
             'options' => Mage::getModel ('pdv/adminhtml_system_config_source_log_type')->toArray (),
 		));
-		$this->addColumn ('amount', array(
-		    'header'  => Mage::helper ('pdv')->__('Amount'),
+		$this->addColumn ('total_amount', array(
+		    'header'  => Mage::helper ('pdv')->__('Total Amount'),
 		    'align'   => 'right',
 	        'type'    => 'price',
-		    'index'   => 'amount',
+		    'index'   => 'total_amount',
             'currency_code' => $store->getBaseCurrency()->getCode(),
 		));
 		$this->addColumn ('message', array(
 		    'header'  => Mage::helper ('pdv')->__('Message'),
 		    'index'   => 'message',
 		));
+		$this->addColumn ('customer_id', array(
+		    'header'  => Mage::helper ('pdv')->__('Customer'),
+		    'index'   => 'customer_id',
+            'type'    => 'options',
+            'options' => self::getCustomers (),
+		));
 		$this->addColumn ('order_increment_id', array(
 		    'header'  => Mage::helper ('pdv')->__('Order Inc. ID'),
 		    'index'   => 'order_increment_id',
+		));
+		$this->addColumn ('shipping_method', array(
+		    'header'  => Mage::helper ('pdv')->__('Shipping Method'),
+		    'index'   => 'shipping_method',
+            'type'    => 'options',
+            'options' => Mage::getModel ('pdv/adminhtml_system_config_source_shipping_allmethods')->toArray (),
 		));
 		$this->addColumn ('payment_method', array(
 		    'header'  => Mage::helper ('pdv')->__('Payment Method'),
@@ -111,26 +117,6 @@ class Toluca_PDV_Block_Adminhtml_Log_Grid extends Mage_Adminhtml_Block_Widget_Gr
 			'index'  => 'updated_at',
             'type'   => 'datetime',
 		));
-
-        $this->addColumn ('action', array(
-            'header'   => Mage::helper ('pdv')->__('Action'),
-            'width'    => '50px',
-            'type'     => 'action',
-            'getter'   => 'getOrderId',
-            'index'    => 'stores',
-            'filter'   => false,
-            'sortable' => false,
-            'actions'  => array(
-                array(
-                    'caption' => Mage::helper ('pdv')->__('Order'),
-                    'field'   => 'order_id',
-                    'url'     => array(
-                        'base'   => 'adminhtml/sales_order/view',
-                        'params' => array ('store' => $this->getRequest ()->getParam ('store'))
-                    ),
-                )
-            ),
-        ));
 
 		return parent::_prepareColumns ();
 	}
