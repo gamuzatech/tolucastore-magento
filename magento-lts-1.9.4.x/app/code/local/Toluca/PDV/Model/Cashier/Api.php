@@ -242,6 +242,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         $reinforceAmount = floatval ($history->getReinforceAmount ());
 
         $history->setReinforceAmount ($reinforceAmount + $amount)
+            ->setUpdatedAt (date ('c'))
             ->save ()
         ;
 
@@ -288,6 +289,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         }
 
         $history->setBleedAmount ($bleedAmount + $amount)
+            ->setUpdatedAt (date ('c'))
             ->save ()
         ;
 
@@ -314,11 +316,13 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('cashier_already_closed');
         }
 
-        $openAmount      = floatval ($cashier->getOpenAmount ());
-        $reinforceAmount = floatval ($cashier->getReinforceAmount ());
-        $bleedAmount     = floatval ($cashier->getBleedAmount ());
-        $moneyAmount     = floatval ($cashier->getMoneyAmount ());
-        $changeAmount    = floatval ($cashier->getChangeAmount ());
+        $history = Mage::getModel ('pdv/history')->load ($cashier->getHistoryId ());
+
+        $openAmount      = floatval ($history->getOpenAmount ());
+        $reinforceAmount = floatval ($history->getReinforceAmount ());
+        $bleedAmount     = floatval ($history->getBleedAmount ());
+        $moneyAmount     = floatval ($history->getMoneyAmount ());
+        $changeAmount    = floatval ($history->getChangeAmount ());
 
         $closeAmount = ((($openAmount + $reinforceAmount) - $bleedAmount) + $moneyAmount) - $changeAmount;
         $differenceAmount = $amount - $closeAmount;
@@ -332,17 +336,22 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('cashier_invalid_amount', $message);
         }
 
-        $cashier->setStatus (Toluca_PDV_Helper_Data::CASHIER_STATUS_CLOSED)
-            ->setCloseAmount ($amount)
+        $history->setCloseAmount ($amount)
             ->setClosedAt (date ('c'))
+            ->setUpdatedAt (date ('c'))
             ->save ()
         ;
 
-        $history = Mage::getModel ('pdv/history')
-            ->setTypeId (Toluca_PDV_Helper_Data::HISTORY_TYPE_CLOSE)
+        $cashier->setStatus (Toluca_PDV_Helper_Data::CASHIER_STATUS_CLOSED)
+            ->save ()
+        ;
+
+        $log = Mage::getModel ('pdv/log')
+            ->setTypeId (Toluca_PDV_Helper_Data::LOG_TYPE_CLOSE)
             ->setCashierId ($cashier->getId ())
             ->setOperatorId ($operator_id)
-            ->setAmount (- $amount)
+            ->setHistoryId ($history->getId ())
+            ->setTotalAmount (- $amount)
             ->setMessage ($message)
             ->setCreatedAt (date ('c'))
             ->save ()
