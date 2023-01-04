@@ -268,11 +268,13 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('cashier_already_closed');
         }
 
-        $openAmount = floatval ($cashier->getOpenAmount ());
-        $reinforceAmount = floatval ($cashier->getReinforceAmount ());
-        $bleedAmount  = floatval ($cashier->getBleedAmount ());
-        $moneyAmount  = floatval ($cashier->getMoneyAmount ());
-        $changeAmount = floatval ($cashier->getChangeAmount ());
+        $history = Mage::getModel ('pdv/history')->load ($cashier->getHistoryId ());
+
+        $openAmount = floatval ($history->getOpenAmount ());
+        $reinforceAmount = floatval ($history->getReinforceAmount ());
+        $bleedAmount  = floatval ($history->getBleedAmount ());
+        $moneyAmount  = floatval ($history->getMoneyAmount ());
+        $changeAmount = floatval ($history->getChangeAmount ());
 
         $closeAmount = ((($openAmount + $reinforceAmount) - $bleedAmount) + $moneyAmount) - $changeAmount;
 
@@ -285,15 +287,16 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('cashier_invalid_amount', $message);
         }
 
-        $cashier->setBleedAmount ($bleedAmount + $amount)
+        $history->setBleedAmount ($bleedAmount + $amount)
             ->save ()
         ;
 
-        $history = Mage::getModel ('pdv/history')
-            ->setTypeId (Toluca_PDV_Helper_Data::HISTORY_TYPE_BLEED)
+        $log = Mage::getModel ('pdv/log')
+            ->setTypeId (Toluca_PDV_Helper_Data::LOG_TYPE_BLEED)
             ->setCashierId ($cashier->getId ())
             ->setOperatorId ($operator_id)
-            ->setAmount (- $amount)
+            ->setHistoryId ($history->getId ())
+            ->setTotalAmount (- $amount)
             ->setMessage ($message)
             ->setCreatedAt (date ('c'))
             ->save ()
