@@ -73,13 +73,18 @@ SQLBLOCK;
         ));
 
     $installer->getConnection ()
-        ->addColumn ($table, 'banktransfer_amount', array(
-            'type'     => Varien_Db_Ddl_Table::TYPE_DECIMAL,
-            'length'   => '12,4',
-            'unsigned' => true,
+        ->addColumn ($table, 'opened_at', array(
+            'type'     => Varien_Db_Ddl_Table::TYPE_DATETIME,
             'nullable' => false,
-            'comment'  => 'Bank Transfer Amount',
+            'comment'  => 'Opened At',
         ));
+    $installer->getConnection ()
+        ->addColumn ($table, 'closed_at', array(
+            'type'     => Varien_Db_Ddl_Table::TYPE_DATETIME,
+            'nullable' => true,
+            'comment'  => 'Closed At',
+        ));
+
     $installer->getConnection ()
         ->addColumn ($table, 'money_amount', array(
             'type'     => Varien_Db_Ddl_Table::TYPE_DECIMAL,
@@ -146,19 +151,15 @@ SQLBLOCK;
             'nullable' => false,
             'comment'  => 'Billet Amount',
         ));
-
     $installer->getConnection ()
-        ->addColumn ($table, 'opened_at', array(
-            'type'     => Varien_Db_Ddl_Table::TYPE_DATETIME,
+        ->addColumn ($table, 'banktransfer_amount', array(
+            'type'     => Varien_Db_Ddl_Table::TYPE_DECIMAL,
+            'length'   => '12,4',
+            'unsigned' => true,
             'nullable' => false,
-            'comment'  => 'Opened At',
+            'comment'  => 'Bank Transfer Amount',
         ));
-    $installer->getConnection ()
-        ->addColumn ($table, 'closed_at', array(
-            'type'     => Varien_Db_Ddl_Table::TYPE_DATETIME,
-            'nullable' => true,
-            'comment'  => 'Closed At',
-        ));
+
     $installer->getConnection ()
         ->addColumn ($table, 'created_at', array(
             'type'     => Varien_Db_Ddl_Table::TYPE_DATETIME,

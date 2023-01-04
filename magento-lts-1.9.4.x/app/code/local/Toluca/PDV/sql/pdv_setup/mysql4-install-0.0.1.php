@@ -38,6 +38,7 @@ SQLBLOCK;
             'nullable' => false,
             'comment'  => 'Total ID',
         ));
+
     $installer->getConnection ()
         ->addColumn ($table, 'code', array(
             'type'     => Varien_Db_Ddl_Table::TYPE_TEXT,
@@ -67,54 +68,7 @@ SQLBLOCK;
             'nullable' => false,
             'comment'  => 'Status',
         ));
-    $installer->getConnection ()
-        ->addColumn ($table, 'open_amount', array(
-            'type'     => Varien_Db_Ddl_Table::TYPE_DECIMAL,
-            'length'   => '12,4',
-            'unsigned' => true,
-            'nullable' => false,
-            'comment'  => 'Open Amount',
-        ));
-    $installer->getConnection ()
-        ->addColumn ($table, 'reinforce_amount', array(
-            'type'     => Varien_Db_Ddl_Table::TYPE_DECIMAL,
-            'length'   => '12,4',
-            'unsigned' => true,
-            'nullable' => false,
-            'comment'  => 'Reinforce Amount',
-        ));
-    $installer->getConnection ()
-        ->addColumn ($table, 'bleed_amount', array(
-            'type'     => Varien_Db_Ddl_Table::TYPE_DECIMAL,
-            'length'   => '12,4',
-            'unsigned' => true,
-            'nullable' => false,
-            'comment'  => 'Bleed Amount',
-        ));
-    $installer->getConnection ()
-        ->addColumn ($table, 'money_amount', array(
-            'type'     => Varien_Db_Ddl_Table::TYPE_DECIMAL,
-            'length'   => '12,4',
-            'unsigned' => true,
-            'nullable' => false,
-            'comment'  => 'Money Amount',
-        ));
-    $installer->getConnection ()
-        ->addColumn ($table, 'change_amount', array(
-            'type'     => Varien_Db_Ddl_Table::TYPE_DECIMAL,
-            'length'   => '12,4',
-            'unsigned' => true,
-            'nullable' => false,
-            'comment'  => 'Change Amount',
-        ));
-    $installer->getConnection ()
-        ->addColumn ($table, 'close_amount', array(
-            'type'     => Varien_Db_Ddl_Table::TYPE_DECIMAL,
-            'length'   => '12,4',
-            'unsigned' => true,
-            'nullable' => false,
-            'comment'  => 'Close Amount',
-        ));
+
     $installer->getConnection ()
         ->addColumn ($table, 'opened_at', array(
             'type'     => Varien_Db_Ddl_Table::TYPE_DATETIME,
@@ -127,6 +81,7 @@ SQLBLOCK;
             'nullable' => true,
             'comment'  => 'Closed At',
         ));
+
     $installer->getConnection ()
         ->addColumn ($table, 'created_at', array(
             'type'     => Varien_Db_Ddl_Table::TYPE_DATETIME,
