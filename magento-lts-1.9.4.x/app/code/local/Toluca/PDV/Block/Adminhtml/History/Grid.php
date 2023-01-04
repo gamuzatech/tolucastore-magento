@@ -5,7 +5,7 @@
  * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
  */
 
-class Toluca_PDV_Block_Adminhtml_Total_Grid extends Mage_Adminhtml_Block_Widget_Grid
+class Toluca_PDV_Block_Adminhtml_History_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
     protected $_countTotals = true;
 
@@ -37,7 +37,7 @@ class Toluca_PDV_Block_Adminhtml_Total_Grid extends Mage_Adminhtml_Block_Widget_
 	{
 		parent::__construct ();
 
-		$this->setId ('pdvTotalGrid');
+		$this->setId ('pdvHistoryGrid');
 		$this->setDefaultSort ('entity_id');
 		$this->setDefaultDir ('DESC');
 		$this->setSaveParametersInSession (true);
@@ -45,7 +45,7 @@ class Toluca_PDV_Block_Adminhtml_Total_Grid extends Mage_Adminhtml_Block_Widget_
 
 	protected function _prepareCollection ()
 	{
-		$collection = Mage::getModel ('pdv/total')->getCollection ();
+		$collection = Mage::getModel ('pdv/history')->getCollection ();
 
 		$this->setCollection ($collection);
 

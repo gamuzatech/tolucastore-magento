@@ -5,11 +5,11 @@
  * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
  */
 
-class Toluca_PDV_Model_Total extends Mage_Core_Model_Abstract
+class Toluca_PDV_Model_History extends Mage_Core_Model_Abstract
 {
     protected function _construct ()
     {
-        $this->_init ('pdv/total');
+        $this->_init ('pdv/history');
     }
 }
 

@@ -5,11 +5,11 @@
  * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
  */
 
-class Toluca_PDV_Model_Mysql4_Total_Collection extends Mage_Core_Model_Mysql4_Collection_Abstract
+class Toluca_PDV_Model_Mysql4_History extends Mage_Core_Model_Mysql4_Abstract
 {
-    public function _construct ()
+    protected function _construct ()
     {
-        $this->_init ('pdv/total');
+        $this->_init ('pdv/history', 'entity_id');
     }
 }
 

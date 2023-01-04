@@ -38,9 +38,9 @@
                     <operator>
                         <table>toluca_pdv_operator</table>
                     </operator>
-                    <total>
-                        <table>toluca_pdv_total</table>
-                    </total>
+                    <history>
+                        <table>toluca_pdv_history</table>
+                    </history>
                     <log>
                         <table>toluca_pdv_log</table>
                     </log>
