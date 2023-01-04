@@ -25,6 +25,14 @@ class Toluca_PDV_Block_Adminhtml_Cashier_Grid extends Mage_Adminhtml_Block_Widge
 
         $collection->getSelect ()
             ->joinLeft (
+                array ('total' => Mage::getSingleton ('core/resource')->getTableName ('pdv/total')),
+                'main_table.total_id = total.entity_id',
+                array (
+                    'opened_at',
+                    'closed_at',
+                )
+            )
+            ->joinLeft (
                 array ('quote' => Mage::getSingleton ('core/resource')->getTableName ('sales/quote')),
                 "main_table.entity_id = quote.pdv_cashier_id AND quote.is_pdv = 1 AND quote.pdv_operator_id = main_table.operator_id AND quote.customer_email LIKE '{$customerEmail}'",
                 array (
@@ -82,11 +90,13 @@ class Toluca_PDV_Block_Adminhtml_Cashier_Grid extends Mage_Adminhtml_Block_Widge
 			'header' => Mage::helper ('pdv')->__('Opened At'),
 			'index'  => 'opened_at',
             'type'   => 'datetime',
+            'filter_index' => 'total.opened_at',
 		));
 		$this->addColumn ('closed_at', array(
 			'header' => Mage::helper ('pdv')->__('Closed At'),
 			'index'  => 'closed_at',
             'type'   => 'datetime',
+            'filter_index' => 'total.closed_at',
 		));
 
 		$this->addColumn ('operator_id', array(
@@ -96,6 +106,12 @@ class Toluca_PDV_Block_Adminhtml_Cashier_Grid extends Mage_Adminhtml_Block_Widge
 		    'index'   => 'operator_id',
             'type'    => 'options',
             'options' => self::getOperators (),
+		));
+		$this->addColumn ('total_id', array(
+		    'header'  => Mage::helper ('pdv')->__('Total ID'),
+		    'align'   => 'right',
+	        'type'    => 'number',
+		    'index'   => 'total_id',
 		));
 		$this->addColumn ('customer_id', array(
 		    'header' => Mage::helper ('pdv')->__('Customer ID'),
