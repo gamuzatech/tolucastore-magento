@@ -161,6 +161,23 @@ SQLBLOCK;
         ));
 
     $installer->getConnection ()
+        ->addColumn ($table, 'shipping_amount', array(
+            'type'     => Varien_Db_Ddl_Table::TYPE_DECIMAL,
+            'length'   => '12,4',
+            'unsigned' => true,
+            'nullable' => false,
+            'comment'  => 'Shipping Amount',
+        ));
+    $installer->getConnection ()
+        ->addColumn ($table, 'total_amount', array(
+            'type'     => Varien_Db_Ddl_Table::TYPE_DECIMAL,
+            'length'   => '12,4',
+            'unsigned' => true,
+            'nullable' => false,
+            'comment'  => 'Total Amount',
+        ));
+
+    $installer->getConnection ()
         ->addColumn ($table, 'created_at', array(
             'type'     => Varien_Db_Ddl_Table::TYPE_DATETIME,
             'nullable' => false,

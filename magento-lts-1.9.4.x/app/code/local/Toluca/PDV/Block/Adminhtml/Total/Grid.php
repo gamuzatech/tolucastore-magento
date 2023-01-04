@@ -28,6 +28,9 @@ class Toluca_PDV_Block_Adminhtml_Total_Grid extends Mage_Adminhtml_Block_Widget_
         'creditcard_amount' => 0,
         'billet_amount' => 0,
         'banktransfer_amount' => 0,
+
+        'shipping_amount' => 0,
+        'total_amount' => 0,
     );
 
 	public function __construct ()
@@ -191,6 +194,21 @@ class Toluca_PDV_Block_Adminhtml_Total_Grid extends Mage_Adminhtml_Block_Widget_
 		    'align'   => 'right',
 	        'type'    => 'price',
 		    'index'   => 'banktransfer_amount',
+            'currency_code' => $store->getBaseCurrency()->getCode(),
+		));
+
+		$this->addColumn ('shipping_amount', array(
+		    'header'  => Mage::helper ('pdv')->__('Shipping'),
+		    'align'   => 'right',
+	        'type'    => 'price',
+		    'index'   => 'shipping_amount',
+            'currency_code' => $store->getBaseCurrency()->getCode(),
+		));
+		$this->addColumn ('total_amount', array(
+		    'header'  => Mage::helper ('pdv')->__('Total'),
+		    'align'   => 'right',
+	        'type'    => 'price',
+		    'index'   => 'total_amount',
             'currency_code' => $store->getBaseCurrency()->getCode(),
 		));
 
