@@ -68,6 +68,11 @@ class Toluca_PDV_Block_Adminhtml_Log_Grid extends Mage_Adminhtml_Block_Widget_Gr
             'type'    => 'options',
             'options' => Toluca_PDV_Block_Adminhtml_Cashier_Grid::getOperators (),
 		));
+		$this->addColumn ('history_id', array(
+		    'header'  => Mage::helper ('pdv')->__('History ID'),
+		    'index'   => 'history_id',
+            'type'    => 'number',
+		));
 		$this->addColumn ('type_id', array(
 		    'header'  => Mage::helper ('pdv')->__('Type'),
 		    'index'   => 'type_id',

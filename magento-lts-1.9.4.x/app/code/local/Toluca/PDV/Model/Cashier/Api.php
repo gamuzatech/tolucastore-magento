@@ -237,17 +237,20 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('cashier_already_closed');
         }
 
-        $reinforceAmount = floatval ($cashier->getReinforceAmount ());
+        $history = Mage::getModel ('pdv/history')->load ($cashier->getHistoryId ());
 
-        $cashier->setReinforceAmount ($reinforceAmount + $amount)
+        $reinforceAmount = floatval ($history->getReinforceAmount ());
+
+        $history->setReinforceAmount ($reinforceAmount + $amount)
             ->save ()
         ;
 
-        $history = Mage::getModel ('pdv/history')
-            ->setTypeId (Toluca_PDV_Helper_Data::HISTORY_TYPE_REINFORCE)
+        $log = Mage::getModel ('pdv/log')
+            ->setTypeId (Toluca_PDV_Helper_Data::LOG_TYPE_REINFORCE)
             ->setCashierId ($cashier->getId ())
             ->setOperatorId ($operator_id)
-            ->setAmount ($amount)
+            ->setHistoryId ($history->getId())
+            ->setTotalAmount ($amount)
             ->setMessage ($message)
             ->setCreatedAt (date ('c'))
             ->save ()

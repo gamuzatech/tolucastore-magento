@@ -47,6 +47,14 @@ SQLBLOCK;
             'comment'  => 'Type ID',
         ));
     $installer->getConnection ()
+        ->addColumn ($table, 'history_id', array(
+            'type'     => Varien_Db_Ddl_Table::TYPE_INTEGER,
+            'length'   => 11,
+            'unsigned' => true,
+            'nullable' => false,
+            'comment'  => 'History ID',
+        ));
+    $installer->getConnection ()
         ->addColumn ($table, 'customer_id', array(
             'type'     => Varien_Db_Ddl_Table::TYPE_INTEGER,
             'length'   => 11,
