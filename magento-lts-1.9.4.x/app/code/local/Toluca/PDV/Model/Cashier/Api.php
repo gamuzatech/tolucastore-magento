@@ -218,6 +218,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             ->setTypeId (Toluca_PDV_Helper_Data::LOG_TYPE_OPEN)
             ->setCashierId ($cashier->getId ())
             ->setOperatorId ($operator_id)
+            ->setHistoryId ($history->getId ())
             ->setTotalAmount ($amount)
             ->setMessage ($message)
             ->setCreatedAt (date ('c'))
