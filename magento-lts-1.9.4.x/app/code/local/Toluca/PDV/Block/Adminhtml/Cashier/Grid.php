@@ -25,8 +25,8 @@ class Toluca_PDV_Block_Adminhtml_Cashier_Grid extends Mage_Adminhtml_Block_Widge
 
         $collection->getSelect ()
             ->joinLeft (
-                array ('total' => Mage::getSingleton ('core/resource')->getTableName ('pdv/total')),
-                'main_table.total_id = total.entity_id',
+                array ('history' => Mage::getSingleton ('core/resource')->getTableName ('pdv/history')),
+                'main_table.history_id = history.entity_id',
                 array (
                     'opened_at',
                     'closed_at',
@@ -107,11 +107,11 @@ class Toluca_PDV_Block_Adminhtml_Cashier_Grid extends Mage_Adminhtml_Block_Widge
             'type'    => 'options',
             'options' => self::getOperators (),
 		));
-		$this->addColumn ('total_id', array(
-		    'header'  => Mage::helper ('pdv')->__('Total ID'),
+		$this->addColumn ('history_id', array(
+		    'header'  => Mage::helper ('pdv')->__('History ID'),
 		    'align'   => 'right',
 	        'type'    => 'number',
-		    'index'   => 'total_id',
+		    'index'   => 'history_id',
 		));
 		$this->addColumn ('customer_id', array(
 		    'header' => Mage::helper ('pdv')->__('Customer ID'),

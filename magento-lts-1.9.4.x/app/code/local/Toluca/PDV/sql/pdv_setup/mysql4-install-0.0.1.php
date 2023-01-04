@@ -31,12 +31,12 @@ SQLBLOCK;
             'comment'  => 'Operator ID',
         ));
     $installer->getConnection ()
-        ->addColumn ($table, 'total_id', array(
+        ->addColumn ($table, 'history_id', array(
             'type'     => Varien_Db_Ddl_Table::TYPE_INTEGER,
             'length'   => 11,
             'unsigned' => true,
             'nullable' => false,
-            'comment'  => 'Total ID',
+            'comment'  => 'History ID',
         ));
 
     $installer->getConnection ()
