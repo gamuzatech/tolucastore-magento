@@ -52,17 +52,20 @@ class Toluca_PDV_Model_Observer
 
         $cashier = Mage::getModel ('pdv/cashier')->load ($orderPdvCashierId);
         $operator = Mage::getModel ('pdv/operator')->load ($orderPdvOperatorId);
+        $history  = Mage::getModel ('pdv/history')->load ($cashier->getHistoryId ());
         $customer = Mage::getModel ('customer/customer')->load ($orderPdvCustomerId);
 
-        $history = Mage::getModel ('pdv/history')
-            ->setTypeId (Toluca_PDV_Helper_Data::HISTORY_TYPE_ORDER)
+        $log = Mage::getModel ('pdv/log')
+            ->setTypeId (Toluca_PDV_Helper_Data::LOG_TYPE_ORDER)
             ->setCashierId ($cashier->getId ())
             ->setOperatorId ($operator->getId ())
+            ->setHistoryId ($history->getId ())
             ->setCustomerId ($customer->getId ())
             ->setOrderId ($order->getId ())
             ->setOrderIncrementId ($order->getIncrementId ())
+            ->setShippingMethod ($order->getShippingMethod ())
             ->setPaymentMethod ($payment->getMethod ())
-            ->setAmount ($amount)
+            ->setTotalAmount ($amount)
             ->setMessage (
                 $changeType == 1
                 ? Mage::helper ('pdv')->__('Money Amount')
@@ -76,22 +79,24 @@ class Toluca_PDV_Model_Observer
 
         if (!strcmp ($payment->getMethod (), $paymentMethod))
         {
-            $history = Mage::getModel ('pdv/history')
-                ->setTypeId (Toluca_PDV_Helper_Data::HISTORY_TYPE_ORDER)
+            $log = Mage::getModel ('pdv/log')
+                ->setTypeId (Toluca_PDV_Helper_Data::LOG_TYPE_ORDER)
                 ->setCashierId ($cashier->getId ())
                 ->setOperatorId ($operator->getId ())
+                ->setHistoryId ($history->getId ())
                 ->setCustomerId ($customer->getId ())
                 ->setOrderId ($order->getId ())
                 ->setOrderIncrementId ($order->getIncrementId ())
+                ->setShippingMethod ($order->getShippingMethod ())
                 ->setPaymentMethod ($payment->getMethod ())
-                ->setAmount (- $changeAmount)
+                ->setTotalAmount (- $changeAmount)
                 ->setMessage (Mage::helper ('pdv')->__('Change Amount'))
                 ->setCreatedAt (date ('c'))
                 ->save ()
             ;
 
-            $cashier->setMoneyAmount (floatval ($cashier->getMoneyAmount ()) + $amount)
-                ->setChangeAmount (floatval ($cashier->getChangeAmount ()) + $changeAmount)
+            $history->setMoneyAmount (floatval ($history->getMoneyAmount ()) + $amount)
+                ->setChangeAmount (floatval ($history->getChangeAmount ()) + $changeAmount)
                 ->setUpdatedAt (date ('c'))
                 ->save ()
             ;
