@@ -29,6 +29,12 @@ class Toluca_PDV_Block_Adminhtml_Log_Grid extends Mage_Adminhtml_Block_Widget_Gr
 	{
 		$collection = Mage::getModel ('pdv/log')->getCollection ();
 
+        $collection->getSelect ()
+            ->columns (
+                "SUBSTRING_INDEX(shipping_method, '_', 1) AS shipping_method_1"
+            )
+        ;
+
 		$this->setCollection ($collection);
 
 		return parent::_prepareCollection ();
@@ -100,11 +106,13 @@ class Toluca_PDV_Block_Adminhtml_Log_Grid extends Mage_Adminhtml_Block_Widget_Gr
 		    'header'  => Mage::helper ('pdv')->__('Order Inc. ID'),
 		    'index'   => 'order_increment_id',
 		));
-		$this->addColumn ('shipping_method', array(
+		$this->addColumn ('shipping_method_1', array(
 		    'header'  => Mage::helper ('pdv')->__('Shipping Method'),
-		    'index'   => 'shipping_method',
+		    'index'   => 'shipping_method_1',
             'type'    => 'options',
             'options' => Mage::getModel ('pdv/adminhtml_system_config_source_shipping_allmethods')->toArray (),
+            'filter_index' => 'shipping_method',
+            'filter_condition_callback' => array ($this, '_shippingmethodFilterConditionCallback'),
 		));
 		$this->addColumn ('payment_method', array(
 		    'header'  => Mage::helper ('pdv')->__('Payment Method'),
@@ -145,6 +153,18 @@ class Toluca_PDV_Block_Adminhtml_Log_Grid extends Mage_Adminhtml_Block_Widget_Gr
         }
 
         return $result;
+    }
+
+    protected function _shippingmethodFilterConditionCallback ($collection, $column)
+    {
+        $value = $column->getFilter ()->getValue ();
+
+        if (!empty ($value))
+        {
+            $this->getCollection ()->getSelect ()->where (sprintf ("%s LIKE '%s_%%'", $column->getFilterIndex (), $value));
+        }
+
+        return $this;
     }
 }
 
