@@ -116,18 +116,11 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             'operator_name'  => $cashier->getOperatorName (),
             'created_at' => $cashier->getCreatedAt (),
             'updated_at' => $cashier->getUpdatedAt (),
-            'opened_at' => $cashier->getOpenedAt (),
-            'closed_at' => $cashier->getClosedAt (),
-            'open_amount'      => floatval ($cashier->getOpenAmount ()),
-            'reinforce_amount' => floatval ($cashier->getReinforceAmount ()),
-            'bleed_amount'     => floatval ($cashier->getBleedAmount ()),
-            'money_amount'     => floatval ($cashier->getMoneyAmount ()),
-            'change_amount'    => floatval ($cashier->getChangeAmount ()),
-            'close_amount'     => floatval ($cashier->getCloseAmount ()),
             'order_amount'     => floatval ($cashier->getOrderAmount ()),
             'default_customer_id' => intval ($this->_defaultCustomerId),
             'current_customer_id' => 0,
             'current_quote_id'    => 0,
+            'current_history'     => null,
         );
 
         $operator = Mage::getModel ('pdv/operator')->load ($cashier->getOperatorId ());
@@ -136,6 +129,31 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         {
             $result ['operator_code'] = $operator->getCode ();
             $result ['operator_name'] = $operator->getName ();
+        }
+
+        $history = Mage::getModel ('pdv/history')->load ($cashier->getHistoryId ());
+
+        if ($history && $history->getId ())
+        {
+            $result ['current_history'] = array(
+                'open_amount'      => floatval ($history->getOpenAmount ()),
+                'reinforce_amount' => floatval ($history->getReinforceAmount ()),
+                'bleed_amount'     => floatval ($history->getBleedAmount ()),
+                'close_amount'     => floatval ($history->getCloseAmount ()),
+                'opened_at' => $history->getOpenedAt (),
+                'closed_at' => $history->getClosedAt (),
+                'money_amount'   => floatval ($history->getMoneyAmount ()),
+                'change_amount'  => floatval ($history->getChangeAmount ()),
+                'machine_amount' => floatval ($history->getMachineAmount ()),
+                'pagcripto_amount' => floatval ($history->getPagcriptoAmount ()),
+                'picpay_amount'    => floatval ($history->getPicpayAmount ()),
+                'openpix_amount'   => floatval ($history->getOpenpixAmount ()),
+                'creditcard_amount'   => floatval ($history->getCreditcardAmount ()),
+                'billet_amount'       => floatval ($history->getBilletAmount ()),
+                'banktransfer_amount' => floatval ($history->getBanktransferAmount ()),
+                'shipping_amount' => floatval ($history->getShippingAmount ()),
+                'total_amount'    => floatval ($history->getTotalAmount ()),
+            );
         }
 
         $collection = Mage::getModel ('sales/quote')->getCollection ()
