@@ -38,7 +38,7 @@ class Toluca_PDV_Helper_Data extends Mage_Core_Helper_Abstract
 
     const XML_PATH_PDV_CASHIER_INCLUDE_ALL_ORDERS = 'pdv/cashier/include_all_orders';
 
-    const XML_PATH_PDV_PAYMENT_METHOD_CASHONDELIVERY = 'pdv/payment_method/cashondelivery';
+    const XML_PATH_PDV_PAYMENT_METHOD_CASHONDELIVERY = 'pdv/payment_method/money';
 
     const XML_PATH_PDV_PAYMENT_METHOD_ALL = 'pdv/payment_method';
 

@@ -160,8 +160,8 @@
     <default>
         <pdv>
             <payment_method>
-                <cashondelivery>cashondelivery</cashondelivery>
-                <machineondelivery>machineondelivery</machineondelivery>
+                <money>cashondelivery</money>
+                <machine>machineondelivery</machine>
                 <pagcripto>gamuza_pagcripto_payment</pagcripto>
                 <picpay>gamuza_picpay_payment</picpay>
                 <openpix>gamuza_openpix_payment</openpix>
