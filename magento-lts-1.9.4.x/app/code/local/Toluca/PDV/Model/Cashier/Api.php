@@ -65,6 +65,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
                 'operator_id'    => intval ($cashier->getOperatorId ()),
                 'operator_code'  => $cashier->getOperatorCode (),
                 'operator_name'  => $cashier->getOperatorName (),
+                'history_id' => intval ($cashier->getHistoryId ()),
                 'created_at' => $cashier->getCreatedAt (),
                 'updated_at' => $cashier->getUpdatedAt (),
                 'order_amount'     => floatval ($cashier->getOrderAmount ()),
@@ -79,6 +80,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             if ($history && $history->getId ())
             {
                 $data ['current_history'] = array(
+                    'entity_id'        => intval ($history->getId ()),
                     'open_amount'      => floatval ($history->getOpenAmount ()),
                     'reinforce_amount' => floatval ($history->getReinforceAmount ()),
                     'bleed_amount'     => floatval ($history->getBleedAmount ()),
@@ -96,6 +98,8 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
                     'banktransfer_amount' => floatval ($history->getBanktransferAmount ()),
                     'shipping_amount' => floatval ($history->getShippingAmount ()),
                     'total_amount'    => floatval ($history->getTotalAmount ()),
+                    'created_at' => $history->getCreatedAt (),
+                    'updated_at' => $history->getUpdatedAt (),
                 );
             }
 
@@ -134,6 +138,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             'operator_id'    => intval ($cashier->getOperatorId ()),
             'operator_code'  => $cashier->getOperatorCode (),
             'operator_name'  => $cashier->getOperatorName (),
+            'history_id' => intval ($cashier->getHistoryId ()),
             'created_at' => $cashier->getCreatedAt (),
             'updated_at' => $cashier->getUpdatedAt (),
             'order_amount'     => floatval ($cashier->getOrderAmount ()),
@@ -156,6 +161,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         if ($history && $history->getId ())
         {
             $result ['current_history'] = array(
+                'entity_id'        => intval ($history->getId ()),
                 'open_amount'      => floatval ($history->getOpenAmount ()),
                 'reinforce_amount' => floatval ($history->getReinforceAmount ()),
                 'bleed_amount'     => floatval ($history->getBleedAmount ()),
@@ -173,6 +179,8 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
                 'banktransfer_amount' => floatval ($history->getBanktransferAmount ()),
                 'shipping_amount' => floatval ($history->getShippingAmount ()),
                 'total_amount'    => floatval ($history->getTotalAmount ()),
+                'created_at' => $history->getCreatedAt (),
+                'updated_at' => $history->getUpdatedAt (),
             );
         }
 
