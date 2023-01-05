@@ -54,6 +54,7 @@
 "Requested customer was not found.","Cliente solicitado não foi encontrado."
 "Requested customer billing address was not found.","Endereço de Cobrança do Cliente solicitado não foi especificado."
 "Requested customer shipping address was not found.","Endereço de Cobrança do Cliente solicitado não foi encontrado."
+"Requested history was not found.","Histórico solicitado não foi encontrado."
 "Close amount is invalid. Difference of %s.","Valor de Fechamento inválido. Diferença de %s."
 "Bleed amount is invalid. Allowed only %s.","Valor da Sangria inválida. Permitido somente %s."
 "Default Cashier","Caixa Padrão"

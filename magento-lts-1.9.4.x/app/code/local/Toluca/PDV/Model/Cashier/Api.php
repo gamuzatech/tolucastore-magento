@@ -287,6 +287,11 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
 
         $history = Mage::getModel ('pdv/history')->load ($cashier->getHistoryId ());
 
+        if (!$history || !$history->getId ())
+        {
+            $this->_fault ('history_not_exists');
+        }
+
         $reinforceAmount = floatval ($history->getReinforceAmount ());
 
         $history->setReinforceAmount ($reinforceAmount + $amount)
@@ -318,6 +323,11 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         }
 
         $history = Mage::getModel ('pdv/history')->load ($cashier->getHistoryId ());
+
+        if (!$history || !$history->getId ())
+        {
+            $this->_fault ('history_not_exists');
+        }
 
         $openAmount = floatval ($history->getOpenAmount ());
         $reinforceAmount = floatval ($history->getReinforceAmount ());
@@ -365,6 +375,11 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         }
 
         $history = Mage::getModel ('pdv/history')->load ($cashier->getHistoryId ());
+
+        if (!$history || !$history->getId ())
+        {
+            $this->_fault ('history_not_exists');
+        }
 
         $openAmount      = floatval ($history->getOpenAmount ());
         $reinforceAmount = floatval ($history->getReinforceAmount ());

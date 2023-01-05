@@ -72,6 +72,11 @@ class Toluca_PDV_Model_Observer
 
         $history = Mage::getModel ('pdv/history')->load ($cashier->getHistoryId ());
 
+        if (!$history || !$history->getId ())
+        {
+            throw new Mage_Core_Exception (Mage::helper ('pdv')->__('Requested history was not found.'));
+        }
+
         $history->setShippingAmount (floatval ($history->getShippingAmount ()) + $order->getBaseShippingAmount ());
 
         $log = Mage::getModel ('pdv/log')
