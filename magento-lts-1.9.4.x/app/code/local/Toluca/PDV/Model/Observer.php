@@ -84,6 +84,7 @@ class Toluca_PDV_Model_Observer
             ->setOrderIncrementId ($order->getIncrementId ())
             ->setShippingMethod ($order->getShippingMethod ())
             ->setPaymentMethod ($payment->getMethod ())
+            ->setShippingAmount ($order->getBaseShippingAmount ())
             ->setTotalAmount ($amount)
             ->setMessage (
                 $changeType == 1
@@ -108,6 +109,7 @@ class Toluca_PDV_Model_Observer
                 ->setOrderIncrementId ($order->getIncrementId ())
                 ->setShippingMethod ($order->getShippingMethod ())
                 ->setPaymentMethod ($payment->getMethod ())
+                ->setShippingAmount ($order->getBaseShippingAmount ())
                 ->setTotalAmount (- $changeAmount)
                 ->setMessage (Mage::helper ('pdv')->__('Change Amount'))
                 ->setCreatedAt (date ('c'))

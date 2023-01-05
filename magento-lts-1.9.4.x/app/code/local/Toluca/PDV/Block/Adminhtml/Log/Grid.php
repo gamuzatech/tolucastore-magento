@@ -106,6 +106,12 @@ class Toluca_PDV_Block_Adminhtml_Log_Grid extends Mage_Adminhtml_Block_Widget_Gr
 		    'header'  => Mage::helper ('pdv')->__('Order Inc. ID'),
 		    'index'   => 'order_increment_id',
 		));
+		$this->addColumn ('payment_method', array(
+		    'header'  => Mage::helper ('pdv')->__('Payment Method'),
+		    'index'   => 'payment_method',
+            'type'    => 'options',
+            'options' => Mage::getModel ('pdv/adminhtml_system_config_source_payment_allmethods')->toArray (),
+		));
 		$this->addColumn ('shipping_method_1', array(
 		    'header'  => Mage::helper ('pdv')->__('Shipping Method'),
 		    'index'   => 'shipping_method_1',
@@ -114,11 +120,13 @@ class Toluca_PDV_Block_Adminhtml_Log_Grid extends Mage_Adminhtml_Block_Widget_Gr
             'filter_index' => 'shipping_method',
             'filter_condition_callback' => array ($this, '_shippingmethodFilterConditionCallback'),
 		));
-		$this->addColumn ('payment_method', array(
-		    'header'  => Mage::helper ('pdv')->__('Payment Method'),
-		    'index'   => 'payment_method',
-            'type'    => 'options',
-            'options' => Mage::getModel ('pdv/adminhtml_system_config_source_payment_allmethods')->toArray (),
+		$this->addColumn ('shipping_amount', array(
+		    'header'  => Mage::helper ('pdv')->__('Shipping Amount'),
+		    'index'   => 'shipping_amount',
+		    'align'   => 'right',
+	        'type'    => 'price',
+		    'index'   => 'shipping_amount',
+            'currency_code' => $store->getBaseCurrency()->getCode(),
 		));
 		$this->addColumn ('created_at', array(
 			'header' => Mage::helper ('pdv')->__('Created At'),

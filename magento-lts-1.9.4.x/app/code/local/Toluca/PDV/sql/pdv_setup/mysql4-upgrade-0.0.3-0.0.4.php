@@ -94,6 +94,13 @@ SQLBLOCK;
             'comment'  => 'Payment Method',
         ));
     $installer->getConnection ()
+        ->addColumn ($table, 'shipping_amount', array(
+            'type'     => Varien_Db_Ddl_Table::TYPE_DECIMAL,
+            'length'   => '12,4',
+            'nullable' => false,
+            'comment'  => 'Shipping Amount',
+        ));
+    $installer->getConnection ()
         ->addColumn ($table, 'total_amount', array(
             'type'     => Varien_Db_Ddl_Table::TYPE_DECIMAL,
             'length'   => '12,4',
