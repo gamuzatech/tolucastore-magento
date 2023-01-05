@@ -68,8 +68,11 @@ class Toluca_PDV_Model_Observer
 
         $cashier = Mage::getModel ('pdv/cashier')->load ($orderPdvCashierId);
         $operator = Mage::getModel ('pdv/operator')->load ($orderPdvOperatorId);
-        $history  = Mage::getModel ('pdv/history')->load ($cashier->getHistoryId ());
         $customer = Mage::getModel ('customer/customer')->load ($orderPdvCustomerId);
+
+        $history = Mage::getModel ('pdv/history')->load ($cashier->getHistoryId ());
+
+        $history->setShippingAmount (floatval ($history->getShippingAmount ()) + $order->getBaseShippingAmount ());
 
         $log = Mage::getModel ('pdv/log')
             ->setTypeId (Toluca_PDV_Helper_Data::LOG_TYPE_ORDER)
