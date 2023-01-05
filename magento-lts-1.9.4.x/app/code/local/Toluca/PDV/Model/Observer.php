@@ -7,7 +7,15 @@
 
 class Toluca_PDV_Model_Observer
 {
+    const XML_PATH_PDV_SETTING_DEFAULT_CASHIER  = Toluca_PDV_Helper_Data::XML_PATH_PDV_SETTING_DEFAULT_CASHIER;
+    const XML_PATH_PDV_SETTING_DEFAULT_OPERATOR = Toluca_PDV_Helper_Data::XML_PATH_PDV_SETTING_DEFAULT_OPERATOR;
+    const XML_PATH_PDV_SETTING_DEFAULT_CUSTOMER = Toluca_PDV_Helper_Data::XML_PATH_PDV_SETTING_DEFAULT_CUSTOMER;
+
+    const XML_PATH_PDV_CASHIER_INCLUDE_ALL_ORDERS = Toluca_PDV_Helper_Data::XML_PATH_PDV_CASHIER_INCLUDE_ALL_ORDERS;
+
     const XML_PATH_PDV_PAYMENT_METHOD_CASHONDELIVERY = Toluca_PDV_Helper_Data::XML_PATH_PDV_PAYMENT_METHOD_CASHONDELIVERY;
+
+    const XML_PATH_PDV_PAYMENT_METHOD_ALL = Toluca_PDV_Helper_Data::XML_PATH_PDV_PAYMENT_METHOD_ALL;
 
     public function controllerActionPredispatch ($observer)
     {
@@ -29,12 +37,20 @@ class Toluca_PDV_Model_Observer
         $order   = $event->getOrder ();
         $payment = $order->getPayment ();
 
-        $orderIsPdv         = $order->getData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_IS_PDV);
-        $orderPdvCashierId  = $order->getData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_CASHIER_ID);
-        $orderPdvOperatorId = $order->getData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_OPERATOR_ID);
-        $orderPdvCustomerId = $order->getData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_CUSTOMER_ID);
+        $orderPdvCashierId  = Mage::getStoreConfig (self::XML_PATH_PDV_SETTING_DEFAULT_CASHIER);
+        $orderPdvOperatorId = Mage::getStoreConfig (self::XML_PATH_PDV_SETTING_DEFAULT_OPERATOR);
+        $orderPdvCustomerId = Mage::getStoreConfig (self::XML_PATH_PDV_SETTING_DEFAULT_CUSTOMER);
 
-        if (!$orderIsPdv || !$orderPdvCashierId || !$orderPdvOperatorId || !$orderPdvCustomerId)
+        $orderIsPdv = boolval ($order->getData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_IS_PDV));
+
+        if ($orderIsPdv)
+        {
+            $orderPdvCashierId  = $order->getData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_CASHIER_ID);
+            $orderPdvOperatorId = $order->getData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_OPERATOR_ID);
+            $orderPdvCustomerId = $order->getData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_CUSTOMER_ID);
+        }
+
+        if (!$orderIsPdv && !Mage::getStoreConfigFlag (self::XML_PATH_PDV_CASHIER_INCLUDE_ALL_ORDERS))
         {
             return $this; // cancel
         }
@@ -100,6 +116,27 @@ class Toluca_PDV_Model_Observer
                 ->setUpdatedAt (date ('c'))
                 ->save ()
             ;
+        }
+        else
+        {
+            $paymentAllMethods = Mage::getStoreConfig (self::XML_PATH_PDV_PAYMENT_METHOD_ALL);
+
+            foreach ($paymentAllMethods as $code => $value)
+            {
+                if (!strcmp ($payment->getMethod (), $value))
+                {
+                    $fieldAmount = sprintf ('%s_amount', $code);
+
+                    $historyAmount = floatval ($history->getData ($fieldAmount));
+
+                    $history->setData ($fieldAmount, $historyAmount + $amount)
+                        ->setUpdatedAt (date ('c'))
+                        ->save ()
+                    ;
+
+                    break;
+                }
+            }
         }
     }
 }

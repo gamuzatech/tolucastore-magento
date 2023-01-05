@@ -161,6 +161,13 @@
         <pdv>
             <payment_method>
                 <cashondelivery>cashondelivery</cashondelivery>
+                <machineondelivery>machineondelivery</machineondelivery>
+                <pagcripto>gamuza_pagcripto_payment</pagcripto>
+                <picpay>gamuza_picpay_payment</picpay>
+                <openpix>gamuza_openpix_payment</openpix>
+                <creditcard>rm_pagseguro_cc</creditcard>
+                <billet>pagseguropro_boleto</billet>
+                <banktransfer>banktransfer</banktransfer>
             </payment_method>
         </pdv>
     </default>
