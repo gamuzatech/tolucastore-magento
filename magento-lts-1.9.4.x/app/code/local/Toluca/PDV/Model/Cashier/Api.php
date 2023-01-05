@@ -10,6 +10,8 @@
  */
 class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
 {
+    const XML_PATH_PDV_CASHIER_INCLUDE_ALL_ORDERS = Toluca_PDV_Helper_Data::XML_PATH_PDV_CASHIER_INCLUDE_ALL_ORDERS;
+
     protected $_defaultCustomerId = null;
 
     public function __construct ()
@@ -371,7 +373,26 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         $changeAmount    = floatval ($history->getChangeAmount ());
 
         $closeAmount = ((($openAmount + $reinforceAmount) - $bleedAmount) + $moneyAmount) - $changeAmount;
-        $differenceAmount = $amount - $closeAmount;
+
+        $orderAmount = 0;
+
+        if (Mage::getStoreConfigFlag (self::XML_PATH_PDV_CASHIER_INCLUDE_ALL_ORDERS))
+        {
+            $machineAmount = floatval ($history->getMachineAmount ());
+            $pagcriptoAmount = floatval ($history->getPagcriptoAmount ());
+            $picpayAmount    = floatval ($history->getPicpayAmount ());
+            $openpixAmount   = floatval ($history->getOpenpixAmount ());
+            $creditcardAmount   = floatval ($history->getCreditcardAmount ());
+            $billetAmount       = floatval ($history->getBilletAmount ());
+            $banktransferAmount = floatval ($history->getBanktransferAmount ());
+
+            $orderAmount = $machineAmount
+                + $pagcriptoAmount + $picpayAmount + $openpixAmount
+                + $creditcardAmount + $billetAmount + $banktransferAmount
+            ;
+        }
+
+        $differenceAmount = $amount - ($closeAmount + $orderAmount);
 
         if ($differenceAmount != 0)
         {
