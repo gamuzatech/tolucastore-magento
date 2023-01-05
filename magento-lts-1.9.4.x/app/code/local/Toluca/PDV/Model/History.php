@@ -11,5 +11,33 @@ class Toluca_PDV_Model_History extends Mage_Core_Model_Abstract
     {
         $this->_init ('pdv/history');
     }
+
+    protected function _afterSaveCommit ()
+    {
+        $openAmount      = floatval ($this->getOpenAmount ());
+        $reinforceAmount = floatval ($this->getReinforceAmount ());
+        $bleedAmount     = floatval ($this->getBleedAmount ());
+
+        $moneyAmount  = floatval ($this->getMoneyAmount ());
+        $changeAmount = floatval ($this->getChangeAmount ());
+
+        $closeAmount = ((($openAmount + $reinforceAmount) - $bleedAmount) + $moneyAmount) - $changeAmount;
+
+        $machineAmount = floatval ($this->getMachineAmount ());
+        $pagcriptoAmount = floatval ($this->getPagcriptoAmount ());
+        $picpayAmount    = floatval ($this->getPicpayAmount ());
+        $openpixAmount   = floatval ($this->getOpenpixAmount ());
+        $creditcardAmount   = floatval ($this->getCreditcardAmount ());
+        $billetAmount       = floatval ($this->getBilletAmount ());
+        $banktransferAmount = floatval ($this->getBanktransferAmount ());
+
+        $this->setTotalAmount (
+            $closeAmount + $machineAmount
+            + $pagcriptoAmount + $picpayAmount + $openpixAmount
+            + $creditcardAmount + $billetAmount + $banktransferAmount
+        );
+
+        $this->_getResource ()->save ($this); // total_amount
+    }
 }
 
