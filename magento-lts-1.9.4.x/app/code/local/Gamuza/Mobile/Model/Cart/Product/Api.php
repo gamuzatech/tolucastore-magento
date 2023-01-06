@@ -410,6 +410,7 @@ class Gamuza_Mobile_Model_Cart_Product_Api extends Gamuza_Mobile_Model_Api_Resou
             $itemBundleOption = $item->getBuyRequest()->getData('bundle_option');
 
             $productData = array(
+                'item_id'                 => intval($item->getId()),
                 'product_id'              => intval($item->getProductId()),
                 // Basic item data
                 'sku'                     => $item->getSku(),
