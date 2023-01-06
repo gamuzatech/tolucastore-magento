@@ -31,10 +31,11 @@ class Toluca_PDV_Model_Observer
         }
     }
 
-    public function salesOrderPlaceAfter ($observer)
+    public function salesOrderInvoicePay ($observer)
     {
         $event   = $observer->getEvent ();
-        $order   = $event->getOrder ();
+        $invoice = $event->getInvoice ();
+        $order   = $invoice->getOrder ();
         $payment = $order->getPayment ();
 
         $orderPdvCashierId  = Mage::getStoreConfig (self::XML_PATH_PDV_SETTING_DEFAULT_CASHIER);
