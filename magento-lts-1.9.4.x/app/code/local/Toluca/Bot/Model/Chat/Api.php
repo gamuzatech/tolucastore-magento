@@ -48,12 +48,15 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
         '1' => 'cashondelivery',
         '2' => 'machineondelivery',
         '3' => 'banktransfer',
+        '4' => 'checkmo',
 
-        '4' => 'gamuza_pagcripto_payment',
-        '5' => 'gamuza_picpay_payment',
-        '6' => 'gamuza_openpix_payment',
+        '5' => 'gamuza_pagcripto_payment',
+        '6' => 'gamuza_picpay_payment',
+        '7' => 'gamuza_openpix_payment',
 
-        '7' => 'pagseguropro_boleto',
+        '8' => 'pagseguropro_boleto',
+
+        '9' => 'free',
     );
 
     protected $_paymentCcTypes = array(
