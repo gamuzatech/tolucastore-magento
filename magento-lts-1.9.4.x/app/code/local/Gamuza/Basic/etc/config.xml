@@ -544,10 +544,19 @@
                 <specificerrmsg>This shipping method is currently unavailable.</specificerrmsg>
                 <model>basic/shipping_carrier_pickup</model>
             </pickup>
+            <flatrate>
+                <active>1</active>
+                <type>O</type>
+            </flatrate>
             <tablerate>
+                <active>1</active>
                 <handling_action>O</handling_action>
                 <model>basic/shipping_carrier_tablerate</model>
             </tablerate>
+            <freeshipping>
+                <active>1</active>
+                <free_shipping_subtotal>1000000000</free_shipping_subtotal>
+            </freeshipping>
         </carriers>
         <payment>
             <cashondelivery>
