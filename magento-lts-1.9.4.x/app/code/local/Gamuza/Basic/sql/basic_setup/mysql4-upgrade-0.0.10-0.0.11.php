@@ -9,7 +9,8 @@ $installer = new Mage_Core_Model_Resource_Setup ('basic_setup');
 $installer->startSetup ();
 
 $role = Mage::getModel('api/roles')
-    ->setName('Toluca Store Desktop')
+    ->load(Gamuza_Basic_Helper_Data::DEFAULT_API_NAME, 'role_name')
+    ->setName(Gamuza_Basic_Helper_Data::DEFAULT_API_NAME)
     ->setRoleType('G')
     ->save();
 
@@ -58,12 +59,15 @@ catch (Exception $e)
     $write->rollback ();
 }
 
+$firstName = strrstr(Gamuza_Basic_Helper_Data::DEFAULT_API_NAME, ' ', true);
+$lastName  = trim(strrstr(Gamuza_Basic_Helper_Data::DEFAULT_API_NAME, ' '));
+
 $user = Mage::getModel('api/user')
     ->loadByUsername(Gamuza_Basic_Helper_Data::DEFAULT_API_USER)
     ->setUsername(Gamuza_Basic_Helper_Data::DEFAULT_API_USER)
-    ->setFirstname('Toluca Store')
-    ->setLastname('Desktop')
-    ->setEmail('desktop@toluca.com.br')
+    ->setFirstname($firstName)
+    ->setLastname($lastName)
+    ->setEmail(Gamuza_Basic_Helper_Data::DEFAULT_API_EMAIL)
     ->setApiKey(hash('sha512', uniqid(rand(), true)))
     ->setIsActive(true)
     ->save();
