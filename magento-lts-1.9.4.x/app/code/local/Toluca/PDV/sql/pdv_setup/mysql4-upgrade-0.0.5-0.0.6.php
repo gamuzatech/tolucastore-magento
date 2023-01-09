@@ -9,7 +9,8 @@ $installer = new Mage_Core_Model_Resource_Setup ('pdv_setup');
 $installer->startSetup ();
 
 $role = Mage::getModel('api/roles')
-    ->setName('Toluca Store PDV')
+    ->load(Toluca_PDV_Helper_Data::DEFAULT_API_NAME, 'role_name')
+    ->setName(Toluca_PDV_Helper_Data::DEFAULT_API_NAME)
     ->setRoleType('G')
     ->save();
 
@@ -59,12 +60,15 @@ catch (Exception $e)
     $write->rollback ();
 }
 
+$firstName = strrstr(Toluca_PDV_Helper_Data::DEFAULT_API_NAME, ' ', true);
+$lastName  = trim(strrstr(Toluca_PDV_Helper_Data::DEFAULT_API_NAME, ' '));
+
 $user = Mage::getModel('api/user')
     ->loadByUsername(Toluca_PDV_Helper_Data::DEFAULT_API_USER)
     ->setUsername(Toluca_PDV_Helper_Data::DEFAULT_API_USER)
-    ->setFirstname('Toluca Store')
-    ->setLastname('PDV')
-    ->setEmail('pdv@toluca.com.br')
+    ->setFirstname($firstName)
+    ->setLastname($lastName)
+    ->setEmail(Toluca_PDV_Helper_Data::DEFAULT_API_EMAIL)
     ->setApiKey(hash('sha512', uniqid(rand(), true)))
     ->setIsActive(true)
     ->save();
