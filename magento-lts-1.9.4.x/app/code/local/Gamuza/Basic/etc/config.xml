@@ -120,6 +120,7 @@
             <catalog>
                 <rewrite>
                     <product_option>Gamuza_Basic_Model_Catalog_Product_Option</product_option>
+                    <product_type_configurable>Gamuza_Basic_Model_Catalog_Product_Type_Configurable</product_type_configurable>
                     <observer>Gamuza_Basic_Model_Catalog_Observer</observer>
                 </rewrite>
             </catalog>

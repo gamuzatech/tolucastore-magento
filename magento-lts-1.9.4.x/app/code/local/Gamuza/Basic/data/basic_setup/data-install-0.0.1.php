@@ -23,6 +23,7 @@ $installer->updateAttribute ('catalog_product', 'description',       'is_require
 $installer->updateAttribute ('catalog_product', 'short_description', 'frontend_input', 'text');
 $installer->updateAttribute ('catalog_product', 'url_key',           'frontend_input', 'label');
 $installer->updateAttribute ('catalog_product', 'tax_class_id',      'default_value',  '0');
+$installer->updateAttribute ('catalog_product', 'cost',              'is_user_defined', '0');
 
 $rootCategoryId = Mage::getModel ('core/store')
     ->load (Mage_Core_Model_App::DISTRO_STORE_ID)
