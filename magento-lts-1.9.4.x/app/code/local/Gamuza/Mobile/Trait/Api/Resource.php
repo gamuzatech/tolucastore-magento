@@ -14,9 +14,9 @@ trait Gamuza_Mobile_Trait_Api_Resource
      * @param string|int $store
      * @return Mage_Sales_Model_Quote
      */
-    protected function _getCustomerQuote($customerCode, $createNewQuote = false)
+    protected function _getCustomerQuote($customerCode, $store = null, $createNewQuote = false)
     {
-        $storeId = Mage::getStoreConfig (Gamuza_Mobile_Helper_Data::XML_PATH_API_MOBILE_STORE_VIEW);
+        $storeId = Mage::getStoreConfig (Gamuza_Mobile_Helper_Data::XML_PATH_API_MOBILE_STORE_VIEW, $store);
 
         $customerPrefix = Mage::getStoreConfig (Gamuza_Mobile_Helper_Data::XML_PATH_DEFAULT_EMAIL_PREFIX);
         $customerDomain = Mage::getStoreConfig (Mage_Customer_Model_Customer::XML_PATH_DEFAULT_EMAIL_DOMAIN);

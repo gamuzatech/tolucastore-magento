@@ -37,7 +37,7 @@ class Gamuza_Mobile_Model_Cart_Product_Api extends Gamuza_Mobile_Model_Api_Resou
             $this->_fault ('store_not_specified');
         }
 
-        $quote = $this->_getCustomerQuote($store, true);
+        $quote = $this->_getCustomerQuote($store, null, true);
 
         if (empty ($productsData))
         {

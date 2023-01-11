@@ -577,7 +577,7 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
             // nothing
         }
 
-        $quote = $this->_getCustomerQuote ($store, true);
+        $quote = $this->_getCustomerQuote ($store, null, true);
 
         $result = false;
 
