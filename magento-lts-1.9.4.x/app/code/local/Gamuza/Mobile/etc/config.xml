@@ -231,6 +231,11 @@
         </translate>
     </frontend>
     <default>
+        <api>
+            <mobile>
+                <store_view>1</store_view>
+            </mobile>
+        </api>
         <customer>
             <create_account>
                 <email_prefix>app</email_prefix>
