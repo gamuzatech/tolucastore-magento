@@ -492,6 +492,8 @@ class Gamuza_Mobile_Model_Cart_Product_Api extends Gamuza_Mobile_Model_Api_Resou
                 $productData [$code] = $value;
             }
 
+            $productData ['product_additional_options'] = $itemAdditionalOptions;
+
             $productData ['product_options'] = array ();
 
             foreach ($itemOptions as $itemOptionId => $itemOptionValues)
