@@ -281,7 +281,7 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
             $this->_fault ('code_not_specified');
         }
 
-        $order = $this->_initOrder($orderIncrementId);
+        $order = $this->_initOrder($orderIncrementId, $orderProtectCode);
 
         if ($order->getGiftMessageId() > 0)
         {
@@ -510,7 +510,7 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
             $this->_fault ('comment_not_specified');
         }
 
-        $order = $this->_initOrder ($orderIncrementId);
+        $order = $this->_initOrder ($orderIncrementId, $orderProtectCode);
 
         if ($order->getData (Gamuza_Mobile_Helper_Data::ORDER_ATTRIBUTE_CUSTOMER_STARS))
         {
@@ -566,7 +566,7 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
             $this->_fault ('customer_code_not_specified');
         }
 
-        $order = $this->_initOrder ($orderIncrementId);
+        $order = $this->_initOrder ($orderIncrementId, $orderProtectCode);
 
         try
         {
@@ -632,6 +632,28 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
         }
 
         return $result;
+    }
+
+    /**
+     * Initialize basic order model
+     *
+     * @param mixed $orderIncrementId
+     * @return Mage_Sales_Model_Order
+     */
+    protected function _initOrder($orderIncrementId, $orderProtectCode = null)
+    {
+        $order = Mage::getModel('sales/order')->getCollection()
+            ->addFieldToFilter ('increment_id', array ('eq' => $orderIncrementId))
+            ->addFieldToFilter ('protect_code', array ('eq' => $orderProtectCode))
+            ->getFirstItem ()
+        ;
+
+        if (!$order->getId())
+        {
+            $this->_fault('not_exists');
+        }
+
+        return $order;
     }
 }
 
