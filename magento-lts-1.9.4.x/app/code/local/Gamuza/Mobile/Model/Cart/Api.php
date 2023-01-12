@@ -137,6 +137,8 @@ class Gamuza_Mobile_Model_Cart_Api extends Mage_Checkout_Model_Api_Resource
             'pagseguropro' => null,
         );
 
+        $result ['order']['payment_method'] = $order->getPayment ()->getMethod ();
+
         foreach ($this->_boolAttributes as $code)
         {
             if (array_key_exists ($code, $result ['order']))
