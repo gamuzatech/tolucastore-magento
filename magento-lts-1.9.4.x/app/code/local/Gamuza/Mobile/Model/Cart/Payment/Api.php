@@ -12,8 +12,6 @@ class Gamuza_Mobile_Model_Cart_Payment_Api extends Mage_Checkout_Model_Cart_Paym
 {
     use Gamuza_Mobile_Trait_Api_Resource;
 
-    const DISTRO_STORE_ID = Mage_Core_Model_App::DISTRO_STORE_ID;
-
     /**
      * Retrieve available payment methods for a quote
      *
@@ -21,19 +19,21 @@ class Gamuza_Mobile_Model_Cart_Payment_Api extends Mage_Checkout_Model_Cart_Paym
      * @param int $store
      * @return array
      */
-    public function _getPaymentMethodsList($store = null)
+    public function _getPaymentMethodsList($code = null, $store = null)
     {
-        if (empty ($store))
+        if (empty ($code))
         {
-            $this->_fault ('store_not_specified');
+            $this->_fault ('customer_code_not_specified');
         }
 
-        $quote = $this->_getCustomerQuote($store);
+        $quote = $this->_getCustomerQuote($code, $store);
 
         $total = $quote->getBaseSubtotal();
 
+        $storeId = Mage::getStoreConfig (Gamuza_Mobile_Helper_Data::XML_PATH_API_MOBILE_STORE_VIEW, $store);
+
         $methodsResult = array();
-        $methods = Mage::helper('payment')->getStoreMethods(self::DISTRO_STORE_ID, $quote);
+        $methods = Mage::helper('payment')->getStoreMethods($storeId, $quote);
 
         foreach ($methods as $method)
         {
@@ -72,11 +72,11 @@ class Gamuza_Mobile_Model_Cart_Payment_Api extends Mage_Checkout_Model_Cart_Paym
      * @param  $store
      * @return bool
      */
-    public function _setPaymentMethod($store = null, $paymentData = null)
+    public function _setPaymentMethod($code = null, $paymentData = null, $store = null)
     {
-        if (empty ($store))
+        if (empty ($code))
         {
-            $this->_fault ('store_not_specified');
+            $this->_fault ('customer_code_not_specified');
         }
 
         $quote = $this->_getCustomerQuote($store);
@@ -120,7 +120,9 @@ class Gamuza_Mobile_Model_Cart_Payment_Api extends Mage_Checkout_Model_Cart_Paym
 
         $total = $quote->getBaseSubtotal();
 
-        $methods = Mage::helper('payment')->getStoreMethods(self::DISTRO_STORE_ID, $quote);
+        $storeId = Mage::getStoreConfig (Gamuza_Mobile_Helper_Data::XML_PATH_API_MOBILE_STORE_VIEW, $store);
+
+        $methods = Mage::helper('payment')->getStoreMethods($storeId, $quote);
 
         foreach ($methods as $method)
         {

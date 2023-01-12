@@ -486,6 +486,10 @@
                 <code>101</code>
                 <message>Customer data are invalid.</message>
             </customer_data_are_invalid>
+            <customer_code_not_specified>
+                <code>200</code>
+                <message>Customer code was not specified.</message>
+            </customer_code_not_specified>
         </faults>
         <acl>
             <resources>

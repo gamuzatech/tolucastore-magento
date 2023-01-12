@@ -9,8 +9,6 @@ class Gamuza_Mobile_Model_Cart_Product_Api extends Gamuza_Mobile_Model_Api_Resou
 {
     const PRICE_TYPE_FIXED = 'fixed';
 
-    const DISTRO_STORE_ID = Mage_Core_Model_App::DISTRO_STORE_ID;
-
     protected $_imageCodes = array ('image', 'small_image', 'thumbnail');
 
     /**
@@ -30,14 +28,14 @@ class Gamuza_Mobile_Model_Cart_Product_Api extends Gamuza_Mobile_Model_Api_Resou
      * @param  $store
      * @return bool
      */
-    public function add($store = null, $productsData = null)
+    public function add($code = null, $productsData = null, $store = null)
     {
-        if (empty ($store))
+        if (empty ($code))
         {
-            $this->_fault ('store_not_specified');
+            $this->_fault ('customer_code_not_specified');
         }
 
-        $quote = $this->_getCustomerQuote($store, null, true);
+        $quote = $this->_getCustomerQuote($code, $store, true);
 
         if (empty ($productsData))
         {
@@ -53,15 +51,17 @@ class Gamuza_Mobile_Model_Cart_Product_Api extends Gamuza_Mobile_Model_Api_Resou
 
         $errors = array();
 
+        $storeId = Mage::getStoreConfig (Gamuza_Mobile_Helper_Data::XML_PATH_API_MOBILE_STORE_VIEW, $store);
+
         foreach ($productsData as $productItem)
         {
             if (isset($productItem['product_id']) && intval($productItem['product_id']) > 0)
             {
-                $productByItem = $this->_getProduct($productItem['product_id'], self::DISTRO_STORE_ID, "id");
+                $productByItem = $this->_getProduct($productItem['product_id'], $storeId, "id");
             }
             else if (isset($productItem['sku']) && strlen($productItem['sku']) > 0)
             {
-                $productByItem = $this->_getProduct($productItem['sku'], self::DISTRO_STORE_ID, "sku");
+                $productByItem = $this->_getProduct($productItem['sku'], $storeId, "sku");
             }
             else
             {
@@ -158,11 +158,11 @@ class Gamuza_Mobile_Model_Cart_Product_Api extends Gamuza_Mobile_Model_Api_Resou
      * @param  $store
      * @return bool
      */
-    public function update($store = null, $productsData = null)
+    public function update($code = null, $productsData = null, $store = null)
     {
-        if (empty ($store))
+        if (empty ($code))
         {
-            $this->_fault ('store_not_specified');
+            $this->_fault ('customer_code_not_specified');
         }
 
         $quote = $this->_getCustomerQuote($store);
@@ -181,15 +181,17 @@ class Gamuza_Mobile_Model_Cart_Product_Api extends Gamuza_Mobile_Model_Api_Resou
 
         $errors = array();
 
+        $storeId = Mage::getStoreConfig (Gamuza_Mobile_Helper_Data::XML_PATH_API_MOBILE_STORE_VIEW, $store);
+
         foreach ($productsData as $productItem)
         {
             if (isset($productItem['product_id']) && intval($productItem['product_id']) > 0)
             {
-                $productByItem = $this->_getProduct($productItem['product_id'], self::DISTRO_STORE_ID, "id");
+                $productByItem = $this->_getProduct($productItem['product_id'], $storeId, "id");
             }
             else if (isset($productItem['sku']) && strlen($productItem['sku']) > 0)
             {
-                $productByItem = $this->_getProduct($productItem['sku'], self::DISTRO_STORE_ID, "sku");
+                $productByItem = $this->_getProduct($productItem['sku'], $storeId, "sku");
             }
             else
             {
@@ -263,14 +265,14 @@ class Gamuza_Mobile_Model_Cart_Product_Api extends Gamuza_Mobile_Model_Api_Resou
      * @param  $store
      * @return bool
      */
-    public function remove($store = null, $productsData = null)
+    public function remove($code = null, $productsData = null, $store = null)
     {
-        if (empty ($store))
+        if (empty ($code))
         {
-            $this->_fault ('store_not_specified');
+            $this->_fault ('customer_code_not_specified');
         }
 
-        $quote = $this->_getCustomerQuote($store);
+        $quote = $this->_getCustomerQuote($code, $store);
 
         if (empty ($productsData))
         {
@@ -286,15 +288,17 @@ class Gamuza_Mobile_Model_Cart_Product_Api extends Gamuza_Mobile_Model_Api_Resou
 
         $errors = array();
 
+        $storeId = Mage::getStoreConfig (Gamuza_Mobile_Helper_Data::XML_PATH_API_MOBILE_STORE_VIEW, $store);
+
         foreach ($productsData as $productItem)
         {
             if (isset($productItem['product_id']) && intval($productItem['product_id']) > 0)
             {
-                $productByItem = $this->_getProduct($productItem['product_id'], self::DISTRO_STORE_ID, "id");
+                $productByItem = $this->_getProduct($productItem['product_id'], $storeId, "id");
             }
             else if (isset($productItem['sku']) && strlen($productItem['sku']) > 0)
             {
-                $productByItem = $this->_getProduct($productItem['sku'], self::DISTRO_STORE_ID, "sku");
+                $productByItem = $this->_getProduct($productItem['sku'], $storeId, "sku");
             }
             else
             {
@@ -347,14 +351,14 @@ class Gamuza_Mobile_Model_Cart_Product_Api extends Gamuza_Mobile_Model_Api_Resou
      * @param  $store
      * @return array
      */
-    public function items($store = null)
+    public function items($code = null, $store = null, $media = null)
     {
-        if (empty ($store))
+        if (empty ($code))
         {
-            $this->_fault ('store_not_specified');
+            $this->_fault ('customer_code_not_specified');
         }
 
-        $quote = $this->_getCustomerQuote($store);
+        $quote = $this->_getCustomerQuote($code, $store);
 
         if (!$quote->getItemsCount())
         {
@@ -379,8 +383,10 @@ class Gamuza_Mobile_Model_Cart_Product_Api extends Gamuza_Mobile_Model_Api_Resou
             ;
         }
 
+        $storeId = Mage::getStoreConfig (Gamuza_Mobile_Helper_Data::XML_PATH_API_MOBILE_STORE_VIEW, $store);
+
         $mediaUrl = Mage::app ()
-            ->getStore (Mage_Core_Model_App::DISTRO_STORE_ID)
+            ->getStore (!empty ($media) ? $media : $storeId)
             ->getBaseUrl (Mage_Core_Model_Store::URL_TYPE_MEDIA, false)
         ;
 
@@ -472,7 +478,7 @@ class Gamuza_Mobile_Model_Cart_Product_Api extends Gamuza_Mobile_Model_Api_Resou
                 if (!empty ($value) && !strcmp ($value, 'no_selection'))
                 {
                     $value = Mage::getSingleton ('mobile/core_design_package')
-                        ->setStore (Mage_Core_Model_App::DISTRO_STORE_ID)
+                        ->setStore (!empty ($media) ? $media : $storeId)
                         ->setPackageName ('rwd')
                         ->setTheme ('magento2')
                         ->getSkinUrl ("images/catalog/product/placeholder/{$code}.jpg")
