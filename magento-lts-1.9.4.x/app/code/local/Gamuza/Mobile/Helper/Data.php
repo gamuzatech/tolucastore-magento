@@ -15,8 +15,10 @@ class Gamuza_Mobile_Helper_Data extends Mage_Core_Helper_Abstract
 
     const XML_GLOBAL_PAYMENT_MACHINE_TYPES = 'global/payment/machine/types';
 
-    const DEFAULT_CUSTOMER_TAXVAT = '02788178824';
+    const XML_PATH_API_MOBILE_STORE_VIEW = 'api/mobile/store_view';
 
     const XML_PATH_DEFAULT_EMAIL_PREFIX = 'customer/create_account/email_prefix';
+
+    const DEFAULT_CUSTOMER_TAXVAT = '02788178824';
 }
 

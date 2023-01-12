@@ -14,13 +14,13 @@ trait Gamuza_Mobile_Trait_Api_Resource
      * @param string|int $store
      * @return Mage_Sales_Model_Quote
      */
-    protected function _getCustomerQuote($store, $createNewQuote = false)
+    protected function _getCustomerQuote($customerCode, $store = null, $createNewQuote = false)
     {
-        $storeId = Mage_Core_Model_App::DISTRO_STORE_ID;
+        $storeId = Mage::getStoreConfig (Gamuza_Mobile_Helper_Data::XML_PATH_API_MOBILE_STORE_VIEW, $store);
 
         $customerPrefix = Mage::getStoreConfig (Gamuza_Mobile_Helper_Data::XML_PATH_DEFAULT_EMAIL_PREFIX);
         $customerDomain = Mage::getStoreConfig (Mage_Customer_Model_Customer::XML_PATH_DEFAULT_EMAIL_DOMAIN);
-        $customerEmail  = sprintf ('%s+%s@%s', $customerPrefix, $store, $customerDomain);
+        $customerEmail  = sprintf ('%s+%s@%s', $customerPrefix, $customerCode, $customerDomain);
 
         /** @var $quote Mage_Sales_Model_Quote */
         $quote = Mage::getModel("sales/quote")
@@ -30,7 +30,7 @@ trait Gamuza_Mobile_Trait_Api_Resource
 
         if ((!$quote || !$quote->getId()) && $createNewQuote)
         {
-            $quote = $this->_createNewQuote ($storeId, $store, $customerEmail);
+            $quote = $this->_createNewQuote ($customerCode, $customerEmail, $storeId);
         }
 
         if (!$quote || !$quote->getId())
@@ -49,7 +49,7 @@ trait Gamuza_Mobile_Trait_Api_Resource
      * @param int|string $store
      * @return int
      */
-    protected function _createNewQuote ($storeId, $customerCode, $customerEmail)
+    protected function _createNewQuote ($customerCode, $customerEmail, $storeId)
     {
         $remoteIp = Mage::helper('core/http')->getRemoteAddr(false);
 

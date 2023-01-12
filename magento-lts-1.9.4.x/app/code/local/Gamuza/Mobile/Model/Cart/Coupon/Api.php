@@ -18,9 +18,9 @@ class Gamuza_Mobile_Model_Cart_Coupon_Api extends Mage_Checkout_Model_Cart_Coupo
      * @param  $storeId
      * @return bool
      */
-    public function addCoupon($store = null, $couponCode = null)
+    public function addCoupon($code = null, $couponCode = null, $store = null)
     {
-        return $this->applyCoupon($store, $couponCode);
+        return $this->applyCoupon($code, $couponCode, $store);
     }
 
     /**
@@ -28,11 +28,11 @@ class Gamuza_Mobile_Model_Cart_Coupon_Api extends Mage_Checkout_Model_Cart_Coupo
      * @param  $storeId
      * @return void
      */
-    public function removeCoupon($store = null)
+    public function removeCoupon($code = null, $store = null)
     {
         $couponCode = '';
 
-        return $this->applyCoupon($store, $couponCode);
+        return $this->applyCoupon($code, $couponCode, $store);
     }
 
     /**
@@ -40,14 +40,14 @@ class Gamuza_Mobile_Model_Cart_Coupon_Api extends Mage_Checkout_Model_Cart_Coupo
      * @param  $storeId
      * @return string
      */
-    public function getCoupon($store = null)
+    public function getCoupon($code = null, $store = null)
     {
-        if (empty ($store))
+        if (empty ($code))
         {
-            $this->_fault ('store_not_specified');
+            $this->_fault ('customer_code_not_specified');
         }
 
-        $quote = $this->_getCustomerQuote($store);
+        $quote = $this->_getCustomerQuote($code, $store);
 
         return $quote->getCouponCode();
     }
@@ -58,14 +58,14 @@ class Gamuza_Mobile_Model_Cart_Coupon_Api extends Mage_Checkout_Model_Cart_Coupo
      * @param  $store
      * @return bool
      */
-    protected function applyCoupon($store = null, $couponCode = null)
+    protected function applyCoupon($code = null, $couponCode = null, $store = null)
     {
-        if (empty ($store))
+        if (empty ($code))
         {
-            $this->_fault ('store_not_specified');
+            $this->_fault ('customer_code_not_specified');
         }
 
-        $quote = $this->_getCustomerQuote($store);
+        $quote = $this->_getCustomerQuote($code, $store);
 
         if (!$quote->getItemsCount())
         {

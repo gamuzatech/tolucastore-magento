@@ -86,9 +86,11 @@ class Gamuza_Mobile_Model_Product_Api extends Mage_Catalog_Model_Api_Resource
      * @param null|object|array $filters
      * @return array
      */
-    public function items ($filters = null, $store = null, $category = null)
+    public function items ($filters = null, $store = null, $media = null)
     {
-        $storeId = Mage_Core_Model_App::DISTRO_STORE_ID;
+        $storeId = Mage::getStoreConfig (Gamuza_Mobile_Helper_Data::XML_PATH_API_MOBILE_STORE_VIEW, $store);
+
+        Mage::app ()->setCurrentStore ($storeId); // for bundle selections
 
         $storeCategoryId  = Mage::app ()->getStore ($storeId)->getRootCategoryId ();
         $baseCategoryPath = Mage_Catalog_Model_Category::TREE_ROOT_ID . '/' . $storeCategoryId;
@@ -169,7 +171,7 @@ class Gamuza_Mobile_Model_Product_Api extends Mage_Catalog_Model_Api_Resource
         $result = array ();
 
         $mediaUrl = Mage::app ()
-            ->getStore (Mage_Core_Model_App::DISTRO_STORE_ID)
+            ->getStore (!empty ($media) ? $media : $storeId)
             ->getBaseUrl (Mage_Core_Model_Store::URL_TYPE_MEDIA, false)
         ;
 
@@ -199,7 +201,7 @@ class Gamuza_Mobile_Model_Product_Api extends Mage_Catalog_Model_Api_Resource
                 if (!empty ($value) && !strcmp ($value, 'no_selection'))
                 {
                     $value = Mage::getSingleton ('mobile/core_design_package')
-                        ->setStore (Mage_Core_Model_App::DISTRO_STORE_ID)
+                        ->setStore (!empty ($media) ? $media : $storeId)
                         ->setPackageName ('rwd')
                         ->setTheme ('magento2')
                         ->getSkinUrl ("images/catalog/product/placeholder/{$code}.jpg")
