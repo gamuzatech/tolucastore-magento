@@ -79,7 +79,7 @@ class Gamuza_Mobile_Model_Cart_Payment_Api extends Mage_Checkout_Model_Cart_Paym
             $this->_fault ('customer_code_not_specified');
         }
 
-        $quote = $this->_getCustomerQuote($store);
+        $quote = $this->_getCustomerQuote($code, $store);
 
         $paymentData = $this->_preparePaymentData($paymentData);
 

@@ -162,7 +162,7 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
      * @param null|object|array $filters
      * @return array
      */
-    public function items($filters = null, $store = null)
+    public function items($filters = null)
     {
         $orders = array();
 
@@ -269,7 +269,7 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
      * @param string $orderIncrementId
      * @return array
      */
-    public function info($orderIncrementId = null, $orderProtectCode = null, $store = null)
+    public function info($orderIncrementId = null, $orderProtectCode = null)
     {
         if (empty ($orderIncrementId))
         {
@@ -488,7 +488,7 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
      * @param  string $comment
      * @return boolean
      */
-    public function rate ($orderIncrementId = null, $orderProtectCode = null, $stars = null, $comment = null, $store = null)
+    public function rate ($orderIncrementId = null, $orderProtectCode = null, $stars = null, $comment = null)
     {
         if (empty ($orderIncrementId))
         {
@@ -549,7 +549,7 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
      * @param  string $store
      * @return boolean
      */
-    public function reorder ($orderIncrementId = null, $orderProtectCode = null, $store = null)
+    public function reorder ($orderIncrementId = null, $orderProtectCode = null, $code = null, $store = null)
     {
         if (empty ($orderIncrementId))
         {
@@ -561,23 +561,23 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
             $this->_fault ('code_not_specified');
         }
 
-        if (empty ($store))
+        if (empty ($code))
         {
-            $this->_fault ('store_not_specified');
+            $this->_fault ('customer_code_not_specified');
         }
 
         $order = $this->_initOrder ($orderIncrementId);
 
         try
         {
-            Mage::getModel ('mobile/cart_api')->clear ($store);
+            Mage::getModel ('mobile/cart_api')->clear ($code);
         }
         catch (Exception $e)
         {
             // nothing
         }
 
-        $quote = $this->_getCustomerQuote ($store, null, true);
+        $quote = $this->_getCustomerQuote ($code, $store, true);
 
         $result = false;
 

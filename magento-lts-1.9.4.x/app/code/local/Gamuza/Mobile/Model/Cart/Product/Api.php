@@ -165,7 +165,7 @@ class Gamuza_Mobile_Model_Cart_Product_Api extends Gamuza_Mobile_Model_Api_Resou
             $this->_fault ('customer_code_not_specified');
         }
 
-        $quote = $this->_getCustomerQuote($store);
+        $quote = $this->_getCustomerQuote($code, $store);
 
         if (empty ($productsData))
         {
