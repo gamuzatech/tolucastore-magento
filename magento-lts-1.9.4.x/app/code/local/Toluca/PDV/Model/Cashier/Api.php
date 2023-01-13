@@ -413,7 +413,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             ;
         }
 
-        $differenceAmount = $amount - ($closeAmount + $orderAmount);
+        $differenceAmount = round ($amount - ($closeAmount + $orderAmount), 4);
 
         if ($differenceAmount != 0)
         {
