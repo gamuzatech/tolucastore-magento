@@ -169,7 +169,7 @@ class Toluca_PDV_Block_Adminhtml_History_Grid extends Mage_Adminhtml_Block_Widge
             'currency_code' => $store->getBaseCurrency()->getCode(),
 		));
 		$this->addColumn ('openpix_amount', array(
-		    'header'  => Mage::helper ('pdv')->__('OpenPIX'),
+		    'header'  => Mage::helper ('pdv')->__('OpenPix'),
 		    'align'   => 'right',
 	        'type'    => 'price',
 		    'index'   => 'openpix_amount',

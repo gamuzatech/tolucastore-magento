@@ -132,7 +132,7 @@ SQLBLOCK;
             'length'   => '12,4',
             'unsigned' => true,
             'nullable' => false,
-            'comment'  => 'OpenPIX Amount',
+            'comment'  => 'OpenPix Amount',
         ));
 
     $installer->getConnection ()
