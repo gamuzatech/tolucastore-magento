@@ -7,4 +7,7 @@
 "Cash amount must be equal or greater than %s.","O valor do dinheiro deve ser igual ou maior que %s."
 "Rating %s star(s): %s","Avaliação %s estrela(s): %s"
 "Default Email Prefix","Prefixo do Email Padrão"
+"Order: %s-%s","Pedido: %s-%s"
+"Customer: %s","Cliente: %s"
+"Total Items Qty: %s","Qtde Total Itens: %s"
 

@@ -635,6 +635,37 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
     }
 
     /**
+     * Retrieve full order information
+     *
+     * @param string $orderIncrementId
+     * @return array
+     */
+    public function draft($orderIncrementId = null, $orderProtectCode = null)
+    {
+        if (empty ($orderIncrementId))
+        {
+            $this->_fault ('order_not_specified');
+        }
+
+        if (empty ($orderProtectCode))
+        {
+            $this->_fault ('code_not_specified');
+        }
+
+        $order = $this->_initOrder($orderIncrementId, $orderProtectCode);
+
+        $result = Mage::app ()
+            ->getLayout ()
+            ->createBlock ('adminhtml/template')
+            ->setArea (Mage_Core_Model_App_Area::AREA_ADMINHTML)
+            ->setOrder ($order)
+            ->setTemplate ('gamuza/mobile/order/draft.phtml')
+            ->toHtml ();
+
+        return wordwrap(strip_tags($result), 30);
+    }
+
+    /**
      * Initialize basic order model
      *
      * @param mixed $orderIncrementId

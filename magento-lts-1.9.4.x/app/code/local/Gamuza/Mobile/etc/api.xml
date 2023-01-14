@@ -428,6 +428,10 @@
                         <title>Reorder order information</title>
                         <acl>mobile/order/reorder</acl>
                     </reorder>
+                    <draft translate="title" module="mobile">
+                        <title>Draft order information</title>
+                        <acl>mobile/order/draft</acl>
+                    </draft>
                 </methods>
                 <faults translate="message" module="mobile">
                     <customer_not_exists>
@@ -593,6 +597,9 @@
                         <reorder translate="title" module="mobile">
                             <title>Reorder</title>
                         </reorder>
+                        <draft translate="title" module="mobile">
+                            <title>Draft order information</title>
+                        </draft>
                      </order>
                 </mobile>
             </resources>
