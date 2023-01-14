@@ -9,7 +9,7 @@ $_cashier   = $this->getCashier ();
 $_operator  = $this->getOperator ();
 $_history   = $this->getHistory ();
 
-echo sprintf ('%s: %s', Mage::helper ('pdv')->__('Datetime'), Mage::getModel ('core/date')->date ('d/m/Y H:i:s')) . PHP_EOL;
+echo sprintf ('%s: %s', Mage::helper ('pdv')->__('Datetime'), Mage::getModel ('core/locale')->date ()) . PHP_EOL;
 echo str_repeat ('-', 30) . PHP_EOL;
 
 echo sprintf ('%s: %s - %s', Mage::helper ('pdv')->__('Cashier'), $_cashier->getId (), $_cashier->getName ()) . PHP_EOL;
@@ -17,8 +17,8 @@ echo sprintf ('%s: %s - %s', Mage::helper ('pdv')->__('Operator'), $_operator->g
 echo sprintf ('%s: %s', Mage::helper ('pdv')->__('History'), $_history->getId ()) . PHP_EOL;
 echo str_repeat ('-', 30) . PHP_EOL;
 
-echo sprintf ('%s: %s', Mage::helper ('pdv')->__('Opened At'), Mage::getModel ('core/date')->date (null, $_history->getOpenedAt ())) . PHP_EOL;
-echo sprintf ('%s: %s', Mage::helper ('pdv')->__('Closed At'), Mage::getModel ('core/date')->date (null, $_history->getClosedAt ())) . PHP_EOL;
+echo sprintf ('%s: %s', Mage::helper ('pdv')->__('Opened At'), Mage::getModel ('core/locale')->date ($_history->getOpenedAt ())) . PHP_EOL;
+echo sprintf ('%s: %s', Mage::helper ('pdv')->__('Closed At'), Mage::getModel ('core/locale')->date ($_history->getClosedAt ())) . PHP_EOL;
 echo str_repeat ('-', 30) . PHP_EOL;
 
 echo sprintf ('%s: %s', Mage::helper ('pdv')->__('Open'), Mage::helper ('core')->currency ($_history->getOpenAmount (), true, false)) . PHP_EOL;
