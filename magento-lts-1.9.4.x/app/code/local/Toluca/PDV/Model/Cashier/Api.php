@@ -226,6 +226,76 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         return $result;
     }
 
+    public function draft ($cashier_id, $operation = null)
+    {
+        if (empty ($cashier_id))
+        {
+            $this->_fault ('cashier_not_specified');
+        }
+
+        $cashier = Mage::getModel ('pdv/cashier')->getCollection ()
+            ->addFieldToFilter ('is_active', array ('eq' => true))
+            ->addFieldToFilter ('entity_id', array ('eq' => $cashier_id))
+            ->getFirstItem ()
+        ;
+
+        if (!$cashier || !$cashier->getId ())
+        {
+            $this->_fault ('cashier_not_exists');
+        }
+
+        $operator = Mage::getModel ('pdv/operator')->getCollection ()
+            ->addFieldToFilter ('is_active', array ('eq' => true))
+            ->addFieldToFilter ('entity_id', array ('eq' => $cashier->getOperatorId ()))
+            ->getFirstItem ()
+        ;
+
+        if (!$operator || !$operator->getId ())
+        {
+            $this->_fault ('operator_not_exists');
+        }
+
+        $history = Mage::getModel ('pdv/history')->load ($cashier->getHistoryId ());
+
+        if (!$history || !$history->getId ())
+        {
+            $this->_fault ('history_not_exists');
+        }
+
+        $customerEmail = Mage::helper ('pdv')->getCustomerEmail ('%');
+
+        $collection = Mage::getModel ('sales/order')->getCollection ()
+            ->addFieldToFilter ('is_pdv', array ('eq' => true))
+            ->addFieldToFilter ('customer_email', array ('like' => $customerEmail))
+            ->addFieldToFilter ('pdv_cashier_id', array ('eq' => $cashier->getId ()))
+            ->addFieldToFilter ('pdv_operator_id', array ('eq' => $operator->getId ()))
+        ;
+
+        $collection->getSelect ()
+            ->columns (array(
+                'sum_base_grand_total' => 'SUM(base_grand_total)'
+            ))
+        ;
+
+        if ($collection->getSize () > 0)
+        {
+            $history->setOrderAmount (floatval ($collection->getFirstItem ()->getSumBaseGrandTotal ()));
+        }
+
+        $result = Mage::app ()
+            ->getLayout ()
+            ->createBlock ('adminhtml/template')
+            ->setArea (Mage_Core_Model_App_Area::AREA_ADMINHTML)
+            ->setOperation ($operation)
+            ->setCashier ($cashier)
+            ->setOperator ($operator)
+            ->setHistory ($history)
+            ->setTemplate ('toluca/pdv/cashier/draft.phtml')
+            ->toHtml ();
+
+        return $result;
+    }
+
     public function open ($amount, $operator_id, $password, $message)
     {
         $cashier = $this->_getCashier ($amount, $operator_id, $password);

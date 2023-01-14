@@ -45,6 +45,10 @@
                         <title>Create a new quote for cashier</title>
                         <acl>pdv/cashier/quote</acl>
                     </quote>
+                    <draft translate="title" module="pdv">
+                        <title>Create a new draft for cashier</title>
+                        <acl>pdv/cashier/draft</acl>
+                    </draft>
                 </methods>
                 <faults translate="message" module="pdv">
                     <cashier_not_specified>
@@ -139,6 +143,9 @@
                         <quote translate="title" module="pdv">
                             <title>Create a new quote for cashier</title>
                         </quote>
+                        <draft translate="title" module="pdv">
+                            <title>Create a new draft for cashier</title>
+                        </draft>
                     </cashier>
                 </pdv>
             </resources>

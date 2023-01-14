@@ -1,0 +1,50 @@
+<?php
+/**
+ * @package     Gamuza_Mobile
+ * @copyright   Copyright (c) 2017 Gamuza Technologies (http://www.gamuza.com.br/)
+ * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
+ */
+
+$_cashier   = $this->getCashier ();
+$_operator  = $this->getOperator ();
+$_history   = $this->getHistory ();
+
+echo sprintf ('%s: %s', Mage::helper ('pdv')->__('Datetime'), Mage::getModel ('core/date')->date ('d/m/Y H:i:s')) . PHP_EOL;
+echo str_repeat ('-', 30) . PHP_EOL;
+
+echo sprintf ('%s: %s - %s', Mage::helper ('pdv')->__('Cashier'), $_cashier->getId (), $_cashier->getName ()) . PHP_EOL;
+echo sprintf ('%s: %s - %s', Mage::helper ('pdv')->__('Operator'), $_operator->getId (), $_operator->getName ()) . PHP_EOL;
+echo sprintf ('%s: %s', Mage::helper ('pdv')->__('History'), $_history->getId ()) . PHP_EOL;
+echo str_repeat ('-', 30) . PHP_EOL;
+
+echo sprintf ('%s: %s', Mage::helper ('pdv')->__('Opened At'), Mage::getModel ('core/date')->date (null, $_history->getOpenedAt ())) . PHP_EOL;
+echo sprintf ('%s: %s', Mage::helper ('pdv')->__('Closed At'), Mage::getModel ('core/date')->date (null, $_history->getClosedAt ())) . PHP_EOL;
+echo str_repeat ('-', 30) . PHP_EOL;
+
+echo sprintf ('%s: %s', Mage::helper ('pdv')->__('Open'), Mage::helper ('core')->currency ($_history->getOpenAmount (), true, false)) . PHP_EOL;
+echo sprintf ('%s: %s', Mage::helper ('pdv')->__('Reinforce'), Mage::helper ('core')->currency ($_history->getReinforceAmount (), true, false)) . PHP_EOL;
+echo sprintf ('%s: %s', Mage::helper ('pdv')->__('Bleed'), Mage::helper ('core')->currency ($_history->getBleedAmount (), true, false)) . PHP_EOL;
+echo sprintf ('%s: %s', Mage::helper ('pdv')->__('Money'), Mage::helper ('core')->currency ($_history->getMoneyAmount (), true, false)) . PHP_EOL;
+echo sprintf ('%s: %s', Mage::helper ('pdv')->__('Money Change'), Mage::helper ('core')->currency ($_history->getChangeAmount (), true, false)) . PHP_EOL;
+echo sprintf ('%s: %s', Mage::helper ('pdv')->__('Close'), Mage::helper ('core')->currency ($_history->getCloseAmount (), true, false)) . PHP_EOL;
+echo sprintf ('%s: %s', Mage::helper ('pdv')->__('Total'), Mage::helper ('core')->currency ($_history->getTotalAmount (), true, false)) . PHP_EOL;
+echo str_repeat ('-', 30) . PHP_EOL;
+
+echo sprintf ('%s: %s', Mage::helper ('pdv')->__('Machine'), Mage::helper ('core')->currency ($_history->getMachineAmount (), true, false)) . PHP_EOL;
+echo sprintf ('%s: %s', Mage::helper ('pdv')->__('PagCripto'), Mage::helper ('core')->currency ($_history->getPagcriptoAmount (), true, false)) . PHP_EOL;
+echo sprintf ('%s: %s', Mage::helper ('pdv')->__('PicPay'), Mage::helper ('core')->currency ($_history->getPicpayAmount (), true, false)) . PHP_EOL;
+echo sprintf ('%s: %s', Mage::helper ('pdv')->__('OpenPIX'), Mage::helper ('core')->currency ($_history->getOpenpixAmount (), true, false)) . PHP_EOL;
+echo sprintf ('%s: %s', Mage::helper ('pdv')->__('Credit Card'), Mage::helper ('core')->currency ($_history->getCreditcardAmount (), true, false)) . PHP_EOL;
+echo sprintf ('%s: %s', Mage::helper ('pdv')->__('Billet'), Mage::helper ('core')->currency ($_history->getBilletAmount (), true, false)) . PHP_EOL;
+echo sprintf ('%s: %s', Mage::helper ('pdv')->__('Bank Transfer'), Mage::helper ('core')->currency ($_history->getBanktransferAmount (), true, false)) . PHP_EOL;
+echo sprintf ('%s: %s', Mage::helper ('pdv')->__('Check Money'), Mage::helper ('core')->currency ($_history->getCheckAmount (), true, false)) . PHP_EOL;
+echo str_repeat ('-', 30) . PHP_EOL;
+
+echo sprintf ('%s: %s', Mage::helper ('pdv')->__('Order'), Mage::helper ('core')->currency ($_history->getOrderAmount (), true, false)) . PHP_EOL;
+echo str_repeat ('-', 30) . PHP_EOL;
+
+echo Mage::getStoreConfig ('general/store_information/name') . PHP_EOL;
+echo Mage::getStoreConfig ('general/store_information/address') . PHP_EOL;
+echo Mage::getStoreConfig ('general/store_information/phone') . PHP_EOL;
+echo str_repeat ('-', 30) . PHP_EOL;
+
