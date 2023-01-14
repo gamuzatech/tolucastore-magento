@@ -159,6 +159,14 @@ SQLBLOCK;
             'nullable' => false,
             'comment'  => 'Bank Transfer Amount',
         ));
+    $installer->getConnection ()
+        ->addColumn ($table, 'check_amount', array(
+            'type'     => Varien_Db_Ddl_Table::TYPE_DECIMAL,
+            'length'   => '12,4',
+            'unsigned' => true,
+            'nullable' => false,
+            'comment'  => 'Check Amount',
+        ));
 
     $installer->getConnection ()
         ->addColumn ($table, 'shipping_amount', array(

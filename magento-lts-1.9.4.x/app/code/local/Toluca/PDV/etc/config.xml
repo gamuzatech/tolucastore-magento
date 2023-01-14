@@ -168,6 +168,7 @@
                 <creditcard>rm_pagseguro_cc</creditcard>
                 <billet>pagseguropro_boleto</billet>
                 <banktransfer>banktransfer</banktransfer>
+                <check>checkmo</check>
             </payment_method>
         </pdv>
     </default>

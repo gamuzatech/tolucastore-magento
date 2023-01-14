@@ -28,6 +28,7 @@ class Toluca_PDV_Block_Adminhtml_History_Grid extends Mage_Adminhtml_Block_Widge
         'creditcard_amount' => 0,
         'billet_amount' => 0,
         'banktransfer_amount' => 0,
+        'check_amount' => 0,
 
         'shipping_amount' => 0,
         'total_amount' => 0,
@@ -194,6 +195,13 @@ class Toluca_PDV_Block_Adminhtml_History_Grid extends Mage_Adminhtml_Block_Widge
 		    'align'   => 'right',
 	        'type'    => 'price',
 		    'index'   => 'banktransfer_amount',
+            'currency_code' => $store->getBaseCurrency()->getCode(),
+		));
+		$this->addColumn ('check_amount', array(
+		    'header'  => Mage::helper ('pdv')->__('Check Money'),
+		    'align'   => 'right',
+	        'type'    => 'price',
+		    'index'   => 'check_amount',
             'currency_code' => $store->getBaseCurrency()->getCode(),
 		));
 
