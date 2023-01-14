@@ -103,6 +103,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
                     'creditcard_amount'   => floatval ($history->getCreditcardAmount ()),
                     'billet_amount'       => floatval ($history->getBilletAmount ()),
                     'banktransfer_amount' => floatval ($history->getBanktransferAmount ()),
+                    'check_amount'        => floatval ($history->getCheckAmount ()),
                     'shipping_amount' => floatval ($history->getShippingAmount ()),
                     'total_amount'    => floatval ($history->getTotalAmount ()),
                     'created_at' => $history->getCreatedAt (),
@@ -185,6 +186,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
                 'creditcard_amount'   => floatval ($history->getCreditcardAmount ()),
                 'billet_amount'       => floatval ($history->getBilletAmount ()),
                 'banktransfer_amount' => floatval ($history->getBanktransferAmount ()),
+                'check_amount'        => floatval ($history->getCheckAmount ()),
                 'shipping_amount' => floatval ($history->getShippingAmount ()),
                 'total_amount'    => floatval ($history->getTotalAmount ()),
                 'created_at' => $history->getCreatedAt (),
@@ -326,6 +328,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             ->setCreditcardAmount (0)
             ->setBilletAmount (0)
             ->setBanktransferAmount (0)
+            ->setCheckAmount (0)
             ->setShippingAmount (0)
             ->setTotalAmount (0)
             ->setCreatedAt (date ('c'))
@@ -476,10 +479,11 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             $creditcardAmount   = floatval ($history->getCreditcardAmount ());
             $billetAmount       = floatval ($history->getBilletAmount ());
             $banktransferAmount = floatval ($history->getBanktransferAmount ());
+            $checkAmount        = floatval ($history->getCheckAmount ());
 
             $orderAmount = $machineAmount
                 + $pagcriptoAmount + $picpayAmount + $openpixAmount
-                + $creditcardAmount + $billetAmount + $banktransferAmount
+                + $creditcardAmount + $billetAmount + $banktransferAmount + $checkAmount
             ;
         }
 
