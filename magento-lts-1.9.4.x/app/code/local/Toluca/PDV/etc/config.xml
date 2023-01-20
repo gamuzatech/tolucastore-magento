@@ -115,6 +115,14 @@
                     </pdv_sales_order_invoice_pay>
                 </observers>
             </sales_order_invoice_pay>
+            <basic_install_installer_finish_after>
+                <observers>
+                    <pdv_install_installer_finish_after>
+                        <class>Toluca_PDV_Model_Observer</class>
+                        <method>installInstallerFinishAfter</method>
+                    </pdv_install_installer_finish_after>
+                </observers>
+            </basic_install_installer_finish_after>
         </events>
     </global>
     <admin>

@@ -150,5 +150,18 @@ class Toluca_PDV_Model_Observer
             }
         }
     }
+
+    public function installInstallerFinishAfter ($observer)
+    {
+        $event     = $observer->getEvent ();
+        $installer = $event->getInstaller ();
+
+        $apiUser = Mage::getModel ('api/user')->loadByUsername (Toluca_PDV_Helper_Data::DEFAULT_API_USER);
+
+        if ($apiUser && $apiUser->getId ())
+        {
+            $apiUser->getResource()->save($apiUser->setIsSystem(true));
+        }
+    }
 }
 
