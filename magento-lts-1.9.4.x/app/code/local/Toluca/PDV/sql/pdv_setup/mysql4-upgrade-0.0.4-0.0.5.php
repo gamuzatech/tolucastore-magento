@@ -59,7 +59,7 @@ SQLBLOCK;
         ->addColumn ($table, 'bleed_amount', array(
             'type'     => Varien_Db_Ddl_Table::TYPE_DECIMAL,
             'length'   => '12,4',
-            'unsigned' => true,
+            'unsigned' => false,
             'nullable' => false,
             'comment'  => 'Bleed Amount',
         ));
@@ -97,7 +97,7 @@ SQLBLOCK;
         ->addColumn ($table, 'change_amount', array(
             'type'     => Varien_Db_Ddl_Table::TYPE_DECIMAL,
             'length'   => '12,4',
-            'unsigned' => true,
+            'unsigned' => false,
             'nullable' => false,
             'comment'  => 'Change Amount',
         ));
