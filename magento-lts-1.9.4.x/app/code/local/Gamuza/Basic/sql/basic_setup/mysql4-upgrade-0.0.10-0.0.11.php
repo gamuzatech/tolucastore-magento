@@ -43,8 +43,9 @@ $write->beginTransaction ();
 
 try
 {
+    /*
     $write->delete ($table);
-
+    */
     foreach ($resourcesList2D as $resource)
     {
         $row ['resource_id'] = $resource;
