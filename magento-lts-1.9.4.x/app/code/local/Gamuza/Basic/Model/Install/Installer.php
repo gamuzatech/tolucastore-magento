@@ -32,6 +32,10 @@ class Gamuza_Basic_Model_Install_Installer extends Mage_Install_Model_Installer
         {
             $apiUser->getResource()->save($apiUser->setIsSystem(true));
         }
+
+        Mage::dispatchEvent('basic_install_installer_finish_after',
+            array('installer' => $this)
+        );
     }
 }
 
