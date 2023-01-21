@@ -123,7 +123,7 @@ class Toluca_PDV_Model_Observer
             ;
 
             $history->setMoneyAmount (floatval ($history->getMoneyAmount ()) + $amount)
-                ->setChangeAmount (floatval ($history->getChangeAmount ()) + $changeAmount)
+                ->setChangeAmount (floatval ($history->getChangeAmount ()) + (- $changeAmount))
                 ->setUpdatedAt (date ('c'))
                 ->save ()
             ;
