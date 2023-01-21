@@ -111,6 +111,8 @@ class Mage_Catalog_Model_Product_Attribute_Media_Api extends Mage_Catalog_Model_
      * @param string|null $identifierType
      * @return string
      * @throws Mage_Api_Exception
+     *
+     * @SuppressWarnings(PHPMD.ErrorControlOperator)
      */
     public function create($productId, $data, $store = null, $identifierType = null)
     {
@@ -156,7 +158,7 @@ class Mage_Catalog_Model_Product_Attribute_Media_Api extends Mage_Catalog_Model_
             // try to create Image object - it fails with Exception if image is not supported
             try {
                 $filePath = $tmpDirectory . DS . $fileName;
-                new Varien_Image($filePath);
+                Mage::getModel('varien/image', $filePath);
                 Mage::getModel('core/file_validator_image')->validate($filePath);
             } catch (Exception $e) {
                 // Remove temporary directory
@@ -202,6 +204,8 @@ class Mage_Catalog_Model_Product_Attribute_Media_Api extends Mage_Catalog_Model_
      * @param string|null $identifierType
      * @return bool
      * @throws Mage_Api_Exception
+     *
+     * @SuppressWarnings(PHPMD.ErrorControlOperator)
      */
     public function update($productId, $file, $data, $store = null, $identifierType = null)
     {
