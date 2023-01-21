@@ -466,7 +466,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         $moneyAmount     = floatval ($history->getMoneyAmount ());
         $changeAmount    = floatval ($history->getChangeAmount ());
 
-        $closeAmount = ((($openAmount + $reinforceAmount) - $bleedAmount) + $moneyAmount) - $changeAmount;
+        $closeAmount = ((($openAmount + $reinforceAmount) + $bleedAmount) + $moneyAmount) + $changeAmount;
 
         $orderAmount = 0;
 
@@ -498,7 +498,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('cashier_invalid_amount', $message);
         }
 
-        $history->setCloseAmount ($amount)
+        $history->setCloseAmount (- $amount)
             ->setClosedAt (date ('c'))
             ->setUpdatedAt (date ('c'))
             ->save ()
