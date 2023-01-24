@@ -10,12 +10,12 @@ $installer->startSetup ();
 
 $installer->addAttribute(
     'customer',
-    Gamuza_Basic_Helper_Data::CUSTOMER_ATTRIBUTE_SECONDARYNAME,
+    Gamuza_Basic_Helper_Data::CUSTOMER_ATTRIBUTE_SECONDARY_NAME,
     array(
         'type'         => 'varchar',
         'length'       => 255,
         'input'        => 'text',
-        'label'        => Mage::helper ('basic')->__('Secondaryname'),
+        'label'        => Mage::helper ('basic')->__('Secondary Name'),
         'visible'      => true,
         'required'     => false,
         'user_defined' => false,
@@ -32,7 +32,7 @@ $forms = array(
 );
 
 $attribute = Mage::getSingleton ('eav/config')->getAttribute(
-    $installer->getEntityTypeId ('customer'), Gamuza_Basic_Helper_Data::CUSTOMER_ATTRIBUTE_SECONDARYNAME)
+    $installer->getEntityTypeId ('customer'), Gamuza_Basic_Helper_Data::CUSTOMER_ATTRIBUTE_SECONDARY_NAME)
 ;
 $attribute->setData ('used_in_forms', $forms)
     ->setData('is_system', true)

@@ -15,7 +15,7 @@ class Gamuza_Basic_Helper_Data extends Mage_Core_Helper_Abstract
 
     const CATEGORY_ATTRIBUTE_SKU = 'sku';
 
-    const CUSTOMER_ATTRIBUTE_SECONDARYNAME = 'secondaryname';
+    const CUSTOMER_ATTRIBUTE_SECONDARY_NAME = 'secondary_name';
 
     const CUSTOMER_GENDER_MALE   = 1;
     const CUSTOMER_GENDER_FEMALE = 2;
