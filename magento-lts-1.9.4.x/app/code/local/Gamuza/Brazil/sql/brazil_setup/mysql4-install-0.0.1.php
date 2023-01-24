@@ -10,7 +10,7 @@ $installer->startSetup ();
 
 $installer->addAttribute(
     'customer',
-    Gamuza_Brazil_Helper_Data::CUSTOMER_ATTRIBUTE_RGIE,
+    Gamuza_Brazil_Helper_Data::CUSTOMER_ATTRIBUTE_RG_IE,
     array(
         'type'         => 'varchar',
         'length'       => 255,
@@ -32,7 +32,7 @@ $forms = array(
 );
 
 $attribute = Mage::getSingleton ('eav/config')->getAttribute(
-    $installer->getEntityTypeId ('customer'), Gamuza_Brazil_Helper_Data::CUSTOMER_ATTRIBUTE_RGIE)
+    $installer->getEntityTypeId ('customer'), Gamuza_Brazil_Helper_Data::CUSTOMER_ATTRIBUTE_RG_IE)
 ;
 $attribute->setData ('used_in_forms', $forms)
     ->setData('is_system', true)

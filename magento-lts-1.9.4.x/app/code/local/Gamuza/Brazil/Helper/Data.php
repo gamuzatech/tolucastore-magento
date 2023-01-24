@@ -7,6 +7,6 @@
 
 class Gamuza_Brazil_Helper_Data extends Mage_Core_Helper_Abstract
 {
-    const CUSTOMER_ATTRIBUTE_RGIE = 'br_rgie';
+    const CUSTOMER_ATTRIBUTE_RG_IE = 'br_rg_ie';
 }
 
