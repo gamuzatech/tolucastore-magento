@@ -42,8 +42,17 @@ $applyToAttributes = array(
 
 foreach ($applyToAttributes as $attributeCode)
 {
-    // ALL: simple,configurable,virtual,bundle,downloadable,service
-    $installer->updateAttribute ('catalog_product', $attributeCode, 'apply_to', new Zend_Db_Expr('NULL'));
+    $installer->updateAttribute ('catalog_product', $attributeCode, 'apply_to', 'simple,configurable,virtual,bundle,downloadable,service');
+}
+
+$applyToAttributes = array(
+    'is_recurring',
+    'recurring_profile',
+);
+
+foreach ($applyToAttributes as $attributeCode)
+{
+    $installer->updateAttribute ('catalog_product', $attributeCode, 'apply_to', 'simple,virtual,service');
 }
 
 $rootCategoryId = Mage::getModel ('core/store')
