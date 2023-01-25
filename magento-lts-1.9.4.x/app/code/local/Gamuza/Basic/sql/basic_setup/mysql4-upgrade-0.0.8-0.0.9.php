@@ -52,7 +52,7 @@ $installer->addAttribute ('catalog_product', Gamuza_Basic_Helper_Data::PRODUCT_A
     'filterable_in_search' => true,
     'used_for_promo_rules' => true,
     'used_in_product_listing' => true,
-    'used_for_sort_by' => true,
+    'used_for_sort_by' => false,
 ));
 
 $installer->endSetup ();
