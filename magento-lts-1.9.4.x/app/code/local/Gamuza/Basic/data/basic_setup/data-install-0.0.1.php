@@ -23,7 +23,28 @@ $installer->updateAttribute ('catalog_product', 'description',       'is_require
 $installer->updateAttribute ('catalog_product', 'short_description', 'frontend_input', 'text');
 $installer->updateAttribute ('catalog_product', 'url_key',           'frontend_input', 'label');
 $installer->updateAttribute ('catalog_product', 'tax_class_id',      'default_value',  '0');
-$installer->updateAttribute ('catalog_product', 'cost',              'apply_to', 'simple,configurable,virtual,bundle,downloadable');
+
+$applyToAttributes = array(
+    'price',
+    'special_price',
+    'special_from_date',
+    'special_to_date',
+    'cost',
+    'group_price',
+    'tier_price',
+    'minimal_price',
+    'country_of_manufacture',
+    'msrp_enabled',
+    'msrp_display_actual_price_type',
+    'msrp',
+    'tax_class_id',
+);
+
+foreach ($applyToAttributes as $attributeCode)
+{
+    // ALL: simple,configurable,virtual,bundle,downloadable,service
+    $installer->updateAttribute ('catalog_product', $attributeCode, 'apply_to', new Zend_Db_Expr('NULL'));
+}
 
 $rootCategoryId = Mage::getModel ('core/store')
     ->load (Mage_Core_Model_App::DISTRO_STORE_ID)
