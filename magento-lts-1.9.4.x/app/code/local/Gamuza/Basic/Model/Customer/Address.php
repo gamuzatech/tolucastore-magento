@@ -11,6 +11,27 @@
 class Gamuza_Basic_Model_Customer_Address extends Mage_Customer_Model_Address
 {
     /**
+     * Return Region ID
+     *
+     * @return int
+     */
+    public function getRegionId()
+    {
+        return Mage_Customer_Model_Address_Abstract::getRegionId();
+    }
+
+    /**
+     * Set Region ID. $regionId is automatically converted to integer
+     *
+     * @param int $regionId
+     * @return $this
+     */
+    public function setRegionId($regionId)
+    {
+        return Mage_Customer_Model_Address_Abstract::setRegionId($regionId);
+    }
+
+    /**
      * Perform basic validation
      *
      * @return void
