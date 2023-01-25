@@ -40,5 +40,34 @@ $attribute->setData ('used_in_forms', $forms)
 ;
 $attribute->save ();
 
+$installer->addAttribute(
+    'customer',
+    Gamuza_Basic_Helper_Data::CUSTOMER_ATTRIBUTE_CODE,
+    array(
+        'type'         => 'varchar',
+        'length'       => 255,
+        'input'        => 'text',
+        'label'        => Mage::helper ('basic')->__('Code'),
+        'visible'      => true,
+        'required'     => false,
+        'user_defined' => false,
+        'unique'       => true,
+    )
+);
+
+$forms = array(
+    'adminhtml_customer',
+);
+
+$attribute = Mage::getSingleton ('eav/config')->getAttribute(
+    $installer->getEntityTypeId ('customer'), Gamuza_Basic_Helper_Data::CUSTOMER_ATTRIBUTE_CODE)
+;
+$attribute->setData ('used_in_forms', $forms)
+    ->setData('is_system', true)
+    ->setData('sort_order', 1000)
+;
+$attribute->save ();
+
+
 $installer->endSetup ();
 

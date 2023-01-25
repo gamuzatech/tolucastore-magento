@@ -13,8 +13,10 @@ class Gamuza_Basic_Helper_Data extends Mage_Core_Helper_Abstract
     const DEFAULT_API_NAME  = 'Toluca Store Desktop';
     const DEFAULT_API_EMAIL = 'desktop@toluca.com.br';
 
+    const CATEGORY_ATTRIBUTE_CODE = 'code';
     const CATEGORY_ATTRIBUTE_SKU = 'sku';
 
+    const CUSTOMER_ATTRIBUTE_CODE = 'code';
     const CUSTOMER_ATTRIBUTE_SECONDARY_NAME = 'secondary_name';
 
     const CUSTOMER_GENDER_MALE   = 1;
@@ -35,6 +37,7 @@ class Gamuza_Basic_Helper_Data extends Mage_Core_Helper_Abstract
     const ORDER_SUFFIX_MOBILE = 'MOBILE';
 
     const PRODUCT_ATTRIBUTE_BRAND = 'brand';
+    const PRODUCT_ATTRIBUTE_CODE = 'code';
     const PRODUCT_ATTRIBUTE_COLOR = 'color';
     const PRODUCT_ATTRIBUTE_MANUFACTURER = 'manufacturer';
     const PRODUCT_ATTRIBUTE_SIZE = 'size';

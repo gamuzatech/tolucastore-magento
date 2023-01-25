@@ -43,5 +43,22 @@ $installer->addAttribute ('catalog_category', Gamuza_Basic_Helper_Data::CATEGORY
     'sort_order'       => 1000,
 ));
 
+$installer->addAttribute ('catalog_category', Gamuza_Basic_Helper_Data::CATEGORY_ATTRIBUTE_CODE, array(
+    'type'             => 'varchar',
+    'label'            => Mage::helper ('basic')->__('Code'),
+    'input'            => 'text',
+    'global'           => Mage_Catalog_Model_Resource_Eav_Attribute::SCOPE_GLOBAL,
+    'visible'          => true,
+    'required'         => false,
+    'user_defined'     => false,
+    'searchable'       => false,
+    'filterable'       => false,
+    'comparable'       => false,
+    'visible_on_front' => false,
+    'unique'           => true,
+    'group'            => Mage::helper ('basic')->__('ERP'),
+    'sort_order'       => 1000,
+));
+
 $installer->endSetup ();
 
