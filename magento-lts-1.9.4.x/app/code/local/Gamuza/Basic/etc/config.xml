@@ -212,6 +212,18 @@
                 </observers>
             </catalog_product_save_after>
         </events>
+        <catalog>
+            <product>
+                <type>
+                    <service translate="label" module="basic">
+                        <label>Service Product</label>
+                        <model>basic/catalog_product_type_service</model>
+                        <composite>0</composite>
+                        <index_priority>100</index_priority>
+                    </service>
+                </type>
+            </product>
+        </catalog>
         <sales>
             <quote>
                 <item>
