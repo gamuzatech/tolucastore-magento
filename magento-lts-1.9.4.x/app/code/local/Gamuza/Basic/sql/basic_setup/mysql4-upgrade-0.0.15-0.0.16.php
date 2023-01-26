@@ -107,7 +107,7 @@ $attribute->setData ('used_in_forms', $forms)
         'min_text_length' => 1
     ))
     ->setData('is_system', true)
-    ->setData('sort_order', 125)
+    ->setData('sort_order', 115)
 ;
 $attribute->save ();
 

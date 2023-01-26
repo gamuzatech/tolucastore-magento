@@ -227,7 +227,6 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
                     'mode'       => 'billing',
                     'firstname'  => $senderName [0],
                     'lastname'   => $senderName [1],
-                    'company'    => null,
                     'street'     => array (
                         Mage::getStoreConfig ('shipping/origin/street_line1', $storeId),
                         Mage::getStoreConfig ('shipping/origin/street_line2', $storeId),
@@ -238,8 +237,7 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
                     'region'     => Mage::getStoreConfig ('shipping/origin/region_id', $storeId),
                     'country_id' => Mage::getStoreConfig ('shipping/origin/country_id', $storeId),
                     'postcode'   => $shippingPostcode,
-                    'telephone'  => null,
-                    'fax'        => substr ($from, -13),
+                    'cellphone'  => substr ($from, -13),
                     'use_for_shipping' => 1,
                 )
             ), $storeId);
@@ -773,14 +771,12 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
                             'mode'       => 'billing',
                             'firstname'  => $senderName [0],
                             'lastname'   => $senderName [1],
-                            'company'    => null,
                             'street'     => array ($matches [1], $streetNumber, null, $streetDistrict),
                             'city'       => Mage::getStoreConfig ('shipping/origin/city', $storeId),
                             'region'     => Mage::getStoreConfig ('shipping/origin/region_id', $storeId),
                             'country_id' => Mage::getStoreConfig ('shipping/origin/country_id', $storeId),
                             'postcode'   => $shippingPostcode,
-                            'telephone'  => null,
-                            'fax'        => substr ($chat->getNumber (), -13),
+                            'cellphone'  => substr ($chat->getNumber (), -13),
                             'use_for_shipping' => 1,
                         )
                     ), $storeId);

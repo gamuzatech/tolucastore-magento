@@ -639,35 +639,31 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         $customerBillingPostcode  = preg_replace ('[\D]', null, $customerBillingAddress->getPostcode ());
         $customerShippingPostcode = preg_replace ('[\D]', null, $customerShippingAddress->getPostcode ());
 
-        $customerBillingFax  = preg_replace ('[\D]', null, $customerBillingAddress->getFax ());
-        $customerShippingFax = preg_replace ('[\D]', null, $customerShippingAddress->getFax ());
+        $customerBillingCellphone  = preg_replace ('[\D]', null, $customerBillingAddress->getCellphone ());
+        $customerShippingCellphone = preg_replace ('[\D]', null, $customerShippingAddress->getCellphone ());
 
         Mage::getModel ('checkout/cart_customer_api')->setAddresses ($quote->getId (), array(
             array(
                 'mode'       => 'billing',
                 'firstname'  => $customerBillingAddress->getFirstname (),
                 'lastname'   => $customerBillingAddress->getLastname (),
-                'company'    => null,
                 'street'     => $customerBillingAddress->getStreet (),
                 'city'       => $customerBillingAddress->getCity (),
                 'region'     => $customerBillingAddress->getRegionId (),
                 'country_id' => $customerBillingAddress->getCountryId (),
                 'postcode'   => $customerBillingPostcode,
-                'telephone'  => null,
-                'fax'        => $customerBillingFax,
+                'cellphone'  => $customerBillingCellphone,
             ),
             array(
                 'mode'       => 'shipping',
                 'firstname'  => $customerShippingAddress->getFirstname (),
                 'lastname'   => $customerShippingAddress->getLastname (),
-                'company'    => null,
                 'street'     => $customerShippingAddress->getStreet (),
                 'city'       => $customerShippingAddress->getCity (),
                 'region'     => $customerShippingAddress->getRegionId (),
                 'country_id' => $customerShippingAddress->getCountryId (),
                 'postcode'   => $customerShippingPostcode,
-                'telephone'  => null,
-                'fax'        => $customerShippingFax,
+                'cellphone'  => $customerShippingCellphone,
             ),
         ), $storeId);
 

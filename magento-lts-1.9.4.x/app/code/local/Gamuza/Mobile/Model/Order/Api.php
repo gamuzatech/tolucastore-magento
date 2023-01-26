@@ -68,7 +68,7 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
     );
 
     protected $_orderAddressAttributes = array(
-        'region_id', 'fax', 'region', 'postcode', 'lastname', 'street', 'city',
+        'region_id', 'fax', 'region', 'postcode', 'lastname', 'street', 'city', 'cellphone',
         'email', 'telephone', 'country_id', 'firstname', 'address_type', 'company'
     );
 
@@ -154,7 +154,7 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
         'is_customer_notified', 'is_visible_on_front'
     );
 
-    protected $_strAttributes = array ('fax', 'postcode', 'telephone');
+    protected $_strAttributes = array ('fax', 'postcode', 'telephone', 'cellphone');
 
     /**
      * Retrieve list of orders. Filtration could be applied

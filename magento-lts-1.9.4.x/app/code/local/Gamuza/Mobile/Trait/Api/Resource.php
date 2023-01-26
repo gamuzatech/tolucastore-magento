@@ -98,7 +98,6 @@ trait Gamuza_Mobile_Trait_Api_Resource
                     'mode'       => 'billing',
                     'firstname'  => $firstName,
                     'lastname'   => $lastName,
-                    'company'    => null,
                     'street'     => array(
                         Mage::getStoreConfig ('shipping/origin/street_line1', $storeId),
                         Mage::getStoreConfig ('shipping/origin/street_line2', $storeId),
@@ -109,8 +108,7 @@ trait Gamuza_Mobile_Trait_Api_Resource
                     'region'     => Mage::getStoreConfig ('shipping/origin/region_id',  $storeId),
                     'country_id' => Mage::getStoreConfig ('shipping/origin/country_id', $storeId),
                     'postcode'   => $shippingPostcode,
-                    'telephone'  => null,
-                    'fax'        => Mage::getStoreConfig ('general/store_information/phone', $storeId),
+                    'cellphone'  => Mage::getStoreConfig ('general/store_information/phone', $storeId),
                     'use_for_shipping' => 1,
                 )
             ), $storeId);

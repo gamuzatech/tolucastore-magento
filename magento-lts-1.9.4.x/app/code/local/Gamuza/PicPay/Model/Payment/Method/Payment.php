@@ -46,7 +46,7 @@ class Gamuza_PicPay_Model_Payment_Method_Payment extends Mage_Payment_Model_Meth
 
         $customerEmail = $order->getCustomerEmail ();
 
-        $customerPhone = preg_replace ('[\D]', '', $order->getBillingAddress ()->getFax ());
+        $customerPhone = preg_replace ('[\D]', '', $order->getBillingAddress ()->getCellphone ());
 
         $post = array(
             'referenceId' => Mage::helper ('picpay')->getOrderReferenceId ($order),
