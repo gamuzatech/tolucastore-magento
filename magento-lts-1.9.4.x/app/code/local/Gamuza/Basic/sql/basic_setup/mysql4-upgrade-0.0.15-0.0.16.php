@@ -75,17 +75,16 @@ $attribute->setData ('used_in_forms', $forms)
 $attribute->save ();
 
 /**
- * IsVendor
+ * Cellphone
  */
 $installer->addAttribute(
-    'customer',
-    Gamuza_Basic_Helper_Data::CUSTOMER_ATTRIBUTE_IS_VENDOR,
+    'customer_address',
+    Gamuza_Basic_Helper_Data::CUSTOMER_ADDRESS_ATTRIBUTE_CELLPHONE,
     array(
-        'type'         => 'int',
-        'length'       => 1,
-        'input'        => 'boolean',
-        'source'       => 'eav/entity_attribute_source_boolean',
-        'label'        => Mage::helper ('basic')->__('Is Vendor'),
+        'type'         => 'varchar',
+        'length'       => 255,
+        'input'        => 'text',
+        'label'        => Mage::helper ('basic')->__('Cellphone'),
         'visible'      => true,
         'required'     => false,
         'user_defined' => false,
@@ -94,15 +93,17 @@ $installer->addAttribute(
 );
 
 $forms = array(
-    'adminhtml_customer',
+    'adminhtml_customer_address',
+    'customer_address_edit',
+    'customer_register_address'
 );
 
 $attribute = Mage::getSingleton ('eav/config')->getAttribute(
-    $installer->getEntityTypeId ('customer'), Gamuza_Basic_Helper_Data::CUSTOMER_ATTRIBUTE_IS_VENDOR)
+    $installer->getEntityTypeId ('customer_address'), Gamuza_Basic_Helper_Data::CUSTOMER_ADDRESS_ATTRIBUTE_CELLPHONE)
 ;
 $attribute->setData ('used_in_forms', $forms)
     ->setData('is_system', true)
-    ->setData('sort_order', 1000)
+    ->setData('sort_order', 131)
 ;
 $attribute->save ();
 

@@ -18,7 +18,8 @@ class Gamuza_Basic_Helper_Data extends Mage_Core_Helper_Abstract
 
     const CUSTOMER_ATTRIBUTE_CODE = 'code';
     const CUSTOMER_ATTRIBUTE_SECONDARY_NAME = 'secondary_name';
-    const CUSTOMER_ATTRIBUTE_IS_VENDOR = 'is_vendor';
+
+    const CUSTOMER_ADDRESS_ATTRIBUTE_CELLPHONE = 'cellphone';
 
     const CUSTOMER_GENDER_MALE   = 1;
     const CUSTOMER_GENDER_FEMALE = 2;
