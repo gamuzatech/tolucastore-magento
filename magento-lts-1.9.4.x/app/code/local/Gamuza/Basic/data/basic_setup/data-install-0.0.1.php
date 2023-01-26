@@ -169,6 +169,35 @@ $copyright = Mage::helper ('basic')->__('Toluca Store&trade; is a trademark of G
 
 $coreConfig->saveConfig ('design/footer/copyright', $copyright);
 
+/**
+ * Group
+ */
+$tax = Mage::getResourceModel ('tax/class_collection')
+    ->addFieldToFilter ('class_type', Mage_Tax_Model_Class::TAX_CLASS_TYPE_CUSTOMER)
+    ->addFieldToFilter ('class_name', 'Retail Customer')
+    ->getFirstItem ()
+;
+
+$customerGroupNames = array(
+    'Distributor',
+    'Manufacturer',
+    'Supplier',
+    'Seller',
+    'Vendor',
+);
+
+foreach ($customerGroupNames as $groupName)
+{
+    $groupName = Mage::helper ('basic')->__($groupName);
+
+    $group = Mage::getModel ('customer/group')
+        ->load ($groupName, 'customer_group_code')
+        ->setCode ($groupName)
+        ->setTaxClassId ($tax->getId ())
+        ->save()
+    ;
+}
+
 $emulation->stopEnvironmentEmulation($oldEnvironment);
 
 $installer->endSetup();
