@@ -19,7 +19,7 @@ class Gamuza_Basic_Block_Adminhtml_Sales_Order_Create_Customer_Grid
             ->addAttributeToSelect('created_at')
             ->joinAttribute('billing_postcode', 'customer_address/postcode', 'default_billing', null, 'left')
             ->joinAttribute('billing_city', 'customer_address/city', 'default_billing', null, 'left')
-            ->joinAttribute('billing_fax', 'customer_address/fax', 'default_billing', null, 'left')
+            ->joinAttribute('billing_cellphone', 'customer_address/cellphone', 'default_billing', null, 'left')
             ->joinAttribute('billing_regione', 'customer_address/region', 'default_billing', null, 'left')
             ->joinAttribute('billing_country_id', 'customer_address/country_id', 'default_billing', null, 'left')
             ->joinField('store_name', 'core/store', 'name', 'store_id=store_id', null, 'left');
@@ -35,10 +35,10 @@ class Gamuza_Basic_Block_Adminhtml_Sales_Order_Create_Customer_Grid
 
         $this->removeColumn('Telephone');
 
-        $this->addColumnAfter('fax', array(
-            'header'    =>Mage::helper('sales')->__('Fax'),
+        $this->addColumnAfter('cellphone', array(
+            'header'    =>Mage::helper('sales')->__('Cellphone'),
             'width'     =>'100px',
-            'index'     =>'billing_fax'
+            'index'     =>'billing_cellphone'
         ), 'email');
 
         $this->sortColumnsByOrder();

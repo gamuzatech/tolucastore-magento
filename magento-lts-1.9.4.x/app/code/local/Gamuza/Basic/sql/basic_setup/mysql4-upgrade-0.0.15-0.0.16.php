@@ -86,7 +86,7 @@ $installer->addAttribute(
         'input'        => 'text',
         'label'        => Mage::helper ('basic')->__('Cellphone'),
         'visible'      => true,
-        'required'     => false,
+        'required'     => true,
         'user_defined' => false,
         'unique'       => false,
     )
@@ -102,10 +102,26 @@ $attribute = Mage::getSingleton ('eav/config')->getAttribute(
     $installer->getEntityTypeId ('customer_address'), Gamuza_Basic_Helper_Data::CUSTOMER_ADDRESS_ATTRIBUTE_CELLPHONE)
 ;
 $attribute->setData ('used_in_forms', $forms)
+    ->setData('validate_rules', array(
+        'max_text_length' => 255,
+        'min_text_length' => 1
+    ))
     ->setData('is_system', true)
-    ->setData('sort_order', 131)
+    ->setData('sort_order', 125)
 ;
 $attribute->save ();
+
+$this->getConnection ()->addColumn(
+    $this->getTable ('sales/quote_address'),
+    'cellphone',
+    'varchar(255) DEFAULT NULL AFTER telephone'
+);
+
+$this->getConnection ()->addColumn(
+    $this->getTable ('sales/order_address'),
+    'cellphone',
+    'varchar(255) DEFAULT NULL AFTER telephone'
+);
 
 $installer->endSetup ();
 

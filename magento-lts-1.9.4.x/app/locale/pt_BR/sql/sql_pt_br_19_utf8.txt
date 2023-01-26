@@ -146,7 +146,9 @@ UPDATE `eav_attribute` SET `frontend_label`='Modo de Exibição' WHERE `frontend
 UPDATE `eav_attribute` SET `frontend_label`='Exibir Opções do Produto Em' WHERE `frontend_label`='Display Product Options In'; 
 UPDATE `eav_attribute` SET `frontend_label`='Email' WHERE `frontend_label`='Email';    
 UPDATE `eav_attribute` SET `frontend_label`='Habilitar Perfil Recorrente' WHERE `frontend_label`='Enable Recurring Profile';
+/*
 UPDATE `eav_attribute` SET `frontend_label`='Celular' WHERE `frontend_label`='Fax';    
+*/
 UPDATE `eav_attribute` SET `frontend_label`='Nome' WHERE `frontend_label`='First Name';    
 UPDATE `eav_attribute` SET `frontend_label`='Sexo' WHERE `frontend_label`='Gender';    
 UPDATE `eav_attribute` SET `frontend_label`='Grupo' WHERE `frontend_label`='Group';  

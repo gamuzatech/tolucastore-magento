@@ -73,10 +73,11 @@ $installer->startSetup ();
 $installer->updateAttribute ('customer', 'middlename', 'is_visible', '0');
 
 $installer->updateAttribute ('customer_address', 'middlename', 'is_visible',      '0');
+$installer->updateAttribute ('customer_address', 'company',    'is_visible',      '1');
 $installer->updateAttribute ('customer_address', 'street',     'multiline_count', '4');
 $installer->updateAttribute ('customer_address', 'region_id',  'is_required',     '1');
 $installer->updateAttribute ('customer_address', 'telephone',  'is_required',     '0');
-$installer->updateAttribute ('customer_address', 'fax',        'is_required',     '1');
+$installer->updateAttribute ('customer_address', 'fax',        'is_required',     '0');
 
 /**
  * General

@@ -22,7 +22,7 @@ class Gamuza_Basic_Block_Adminhtml_Customer_Grid
             ->addAttributeToSelect ('gender')
             ->joinAttribute('billing_postcode', 'customer_address/postcode', 'default_billing', null, 'left')
             ->joinAttribute('billing_city', 'customer_address/city', 'default_billing', null, 'left')
-            ->joinAttribute('billing_fax', 'customer_address/fax', 'default_billing', null, 'left')
+            ->joinAttribute('billing_cellphone', 'customer_address/cellphone', 'default_billing', null, 'left')
             ->joinAttribute('billing_region', 'customer_address/region', 'default_billing', null, 'left')
             ->joinAttribute('billing_country_id', 'customer_address/country_id', 'default_billing', null, 'left');
 
@@ -44,17 +44,17 @@ class Gamuza_Basic_Block_Adminhtml_Customer_Grid
             'index'     => 'billing_city',
         ), 'billing_postcode');
 
-        $this->addColumnAfter('billing_fax', array(
-            'header'    => Mage::helper('customer')->__('Fax'),
+        $this->addColumnAfter('billing_cellphone', array(
+            'header'    => Mage::helper('customer')->__('Cellphone'),
             'width'     => '100',
-            'index'     => 'billing_fax',
+            'index'     => 'billing_cellphone',
         ), 'email');
 
         $this->addColumnAfter ('taxvat', array(
             'header'    => Mage::helper ('customer')->__('Taxvat'),
             'width'     => '100',
             'index'     => 'taxvat',
-        ), 'billing_fax');
+        ), 'billing_cellphone');
 
         $this->addColumnAfter ('dob', array(
             'header'    => Mage::helper ('customer')->__('Date of Birth'),

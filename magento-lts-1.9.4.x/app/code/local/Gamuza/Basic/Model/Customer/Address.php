@@ -58,9 +58,9 @@ class Gamuza_Basic_Model_Customer_Address extends Mage_Customer_Model_Address
             $this->addError(Mage::helper('customer')->__('Please enter the city.'));
         }
 
-        if (!Zend_Validate::is($this->getFax(), 'NotEmpty'))
+        if (!Zend_Validate::is($this->getCellphone(), 'NotEmpty'))
         {
-            $this->addError(Mage::helper('customer')->__('Please enter the fax number.'));
+            $this->addError(Mage::helper('customer')->__('Please enter the cellphone number.'));
         }
 
         $_havingOptionalZip = Mage::helper('directory')->getCountriesWithOptionalZip();
