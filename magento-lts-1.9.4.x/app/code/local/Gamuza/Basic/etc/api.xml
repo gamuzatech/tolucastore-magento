@@ -48,6 +48,19 @@
                     </user_not_exists>
                 </faults>
             </basic_magento>
+            <!-- Customer -->
+            <basic_customer translate="title" module="basic">
+                <model>basic/customer_api</model>
+                <title>Magento Customer API</title>
+                <acl>basic/customer</acl>
+                <methods>
+                    <list translate="title" module="basic">
+                        <title>Retrieve customer list</title>
+                        <method>items</method>
+                        <acl>basic/customer/list</acl>
+                    </list>
+                </methods>
+            </basic_customer>
         </resources>
         <acl>
             <resources>
@@ -76,6 +89,13 @@
                             <title>Generate info about current Magento session</title>
                         </session>
                     </magento>
+                    <!-- Customer -->
+                    <customer translate="title" module="basic">
+                        <title>Magento Customer</title>
+                        <list translate="title" module="basic">
+                            <title>Retrieve customer list</title>
+                        </list>
+                    </customer>
                 </basic>
             </resources>
         </acl>
