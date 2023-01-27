@@ -40,6 +40,9 @@
             <rm_pagseguro_recurring>
                 <model>0</model>
             </rm_pagseguro_recurring>
+            <rm_pagseguro>
+                <address_telephone_attribute>cellphone</address_telephone_attribute>
+            </rm_pagseguro>
         </payment>
         <carriers>
             <rm_pagseguro>
