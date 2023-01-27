@@ -96,13 +96,13 @@ class Gamuza_Mobile_Model_Product_Api extends Mage_Catalog_Model_Api_Resource
         $baseCategoryPath = Mage_Catalog_Model_Category::TREE_ROOT_ID . '/' . $storeCategoryId;
 
         $status = Mage_Catalog_Model_Product_Status::STATUS_DISABLED;
-
+/*
         $typeIds = array(
             Mage_Catalog_Model_Product_Type::TYPE_SIMPLE,
             Mage_Catalog_Model_Product_Type::TYPE_BUNDLE,
             Mage_Catalog_Model_Product_Type::TYPE_CONFIGURABLE
         );
-
+*/
         $visibility = array(
             Mage_Catalog_Model_Product_Visibility::VISIBILITY_IN_CATALOG,
             Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH
@@ -123,7 +123,9 @@ class Gamuza_Mobile_Model_Product_Api extends Mage_Catalog_Model_Api_Resource
             ->addStoreFilter ($storeId)
             ->setFlag ('require_stock_items', true)
             ->addAttributeToFilter ('status', array ('neq' => $status))
+            /*
             ->addAttributeToFilter ('type_id', array ('in' => $typeIds))
+            */
             ->addAttributeToFilter ('visibility', array ('in' => $visibility))
             ->addAttributeToSelect ($this->_attributeCodes)
             /* compare to category_product_index table (filter inactive stores) */
