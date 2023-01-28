@@ -10,7 +10,7 @@
 <config>
     <modules>
         <Gamuza_Basic>
-            <version>0.0.16</version>
+            <version>0.0.17</version>
         </Gamuza_Basic>
     </modules>
     <global>
@@ -40,6 +40,8 @@
                     <catalog_product_grid>Gamuza_Basic_Block_Adminhtml_Catalog_Product_Grid</catalog_product_grid>
                     <customer_edit_tabs>Gamuza_Basic_Block_Adminhtml_Customer_Edit_Tabs</customer_edit_tabs>
                     <customer_grid>Gamuza_Basic_Block_Adminhtml_Customer_Grid</customer_grid>
+                    <customer_group_edit_form>Gamuza_Basic_Block_Adminhtml_Customer_Group_Edit_Form</customer_group_edit_form>
+                    <customer_group_grid>Gamuza_Basic_Block_Adminhtml_Customer_Group_Grid</customer_group_grid>
                     <customer_online_grid>Gamuza_Basic_Block_Adminhtml_Customer_Online_Grid</customer_online_grid>
                     <page_head>Gamuza_Basic_Block_Adminhtml_Page_Head</page_head>
                     <permissions_user_grid>Gamuza_Basic_Block_Adminhtml_Permissions_User_Grid</permissions_user_grid>
@@ -129,6 +131,11 @@
                     <address>Gamuza_Basic_Model_Customer_Address</address>
                 </rewrite>
             </customer>
+            <customer_resource>
+                <rewrite>
+                    <group_collection>Gamuza_Basic_Model_Customer_Resource_Group_Collection</group_collection>
+                </rewrite>
+            </customer_resource>
             <eav>
                 <rewrite>
                     <entity_type>Gamuza_Basic_Model_Eav_Entity_Type</entity_type>

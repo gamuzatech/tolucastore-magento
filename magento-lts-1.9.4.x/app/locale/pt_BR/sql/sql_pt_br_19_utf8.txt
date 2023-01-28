@@ -99,10 +99,12 @@ UPDATE `core_store_group` SET `name`='Loja Principal' WHERE `name`='Main Website
 UPDATE `core_website` SET `name`='Website Principal' WHERE `name`='Main Website';
 
 /* customer_group */
+/*
 UPDATE `customer_group` SET `customer_group_code`='Visitante' WHERE `customer_group_code`='NOT LOGGED IN';
 UPDATE `customer_group` SET `customer_group_code`='Geral' WHERE `customer_group_code`='General';
 UPDATE `customer_group` SET `customer_group_code`='Atacado' WHERE `customer_group_code`='Wholesale';
 UPDATE `customer_group` SET `customer_group_code`='Varejo' WHERE `customer_group_code`='Retailer';
+*/
 
 /* dataflow_profile */
 UPDATE `dataflow_profile` SET `name`='Exportar Todos Produtos' WHERE `name`='Export All Products';

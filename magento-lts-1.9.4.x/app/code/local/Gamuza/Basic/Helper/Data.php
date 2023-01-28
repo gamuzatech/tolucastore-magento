@@ -21,6 +21,9 @@ class Gamuza_Basic_Helper_Data extends Mage_Core_Helper_Abstract
 
     const CUSTOMER_ADDRESS_ATTRIBUTE_CELLPHONE = 'cellphone';
 
+    const CUSTOMER_GROUP_ATTRIBUTE_NAME = 'name';
+    const CUSTOMER_GROUP_ATTRIBUTE_IS_SYSTEM = 'is_system';
+
     const CUSTOMER_GENDER_MALE   = 1;
     const CUSTOMER_GENDER_FEMALE = 2;
 

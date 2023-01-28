@@ -179,21 +179,27 @@ $tax = Mage::getResourceModel ('tax/class_collection')
     ->getFirstItem ()
 ;
 
-$customerGroupNames = array(
-    'Distributor',
-    'Manufacturer',
-    'Supplier',
-    'Seller',
-    'Vendor',
+$customerGroups = array(
+    0 => 'Not Logged In',
+    1 => 'General',
+    2 => 'Wholesale',
+    3 => 'Retailer',
+    4 => 'Supplier',
+    5 => 'Manufacturer',
+    6 => 'Distributer',
+    7 => 'Seller',
+    8 => 'Reseller'
 );
 
-foreach ($customerGroupNames as $groupName)
+foreach ($customerGroups as $id => $value)
 {
-    $groupName = Mage::helper ('basic')->__($groupName);
+    $name = Mage::helper ('basic')->__($value);
 
     $group = Mage::getModel ('customer/group')
-        ->load ($groupName, 'customer_group_code')
-        ->setCode ($groupName)
+        ->load ($id)
+        ->setCode ($value)
+        ->setName ($name)
+        ->setIsSystem (true)
         ->setTaxClassId ($tax->getId ())
         ->save()
     ;
