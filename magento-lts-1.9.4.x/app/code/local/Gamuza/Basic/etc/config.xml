@@ -10,7 +10,7 @@
 <config>
     <modules>
         <Gamuza_Basic>
-            <version>0.0.17</version>
+            <version>0.0.18</version>
         </Gamuza_Basic>
     </modules>
     <global>

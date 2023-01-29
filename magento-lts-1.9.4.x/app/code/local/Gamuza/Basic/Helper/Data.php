@@ -24,6 +24,16 @@ class Gamuza_Basic_Helper_Data extends Mage_Core_Helper_Abstract
     const CUSTOMER_GROUP_ATTRIBUTE_NAME = 'name';
     const CUSTOMER_GROUP_ATTRIBUTE_IS_SYSTEM = 'is_system';
 
+    const CUSTOMER_GROUP_NOT_LOGGED_IN = 0;
+    const CUSTOMER_GROUP_GENERAL = 1;
+    const CUSTOMER_GROUP_WHOLESALE = 2;
+    const CUSTOMER_GROUP_RETAILER = 3;
+    const CUSTOMER_GROUP_SUPPLIER = 4;
+    const CUSTOMER_GROUP_MANUFACTURER = 5;
+    const CUSTOMER_GROUP_DISTRIBUTER = 6;
+    const CUSTOMER_GROUP_SELLER = 7;
+    const CUSTOMER_GROUP_RESELLER = 8;
+
     const CUSTOMER_GENDER_MALE   = 1;
     const CUSTOMER_GENDER_FEMALE = 2;
 
@@ -49,6 +59,12 @@ class Gamuza_Basic_Helper_Data extends Mage_Core_Helper_Abstract
     const PRODUCT_ATTRIBUTE_FREE_SHIPPING = 'free_shipping';
     const PRODUCT_ATTRIBUTE_PRICE_TYPE   = 'price_type';
     const PRODUCT_ATTRIBUTE_SKU_POSITION = 'sku_position';
+
+    const PRODUCT_ATTRIBUTE_CUSTOMER_OF_SUPPLIER = 'customer_of_supplier';
+    const PRODUCT_ATTRIBUTE_CUSTOMER_OF_MANUFACTURER = 'customer_of_manufacturer';
+    const PRODUCT_ATTRIBUTE_CUSTOMER_OF_DISTRIBUTER = 'customer_of_distributer';
+    const PRODUCT_ATTRIBUTE_CUSTOMER_OF_SELLER = 'customer_of_seller';
+    const PRODUCT_ATTRIBUTE_CUSTOMER_OF_RESELLER = 'customer_of_reseller';
 
     const PRODUCT_PRICE_VIEW_PRICE_RANGE    = 0;
     const PRODUCT_PRICE_VIEW_AS_LOW_AS      = 1;

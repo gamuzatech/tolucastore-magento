@@ -180,15 +180,15 @@ $tax = Mage::getResourceModel ('tax/class_collection')
 ;
 
 $customerGroups = array(
-    0 => 'Not Logged In',
-    1 => 'General',
-    2 => 'Wholesale',
-    3 => 'Retailer',
-    4 => 'Supplier',
-    5 => 'Manufacturer',
-    6 => 'Distributer',
-    7 => 'Seller',
-    8 => 'Reseller'
+    Gamuza_Basic_Helper_Data::CUSTOMER_GROUP_NOT_LOGGED_IN => 'Not Logged In',
+    Gamuza_Basic_Helper_Data::CUSTOMER_GROUP_GENERAL => 'General',
+    Gamuza_Basic_Helper_Data::CUSTOMER_GROUP_WHOLESALE => 'Wholesale',
+    Gamuza_Basic_Helper_Data::CUSTOMER_GROUP_RETAILER => 'Retailer',
+    Gamuza_Basic_Helper_Data::CUSTOMER_GROUP_SUPPLIER => 'Supplier',
+    Gamuza_Basic_Helper_Data::CUSTOMER_GROUP_MANUFACTURER => 'Manufacturer',
+    Gamuza_Basic_Helper_Data::CUSTOMER_GROUP_DISTRIBUTER => 'Distributer',
+    Gamuza_Basic_Helper_Data::CUSTOMER_GROUP_SELLER => 'Seller',
+    Gamuza_Basic_Helper_Data::CUSTOMER_GROUP_RESELLER => 'Reseller'
 );
 
 foreach ($customerGroups as $id => $value)
