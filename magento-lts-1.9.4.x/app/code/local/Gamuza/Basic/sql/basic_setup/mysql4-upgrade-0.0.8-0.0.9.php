@@ -12,7 +12,7 @@ $installer->addAttribute ('catalog_product', Gamuza_Basic_Helper_Data::PRODUCT_A
     'group'            => Mage::helper ('basic')->__('General'),
     'label'            => Mage::helper ('basic')->__('Free Shipping'),
     'global'           => Mage_Catalog_Model_Resource_Eav_Attribute::SCOPE_GLOBAL,
-    'source'           => 'eav/entity_attribute_source_boolean',
+    'source'           => 'basic/eav_entity_attribute_source_boolean',
     'type'             => 'int',
     'input'            => 'select',
     'visible'          => true,
