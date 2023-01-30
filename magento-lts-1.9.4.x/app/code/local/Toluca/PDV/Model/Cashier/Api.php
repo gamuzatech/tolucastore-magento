@@ -568,9 +568,23 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('customer_billing_address_not_exists');
         }
 
+        $customerBillingValidate = $customerBillingAddress->validate ();
+
+        if ($customerBillingValidate !== true)
+        {
+            $this->_fault ('customer_invalid_billing_address', implode("\n", $customerBillingValidate));
+        }
+
         if (!$customerShippingAddress || !$customerShippingAddress->getId ())
         {
             $this->_fault ('customer_shipping_address_not_exists');
+        }
+
+        $customerShippingValidate = $customerShippingAddress->validate ();
+
+        if ($customerShippingValidate !== true)
+        {
+            $this->_fault ('customer_invalid_shipping_address', implode("\n", $customerShippingValidate));
         }
 
         $storeId = Mage_Core_Model_App::DISTRO_STORE_ID;

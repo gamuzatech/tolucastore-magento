@@ -111,6 +111,14 @@
                         <code>1500</code>
                         <message>Requested history was not found.</message>
                     </history_not_exists>
+                    <customer_invalid_billing_address>
+                        <code>1600</code>
+                        <message>Requested customer billing address is invalid.</message>
+                    </customer_invalid_billing_address>
+                    <customer_invalid_shipping_address>
+                        <code>1700</code>
+                        <message>Requested customer shipping address is invalid.</message>
+                    </customer_invalid_shipping_address>
                 </faults>
             </pdv_cashier>
         </resources>
