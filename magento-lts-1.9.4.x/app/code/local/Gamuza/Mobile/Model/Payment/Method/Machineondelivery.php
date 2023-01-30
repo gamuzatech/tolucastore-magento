@@ -74,5 +74,10 @@ class Gamuza_Mobile_Model_Payment_Method_Machineondelivery extends Mage_Payment_
 
         return $this;
     }
+
+    public function isApplicableToQuote($quote, $checksBitMask)
+    {
+        return Mage_Payment_Model_Method_Abstract::isApplicableToQuote($quote, $checksBitMask);
+    }
 }
 
