@@ -41,6 +41,10 @@
                         <title>Close a cashier</title>
                         <acl>pdv/cashier/close</acl>
                     </close>
+                    <carts translate="title" module="pdv">
+                        <title>List available carts</title>
+                        <acl>pdv/cashier/carts</acl>
+                    </carts>
                     <quote translate="title" module="pdv">
                         <title>Create a new quote for cashier</title>
                         <acl>pdv/cashier/quote</acl>
@@ -148,6 +152,9 @@
                         <close translate="title" module="pdv">
                             <title>Close a cashier</title>
                         </close>
+                        <carts translate="title" module="pdv">
+                            <title>List available carts</title>
+                        </carts>
                         <quote translate="title" module="pdv">
                             <title>Create a new quote for cashier</title>
                         </quote>

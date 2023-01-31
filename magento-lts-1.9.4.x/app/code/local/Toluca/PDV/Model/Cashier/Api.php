@@ -522,6 +522,70 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         return intval ($cashier->getId ());
     }
 
+    public function carts ($cashier_id)
+    {
+        if (empty ($cashier_id))
+        {
+            $this->_fault ('cashier_not_specified');
+        }
+
+        $cashier = Mage::getModel ('pdv/cashier')->load ($cashier_id);
+
+        if (!$cashier || !$cashier->getId ())
+        {
+            $this->_fault ('cashier_not_exists');
+        }
+
+        $result = array ();
+
+        $storeId = Mage_Core_Model_App::DISTRO_STORE_ID;
+
+        /**
+         * NOTE: cashier_id instead customer_id
+         */
+        $customerEmail = Mage::helper ('pdv')->getCustomerEmail ($cashier->getId ());
+
+        $collection = Mage::getModel ('sales/quote')->getCollection ()
+            ->addFieldToFilter ('store_id', array ('eq' => $storeId))
+            ->addFieldToFilter ('customer_email', array ('eq' => $customerEmail))
+        ;
+
+        foreach ($collection as $quote)
+        {
+            $result [] = array(
+                'entity_id' => intval ($quote->getId ()),
+                'store_id'  => intval ($quote->getStoreId ()),
+                'created_at' => $quote->getCreatedAt (),
+                'updated_at' => $quote->getUpdatedAt (),
+                'is_active'  => boolval ($quote->getIsActive ()),
+                'is_virtual' => boolval ($quote->getIsVirtual ()),
+                'items_count' => intval ($quote->getItemsCount ()),
+                'items_qty'   => intval ($quote->getItemsQty ()),
+                'base_currency_code' => $quote->getBaseCurrencyCode (),
+                'base_grand_total' => floatval ($quote->getBaseGrandTotal ()),
+                'checkout_method' => $quote->getCheckoutMethod (),
+                'customer_group_id'  => intval ($quote->getCustomerGroupId ()),
+                'customer_email'     => $quote->getCustomerEmail (),
+                'customer_firstname' => $quote->getFirstname (),
+                'customer_lastname'  => $quote->getLastname (),
+                'customer_is_guest'  => boolval ($quote->getCustomerIsGuest ()),
+                'remote_ip' => $quote->getRemoteIp (),
+                'customer_taxvat' => $quote->getCustomerTaxvat (),
+                'base_subtotal' => floatval ($quote->getBaseSubtotal ()),
+                'base_subtotal_with_discount' => floatval ($quote->getBaseSubtotalWithDiscount ()),
+                'is_changed' => boolval ($quote->getIsChanged ()),
+                'is_pdv' => boolval ($quote->getIsPdv ()),
+                'pdv_cashier_id'  => intval ($quote->getPdvCashierId ()),
+                'pdv_operator_id' => intval ($quote->getPdvOperatorId ()),
+                'pdv_customer_id' => intval ($quote->getPdvCustomerId ()),
+                'store_info_code'    => $quote->getStoreInfoCode (),
+                'customer_info_code' => $quote->getCustomerInfoCode (),
+            );
+        }
+
+        return $result;
+    }
+
     public function quote ($cashier_id, $operator_id, $customer_id)
     {
         if (empty ($cashier_id))
