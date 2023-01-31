@@ -54,6 +54,7 @@ class Gamuza_Basic_Model_Eav_Entity_Type extends Mage_Eav_Model_Entity_Type
 */
         $isPdv = $quote->getData (Gamuza_Basic_Helper_Data::ORDER_ATTRIBUTE_IS_PDV);
         $isSat = $quote->getData (Gamuza_Basic_Helper_Data::ORDER_ATTRIBUTE_IS_SAT);
+        $isService = $quote->getData (Gamuza_Basic_Helper_Data::ORDER_ATTRIBUTE_IS_SERVICE);
 
         if ($isMobile)
         {
@@ -74,6 +75,10 @@ class Gamuza_Basic_Model_Eav_Entity_Type extends Mage_Eav_Model_Entity_Type
         else if ($isSat)
         {
             $suffix = Gamuza_Basic_Helper_Data::ORDER_SUFFIX_SAT;
+        }
+        else if ($isService)
+        {
+            $suffix = Gamuza_Basic_Helper_Data::ORDER_SUFFIX_SERVICE;
         }
 
         return sprintf ('%s-%s', $result, $suffix);
