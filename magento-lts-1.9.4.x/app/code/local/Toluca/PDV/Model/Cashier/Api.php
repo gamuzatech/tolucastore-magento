@@ -586,7 +586,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         return $result;
     }
 
-    public function quote ($cashier_id, $operator_id, $customer_id)
+    public function quote ($cashier_id, $operator_id, $customer_id, $quoteData = array ())
     {
         if (empty ($cashier_id))
         {
@@ -659,12 +659,12 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
          * NOTE: cashier_id instead customer_id
          */
         $customerEmail = Mage::helper ('pdv')->getCustomerEmail ($cashier->getId ());
-
+/*
         $quote = Mage::getModel('sales/quote')
             ->setStoreId ($storeId)
             ->load ($customerEmail, 'customer_email')
         ;
-/*
+
         $collection = Mage::getModel ('sales/quote')->getCollection ()
             ->addFieldToFilter ('pdv_cashier_id',  array ('eq' => $cashier_id))
             ->addFieldToFilter ('pdv_operator_id', array ('eq' => $operator_id))
@@ -672,14 +672,14 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         ;
 
         $quote = $collection->getFirstItem ();
-*/
+
         if ($quote && $quote->getId ())
         {
             $quote->afterLoad ();
 
             return $quote->getId ();
         }
-
+*/
         $quote = Mage::getModel ('sales/quote')
             ->setStoreId ($storeId)
             ->setIsActive (true)
@@ -689,8 +689,12 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             ->setCustomerLastname ($customer->getLastname ())
             ->setCustomerEmail ($customerEmail)
             ->setCustomerTaxvat ($customer->getTaxvat ())
-            ->save ()
         ;
+
+        foreach ($quoteData as $field => $value)
+        {
+            $quote->setData ($field, $value);
+        }
 
         $quote->setData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_IS_PDV, true)
             ->setData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_CASHIER_ID, $cashier_id)
