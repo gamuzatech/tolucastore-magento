@@ -138,7 +138,11 @@ class Gamuza_Basic_Model_Observer
         Mage::dispatchEvent('clear_expired_quotes_before', array('sales_observer' => $this));
 
         /** @var $quotes Mage_Sales_Model_Mysql4_Quote_Collection */
-        $quotes = Mage::getModel('sales/quote')->getCollection();
+        $quotes = Mage::getModel('sales/quote')->getCollection()
+            ->addFieldToFilter('is_app', array ('neq' => true))
+            ->addFieldToFilter('is_bot', array ('neq' => true))
+            ->addFieldToFilter('is_pdv', array ('neq' => true))
+        ;
 
         $quotes->addFieldToFilter('updated_at', array('to'=>date("Y-m-d H:i:s", mktime(23, 59, 59) - self::SALES_QUOTE_LIFETIME)));
 
