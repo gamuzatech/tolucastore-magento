@@ -33,7 +33,9 @@ umask(0);
 
 try
 {
-    Mage::getModel ('basic/magento_api')->clean ();
+    array_shift($argv);
+
+    Mage::getModel ('basic/magento_api')->clean ($argv);
 }
 catch (Exception $e)
 {

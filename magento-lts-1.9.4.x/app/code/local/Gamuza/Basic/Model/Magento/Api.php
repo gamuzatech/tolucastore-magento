@@ -74,13 +74,28 @@ class Gamuza_Basic_Model_Magento_Api extends Mage_Core_Model_Magento_Api
         return true;
     }
 
-    public function clean ()
+    public function clean ($codes = array())
     {
-        Mage::getModel ('basic/observer')->cleanExpiredQuotes ();
-
-        if (Mage::helper ('core')->isModuleEnabled ('Toluca_Bot'))
+        foreach ($codes as $id => $value)
         {
-            Mage::getModel ('bot/observer')->cleanExpiredChats ();
+            switch ($value)
+            {
+                case 'quote':
+                {
+                    Mage::getModel ('basic/observer')->cleanExpiredQuotes ();
+
+                    break;
+                }
+                case 'chat':
+                {
+                    if (Mage::helper ('core')->isModuleEnabled ('Toluca_Bot'))
+                    {
+                        Mage::getModel ('bot/observer')->cleanExpiredChats ();
+                    }
+
+                    break;
+                }
+            }
         }
 
         return true;
