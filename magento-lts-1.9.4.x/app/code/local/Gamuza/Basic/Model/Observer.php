@@ -55,7 +55,7 @@ class Gamuza_Basic_Model_Observer
              */
             $table = $resource->getTableName ('catalog/category');
 
-            $token = hash ('crc32', $category->getId ());
+            $token = hash ('crc32b', $category->getId ());
 
             $query = sprintf ("UPDATE {$table} SET sku = '{$token}' WHERE entity_id = %s LIMIT 1",
                 $category->getId ()
@@ -81,7 +81,7 @@ class Gamuza_Basic_Model_Observer
              */
             $table = $resource->getTableName ('catalog/product');
 
-            $token = hash ('crc32', $product->getId ());
+            $token = hash ('crc32b', $product->getId ());
 
             $query = sprintf ("UPDATE {$table} SET sku = '{$token}' WHERE entity_id = %s LIMIT 1",
                 $product->getId ()

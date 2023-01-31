@@ -109,7 +109,7 @@ class Toluca_PDV_Adminhtml_OperatorController extends Mage_Adminhtml_Controller_
 				    ->save ()
                 ;
 
-                $code = hash ('crc32', $model->getId ());
+                $code = hash ('crc32b', $model->getId ());
 
                 $model->setCode ($code)->save ();
 

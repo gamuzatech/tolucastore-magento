@@ -107,7 +107,7 @@ class Toluca_PDV_Adminhtml_CashierController extends Mage_Adminhtml_Controller_A
 				    ->save ()
                 ;
 
-                $code = hash ('crc32', $model->getId ());
+                $code = hash ('crc32b', $model->getId ());
 
                 $model->setCode ($code)->save ();
 
