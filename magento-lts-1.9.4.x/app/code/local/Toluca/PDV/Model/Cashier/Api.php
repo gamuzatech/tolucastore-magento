@@ -656,9 +656,9 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         $remoteIp = Mage::helper ('core/http')->getRemoteAddr (false);
 
         /**
-         * NOTE: cashier_id instead customer_id
+         * NOTE: uniq_id instead customer_id
          */
-        $customerEmail = Mage::helper ('pdv')->getCustomerEmail ($cashier->getId ());
+        $customerEmail = Mage::helper ('pdv')->getCustomerEmail (uniqid('c_', true));
 /*
         $quote = Mage::getModel('sales/quote')
             ->setStoreId ($storeId)
@@ -704,6 +704,11 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             ->setCustomerIsGuest (1)
             ->save ()
         ;
+
+        /**
+         * NOTE: quote_id instead customer_id
+         */
+        $customerEmail = Mage::helper ('pdv')->getCustomerEmail ($quote->getId ());
 
         $customerData = array(
             'mode'      => Mage_Checkout_Model_Type_Onepage::METHOD_GUEST,
