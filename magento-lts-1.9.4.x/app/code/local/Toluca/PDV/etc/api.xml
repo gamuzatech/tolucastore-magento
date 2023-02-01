@@ -16,11 +16,6 @@
                 <title>PDV Cashier API</title>
                 <acl>pdv/cashier</acl>
                 <methods>
-                    <list translate="title" module="pdv">
-                        <title>List available cashiers</title>
-                        <acl>pdv/cashier/list</acl>
-                        <method>items</method>
-                    </list>
                     <info translate="title" module="pdv">
                         <title>Get cashier information</title>
                         <acl>pdv/cashier/info</acl>
@@ -134,9 +129,6 @@
                     <!-- Cashier -->
                     <cashier translate="title" module="pdv">
                         <title>Cashier</title>
-                        <list translate="title" module="pdv">
-                            <title>List available cashiers</title>
-                        </list>
                         <info translate="title" module="pdv">
                             <title>Get cashier information</title>
                         </info>
