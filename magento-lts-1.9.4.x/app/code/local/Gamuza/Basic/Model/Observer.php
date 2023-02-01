@@ -139,8 +139,6 @@ class Gamuza_Basic_Model_Observer
 
         /** @var $quotes Mage_Sales_Model_Mysql4_Quote_Collection */
         $quotes = Mage::getModel('sales/quote')->getCollection()
-            ->addFieldToFilter('is_app', array ('neq' => true))
-            ->addFieldToFilter('is_bot', array ('neq' => true))
             ->addFieldToFilter('is_pdv', array ('neq' => true))
         ;
 
