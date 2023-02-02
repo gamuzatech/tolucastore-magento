@@ -62,14 +62,12 @@ class Toluca_PDV_Model_Observer
         $orderPdvCashierId  = Mage::getStoreConfig (self::XML_PATH_PDV_SETTING_DEFAULT_CASHIER);
         $orderPdvOperatorId = Mage::getStoreConfig (self::XML_PATH_PDV_SETTING_DEFAULT_OPERATOR);
         $orderPdvCustomerId = Mage::getStoreConfig (self::XML_PATH_PDV_SETTING_DEFAULT_CUSTOMER);
-        $orderPdvHistoryId  = 0;
 
         if ($orderIsPdv)
         {
             $orderPdvCashierId  = $order->getData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_CASHIER_ID);
             $orderPdvOperatorId = $order->getData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_OPERATOR_ID);
             $orderPdvCustomerId = $order->getData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_CUSTOMER_ID);
-            $orderPdvHistoryId  = $order->getData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_HISTORY_ID);
         }
 
         $amount = $order->getBaseGrandTotal ();
@@ -87,12 +85,7 @@ class Toluca_PDV_Model_Observer
         $operator = Mage::getModel ('pdv/operator')->load ($orderPdvOperatorId);
         $customer = Mage::getModel ('customer/customer')->load ($orderPdvCustomerId);
 
-        if (!$orderPdvHistoryId)
-        {
-            $orderPdvHistoryId = $cashier->getHistoryId ();
-        }
-
-        $history = Mage::getModel ('pdv/history')->load ($orderPdvHistoryId);
+        $history = Mage::getModel ('pdv/history')->load ($cashier->getHistoryId ());
 
         if (!$history || !$history->getId ())
         {
