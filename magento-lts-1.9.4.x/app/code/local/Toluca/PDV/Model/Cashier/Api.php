@@ -43,8 +43,6 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('cashier_not_exists');
         }
 
-        $customerEmail = Mage::helper ('pdv')->getCustomerEmail ('%');
-
         $result = array(
             'entity_id'  => intval ($cashier->getId ()),
             'code'       => $cashier->getCode (),
@@ -60,9 +58,9 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             'order_amount'     => floatval ($cashier->getOrderAmount ()),
             'include_all_orders'  => boolval ($this->_includeAllOrders),
             'default_customer_id' => intval ($this->_defaultCustomerId),
-            'current_customer_id' => 0,
-            'current_quote_id'    => 0,
-            'current_history'     => null,
+            'customer_id' => intval ($cashier->getCustomerId ()),
+            'quote_id'    => intval ($cashier->getQuoteId ()),
+            'history'     => null,
         );
 
         $operator = Mage::getModel ('pdv/operator')->load ($cashier->getOperatorId ());
@@ -77,7 +75,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
 
         if ($history && $history->getId ())
         {
-            $result ['current_history'] = array(
+            $result ['history'] = array(
                 'entity_id'        => intval ($history->getId ()),
                 'open_amount'      => floatval ($history->getOpenAmount ()),
                 'reinforce_amount' => floatval ($history->getReinforceAmount ()),
@@ -102,22 +100,8 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             );
         }
 
-        $collection = Mage::getModel ('sales/quote')->getCollection ()
-            ->addFieldToFilter ('is_pdv', array ('eq' => true))
-            ->addFieldToFilter ('customer_email', array ('like' => $customerEmail))
-            ->addFieldToFilter ('pdv_cashier_id', array ('eq' => $cashier->getId ()))
-            ->addFieldToFilter ('pdv_operator_id', array ('eq' => $cashier->getOperatorId ()))
-        ;
-
-        if ($collection->getSize () > 0)
-        {
-            $result ['current_customer_id'] = intval ($collection->getFirstItem ()->getPdvCustomerId ());
-            $result ['current_quote_id']    = intval ($collection->getFirstItem ()->getId ());
-        }
-
         $collection = Mage::getModel ('sales/order')->getCollection ()
             ->addFieldToFilter ('is_pdv', array ('eq' => true))
-            ->addFieldToFilter ('customer_email', array ('like' => $customerEmail))
             ->addFieldToFilter ('pdv_cashier_id', array ('eq' => $cashier->getId ()))
             ->addFieldToFilter ('pdv_operator_id', array ('eq' => $cashier->getOperatorId ()))
         ;
