@@ -425,18 +425,22 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('cashier_not_exists');
         }
 
+        $operator = Mage::getModel ('pdv/operator')->getCollection ()
+            ->addFieldToFilter ('is_active', array ('eq' => true))
+            ->addFieldToFilter ('entity_id', array ('eq' => $cashier->getOperatorId ()))
+            ->getFirstItem ()
+        ;
+
+        if (!$operator || !$operator->getId ())
+        {
+            $this->_fault ('operator_not_exists');
+        }
+
         $result = array ();
 
-        $storeId = Mage_Core_Model_App::DISTRO_STORE_ID;
-
-        /**
-         * NOTE: cashier_id instead customer_id
-         */
-        $customerEmail = Mage::helper ('pdv')->getCustomerEmail ($cashier->getId ());
-
         $collection = Mage::getModel ('sales/quote')->getCollection ()
-            ->addFieldToFilter ('store_id', array ('eq' => $storeId))
-            ->addFieldToFilter ('customer_email', array ('eq' => $customerEmail))
+            ->addFieldToFilter ('pdv_cashier_id',  array ('eq' => $cashier->getId ()))
+            ->addFieldToFilter ('pdv_operator_id', array ('eq' => $operator->getId ()))
         ;
 
         foreach ($collection as $quote)
