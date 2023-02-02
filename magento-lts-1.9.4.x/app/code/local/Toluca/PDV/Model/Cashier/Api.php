@@ -479,7 +479,14 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         return $result;
     }
 
-    public function quote ($cashier_id, $operator_id, $customer_id, $quoteData = array ())
+    public function quote ($cashier_id, $operator_id, $customer_id, $quote_id = 0)
+    {
+        $quote = $this->_getQuote ($cashier_id, $operator_id, $customer_id, $quote_id);
+
+        return intval ($quote->getId ());
+    }
+
+    protected function _getQuote ($cashier_id, $operator_id, $customer_id, $quote_id = 0)
     {
         if (empty ($cashier_id))
         {
@@ -544,24 +551,11 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('customer_invalid_shipping_address', implode("\n", $customerShippingValidate));
         }
 
-        $storeId = Mage_Core_Model_App::DISTRO_STORE_ID;
-
-        $remoteIp = Mage::helper ('core/http')->getRemoteAddr (false);
-
-        /**
-         * NOTE: uniq_id instead customer_id
-         */
-        $customerEmail = Mage::helper ('pdv')->getCustomerEmail (uniqid('c_', true));
-/*
-        $quote = Mage::getModel('sales/quote')
-            ->setStoreId ($storeId)
-            ->load ($customerEmail, 'customer_email')
-        ;
-
         $collection = Mage::getModel ('sales/quote')->getCollection ()
             ->addFieldToFilter ('pdv_cashier_id',  array ('eq' => $cashier_id))
             ->addFieldToFilter ('pdv_operator_id', array ('eq' => $operator_id))
-            ->addFieldToFilter ('customer_id',     array ('eq' => $customer_id))
+            ->addFieldToFilter ('pdv_customer_id', array ('eq' => $customer_id))
+            ->addFieldToFilter ('entity_id',       array ('eq' => $quote_id))
         ;
 
         $quote = $collection->getFirstItem ();
@@ -570,9 +564,18 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         {
             $quote->afterLoad ();
 
-            return $quote->getId ();
+            goto __returnQuote;
         }
-*/
+
+        $storeId = Mage_Core_Model_App::DISTRO_STORE_ID;
+
+        $remoteIp = Mage::helper ('core/http')->getRemoteAddr (false);
+
+        /**
+         * NOTE: uniq_id instead customer_id
+         */
+        $customerEmail = Mage::helper ('pdv')->getCustomerEmail (uniqid('c_', true));
+
         $quote = Mage::getModel ('sales/quote')
             ->setStoreId ($storeId)
             ->setIsActive (true)
@@ -583,11 +586,6 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             ->setCustomerEmail ($customerEmail)
             ->setCustomerTaxvat ($customer->getTaxvat ())
         ;
-
-        foreach ($quoteData as $field => $value)
-        {
-            $quote->setData ($field, $value);
-        }
 
         $quote->setData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_IS_PDV, true)
             ->setData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_CASHIER_ID, $cashier_id)
@@ -647,7 +645,14 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             ),
         ), $storeId);
 
-        return intval ($quote->getId ());
+    __returnQuote:
+
+        $cashier->setQuoteId ($quote->getId ())
+            ->setCustomerId ($customer->getId ())
+            ->save ()
+        ;
+
+        return $quote;
     }
 
     protected function _getCashier ($amount, $operator_id, $password)
