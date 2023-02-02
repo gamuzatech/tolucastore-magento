@@ -1,5 +1,17 @@
 <img src="https://dl.dropboxusercontent.com/s/qi0b31um3y3nxo6/tolucastore-admin-panel.png" alt="TolucaStore Admin Panel"/>
 
+## Table of features
+
+- Chat Bot
+- PDV
+- PagCripto
+- PicPay
+- PagSeguro (Cartão e Boleto)
+- OpenPix
+- Correios
+
+---
+
 <p align="center">
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 <a href="#contributors-"><img src="https://img.shields.io/badge/all_contributors-151-orange.svg" alt="All Contributors"></a>
@@ -290,6 +302,7 @@ dependency definition.
 
 ## Maintainers
 
+* [Enéias Ramos de Melo](https://github.com/eneiasramos)
 * [Daniel Fahlke](https://github.com/Flyingmana)
 * [David Robinson](https://github.com/drobinson)
 * [Fabrizio Balliano](https://github.com/fballiano)
