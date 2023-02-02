@@ -21,17 +21,6 @@ class Toluca_PDV_Block_Adminhtml_Cashier_Grid extends Mage_Adminhtml_Block_Widge
 	{
 		$collection = Mage::getModel ('pdv/cashier')->getCollection ();
 
-        $collection->getSelect ()
-            ->joinLeft (
-                array ('history' => Mage::getSingleton ('core/resource')->getTableName ('pdv/history')),
-                'main_table.history_id = history.entity_id',
-                array (
-                    'opened_at',
-                    'closed_at',
-                )
-            )
-        ;
-
 		$this->setCollection ($collection);
 
 		return parent::_prepareCollection ();
@@ -79,13 +68,11 @@ class Toluca_PDV_Block_Adminhtml_Cashier_Grid extends Mage_Adminhtml_Block_Widge
 			'header' => Mage::helper ('pdv')->__('Opened At'),
 			'index'  => 'opened_at',
             'type'   => 'datetime',
-            'filter_index' => 'total.opened_at',
 		));
 		$this->addColumn ('closed_at', array(
 			'header' => Mage::helper ('pdv')->__('Closed At'),
 			'index'  => 'closed_at',
             'type'   => 'datetime',
-            'filter_index' => 'total.closed_at',
 		));
 
 		$this->addColumn ('operator_id', array(
