@@ -20,6 +20,7 @@ class Toluca_PDV_Helper_Data extends Mage_Core_Helper_Abstract
     const ORDER_ATTRIBUTE_PDV_CASHIER_ID  = 'pdv_cashier_id';
     const ORDER_ATTRIBUTE_PDV_OPERATOR_ID = 'pdv_operator_id';
     const ORDER_ATTRIBUTE_PDV_CUSTOMER_ID = 'pdv_customer_id';
+    const ORDER_ATTRIBUTE_PDV_HISTORY_ID  = 'pdv_history_id';
     const ORDER_ATTRIBUTE_IS_SAT = 'is_sat';
     const ORDER_ATTRIBUTE_IS_SERVICE = 'is_service';
 

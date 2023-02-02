@@ -471,6 +471,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
                 'pdv_cashier_id'  => intval ($quote->getPdvCashierId ()),
                 'pdv_operator_id' => intval ($quote->getPdvOperatorId ()),
                 'pdv_customer_id' => intval ($quote->getPdvCustomerId ()),
+                'pdv_history_id'  => intval ($quote->getPdvHistoryId ()),
                 'store_info_code'    => $quote->getStoreInfoCode (),
                 'customer_info_code' => $quote->getCustomerInfoCode (),
             );
@@ -551,6 +552,13 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('customer_invalid_shipping_address', implode("\n", $customerShippingValidate));
         }
 
+        $history = Mage::getModel ('pdv/history')->load ($cashier->getHistoryId ());
+
+        if (!$history || !$history->getId ())
+        {
+            $this->_fault ('history_not_exists');
+        }
+
         $collection = Mage::getModel ('sales/quote')->getCollection ()
             ->addFieldToFilter ('pdv_cashier_id',  array ('eq' => $cashier_id))
             ->addFieldToFilter ('pdv_operator_id', array ('eq' => $operator_id))
@@ -591,6 +599,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             ->setData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_CASHIER_ID, $cashier_id)
             ->setData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_OPERATOR_ID, $operator_id)
             ->setData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_CUSTOMER_ID, $customer_id)
+            ->setData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_HISTORY_ID,  $history->getId ())
             ->setCustomerGroupId (0)
             ->setCustomerIsGuest (1)
             ->save ()
