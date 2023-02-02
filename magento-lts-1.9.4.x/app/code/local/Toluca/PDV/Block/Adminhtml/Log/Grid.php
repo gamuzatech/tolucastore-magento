@@ -102,11 +102,13 @@ class Toluca_PDV_Block_Adminhtml_Log_Grid extends Mage_Adminhtml_Block_Widget_Gr
             'type'    => 'options',
             'options' => self::getCustomers (),
 		));
+/*
 		$this->addColumn ('quote_id', array(
 		    'header'  => Mage::helper ('pdv')->__('Quote ID'),
 		    'index'   => 'quote_id',
             'type'    => 'number',
 		));
+*/
 		$this->addColumn ('order_increment_id', array(
 		    'header'  => Mage::helper ('pdv')->__('Order Inc. ID'),
 		    'index'   => 'order_increment_id',
