@@ -298,11 +298,15 @@ dependency definition.
 
 ## Public Communication
 
-* [Discord](https://discord.gg/EV8aNbU) (maintained by Flyingmana)
+* [Toluca Store](https://t.me/tolucastore) (Telegram)
+* [Gamuza Technologies](https://t.me/gamuzatech) (Telegram)
+
+## Developers
+
+* [Enéias Ramos de Melo](https://github.com/eneiasramos)
 
 ## Maintainers
 
-* [Enéias Ramos de Melo](https://github.com/eneiasramos)
 * [Daniel Fahlke](https://github.com/Flyingmana)
 * [David Robinson](https://github.com/drobinson)
 * [Fabrizio Balliano](https://github.com/fballiano)
