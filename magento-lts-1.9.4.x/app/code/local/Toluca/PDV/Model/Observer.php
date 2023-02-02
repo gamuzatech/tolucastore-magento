@@ -31,6 +31,20 @@ class Toluca_PDV_Model_Observer
         }
     }
 
+    public function salesOrderPlaceAfter ($observer)
+    {
+        $event = $observer->getEvent ();
+        $order = $event->getOrder();
+        $quote = $order->getQuote ();
+
+        $orderIsPdv = boolval ($order->getData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_IS_PDV));
+
+        if ($orderIsPdv)
+        {
+            $quote->delete (); // discard
+        }
+    }
+
     public function salesOrderInvoicePay ($observer)
     {
         $event   = $observer->getEvent ();
@@ -86,6 +100,7 @@ class Toluca_PDV_Model_Observer
             ->setOperatorId ($operator->getId ())
             ->setHistoryId ($history->getId ())
             ->setCustomerId ($customer->getId ())
+            ->setQuoteId ($order->getQuoteId ())
             ->setOrderId ($order->getId ())
             ->setOrderIncrementId ($order->getIncrementId ())
             ->setShippingMethod ($order->getShippingMethod ())
@@ -111,6 +126,7 @@ class Toluca_PDV_Model_Observer
                 ->setOperatorId ($operator->getId ())
                 ->setHistoryId ($history->getId ())
                 ->setCustomerId ($customer->getId ())
+                ->setQuoteId ($order->getQuoteId ())
                 ->setOrderId ($order->getId ())
                 ->setOrderIncrementId ($order->getIncrementId ())
                 ->setShippingMethod ($order->getShippingMethod ())

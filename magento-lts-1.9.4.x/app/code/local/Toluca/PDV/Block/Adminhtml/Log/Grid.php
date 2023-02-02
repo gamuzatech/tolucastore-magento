@@ -102,6 +102,11 @@ class Toluca_PDV_Block_Adminhtml_Log_Grid extends Mage_Adminhtml_Block_Widget_Gr
             'type'    => 'options',
             'options' => self::getCustomers (),
 		));
+		$this->addColumn ('quote_id', array(
+		    'header'  => Mage::helper ('pdv')->__('Quote ID'),
+		    'index'   => 'quote_id',
+            'type'    => 'number',
+		));
 		$this->addColumn ('order_increment_id', array(
 		    'header'  => Mage::helper ('pdv')->__('Order Inc. ID'),
 		    'index'   => 'order_increment_id',
@@ -133,12 +138,13 @@ class Toluca_PDV_Block_Adminhtml_Log_Grid extends Mage_Adminhtml_Block_Widget_Gr
 			'index'  => 'created_at',
             'type'   => 'datetime',
 		));
+/*
 		$this->addColumn ('updated_at', array(
 			'header' => Mage::helper ('pdv')->__('Updated At'),
 			'index'  => 'updated_at',
             'type'   => 'datetime',
 		));
-
+*/
 		return parent::_prepareColumns ();
 	}
 

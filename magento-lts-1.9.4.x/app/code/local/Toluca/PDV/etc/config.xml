@@ -119,6 +119,14 @@
                     </toluca_pdv_controller_action_predispatch>
                 </observers>
             </controller_action_predispatch>
+            <sales_order_place_after>
+                <observers>
+                    <toluca_pdv_sales_order_place_after>
+                        <class>pdv/observer</class>
+                        <method>salesOrderPlaceAfter</method>
+                    </toluca_pdv_sales_order_place_after>
+                </observers>
+            </sales_order_place_after>
             <sales_order_invoice_pay>
                 <observers>
                     <pdv_sales_order_invoice_pay>
