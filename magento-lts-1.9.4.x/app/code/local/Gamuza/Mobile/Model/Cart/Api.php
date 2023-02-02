@@ -316,7 +316,7 @@ class Gamuza_Mobile_Model_Cart_Api extends Mage_Checkout_Model_Api_Resource
                 array('order' => $order, 'quote' => $quote)
             );
 
-            $quote->delete (); // Discard
+            $quote->delete (); // discard
         }
         catch (Mage_Core_Exception $e)
         {

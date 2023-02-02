@@ -12,9 +12,16 @@ class Toluca_Bot_Model_Chat extends Mage_Core_Model_Abstract
         $this->_init ('bot/chat');
     }
 
-    protected function _beforeDelete ()
+    protected function _afterDelete ()
     {
-        parent::_beforeDelete ();
+        parent::_afterDelete ();
+
+        $quote = Mage::getModel ('sales/quote')->load ($this->getQuoteId ());
+
+        if ($quote && $quote->getId ())
+        {
+            $quote->delete (); // discard
+        }
 
         $collection = Mage::getModel ('bot/message')->getCollection ()
             ->addFieldToFilter ('chat_id', array ('eq' => $this->getId ()))
