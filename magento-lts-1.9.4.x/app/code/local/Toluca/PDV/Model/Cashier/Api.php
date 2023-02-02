@@ -156,11 +156,8 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('history_not_exists');
         }
 
-        $customerEmail = Mage::helper ('pdv')->getCustomerEmail ('%');
-
         $collection = Mage::getModel ('sales/order')->getCollection ()
             ->addFieldToFilter ('is_pdv', array ('eq' => true))
-            ->addFieldToFilter ('customer_email', array ('like' => $customerEmail))
             ->addFieldToFilter ('pdv_cashier_id', array ('eq' => $cashier->getId ()))
             ->addFieldToFilter ('pdv_operator_id', array ('eq' => $operator->getId ()))
         ;
