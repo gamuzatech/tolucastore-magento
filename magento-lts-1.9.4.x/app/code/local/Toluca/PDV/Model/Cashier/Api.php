@@ -187,6 +187,32 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         return $result;
     }
 
+    public function clear ($cashier_id)
+    {
+        if (empty ($cashier_id))
+        {
+            $this->_fault ('cashier_not_specified');
+        }
+
+        $cashier = Mage::getModel ('pdv/cashier')->getCollection ()
+            ->addFieldToFilter ('is_active', array ('eq' => true))
+            ->addFieldToFilter ('entity_id', array ('eq' => $cashier_id))
+            ->getFirstItem ()
+        ;
+
+        if (!$cashier || !$cashier->getId ())
+        {
+            $this->_fault ('cashier_not_exists');
+        }
+
+        $cashier->setQuoteId (0)
+            ->setCustomerId (0)
+            ->save ()
+        ;
+
+        return true;
+    }
+
     public function open ($operator_id, $password, $amount, $message)
     {
         $cashier = $this->_getCashier ($operator_id, $password, $amount);
