@@ -187,9 +187,9 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         return $result;
     }
 
-    public function open ($amount, $operator_id, $password, $message)
+    public function open ($operator_id, $password, $amount, $message)
     {
-        $cashier = $this->_getCashier ($amount, $operator_id, $password);
+        $cashier = $this->_getCashier ($operator_id, $password, $amount);
 
         if ($cashier->getStatus () == Toluca_PDV_Helper_Data::CASHIER_STATUS_OPENED)
         {
@@ -247,9 +247,9 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         return intval ($cashier->getId ());
     }
 
-    public function reinforce ($amount, $operator_id, $password, $message)
+    public function reinforce ($operator_id, $password, $amount, $message)
     {
-        $cashier = $this->_getCashier ($amount, $operator_id, $password);
+        $cashier = $this->_getCashier ($operator_id, $password, $amount);
 
         if ($cashier->getStatus () == Toluca_PDV_Helper_Data::CASHIER_STATUS_CLOSED)
         {
@@ -284,9 +284,9 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         return intval ($cashier->getId ());
     }
 
-    public function bleed ($amount, $operator_id, $password, $message)
+    public function bleed ($operator_id, $password, $amount, $message)
     {
-        $cashier = $this->_getCashier ($amount, $operator_id, $password);
+        $cashier = $this->_getCashier ($operator_id, $password, $amount);
 
         if ($cashier->getStatus () == Toluca_PDV_Helper_Data::CASHIER_STATUS_CLOSED)
         {
@@ -336,9 +336,9 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         return intval ($cashier->getId ());
     }
 
-    public function close ($amount, $operator_id, $password, $message)
+    public function close ($operator_id, $password, $amount, $message)
     {
-        $cashier = $this->_getCashier ($amount, $operator_id, $password);
+        $cashier = $this->_getCashier ($operator_id, $password, $amount);
 
         if ($cashier->getStatus () == Toluca_PDV_Helper_Data::CASHIER_STATUS_CLOSED)
         {
@@ -686,7 +686,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         return $quote;
     }
 
-    protected function _getCashier ($amount, $operator_id, $password)
+    protected function _getCashier ($operator_id, $password, $amount)
     {
         if (empty ($amount))
         {
