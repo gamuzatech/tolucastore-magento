@@ -418,11 +418,21 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         return intval ($cashier->getId ());
     }
 
-    public function carts ($cashier_id)
+    public function carts ($cashier_id, $operator_id, $customer_id)
     {
         if (empty ($cashier_id))
         {
             $this->_fault ('cashier_not_specified');
+        }
+
+        if (empty ($operator_id))
+        {
+            $this->_fault ('operator_not_specified');
+        }
+
+        if (empty ($customer_id))
+        {
+            $this->_fault ('customer_not_specified');
         }
 
         $cashier = Mage::getModel ('pdv/cashier')->load ($cashier_id);
@@ -432,22 +442,27 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('cashier_not_exists');
         }
 
-        $operator = Mage::getModel ('pdv/operator')->getCollection ()
-            ->addFieldToFilter ('is_active', array ('eq' => true))
-            ->addFieldToFilter ('entity_id', array ('eq' => $cashier->getOperatorId ()))
-            ->getFirstItem ()
-        ;
+        $operator = Mage::getModel ('pdv/operator')->load ($operator_id);
 
         if (!$operator || !$operator->getId ())
         {
             $this->_fault ('operator_not_exists');
         }
 
+        $customer = Mage::getModel ('customer/customer')->load ($customer_id);
+
+        if (!$customer || !$customer->getId ())
+        {
+            $this->_fault ('customer_not_exists');
+        }
+
         $result = array ();
 
         $collection = Mage::getModel ('sales/quote')->getCollection ()
+            ->addFieldToFilter ('is_pdv',          array ('eq' => true))
             ->addFieldToFilter ('pdv_cashier_id',  array ('eq' => $cashier->getId ()))
             ->addFieldToFilter ('pdv_operator_id', array ('eq' => $operator->getId ()))
+            ->addFieldToFilter ('pdv_customer_id', array ('eq' => $customer_id))
         ;
 
         foreach ($collection as $quote)
