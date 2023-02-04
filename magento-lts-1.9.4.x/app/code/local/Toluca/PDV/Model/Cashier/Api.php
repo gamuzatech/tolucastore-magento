@@ -528,14 +528,14 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         return $result;
     }
 
-    public function quote ($cashier_id, $operator_id, $customer_id, $quote_id = 0)
+    public function quote ($cashier_id, $operator_id, $customer_id, $quote_id = 0, $message = null)
     {
-        $quote = $this->_getQuote ($cashier_id, $operator_id, $customer_id, $quote_id);
+        $quote = $this->_getQuote ($cashier_id, $operator_id, $customer_id, $quote_id, $message);
 
         return intval ($quote->getId ());
     }
 
-    protected function _getQuote ($cashier_id, $operator_id, $customer_id, $quote_id = 0)
+    protected function _getQuote ($cashier_id, $operator_id, $customer_id, $quote_id, $message)
     {
         if (empty ($cashier_id))
         {
@@ -641,6 +641,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             ->setCustomerLastname ($customer->getLastname ())
             ->setCustomerEmail ($customerEmail)
             ->setCustomerTaxvat ($customer->getTaxvat ())
+            ->setCustomerNote ($message)
         ;
 
         $quote->setData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_IS_PDV, true)
