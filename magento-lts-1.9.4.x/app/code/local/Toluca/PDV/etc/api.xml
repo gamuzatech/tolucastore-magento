@@ -130,6 +130,11 @@
                 <title>PDV Cart API</title>
                 <acl>pdv/cart</acl>
                 <methods>
+                    <list translate="title" module="pdv">
+                        <title>Get cart list information</title>
+                        <acl>pdv/cart/list</acl>
+                        <method>items</method>
+                    </list>
                     <info translate="title" module="pdv">
                         <title>Get cart information</title>
                         <acl>pdv/cart/info</acl>
@@ -186,6 +191,9 @@
                     <!-- Cart -->
                     <cart translate="title" module="pdv">
                         <title>Cart</title>
+                        <list translate="title" module="pdv">
+                            <title>Get cart list information</title>
+                        </list>
                         <info translate="title" module="pdv">
                             <title>Get cart information</title>
                         </info>
