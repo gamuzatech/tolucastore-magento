@@ -45,7 +45,8 @@ class Gamuza_Basic_Block_Adminhtml_Sales_Order_View extends Mage_Adminhtml_Block
         /**
          * Prepare
          */
-        if (!strcmp ($order->getState (), Mage_Sales_Model_Order::STATE_NEW) && !strcmp ($order->getStatus (), Gamuza_Basic_Model_Order::STATUS_PENDING))
+        if ((!strcmp ($order->getState (), Mage_Sales_Model_Order::STATE_NEW) && !strcmp ($order->getStatus (), Gamuza_Basic_Model_Order::STATUS_PENDING))
+            || (!strcmp ($order->getState (), Mage_Sales_Model_Order::STATE_PROCESSING) && !strcmp ($order->getStatus (), Gamuza_Basic_Model_Order::STATUS_PAID)))
         {
             $coreHelper = Mage::helper ('core');
 
