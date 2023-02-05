@@ -16,10 +16,6 @@
                 <title>PDV Cashier API</title>
                 <acl>pdv/cashier</acl>
                 <methods>
-                    <info translate="title" module="pdv">
-                        <title>Get cashier information</title>
-                        <acl>pdv/cashier/info</acl>
-                    </info>
                     <open translate="title" module="pdv">
                         <title>Open a cashier</title>
                         <acl>pdv/cashier/open</acl>
@@ -36,14 +32,10 @@
                         <title>Close a cashier</title>
                         <acl>pdv/cashier/close</acl>
                     </close>
-                    <carts translate="title" module="pdv">
-                        <title>List available carts</title>
-                        <acl>pdv/cashier/carts</acl>
-                    </carts>
-                    <quote translate="title" module="pdv">
-                        <title>Create a new quote for cashier</title>
-                        <acl>pdv/cashier/quote</acl>
-                    </quote>
+                    <info translate="title" module="pdv">
+                        <title>Get cashier information</title>
+                        <acl>pdv/cashier/info</acl>
+                    </info>
                     <draft translate="title" module="pdv">
                         <title>Create a new draft for cashier</title>
                         <acl>pdv/cashier/draft</acl>
@@ -69,6 +61,10 @@
                         <title>Get cart information</title>
                         <acl>pdv/cart/info</acl>
                     </info>
+                    <create translate="title" module="pdv">
+                        <title>Create cart information</title>
+                        <acl>pdv/cart/create</acl>
+                    </create>
                 </methods>
             </pdv_cart>
         </resources>
@@ -160,9 +156,6 @@
                     <!-- Cashier -->
                     <cashier translate="title" module="pdv">
                         <title>Cashier</title>
-                        <info translate="title" module="pdv">
-                            <title>Get cashier information</title>
-                        </info>
                         <open translate="title" module="pdv">
                             <title>Open a cashier</title>
                         </open>
@@ -175,12 +168,9 @@
                         <close translate="title" module="pdv">
                             <title>Close a cashier</title>
                         </close>
-                        <carts translate="title" module="pdv">
-                            <title>List available carts</title>
-                        </carts>
-                        <quote translate="title" module="pdv">
-                            <title>Create a new quote for cashier</title>
-                        </quote>
+                        <info translate="title" module="pdv">
+                            <title>Get cashier information</title>
+                        </info>
                         <draft translate="title" module="pdv">
                             <title>Create a new draft for cashier</title>
                         </draft>
@@ -197,6 +187,9 @@
                         <info translate="title" module="pdv">
                             <title>Get cart information</title>
                         </info>
+                        <create translate="title" module="pdv">
+                            <title>Create cart information</title>
+                        </create>
                     </cart>
                 </pdv>
             </resources>
