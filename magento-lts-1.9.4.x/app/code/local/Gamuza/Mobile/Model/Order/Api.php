@@ -18,15 +18,23 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
     public function __construct()
     {
         $this->_attributesMap = array(
-            'order' => array('order_id' => 'entity_id'),
             /*
+            'order' => array('order_id' => 'entity_id'),
             'order_address' => array('address_id' => 'entity_id'),
             'order_payment' => array('payment_id' => 'entity_id')
             */
         );
+
+        $this->_ignoredAttributeCodes = array(
+            'global' => array(
+                'attribute_set_id',
+                'entity_type_id'
+            ),
+        );
     }
 
     protected $_orderAttributes = array(
+        'entity_id',
         'state', 'status', 'coupon_code', 'protect_code', 'shipping_description', 'is_virtual',
         'base_discount_amount', 'base_discount_canceled',
         'base_discount_invoiced', 'base_discount_refunded',
@@ -136,6 +144,7 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
     );
 
     protected $_intAttributes = array(
+        'entity_id',
         /* list */
         'total_item_count', 'customer_gender', 'gift_message_id',
         /* info */
