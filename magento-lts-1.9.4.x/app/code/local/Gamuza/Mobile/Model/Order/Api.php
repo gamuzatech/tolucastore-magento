@@ -18,11 +18,9 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
     public function __construct()
     {
         $this->_attributesMap = array(
-            /*
             'order' => array('order_id' => 'entity_id'),
             'order_address' => array('address_id' => 'entity_id'),
             'order_payment' => array('payment_id' => 'entity_id')
-            */
         );
 
         $this->_ignoredAttributeCodes = array(
