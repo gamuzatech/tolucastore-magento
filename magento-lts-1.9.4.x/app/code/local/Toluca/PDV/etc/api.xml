@@ -124,6 +124,28 @@
                     </customer_invalid_shipping_address>
                 </faults>
             </pdv_cashier>
+            <!-- Cart -->
+            <pdv_cart translate="title" module="pdv">
+                <model>pdv/cart_api</model>
+                <title>PDV Cart API</title>
+                <acl>pdv/cart</acl>
+                <methods>
+                    <info translate="title" module="pdv">
+                        <title>Get cart information</title>
+                        <acl>pdv/cart/info</acl>
+                    </info>
+                </methods>
+                <faults>
+                    <quote_not_specified>
+                        <code>100</code>
+                        <message>Requested quote ID was not specified.</message>
+                    </quote_not_specified>
+                    <quote_not_exists>
+                        <code>200</code>
+                        <message>Requested quote was not found.</message>
+                    </quote_not_exists>
+                </faults>
+            </pdv_cart>
         </resources>
         <acl>
             <resources>
@@ -161,6 +183,13 @@
                             <title>Clear the quote for cashier</title>
                         </clear>
                     </cashier>
+                    <!-- Cart -->
+                    <cart translate="title" module="pdv">
+                        <title>Cart</title>
+                        <info translate="title" module="pdv">
+                            <title>Get cart information</title>
+                        </info>
+                    </cart>
                 </pdv>
             </resources>
         </acl>
