@@ -150,5 +150,82 @@ class Gamuza_Basic_Model_Observer
 
         return $this;
     }
+
+    public function salesOrderPlaceAfter ($observer)
+    {
+        $event = $observer->getEvent ();
+        $order = $event->getOrder();
+
+        $orderItems = Mage::getResourceModel ('sales/order_item_collection')
+            ->setOrderFilter ($order)
+            ->filterByTypes (array (Gamuza_Basic_Model_Catalog_Product_Type_Service::TYPE_SERVICE))
+        ;
+
+        if ($orderItems->count() > 0)
+        {
+            $basic = Mage::getModel ('basic/order_service')
+                ->setOrder($order)
+                ->setState (Gamuza_Basic_Model_Order_Service::STATE_OPEN)
+                ->save()
+            ;
+
+            $order->setData (Gamuza_Basic_Helper_Data::ORDER_ATTRIBUTE_IS_SERVICE, true)->save ();
+        }
+
+        return $this;
+    }
+
+    public function orderCancelAfter ($observer)
+    {
+        $this->_updateOrderServiceState (
+            $observer->getEvent ()->getOrder (),
+            Gamuza_Basic_Model_Order_Service::STATE_CANCELED
+        );
+
+        return $this;
+    }
+
+    public function salesOrderPrepareAfter ($observer)
+    {
+        $this->_updateOrderServiceState (
+            $observer->getEvent ()->getOrder (),
+            Gamuza_Basic_Model_Order_Service::STATE_PROCESSING
+        );
+
+        return $this;
+    }
+
+    public function salesOrderDeliveredAfter ($observer)
+    {
+        $this->_updateOrderServiceState (
+            $observer->getEvent ()->getOrder (),
+            Gamuza_Basic_Model_Order_Service::STATE_CLOSED
+        );
+
+        return $this;
+    }
+
+    public function salesOrderCreditmemoRefund ($observer)
+    {
+        $this->_updateOrderServiceState (
+            $observer->getEvent ()->getCreditmemo ()->getOrder (),
+            Gamuza_Basic_Model_Order_Service::STATE_REFUNDED
+        );
+
+        return $this;
+    }
+
+    private function _updateOrderServiceState ($order, $state)
+    {
+        if ($order->getData (Gamuza_Basic_Helper_Data::ORDER_ATTRIBUTE_IS_SERVICE))
+        {
+            $service = Mage::getModel ('basic/order_service')->load ($order->getId (), 'order_id');
+
+            if ($service && $service->getId ())
+            {
+                $service->setState ($state)->save ();
+            }
+        }
+    }
 }
 

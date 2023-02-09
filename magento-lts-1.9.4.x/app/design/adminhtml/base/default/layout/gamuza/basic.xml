@@ -105,5 +105,11 @@
             <block type="basic/adminhtml_shipping_rate" name="rate" />
         </reference>
     </admin_basic_adminhtml_shipping_rate_index>
+
+    <admin_basic_adminhtml_order_service_index>
+        <reference name="content">
+            <block type="basic/adminhtml_order_service" name="service" />
+        </reference>
+    </admin_basic_adminhtml_order_service_index>
 </layout>
 

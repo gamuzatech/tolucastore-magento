@@ -78,6 +78,8 @@ class Gamuza_Basic_Adminhtml_Sales_OrderController extends Mage_Adminhtml_Sales_
                     ->save ()
                 ;
 
+                Mage::dispatchEvent ('sales_order_prepare_after', array ('order' => $order));
+
                 $this->_getSession()->addSuccess ($this->__('The order notification has been sent.'));
             }
             catch (Mage_Core_Exception $e)
@@ -115,6 +117,8 @@ class Gamuza_Basic_Adminhtml_Sales_OrderController extends Mage_Adminhtml_Sales_
                     ->getOrder ()
                     ->save ()
                 ;
+
+                Mage::dispatchEvent ('sales_order_delivered_after', array ('order' => $order));
 
                 $this->_getSession()->addSuccess ($this->__('The order notification has been sent.'));
             }

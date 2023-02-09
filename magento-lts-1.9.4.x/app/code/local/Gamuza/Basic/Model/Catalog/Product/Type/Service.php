@@ -11,5 +11,6 @@
 class Gamuza_Basic_Model_Catalog_Product_Type_Service
     extends Mage_Catalog_Model_Product_Type_Virtual
 {
+    public const TYPE_SERVICE = 'service';
 }
 

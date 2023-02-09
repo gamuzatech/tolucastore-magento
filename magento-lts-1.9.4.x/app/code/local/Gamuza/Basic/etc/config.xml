@@ -10,7 +10,7 @@
 <config>
     <modules>
         <Gamuza_Basic>
-            <version>0.0.18</version>
+            <version>0.0.19</version>
         </Gamuza_Basic>
     </modules>
     <global>
@@ -85,6 +85,9 @@
                     <eav_entity_attribute_option_value>
                         <table>eav_attribute_option_value</table>
                     </eav_entity_attribute_option_value>
+                    <order_service>
+                        <table>basic_order_service</table>
+                    </order_service>
                 </entities>
             </basic_mysql4>
             <adminhtml>
@@ -251,6 +254,46 @@
                     </admin_basic_catalog_product_save_after>
                 </observers>
             </catalog_product_save_after>
+            <order_cancel_after>
+                <observers>
+                    <admin_basic_order_cancel_after>
+                        <class>basic/observer</class>
+                        <method>orderCancelAfter</method>
+                    </admin_basic_order_cancel_after>
+                </observers>
+            </order_cancel_after>
+            <sales_order_place_after>
+                <observers>
+                    <admin_basic_sales_order_place_after>
+                        <class>basic/observer</class>
+                        <method>salesOrderPlaceAfter</method>
+                    </admin_basic_sales_order_place_after>
+                </observers>
+            </sales_order_place_after>
+            <sales_order_prepare_after>
+                <observers>
+                    <admin_basic_sales_order_prepare_after>
+                        <class>basic/observer</class>
+                        <method>salesOrderPrepareAfter</method>
+                    </admin_basic_sales_order_prepare_after>
+                </observers>
+            </sales_order_prepare_after>
+            <sales_order_delivered_after>
+                <observers>
+                    <admin_basic_sales_order_delivered_after>
+                        <class>basic/observer</class>
+                        <method>salesOrderDeliveredAfter</method>
+                    </admin_basic_sales_order_delivered_after>
+                </observers>
+            </sales_order_delivered_after>
+            <sales_order_creditmemo_refund>
+                <observers>
+                    <admin_basic_sales_order_creditmemo_refund>
+                        <class>basic/observer</class>
+                        <method>salesOrderCreditmemoRefund</method>
+                    </admin_basic_sales_order_creditmemo_refund>
+                </observers>
+            </sales_order_creditmemo_refund>
         </events>
         <catalog>
             <product>

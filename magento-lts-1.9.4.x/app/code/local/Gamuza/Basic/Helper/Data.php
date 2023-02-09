@@ -13,6 +13,8 @@ class Gamuza_Basic_Helper_Data extends Mage_Core_Helper_Abstract
     const DEFAULT_API_NAME  = 'Toluca Store Desktop';
     const DEFAULT_API_EMAIL = 'desktop@toluca.com.br';
 
+    const BASIC_ORDER_SERVICE_TABLE = 'basic_order_service';
+
     const CATEGORY_ATTRIBUTE_CODE = 'code';
     const CATEGORY_ATTRIBUTE_SKU = 'sku';
 
@@ -114,7 +116,7 @@ class Gamuza_Basic_Helper_Data extends Mage_Core_Helper_Abstract
         return $object;
     }
 
-    function isMobile ()
+    public function isMobile ()
     {
         /*
         $result = Zend_Http_UserAgent_Mobile::match(
