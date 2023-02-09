@@ -119,6 +119,13 @@ class Toluca_PDV_Block_Adminhtml_Log_Grid extends Mage_Adminhtml_Block_Widget_Gr
             'type'    => 'options',
             'options' => Mage::getModel ('pdv/adminhtml_system_config_source_payment_allmethods')->toArray (),
 		));
+		$this->addColumn ('subtotal_amount', array(
+		    'header'  => Mage::helper ('pdv')->__('Subtotal Amount'),
+		    'index'   => 'subtotal_amount',
+		    'align'   => 'right',
+	        'type'    => 'price',
+            'currency_code' => $store->getBaseCurrency()->getCode(),
+		));
 		$this->addColumn ('shipping_method_1', array(
 		    'header'  => Mage::helper ('pdv')->__('Shipping Method'),
 		    'index'   => 'shipping_method_1',
@@ -132,7 +139,6 @@ class Toluca_PDV_Block_Adminhtml_Log_Grid extends Mage_Adminhtml_Block_Widget_Gr
 		    'index'   => 'shipping_amount',
 		    'align'   => 'right',
 	        'type'    => 'price',
-		    'index'   => 'shipping_amount',
             'currency_code' => $store->getBaseCurrency()->getCode(),
 		));
 		$this->addColumn ('created_at', array(

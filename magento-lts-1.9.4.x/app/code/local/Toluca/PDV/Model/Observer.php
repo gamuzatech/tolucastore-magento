@@ -105,6 +105,7 @@ class Toluca_PDV_Model_Observer
             ->setOrderIncrementId ($order->getIncrementId ())
             ->setShippingMethod ($order->getShippingMethod ())
             ->setPaymentMethod ($payment->getMethod ())
+            ->setSubtotalAmount ($order->getBaseSubtotal ())
             ->setShippingAmount ($order->getBaseShippingAmount ())
             ->setTotalAmount ($amount)
             ->setMessage (
