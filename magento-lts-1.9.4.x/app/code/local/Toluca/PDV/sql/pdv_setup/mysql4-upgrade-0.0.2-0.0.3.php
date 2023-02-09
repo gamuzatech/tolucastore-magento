@@ -27,8 +27,6 @@ $options = array(
 foreach ($entities as $entity)
 {
     $installer->addAttribute ($entity, Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_IS_PDV, $options);
-    $installer->addAttribute ($entity, Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_IS_SAT, $options);
-    $installer->addAttribute ($entity, Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_IS_SERVICE, $options);
 }
 
 $options = array(
