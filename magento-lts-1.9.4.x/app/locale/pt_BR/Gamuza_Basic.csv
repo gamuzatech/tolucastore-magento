@@ -97,4 +97,7 @@
 "Open","Aberto"
 "Doing","Fazendo"
 "Done","Feito"
+"Requested order ID was not specified.","ID Pedido não foi especificado."
+"Requested order was not found.","Pedido não foi encontrado."
+"Requested service was not found.","Serviço não foi encontrado."
 

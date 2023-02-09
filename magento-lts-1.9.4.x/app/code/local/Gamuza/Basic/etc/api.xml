@@ -61,6 +61,32 @@
                     </list>
                 </methods>
             </basic_customer>
+            <!-- PDF -->
+            <basic_pdf translate="title" module="basic">
+                <model>basic/pdf_api</model>
+                <title>Basic PDF API</title>
+                <acl>basic/pdf</acl>
+                <methods>
+                    <service translate="title" module="basic">
+                        <title>Create order service PDF information</title>
+                        <acl>basic/pdf/service</acl>
+                    </service>
+                </methods>
+                <faults>
+                    <order_not_specified>
+                        <code>100</code>
+                        <message>Requested order ID was not specified.</message>
+                    </order_not_specified>
+                    <order_not_exists>
+                        <code>200</code>
+                        <message>Requested order was not found.</message>
+                    </order_not_exists>
+                    <service_not_exists>
+                        <code>300</code>
+                        <message>Requested service was not found.</message>
+                    </service_not_exists>
+                </faults>
+            </basic_pdf>
         </resources>
         <acl>
             <resources>
@@ -96,6 +122,13 @@
                             <title>Retrieve customer list</title>
                         </list>
                     </customer>
+                    <!-- PDF -->
+                    <pdf translate="title" module="basic">
+                        <title>PDF</title>
+                        <service translate="title" module="basic">
+                            <title>Create order service PDF information</title>
+                        </service>
+                    </pdf>
                 </basic>
             </resources>
         </acl>

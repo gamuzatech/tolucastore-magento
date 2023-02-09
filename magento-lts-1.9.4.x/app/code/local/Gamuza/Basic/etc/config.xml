@@ -295,6 +295,12 @@
                 </observers>
             </sales_order_creditmemo_refund>
         </events>
+        <pdf>
+            <service>
+                <default>basic/sales_order_pdf_items_service_default</default>
+                <grouped>basic/sales_order_pdf_items_service_grouped</grouped>
+            </service>
+        </pdf>
         <catalog>
             <product>
                 <type>
