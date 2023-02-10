@@ -41,17 +41,7 @@ class Gamuza_Basic_Adminhtml_Sales_OrderController extends Mage_Adminhtml_Sales_
 
         if ($order = Mage::registry ('current_order'))
         {
-            $status  = Gamuza_Basic_Model_Sales_Order::STATUS_CANCELED;
-            $comment = Mage::helper ('basic')->__('The order was canceled.');
-
-            $order->queueOrderUpdateEmail (true, $comment, true)
-                ->addStatusHistoryComment ($comment, $status)
-                ->setIsCustomerNotified (true)
-                ->setIsVisibleOnFront (true)
-                ->save ()
-                ->getOrder ()
-                ->save ()
-            ;
+            Mage::helper ('basic/sales_order')->cancel ($order);
         }
 
         $this->_redirect ('*/sales_order/view', array ('order_id' => $order->getId ()));
@@ -66,19 +56,7 @@ class Gamuza_Basic_Adminhtml_Sales_OrderController extends Mage_Adminhtml_Sales_
         {
             try
             {
-                $status  = Gamuza_Basic_Model_Sales_Order::STATUS_PREPARING;
-                $comment = Mage::helper ('basic')->__('The order is being prepared.');
-
-                $order->queueOrderUpdateEmail (true, $comment, true)
-                    ->addStatusHistoryComment ($comment, $status)
-                    ->setIsCustomerNotified (true)
-                    ->setIsVisibleOnFront (true)
-                    ->save ()
-                    ->getOrder ()
-                    ->save ()
-                ;
-
-                Mage::dispatchEvent ('sales_order_prepare_after', array ('order' => $order));
+                Mage::helper ('basic/sales_order')->prepare ($order);
 
                 $this->_getSession()->addSuccess ($this->__('The order notification has been sent.'));
             }
@@ -106,19 +84,7 @@ class Gamuza_Basic_Adminhtml_Sales_OrderController extends Mage_Adminhtml_Sales_
         {
             try
             {
-                $status  = Gamuza_Basic_Model_Sales_Order::STATUS_DELIVERED;
-                $comment = $this->__('The order was delivered.');
-
-                $order->queueOrderUpdateEmail (true, $comment, true)
-                    ->addStatusHistoryComment ($comment, $status)
-                    ->setIsCustomerNotified (true)
-                    ->setIsVisibleOnFront (true)
-                    ->save ()
-                    ->getOrder ()
-                    ->save ()
-                ;
-
-                Mage::dispatchEvent ('sales_order_delivered_after', array ('order' => $order));
+                Mage::helper ('basic/sales_order')->delivered ($order);
 
                 $this->_getSession()->addSuccess ($this->__('The order notification has been sent.'));
             }
