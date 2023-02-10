@@ -13,7 +13,7 @@
             <!-- Core -->
             <basic_magento translate="title" module="basic">
                 <model>basic/magento_api</model>
-                <title>Magento Info API</title>
+                <title>Basic Magento API</title>
                 <acl>basic/magento</acl>
                 <methods>
                     <info translate="title" module="basic">
@@ -51,7 +51,7 @@
             <!-- Customer -->
             <basic_customer translate="title" module="basic">
                 <model>basic/customer_api</model>
-                <title>Magento Customer API</title>
+                <title>Basic Customer API</title>
                 <acl>basic/customer</acl>
                 <methods>
                     <list translate="title" module="basic">
@@ -61,6 +61,63 @@
                     </list>
                 </methods>
             </basic_customer>
+            <!-- Order -->
+            <basic_order translate="title" module="basic">
+                <model>basic/order_api</model>
+                <title>Basic Order API</title>
+                <acl>basic/order</acl>
+                <methods>
+                    <cancel translate="title" module="basic">
+                        <title>Cancel order information</title>
+                        <acl>basic/order/cancel</acl>
+                    </cancel>
+                    <prepare translate="title" module="basic">
+                        <title>Prepare order information</title>
+                        <acl>basic/order/prepare</acl>
+                    </prepare>
+                    <delivered translate="title" module="basic">
+                        <title>Delivered order information</title>
+                        <acl>basic/order/delivered</acl>
+                    </delivered>
+                </methods>
+                <faults>
+                    <order_not_specified>
+                        <code>100</code>
+                        <message>Requested order ID was not specified.</message>
+                    </order_not_specified>
+                    <order_not_exists>
+                        <code>200</code>
+                        <message>Requested order was not found.</message>
+                    </order_not_exists>
+
+                    <order_has_canceled>
+                        <code>300</code>
+                        <message>Requested order has been canceled.</message>
+                    </order_has_canceled>
+                    <order_not_canceled>
+                        <code>400</code>
+                        <message>Requested order was not canceled.</message>
+                    </order_not_canceled>
+
+                    <order_has_prepared>
+                        <code>500</code>
+                        <message>Requested order has been prepared.</message>
+                    </order_has_prepared>
+                    <order_not_prepared>
+                        <code>600</code>
+                        <message>Requested order was not prepared.</message>
+                    </order_not_prepared>
+
+                    <order_has_delivered>
+                        <code>700</code>
+                        <message>Requested order has been delivered.</message>
+                    </order_has_delivered>
+                    <order_not_delivered>
+                        <code>800</code>
+                        <message>Requested order was not delivered.</message>
+                    </order_not_delivered>
+                </faults>
+            </basic_order>
             <!-- PDF -->
             <basic_pdf translate="title" module="basic">
                 <model>basic/pdf_api</model>
@@ -95,7 +152,7 @@
                     <sort_order>0</sort_order>
                     <!-- Core -->
                     <magento translate="title" module="basic">
-                        <title>Magento Info</title>
+                        <title>Magento</title>
                         <info translate="title" module="basic">
                             <title>Retrieve info about current Magento installation</title>
                         </info>
@@ -117,11 +174,24 @@
                     </magento>
                     <!-- Customer -->
                     <customer translate="title" module="basic">
-                        <title>Magento Customer</title>
+                        <title>Customer</title>
                         <list translate="title" module="basic">
                             <title>Retrieve customer list</title>
                         </list>
                     </customer>
+                    <!-- Order -->
+                    <order translate="title" module="basic">
+                        <title>Order</title>
+                        <cancel translate="title" module="basic">
+                            <title>Cancel order information</title>
+                        </cancel>
+                        <prepare translate="title" module="basic">
+                            <title>Prepare order information</title>
+                        </prepare>
+                        <delivered translate="title" module="basic">
+                            <title>Delivered order information</title>
+                        </delivered>
+                    </order>
                     <!-- PDF -->
                     <pdf translate="title" module="basic">
                         <title>PDF</title>
