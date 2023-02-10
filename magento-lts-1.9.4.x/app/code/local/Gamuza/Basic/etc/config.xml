@@ -158,6 +158,7 @@
             </install>
             <sales>
                 <rewrite>
+                    <order>Gamuza_Basic_Model_Sales_Order</order>
                     <quote_address>Gamuza_Basic_Model_Sales_Quote_Address</quote_address>
                 </rewrite>
             </sales>

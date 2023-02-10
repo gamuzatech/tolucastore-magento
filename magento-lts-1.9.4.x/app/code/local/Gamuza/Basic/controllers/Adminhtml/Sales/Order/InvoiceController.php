@@ -27,7 +27,7 @@ class Gamuza_Basic_Adminhtml_Sales_Order_InvoiceController
         {
             $order = $invoice->getOrder ();
 
-            $status  = Gamuza_Basic_Model_Order::STATUS_PAID;
+            $status  = Gamuza_Basic_Model_Sales_Order::STATUS_PAID;
             $comment = Mage::helper ('basic')->__('The order was paid.');
 
             $order->queueOrderUpdateEmail (true, $comment, true)

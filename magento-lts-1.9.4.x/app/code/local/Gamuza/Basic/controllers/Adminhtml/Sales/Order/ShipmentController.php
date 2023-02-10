@@ -29,7 +29,7 @@ class Gamuza_Basic_Adminhtml_Sales_Order_ShipmentController
         {
             $order = $shipment->getOrder ();
 
-            $status  = Gamuza_Basic_Model_Order::STATUS_SHIPPED;
+            $status  = Gamuza_Basic_Model_Sales_Order::STATUS_SHIPPED;
             $comment = Mage::helper ('basic')->__('The order was shipped.');
 
             $order->queueOrderUpdateEmail (true, $comment, true)

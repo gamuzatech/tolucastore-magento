@@ -8,7 +8,7 @@
 /**
  * Order model
  */
-class Gamuza_Basic_Model_Order extends Mage_Sales_Model_Order
+class Gamuza_Basic_Model_Sales_Order extends Mage_Sales_Model_Order
 {
     /**
      * Order statuses

@@ -41,7 +41,7 @@ class Gamuza_Basic_Adminhtml_Sales_OrderController extends Mage_Adminhtml_Sales_
 
         if ($order = Mage::registry ('current_order'))
         {
-            $status  = Gamuza_Basic_Model_Order::STATUS_CANCELED;
+            $status  = Gamuza_Basic_Model_Sales_Order::STATUS_CANCELED;
             $comment = Mage::helper ('basic')->__('The order was canceled.');
 
             $order->queueOrderUpdateEmail (true, $comment, true)
@@ -66,7 +66,7 @@ class Gamuza_Basic_Adminhtml_Sales_OrderController extends Mage_Adminhtml_Sales_
         {
             try
             {
-                $status  = Gamuza_Basic_Model_Order::STATUS_PREPARING;
+                $status  = Gamuza_Basic_Model_Sales_Order::STATUS_PREPARING;
                 $comment = Mage::helper ('basic')->__('The order is being prepared.');
 
                 $order->queueOrderUpdateEmail (true, $comment, true)
@@ -106,7 +106,7 @@ class Gamuza_Basic_Adminhtml_Sales_OrderController extends Mage_Adminhtml_Sales_
         {
             try
             {
-                $status  = Gamuza_Basic_Model_Order::STATUS_DELIVERED;
+                $status  = Gamuza_Basic_Model_Sales_Order::STATUS_DELIVERED;
                 $comment = $this->__('The order was delivered.');
 
                 $order->queueOrderUpdateEmail (true, $comment, true)

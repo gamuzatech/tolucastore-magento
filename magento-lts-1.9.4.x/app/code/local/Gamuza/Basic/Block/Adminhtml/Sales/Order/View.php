@@ -45,8 +45,8 @@ class Gamuza_Basic_Block_Adminhtml_Sales_Order_View extends Mage_Adminhtml_Block
         /**
          * Prepare
          */
-        if ((!strcmp ($order->getState (), Mage_Sales_Model_Order::STATE_NEW) && !strcmp ($order->getStatus (), Gamuza_Basic_Model_Order::STATUS_PENDING))
-            || (!strcmp ($order->getState (), Mage_Sales_Model_Order::STATE_PROCESSING) && !strcmp ($order->getStatus (), Gamuza_Basic_Model_Order::STATUS_PAID)))
+        if ((!strcmp ($order->getState (), Mage_Sales_Model_Order::STATE_NEW) && !strcmp ($order->getStatus (), Gamuza_Basic_Model_Sales_Order::STATUS_PENDING))
+            || (!strcmp ($order->getState (), Mage_Sales_Model_Order::STATE_PROCESSING) && !strcmp ($order->getStatus (), Gamuza_Basic_Model_Sales_Order::STATUS_PAID)))
         {
             $coreHelper = Mage::helper ('core');
 
@@ -71,7 +71,7 @@ class Gamuza_Basic_Block_Adminhtml_Sales_Order_View extends Mage_Adminhtml_Block
          */
         if (!strcmp ($order->getState (), Mage_Sales_Model_Order::STATE_COMPLETE)
             && in_array ($order->getStatus (), array(
-                Gamuza_Basic_Model_Order::STATUS_PAID, Gamuza_Basic_Model_Order::STATUS_SHIPPED
+                Gamuza_Basic_Model_Sales_Order::STATUS_PAID, Gamuza_Basic_Model_Sales_Order::STATUS_SHIPPED
             )))
         {
             $coreHelper = Mage::helper ('core');

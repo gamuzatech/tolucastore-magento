@@ -27,7 +27,7 @@ class Gamuza_Basic_Adminhtml_Sales_Order_CreditmemoController
         {
             $order = $creditmemo->getOrder ();
 
-            $status  = Gamuza_Basic_Model_Order::STATUS_REFUNDED;
+            $status  = Gamuza_Basic_Model_Sales_Order::STATUS_REFUNDED;
             $comment = Mage::helper ('basic')->__('The order was refunded.');
 
             $order->queueOrderUpdateEmail (true, $comment, true)
