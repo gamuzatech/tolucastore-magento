@@ -20,5 +20,31 @@ class Gamuza_Basic_Model_Sales_Order extends Mage_Sales_Model_Order
     const STATUS_DELIVERED = 'delivered';
     const STATUS_REFUNDED  = 'refunded';
     const STATUS_CANCELED  = 'canceled';
+
+    public function canPrepare ()
+    {
+        $collection = Mage::getModel ('sales/order_status_history')->getCollection ()
+            ->addFieldToFilter ('parent_id', array ('eq' => $this->getId ()))
+            ->addFieldToFilter ('status',    array ('eq' => self::STATUS_PREPARING))
+        ;
+
+        if ((!strcmp ($this->getState (), self::STATE_NEW) && !strcmp ($this->getStatus (), self::STATUS_PENDING))
+            || (!strcmp ($this->getState (), self::STATE_PROCESSING) && !strcmp ($this->getStatus (), self::STATUS_PAID) && !$collection->getSize ())
+            || (!strcmp ($this->getState (), self::STATE_COMPLETE) && !strcmp ($this->getStatus (), self::STATUS_PAID) && $this->getIsVirtual ()))
+        {
+            return true;
+        }
+    }
+
+    public function canDeliver ()
+    {
+        if (!strcmp ($this->getState (), self::STATE_COMPLETE)
+            && in_array ($this->getStatus (), array(
+                self::STATUS_PAID, self::STATUS_SHIPPED
+            )))
+        {
+            return true;
+        }
+    }
 }
 
