@@ -67,18 +67,30 @@
                 <title>Basic Order API</title>
                 <acl>basic/order</acl>
                 <methods>
-                    <cancel translate="title" module="basic">
-                        <title>Cancel order information</title>
-                        <acl>basic/order/cancel</acl>
-                    </cancel>
-                    <prepare translate="title" module="basic">
-                        <title>Prepare order information</title>
-                        <acl>basic/order/prepare</acl>
-                    </prepare>
+                    <canceled translate="title" module="basic">
+                        <title>Canceled order information</title>
+                        <acl>basic/order/canceled</acl>
+                    </canceled>
+                    <preparing translate="title" module="basic">
+                        <title>Preparing order information</title>
+                        <acl>basic/order/preparing</acl>
+                    </preparing>
+                    <paid translate="title" module="basic">
+                        <title>Paid order information</title>
+                        <acl>basic/order/paid</acl>
+                    </paid>
+                    <shipped translate="title" module="basic">
+                        <title>Shipped order information</title>
+                        <acl>basic/order/shipped</acl>
+                    </shipped>
                     <delivered translate="title" module="basic">
                         <title>Delivered order information</title>
                         <acl>basic/order/delivered</acl>
                     </delivered>
+                    <refunded translate="title" module="basic">
+                        <title>Refunded order information</title>
+                        <acl>basic/order/refunded</acl>
+                    </refunded>
                 </methods>
                 <faults>
                     <order_not_specified>
@@ -209,15 +221,24 @@
                     <!-- Order -->
                     <order translate="title" module="basic">
                         <title>Order</title>
-                        <cancel translate="title" module="basic">
-                            <title>Cancel order information</title>
-                        </cancel>
-                        <prepare translate="title" module="basic">
-                            <title>Prepare order information</title>
-                        </prepare>
+                        <canceled translate="title" module="basic">
+                            <title>Canceled order information</title>
+                        </canceled>
+                        <preparing translate="title" module="basic">
+                            <title>Preparing order information</title>
+                        </preparing>
+                        <paid translate="title" module="basic">
+                            <title>Paid order information</title>
+                        </paid>
+                        <shipped translate="title" module="basic">
+                            <title>Shipped order information</title>
+                        </shipped>
                         <delivered translate="title" module="basic">
                             <title>Delivered order information</title>
                         </delivered>
+                        <refunded translate="title" module="basic">
+                            <title>Refunded order information</title>
+                        </refunded>
                     </order>
                     <!-- PDF -->
                     <pdf translate="title" module="basic">
