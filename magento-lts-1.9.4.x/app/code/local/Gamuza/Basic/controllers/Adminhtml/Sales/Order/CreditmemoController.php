@@ -27,7 +27,7 @@ class Gamuza_Basic_Adminhtml_Sales_Order_CreditmemoController
         {
             $order = $creditmemo->getOrder ();
 
-            Mage::helper ('basic/sales_order')->refunded ($order);
+            Mage::helper ('basic/sales_order_status')->refunded ($order);
         }
 
         $this->_redirect ('*/sales_order/view', array ('order_id' => $orderId));

@@ -27,7 +27,7 @@ class Gamuza_Basic_Adminhtml_Sales_Order_InvoiceController
         {
             $order = $invoice->getOrder ();
 
-            Mage::helper ('basic/sales_order')->paid ($order);
+            Mage::helper ('basic/sales_order_status')->paid ($order);
         }
 
         $this->_redirect ('*/sales_order/view', array ('order_id' => $orderId));

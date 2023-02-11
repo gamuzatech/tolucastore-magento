@@ -41,7 +41,7 @@ class Gamuza_Basic_Adminhtml_Sales_OrderController extends Mage_Adminhtml_Sales_
 
         if ($order = Mage::registry ('current_order'))
         {
-            Mage::helper ('basic/sales_order')->cancel ($order);
+            Mage::helper ('basic/sales_order_status')->canceled ($order);
         }
 
         $this->_redirect ('*/sales_order/view', array ('order_id' => $order->getId ()));
@@ -56,7 +56,7 @@ class Gamuza_Basic_Adminhtml_Sales_OrderController extends Mage_Adminhtml_Sales_
         {
             try
             {
-                Mage::helper ('basic/sales_order')->prepare ($order);
+                Mage::helper ('basic/sales_order_status')->preparing ($order);
 
                 $this->_getSession()->addSuccess ($this->__('The order notification has been sent.'));
             }
@@ -84,7 +84,7 @@ class Gamuza_Basic_Adminhtml_Sales_OrderController extends Mage_Adminhtml_Sales_
         {
             try
             {
-                Mage::helper ('basic/sales_order')->delivered ($order);
+                Mage::helper ('basic/sales_order_status')->delivered ($order);
 
                 $this->_getSession()->addSuccess ($this->__('The order notification has been sent.'));
             }

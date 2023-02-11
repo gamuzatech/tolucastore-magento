@@ -26,7 +26,7 @@ class Gamuza_Basic_Model_Order_Api extends Mage_Api_Model_Resource_Abstract
 
         $order->cancel ($comment)->save ();
 
-        Mage::helper ('basic/sales_order')->canceled ($order);
+        Mage::helper ('basic/sales_order_status')->canceled ($order);
 
         return true;
     }
@@ -45,7 +45,7 @@ class Gamuza_Basic_Model_Order_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('order_not_prepared');
         }
 
-        Mage::helper ('basic/sales_order')->preparing ($order);
+        Mage::helper ('basic/sales_order_status')->preparing ($order);
 
         return true;
     }
@@ -64,7 +64,7 @@ class Gamuza_Basic_Model_Order_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('order_not_paid');
         }
 
-        Mage::helper ('basic/sales_order')->paid ($order);
+        Mage::helper ('basic/sales_order_status')->paid ($order);
 
         return true;
     }
@@ -83,7 +83,7 @@ class Gamuza_Basic_Model_Order_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('order_not_shipped');
         }
 
-        Mage::helper ('basic/sales_order')->shipped ($order);
+        Mage::helper ('basic/sales_order_status')->shipped ($order);
 
         return true;
     }
@@ -102,7 +102,7 @@ class Gamuza_Basic_Model_Order_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('order_not_delivered');
         }
 
-        Mage::helper ('basic/sales_order')->delivered ($order);
+        Mage::helper ('basic/sales_order_status')->delivered ($order);
 
         return true;
     }
@@ -121,7 +121,7 @@ class Gamuza_Basic_Model_Order_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('order_not_refunded');
         }
 
-        Mage::helper ('basic/sales_order')->refunded ($order);
+        Mage::helper ('basic/sales_order_status')->refunded ($order);
 
         return true;
     }

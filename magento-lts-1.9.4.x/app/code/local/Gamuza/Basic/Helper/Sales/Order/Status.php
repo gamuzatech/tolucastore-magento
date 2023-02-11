@@ -5,7 +5,7 @@
  * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
  */
 
-class Gamuza_Basic_Helper_Sales_Order extends Mage_Core_Helper_Abstract
+class Gamuza_Basic_Helper_Sales_Order_Status extends Mage_Core_Helper_Abstract
 {
     public function canceled ($order)
     {
