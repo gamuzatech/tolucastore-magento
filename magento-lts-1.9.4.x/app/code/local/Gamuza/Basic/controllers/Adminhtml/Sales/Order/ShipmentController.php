@@ -29,17 +29,7 @@ class Gamuza_Basic_Adminhtml_Sales_Order_ShipmentController
         {
             $order = $shipment->getOrder ();
 
-            $status  = Gamuza_Basic_Model_Sales_Order::STATUS_SHIPPED;
-            $comment = Mage::helper ('basic')->__('The order was shipped.');
-
-            $order->queueOrderUpdateEmail (true, $comment, true)
-                ->addStatusHistoryComment ($comment, $status)
-                ->setIsCustomerNotified (true)
-                ->setIsVisibleOnFront (true)
-                ->save ()
-                ->getOrder ()
-                ->save ()
-            ;
+            Mage::helper ('basic/sales_order')->shipped ($order);
         }
 
         $this->_redirect ('*/sales_order/view', array ('order_id' => $orderId));

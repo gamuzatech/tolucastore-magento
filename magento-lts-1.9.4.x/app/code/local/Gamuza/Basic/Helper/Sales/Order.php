@@ -41,6 +41,36 @@ class Gamuza_Basic_Helper_Sales_Order extends Mage_Core_Helper_Abstract
         Mage::dispatchEvent ('sales_order_prepare_after', array ('order' => $order));
     }
 
+    public function paid ($order)
+    {
+        $status  = Gamuza_Basic_Model_Sales_Order::STATUS_PAID;
+        $comment = Mage::helper ('basic')->__('The order was paid.');
+
+        $order->queueOrderUpdateEmail (true, $comment, true)
+            ->addStatusHistoryComment ($comment, $status)
+            ->setIsCustomerNotified (true)
+            ->setIsVisibleOnFront (true)
+            ->save ()
+            ->getOrder ()
+            ->save ()
+        ;
+    }
+
+    public function shipped ($order)
+    {
+        $status  = Gamuza_Basic_Model_Sales_Order::STATUS_SHIPPED;
+        $comment = Mage::helper ('basic')->__('The order was shipped.');
+
+        $order->queueOrderUpdateEmail (true, $comment, true)
+            ->addStatusHistoryComment ($comment, $status)
+            ->setIsCustomerNotified (true)
+            ->setIsVisibleOnFront (true)
+            ->save ()
+            ->getOrder ()
+            ->save ()
+        ;
+    }
+
     public function delivered ($order)
     {
         $status  = Gamuza_Basic_Model_Sales_Order::STATUS_DELIVERED;
@@ -56,6 +86,21 @@ class Gamuza_Basic_Helper_Sales_Order extends Mage_Core_Helper_Abstract
         ;
 
         Mage::dispatchEvent ('sales_order_delivered_after', array ('order' => $order));
+    }
+
+    public function refunded ($order)
+    {
+        $status  = Gamuza_Basic_Model_Sales_Order::STATUS_REFUNDED;
+        $comment = Mage::helper ('basic')->__('The order was refunded.');
+
+        $order->queueOrderUpdateEmail (true, $comment, true)
+            ->addStatusHistoryComment ($comment, $status)
+            ->setIsCustomerNotified (true)
+            ->setIsVisibleOnFront (true)
+            ->save ()
+            ->getOrder ()
+            ->save ()
+        ;
     }
 }
 
