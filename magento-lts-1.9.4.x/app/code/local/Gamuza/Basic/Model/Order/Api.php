@@ -64,6 +64,44 @@ class Gamuza_Basic_Model_Order_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('order_not_paid');
         }
 
+        $itemQtys = array ();
+
+        foreach ($order->getAllItems () as $orderItem)
+        {
+            if ($orderItem->getQtyToInvoice () && !$orderItem->getIsVirtual ())
+            {
+                $itemQtys [$orderItem->getId ()] = $orderItem->getQtyToInvoice ();
+            }
+        }
+
+        try
+        {
+            $invoice = Mage::getModel ('sales/service_order', $order)->prepareInvoice ($itemQtys);
+
+            $invoice->setRequestedCaptureCase (Mage_Sales_Model_Order_Invoice::CAPTURE_OFFLINE);
+            $invoice->register ();
+
+            $order->setIsInProcess (true);
+
+            Mage::getModel ('core/resource_transaction')
+                ->addObject ($invoice)
+                ->addObject ($order)
+                ->save ()
+            ;
+
+            $invoice->sendEmail (true);
+
+            $order->save ();
+        }
+        catch (Exception $e)
+        {
+            $this->_fault ('order_not_paid', $e->getMessage ());
+        }
+        catch (Mage_Core_Exception $e)
+        {
+            $this->_fault ('order_not_paid', $e->getMessage ());
+        }
+
         Mage::helper ('basic/sales_order_status')->paid ($order);
 
         return true;
