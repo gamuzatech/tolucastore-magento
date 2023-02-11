@@ -61,11 +61,11 @@
                     </list>
                 </methods>
             </basic_customer>
-            <!-- Order -->
-            <basic_order translate="title" module="basic">
-                <model>basic/order_api</model>
-                <title>Basic Order API</title>
-                <acl>basic/order</acl>
+            <!-- Order Status -->
+            <basic_order_status translate="title" module="basic">
+                <model>basic/order_status_api</model>
+                <title>Basic Order Status API</title>
+                <acl>basic/order_status</acl>
                 <methods>
                     <canceled translate="title" module="basic">
                         <title>Canceled order information</title>
@@ -156,7 +156,7 @@
                         <message>Requested order was not refunded.</message>
                     </order_not_refunded>
                 </faults>
-            </basic_order>
+            </basic_order_status>
             <!-- PDF -->
             <basic_pdf translate="title" module="basic">
                 <model>basic/pdf_api</model>
@@ -218,9 +218,9 @@
                             <title>Retrieve customer list</title>
                         </list>
                     </customer>
-                    <!-- Order -->
-                    <order translate="title" module="basic">
-                        <title>Order</title>
+                    <!-- Order Status -->
+                    <order_status translate="title" module="basic">
+                        <title>Order Status</title>
                         <canceled translate="title" module="basic">
                             <title>Canceled order information</title>
                         </canceled>
@@ -239,7 +239,7 @@
                         <refunded translate="title" module="basic">
                             <title>Refunded order information</title>
                         </refunded>
-                    </order>
+                    </order_status>
                     <!-- PDF -->
                     <pdf translate="title" module="basic">
                         <title>PDF</title>

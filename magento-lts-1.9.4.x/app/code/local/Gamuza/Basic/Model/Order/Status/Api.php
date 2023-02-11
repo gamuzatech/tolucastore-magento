@@ -6,9 +6,9 @@
  */
 
 /**
- * Order API
+ * Order Status API
  */
-class Gamuza_Basic_Model_Order_Api extends Mage_Api_Model_Resource_Abstract
+class Gamuza_Basic_Model_Order_Status_Api extends Mage_Api_Model_Resource_Abstract
 {
     public function canceled ($incrementId, $protectCode, $comment = null)
     {
