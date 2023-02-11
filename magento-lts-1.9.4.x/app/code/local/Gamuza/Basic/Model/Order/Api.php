@@ -10,7 +10,7 @@
  */
 class Gamuza_Basic_Model_Order_Api extends Mage_Api_Model_Resource_Abstract
 {
-    public function cancel ($incrementId, $protectCode, $comment = null)
+    public function canceled ($incrementId, $protectCode, $comment = null)
     {
         $order = $this->_getOrder ($incrementId, $protectCode);
 
@@ -26,12 +26,12 @@ class Gamuza_Basic_Model_Order_Api extends Mage_Api_Model_Resource_Abstract
 
         $order->cancel ($comment)->save ();
 
-        Mage::helper ('basic/sales_order')->cancel ($order);
+        Mage::helper ('basic/sales_order')->canceled ($order);
 
         return true;
     }
 
-    public function prepare ($incrementId, $protectCode)
+    public function preparing ($incrementId, $protectCode)
     {
         $order = $this->_getOrder ($incrementId, $protectCode);
 
@@ -45,7 +45,7 @@ class Gamuza_Basic_Model_Order_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('order_not_prepared');
         }
 
-        Mage::helper ('basic/sales_order')->prepare ($order);
+        Mage::helper ('basic/sales_order')->preparing ($order);
 
         return true;
     }

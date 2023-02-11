@@ -271,14 +271,14 @@
                     </admin_basic_sales_order_place_after>
                 </observers>
             </sales_order_place_after>
-            <sales_order_prepare_after>
+            <sales_order_preparing_after>
                 <observers>
-                    <admin_basic_sales_order_prepare_after>
+                    <admin_basic_sales_order_preparing_after>
                         <class>basic/observer</class>
-                        <method>salesOrderPrepareAfter</method>
-                    </admin_basic_sales_order_prepare_after>
+                        <method>salesOrderPreparingAfter</method>
+                    </admin_basic_sales_order_preparing_after>
                 </observers>
-            </sales_order_prepare_after>
+            </sales_order_preparing_after>
             <sales_order_delivered_after>
                 <observers>
                     <admin_basic_sales_order_delivered_after>

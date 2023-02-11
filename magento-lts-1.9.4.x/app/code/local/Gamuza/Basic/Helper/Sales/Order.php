@@ -7,7 +7,7 @@
 
 class Gamuza_Basic_Helper_Sales_Order extends Mage_Core_Helper_Abstract
 {
-    public function cancel ($order)
+    public function canceled ($order)
     {
         $status  = Gamuza_Basic_Model_Sales_Order::STATUS_CANCELED;
         $comment = Mage::helper ('basic')->__('The order was canceled.');
@@ -21,10 +21,10 @@ class Gamuza_Basic_Helper_Sales_Order extends Mage_Core_Helper_Abstract
             ->save ()
         ;
 
-        Mage::dispatchEvent ('sales_order_cancel_after', array ('order' => $order));
+        Mage::dispatchEvent ('sales_order_canceled_after', array ('order' => $order));
     }
 
-    public function prepare ($order)
+    public function preparing ($order)
     {
         $status  = Gamuza_Basic_Model_Sales_Order::STATUS_PREPARING;
         $comment = Mage::helper ('basic')->__('The order is being prepared.');
@@ -38,7 +38,7 @@ class Gamuza_Basic_Helper_Sales_Order extends Mage_Core_Helper_Abstract
             ->save ()
         ;
 
-        Mage::dispatchEvent ('sales_order_prepare_after', array ('order' => $order));
+        Mage::dispatchEvent ('sales_order_preparing_after', array ('order' => $order));
     }
 
     public function paid ($order)
@@ -54,6 +54,8 @@ class Gamuza_Basic_Helper_Sales_Order extends Mage_Core_Helper_Abstract
             ->getOrder ()
             ->save ()
         ;
+
+        Mage::dispatchEvent ('sales_order_paid_after', array ('order' => $order));
     }
 
     public function shipped ($order)
@@ -69,6 +71,8 @@ class Gamuza_Basic_Helper_Sales_Order extends Mage_Core_Helper_Abstract
             ->getOrder ()
             ->save ()
         ;
+
+        Mage::dispatchEvent ('sales_order_shipped_after', array ('order' => $order));
     }
 
     public function delivered ($order)
@@ -101,6 +105,8 @@ class Gamuza_Basic_Helper_Sales_Order extends Mage_Core_Helper_Abstract
             ->getOrder ()
             ->save ()
         ;
+
+        Mage::dispatchEvent ('sales_order_refunded_after', array ('order' => $order));
     }
 }
 

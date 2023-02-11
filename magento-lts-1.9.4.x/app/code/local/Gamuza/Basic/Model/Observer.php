@@ -185,7 +185,7 @@ class Gamuza_Basic_Model_Observer
         return $this;
     }
 
-    public function salesOrderPrepareAfter ($observer)
+    public function salesOrderPreparingAfter ($observer)
     {
         $this->_updateOrderServiceState (
             $observer->getEvent ()->getOrder (),
