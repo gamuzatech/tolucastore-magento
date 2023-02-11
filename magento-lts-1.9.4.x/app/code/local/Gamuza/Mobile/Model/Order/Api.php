@@ -491,6 +491,11 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
         $result ['can_creditmemo'] = boolval ($order->canCreditmemo ());
         $result ['can_cancel']  = boolval ($order->canCancel ());
 
+        $result ['has_invoices']    = boolval ($order->hasInvoices ());
+        $result ['has_shipments']   = boolval ($order->hasShipments ());
+        $result ['has_creditmemos'] = boolval ($order->hasCreditmemos ());
+        $result ['has_services']    = boolval ($order->hasServices ());
+
         return $result;
     }
 
