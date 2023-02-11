@@ -195,6 +195,42 @@ class Gamuza_Basic_Model_Order_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('order_not_refunded');
         }
 
+        $itemQtys = array ();
+
+        foreach ($order->getAllItems () as $orderItem)
+        {
+            if ($orderItem->getQtyToRefund () && !$orderItem->getIsVirtual ())
+            {
+                $itemQtys [$orderItem->getId ()] = $orderItem->getQtyToRefund ();
+            }
+        }
+
+        try
+        {
+            $creditmemo = Mage::getModel ('sales/service_order', $order)->prepareCreditmemo ($itemQtys);
+            $creditmemo->register ();
+
+            $order->setIsInProcess (true);
+
+            Mage::getModel ('core/resource_transaction')
+                ->addObject ($creditmemo)
+                ->addObject ($order)
+                ->save ()
+            ;
+
+            $creditmemo->sendEmail (true);
+
+            $order->save ();
+        }
+        catch (Exception $e)
+        {
+            $this->_fault ('order_not_refunded', $e->getMessage ());
+        }
+        catch (Mage_Core_Exception $e)
+        {
+            $this->_fault ('order_not_refunded', $e->getMessage ());
+        }
+
         Mage::helper ('basic/sales_order_status')->refunded ($order);
 
         return true;
