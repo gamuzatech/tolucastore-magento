@@ -50,6 +50,44 @@ class Gamuza_Basic_Model_Order_Api extends Mage_Api_Model_Resource_Abstract
         return true;
     }
 
+    public function paid ($incrementId, $protectCode)
+    {
+        $order = $this->_getOrder ($incrementId, $protectCode);
+
+        if (!strcmp ($order->getStatus (), Gamuza_Basic_Model_Sales_Order::STATUS_PAID))
+        {
+            $this->_fault ('order_has_paid');
+        }
+
+        if (!$order->canInvoice ())
+        {
+            $this->_fault ('order_not_paid');
+        }
+
+        Mage::helper ('basic/sales_order')->paid ($order);
+
+        return true;
+    }
+
+    public function shipped ($incrementId, $protectCode)
+    {
+        $order = $this->_getOrder ($incrementId, $protectCode);
+
+        if (!strcmp ($order->getStatus (), Gamuza_Basic_Model_Sales_Order::STATUS_SHIPPED))
+        {
+            $this->_fault ('order_has_shipped');
+        }
+
+        if (!$order->canShip ())
+        {
+            $this->_fault ('order_not_shipped');
+        }
+
+        Mage::helper ('basic/sales_order')->shipped ($order);
+
+        return true;
+    }
+
     public function delivered ($incrementId, $protectCode)
     {
         $order = $this->_getOrder ($incrementId, $protectCode);
@@ -65,6 +103,25 @@ class Gamuza_Basic_Model_Order_Api extends Mage_Api_Model_Resource_Abstract
         }
 
         Mage::helper ('basic/sales_order')->delivered ($order);
+
+        return true;
+    }
+
+    public function refunded ($incrementId, $protectCode)
+    {
+        $order = $this->_getOrder ($incrementId, $protectCode);
+
+        if (!strcmp ($order->getStatus (), Gamuza_Basic_Model_Sales_Order::STATUS_REFUNDED))
+        {
+            $this->_fault ('order_has_refunded');
+        }
+
+        if (!$order->canCreditmemo ())
+        {
+            $this->_fault ('order_not_refunded');
+        }
+
+        Mage::helper ('basic/sales_order')->refunded ($order);
 
         return true;
     }

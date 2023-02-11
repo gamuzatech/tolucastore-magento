@@ -108,14 +108,41 @@
                         <message>Requested order was not prepared.</message>
                     </order_not_prepared>
 
-                    <order_has_delivered>
+                    <order_has_paid>
                         <code>700</code>
+                        <message>Requested order has been paid.</message>
+                    </order_has_paid>
+                    <order_not_paid>
+                        <code>800</code>
+                        <message>Requested order was not paid.</message>
+                    </order_not_paid>
+
+                    <order_has_shipped>
+                        <code>900</code>
+                        <message>Requested order has been shipped.</message>
+                    </order_has_shipped>
+                    <order_not_shipped>
+                        <code>1000</code>
+                        <message>Requested order was not shipped.</message>
+                    </order_not_shipped>
+
+                    <order_has_delivered>
+                        <code>1100</code>
                         <message>Requested order has been delivered.</message>
                     </order_has_delivered>
                     <order_not_delivered>
-                        <code>800</code>
+                        <code>1200</code>
                         <message>Requested order was not delivered.</message>
                     </order_not_delivered>
+
+                    <order_has_refunded>
+                        <code>1300</code>
+                        <message>Requested order has been refunded.</message>
+                    </order_has_refunded>
+                    <order_not_refunded>
+                        <code>1400</code>
+                        <message>Requested order was not refunded.</message>
+                    </order_not_refunded>
                 </faults>
             </basic_order>
             <!-- PDF -->
