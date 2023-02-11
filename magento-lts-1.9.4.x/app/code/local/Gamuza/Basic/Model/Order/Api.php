@@ -121,6 +121,42 @@ class Gamuza_Basic_Model_Order_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('order_not_shipped');
         }
 
+        $itemQtys = array ();
+
+        foreach ($order->getAllItems () as $orderItem)
+        {
+            if ($orderItem->getQtyToShip () && !$orderItem->getIsVirtual ())
+            {
+                $itemQtys [$orderItem->getId ()] = $orderItem->getQtyToShip ();
+            }
+        }
+
+        try
+        {
+            $shipment = Mage::getModel ('sales/service_order', $order)->prepareShipment ($itemQtys);
+            $shipment->register ();
+
+            $order->setIsInProcess (true);
+
+            Mage::getModel ('core/resource_transaction')
+                ->addObject ($shipment)
+                ->addObject ($order)
+                ->save ()
+            ;
+
+            $shipment->sendEmail (true);
+
+            $order->save ();
+        }
+        catch (Exception $e)
+        {
+            $this->_fault ('order_not_shipped', $e->getMessage ());
+        }
+        catch (Mage_Core_Exception $e)
+        {
+            $this->_fault ('order_not_shipped', $e->getMessage ());
+        }
+
         Mage::helper ('basic/sales_order_status')->shipped ($order);
 
         return true;
