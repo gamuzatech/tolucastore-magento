@@ -10,9 +10,9 @@
  */
 class Gamuza_Basic_Model_Order_Api extends Mage_Api_Model_Resource_Abstract
 {
-    public function cancel ($order_id, $comment = null)
+    public function cancel ($incrementId, $protectCode, $comment = null)
     {
-        $order = $this->_getOrder ($order_id);
+        $order = $this->_getOrder ($incrementId, $protectCode);
 
         if (!strcmp ($order->getStatus (), Gamuza_Basic_Model_Sales_Order::STATUS_CANCELED))
         {
@@ -31,9 +31,9 @@ class Gamuza_Basic_Model_Order_Api extends Mage_Api_Model_Resource_Abstract
         return true;
     }
 
-    public function prepare ($order_id)
+    public function prepare ($incrementId, $protectCode)
     {
-        $order = $this->_getOrder ($order_id);
+        $order = $this->_getOrder ($incrementId, $protectCode);
 
         if (!strcmp ($order->getStatus (), Gamuza_Basic_Model_Sales_Order::STATUS_PREPARING))
         {
@@ -50,9 +50,9 @@ class Gamuza_Basic_Model_Order_Api extends Mage_Api_Model_Resource_Abstract
         return true;
     }
 
-    public function delivered ($order_id)
+    public function delivered ($incrementId, $protectCode)
     {
-        $order = $this->_getOrder ($order_id);
+        $order = $this->_getOrder ($incrementId, $protectCode);
 
         if (!strcmp ($order->getStatus (), Gamuza_Basic_Model_Sales_Order::STATUS_DELIVERED))
         {
@@ -69,14 +69,18 @@ class Gamuza_Basic_Model_Order_Api extends Mage_Api_Model_Resource_Abstract
         return true;
     }
 
-    protected function _getOrder ($order_id)
+    protected function _getOrder ($incrementId, $protectCode)
     {
-        if (empty ($order_id))
+        if (empty ($incrementId) || empty ($protectCode))
         {
             $this->_fault ('order_not_specified');
         }
 
-        $order = Mage::getModel ('sales/order')->load ($order_id);
+        $order = Mage::getModel ('sales/order')->getCollection ()
+            ->addFieldToFilter ('increment_id', array ('eq' => $incrementId))
+            ->addFieldToFilter ('protect_code', array ('eq' => $protectCode))
+            ->getFirstItem ()
+        ;
 
         if (!$order || !$order->getId ())
         {
