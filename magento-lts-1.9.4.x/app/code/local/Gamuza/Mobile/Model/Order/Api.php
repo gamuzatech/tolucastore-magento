@@ -484,6 +484,13 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
             $result['status_history'][] = $status;
         }
 
+        $result ['can_prepare'] = boolval ($order->canPrepare ());
+        $result ['can_invoice'] = boolval ($order->canInvoice ());
+        $result ['can_ship']    = boolval ($order->canShip ());
+        $result ['can_deliver'] = boolval ($order->canDeliver ());
+        $result ['can_creditmemo'] = boolval ($order->canCreditmemo ());
+        $result ['can_cancel']  = boolval ($order->canCancel ());
+
         return $result;
     }
 
