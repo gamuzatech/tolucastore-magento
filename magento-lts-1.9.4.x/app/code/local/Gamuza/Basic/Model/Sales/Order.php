@@ -46,5 +46,14 @@ class Gamuza_Basic_Model_Sales_Order extends Mage_Sales_Model_Order
             return true;
         }
     }
+
+    public function hasServices ()
+    {
+        $collection = Mage::getModel ('basic/order_service')->getCollection ()
+            ->addFieldToFilter ('order_id', array ('eq' => $this->getId ()))
+        ;
+
+        return $collection->getSize () > 0;
+    }
 }
 
