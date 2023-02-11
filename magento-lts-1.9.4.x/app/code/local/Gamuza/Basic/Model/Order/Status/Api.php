@@ -254,7 +254,7 @@ class Gamuza_Basic_Model_Order_Status_Api extends Mage_Api_Model_Resource_Abstra
             $this->_fault ('order_not_exists');
         }
 
-        return $order;        
+        return $order;
     }
 }
 

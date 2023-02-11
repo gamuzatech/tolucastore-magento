@@ -6,21 +6,13 @@
  */
 
 /**
- * PDF API
+ * Order PDF API
  */
-class Gamuza_Basic_Model_Pdf_Api extends Mage_Api_Model_Resource_Abstract
+class Gamuza_Basic_Model_Order_Pdf_Api extends Mage_Api_Model_Resource_Abstract
 {
-    public function service ($order_id)
+    public function service ($incrementId, $protectCode)
     {
-        if (empty ($order_id))
-        {
-            $this->_fault ('order_not_specified');
-        }
-
-        $order = Mage::getModel ('sales/order')
-            ->setStoreId (Mage_Core_Model_App::DISTRO_STORE_ID)
-            ->load ($order_id)
-        ;
+        $order = $this->_getOrder ($incrementId, $protectCode);
 
         if (!$order || !$order->getId ())
         {
@@ -47,6 +39,27 @@ class Gamuza_Basic_Model_Pdf_Api extends Mage_Api_Model_Resource_Abstract
         $emulation->stopEnvironmentEmulation($oldEnvironment);
 
         return base64_encode ($pdf->render ());
+    }
+
+    protected function _getOrder ($incrementId, $protectCode)
+    {
+        if (empty ($incrementId) || empty ($protectCode))
+        {
+            $this->_fault ('order_not_specified');
+        }
+
+        $order = Mage::getModel ('sales/order')->getCollection ()
+            ->addFieldToFilter ('increment_id', array ('eq' => $incrementId))
+            ->addFieldToFilter ('protect_code', array ('eq' => $protectCode))
+            ->getFirstItem ()
+        ;
+
+        if (!$order || !$order->getId ())
+        {
+            $this->_fault ('order_not_exists');
+        }
+
+        return $order;
     }
 }
 

@@ -69,27 +69,27 @@
                 <methods>
                     <canceled translate="title" module="basic">
                         <title>Canceled order information</title>
-                        <acl>basic/order/canceled</acl>
+                        <acl>basic/order_status/canceled</acl>
                     </canceled>
                     <preparing translate="title" module="basic">
                         <title>Preparing order information</title>
-                        <acl>basic/order/preparing</acl>
+                        <acl>basic/order_status/preparing</acl>
                     </preparing>
                     <paid translate="title" module="basic">
                         <title>Paid order information</title>
-                        <acl>basic/order/paid</acl>
+                        <acl>basic/order_status/paid</acl>
                     </paid>
                     <shipped translate="title" module="basic">
                         <title>Shipped order information</title>
-                        <acl>basic/order/shipped</acl>
+                        <acl>basic/order_status/shipped</acl>
                     </shipped>
                     <delivered translate="title" module="basic">
                         <title>Delivered order information</title>
-                        <acl>basic/order/delivered</acl>
+                        <acl>basic/order_status/delivered</acl>
                     </delivered>
                     <refunded translate="title" module="basic">
                         <title>Refunded order information</title>
-                        <acl>basic/order/refunded</acl>
+                        <acl>basic/order_status/refunded</acl>
                     </refunded>
                 </methods>
                 <faults>
@@ -157,15 +157,15 @@
                     </order_not_refunded>
                 </faults>
             </basic_order_status>
-            <!-- PDF -->
-            <basic_pdf translate="title" module="basic">
-                <model>basic/pdf_api</model>
-                <title>Basic PDF API</title>
-                <acl>basic/pdf</acl>
+            <!-- Order PDF -->
+            <basic_order_pdf translate="title" module="basic">
+                <model>basic/order_pdf_api</model>
+                <title>Basic Order PDF API</title>
+                <acl>basic/order_pdf</acl>
                 <methods>
                     <service translate="title" module="basic">
                         <title>Create order service PDF information</title>
-                        <acl>basic/pdf/service</acl>
+                        <acl>basic/order_pdf/service</acl>
                     </service>
                 </methods>
                 <faults>
@@ -182,7 +182,7 @@
                         <message>Requested service was not found.</message>
                     </service_not_exists>
                 </faults>
-            </basic_pdf>
+            </basic_order_pdf>
         </resources>
         <acl>
             <resources>
@@ -240,13 +240,13 @@
                             <title>Refunded order information</title>
                         </refunded>
                     </order_status>
-                    <!-- PDF -->
-                    <pdf translate="title" module="basic">
+                    <!-- Order PDF -->
+                    <order_pdf translate="title" module="basic">
                         <title>PDF</title>
                         <service translate="title" module="basic">
                             <title>Create order service PDF information</title>
                         </service>
-                    </pdf>
+                    </order_pdf>
                 </basic>
             </resources>
         </acl>
