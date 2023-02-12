@@ -190,6 +190,17 @@
             </basic_read>
         </resources>
         <fieldsets>
+            <sales_convert_quote>
+                <is_service>
+                    <to_order>*</to_order>
+                </is_service>
+            </sales_convert_quote>
+            <sales_convert_order>
+                <is_service>
+                    <to_quote>*</to_quote>
+                </is_service>
+            </sales_convert_order>
+            <!-- Address -->
             <sales_copy_order_billing_address>
                 <cellphone>
                     <to_order>*</to_order>
