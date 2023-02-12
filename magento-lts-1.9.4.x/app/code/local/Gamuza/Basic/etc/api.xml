@@ -163,6 +163,18 @@
                 <title>Basic Order PDF API</title>
                 <acl>basic/order_pdf</acl>
                 <methods>
+                    <invoice translate="title" module="basic">
+                        <title>Create order invoice PDF information</title>
+                        <acl>basic/order_pdf/invoice</acl>
+                    </invoice>
+                    <shipment translate="title" module="basic">
+                        <title>Create order shipment PDF information</title>
+                        <acl>basic/order_pdf/shipment</acl>
+                    </shipment>
+                    <creditmemo translate="title" module="basic">
+                        <title>Create order creditmemo PDF information</title>
+                        <acl>basic/order_pdf/creditmemo</acl>
+                    </creditmemo>
                     <service translate="title" module="basic">
                         <title>Create order service PDF information</title>
                         <acl>basic/order_pdf/service</acl>
@@ -177,8 +189,20 @@
                         <code>200</code>
                         <message>Requested order was not found.</message>
                     </order_not_exists>
-                    <service_not_exists>
+                    <invoice_not_exists>
                         <code>300</code>
+                        <message>Requested invoice was not found.</message>
+                    </invoice_not_exists>
+                    <shipment_not_exists>
+                        <code>400</code>
+                        <message>Requested shipment was not found.</message>
+                    </shipment_not_exists>
+                    <creditmemo_not_exists>
+                        <code>500</code>
+                        <message>Requested creditmemo was not found.</message>
+                    </creditmemo_not_exists>
+                    <service_not_exists>
+                        <code>600</code>
                         <message>Requested service was not found.</message>
                     </service_not_exists>
                 </faults>
@@ -243,6 +267,15 @@
                     <!-- Order PDF -->
                     <order_pdf translate="title" module="basic">
                         <title>PDF</title>
+                        <invoice translate="title" module="basic">
+                            <title>Create order invoice PDF information</title>
+                        </invoice>
+                        <shipment translate="title" module="basic">
+                            <title>Create order shipment PDF information</title>
+                        </shipment>
+                        <creditmemo translate="title" module="basic">
+                            <title>Create order creditmemo PDF information</title>
+                        </creditmemo>
                         <service translate="title" module="basic">
                             <title>Create order service PDF information</title>
                         </service>
