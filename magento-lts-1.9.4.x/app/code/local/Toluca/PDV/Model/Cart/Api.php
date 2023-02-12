@@ -257,6 +257,7 @@ class Toluca_PDV_Model_Cart_Api extends Mage_Api_Model_Resource_Abstract
             ->setStoreId ($storeId)
             ->setIsActive (true)
             ->setIsMultiShipping (false)
+            ->setIsSuperMode (true)
             ->setRemoteIp ($remoteIp)
             ->setCustomerFirstname ($customer->getFirstname ())
             ->setCustomerLastname ($customer->getLastname ())
