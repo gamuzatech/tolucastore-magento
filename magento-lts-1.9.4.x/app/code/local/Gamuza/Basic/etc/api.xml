@@ -163,6 +163,10 @@
                 <title>Basic Order PDF API</title>
                 <acl>basic/order_pdf</acl>
                 <methods>
+                    <order translate="title" module="basic">
+                        <title>Create order PDF information</title>
+                        <acl>basic/order_pdf/order</acl>
+                    </order>
                     <invoice translate="title" module="basic">
                         <title>Create order invoice PDF information</title>
                         <acl>basic/order_pdf/invoice</acl>
@@ -267,6 +271,9 @@
                     <!-- Order PDF -->
                     <order_pdf translate="title" module="basic">
                         <title>PDF</title>
+                        <order translate="title" module="basic">
+                            <title>Create order PDF information</title>
+                        </order>
                         <invoice translate="title" module="basic">
                             <title>Create order invoice PDF information</title>
                         </invoice>

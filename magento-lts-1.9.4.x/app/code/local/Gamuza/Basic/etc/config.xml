@@ -297,6 +297,10 @@
             </sales_order_creditmemo_refund>
         </events>
         <pdf>
+            <order>
+                <default>basic/sales_order_pdf_items_order_default</default>
+                <grouped>basic/sales_order_pdf_items_order_grouped</grouped>
+            </order>
             <service>
                 <default>basic/sales_order_pdf_items_service_default</default>
                 <grouped>basic/sales_order_pdf_items_service_grouped</grouped>

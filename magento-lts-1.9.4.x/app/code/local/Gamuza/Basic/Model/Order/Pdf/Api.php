@@ -10,6 +10,25 @@
  */
 class Gamuza_Basic_Model_Order_Pdf_Api extends Mage_Api_Model_Resource_Abstract
 {
+    public function order ($incrementId, $protectCode)
+    {
+        $order = $this->_getOrder ($incrementId, $protectCode);
+
+        $emulation = Mage::getModel ('core/app_emulation');
+
+        $oldEnvironment = $emulation->startEnvironmentEmulation(
+            Mage_Core_Model_App::ADMIN_STORE_ID,
+            Mage_Core_Model_App_Area::AREA_ADMINHTML,
+            true
+        );
+
+        $pdf = Mage::getModel ('basic/sales_order_pdf_order')->getPdf (array ($order));
+
+        $emulation->stopEnvironmentEmulation($oldEnvironment);
+
+        return base64_encode ($pdf->render ());
+    }
+
     public function invoice ($incrementId, $protectCode)
     {
         $order = $this->_getOrder ($incrementId, $protectCode);
