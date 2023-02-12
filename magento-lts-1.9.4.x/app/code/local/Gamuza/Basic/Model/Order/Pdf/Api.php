@@ -14,11 +14,6 @@ class Gamuza_Basic_Model_Order_Pdf_Api extends Mage_Api_Model_Resource_Abstract
     {
         $order = $this->_getOrder ($incrementId, $protectCode);
 
-        if (!$order || !$order->getId ())
-        {
-            $this->_fault ('order_not_exists');
-        }
-
         $service = Mage::getModel ('basic/order_service')->load ($order->getId (), 'order_id');
 
         if (!$service || !$service->getId ())
