@@ -70,6 +70,9 @@
         </resources>
         <fieldsets>
             <sales_convert_quote>
+                <is_super_mode>
+                    <to_order>*</to_order>
+                </is_super_mode>
                 <is_pdv>
                     <to_order>*</to_order>
                 </is_pdv>
@@ -85,14 +88,11 @@
                 <pdv_history_id>
                     <to_order>*</to_order>
                 </pdv_history_id>
-                <is_sat>
-                    <to_order>*</to_order>
-                </is_sat>
-                <is_service>
-                    <to_order>*</to_order>
-                </is_service>
             </sales_convert_quote>
             <sales_convert_order>
+                <is_super_mode>
+                    <to_quote>*</to_quote>
+                </is_super_mode>
                 <is_pdv>
                     <to_quote>*</to_quote>
                 </is_pdv>
@@ -108,12 +108,6 @@
                 <pdv_history_id>
                     <to_quote>*</to_quote>
                 </pdv_history_id>
-                <is_sat>
-                    <to_quote>*</to_quote>
-                </is_sat>
-                <is_service>
-                    <to_quote>*</to_quote>
-                </is_service>
             </sales_convert_order>
         </fieldsets>
         <events>

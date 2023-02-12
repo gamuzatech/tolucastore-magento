@@ -257,7 +257,6 @@ class Toluca_PDV_Model_Cart_Api extends Mage_Api_Model_Resource_Abstract
             ->setStoreId ($storeId)
             ->setIsActive (true)
             ->setIsMultiShipping (false)
-            ->setIsSuperMode (true)
             ->setRemoteIp ($remoteIp)
             ->setCustomerFirstname ($customer->getFirstname ())
             ->setCustomerLastname ($customer->getLastname ())
@@ -273,6 +272,7 @@ class Toluca_PDV_Model_Cart_Api extends Mage_Api_Model_Resource_Abstract
             ->setData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_HISTORY_ID,  $history->getId ())
             ->setCustomerGroupId (0)
             ->setCustomerIsGuest (1)
+            ->setIsSuperMode (true)
             ->save ()
         ;
 
