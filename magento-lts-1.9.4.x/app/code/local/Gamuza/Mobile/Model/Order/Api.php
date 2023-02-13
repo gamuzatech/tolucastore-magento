@@ -232,6 +232,12 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
             array ('increment_per_store', 'increment_pad_length', 'increment_pad_char')
         );
 
+        $orderCollection->getSelect ()->join (
+            array ('payment' => Mage::getSingleton ('core/resource')->getTableName ('sales/order_payment')),
+            'main_table.entity_id = payment.parent_id',
+            array ('payment_method' => 'payment.method')
+        );
+
         foreach ($orderCollection as $order)
         {
             $result = $this->_getAttributes($order, 'order', $this->_orderAttributes);
@@ -263,6 +269,8 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
             }
 
             $result ['applied_rule_ids'] = explode (',', $result ['applied_rule_ids']);
+
+            $result ['payment_method'] = $order->getPaymentMethod ();
 
             $orders [] = $result;
         }
