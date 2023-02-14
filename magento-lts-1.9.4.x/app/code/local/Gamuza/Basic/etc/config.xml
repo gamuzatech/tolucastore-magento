@@ -663,6 +663,9 @@
                 <session_cookie_lifetime>86400</session_cookie_lifetime>
                 <validate_formkey_checkout>1</validate_formkey_checkout>
             </security>
+            <sales>
+                <grid_auto_reload>1</grid_auto_reload>
+            </sales>
         </admin>
         <hints>
             <store_switcher>

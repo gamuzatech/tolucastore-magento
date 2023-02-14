@@ -6,6 +6,7 @@
  */
 ?>
 
+<?php if (Mage::getStoreConfigFlag ('admin/sales/grid_auto_reload')): ?>
 <script type="text/javascript">
     Notification.requestPermission ();
 
@@ -34,4 +35,5 @@
         });
     }, 60000);
 </script>
+<?php endif; ?>
 
