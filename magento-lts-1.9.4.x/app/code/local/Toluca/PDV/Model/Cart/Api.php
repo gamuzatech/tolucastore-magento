@@ -194,33 +194,6 @@ class Toluca_PDV_Model_Cart_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('customer_not_exists');
         }
 
-        $customerBillingAddress  = $customer->getDefaultBillingAddress ();
-        $customerShippingAddress = $customer->getDefaultShippingAddress ();
-
-        if (!$customerBillingAddress || !$customerBillingAddress->getId ())
-        {
-            $this->_fault ('customer_billing_address_not_exists');
-        }
-
-        $customerBillingValidate = $customerBillingAddress->validate ();
-
-        if ($customerBillingValidate !== true)
-        {
-            $this->_fault ('customer_invalid_billing_address', implode("\n", $customerBillingValidate));
-        }
-
-        if (!$customerShippingAddress || !$customerShippingAddress->getId ())
-        {
-            $this->_fault ('customer_shipping_address_not_exists');
-        }
-
-        $customerShippingValidate = $customerShippingAddress->validate ();
-
-        if ($customerShippingValidate !== true)
-        {
-            $this->_fault ('customer_invalid_shipping_address', implode("\n", $customerShippingValidate));
-        }
-
         $history = Mage::getModel ('pdv/history')->load ($cashier->getHistoryId ());
 
         if (!$history || !$history->getId ())
@@ -294,6 +267,35 @@ class Toluca_PDV_Model_Cart_Api extends Mage_Api_Model_Resource_Abstract
 
         Mage::getModel ('checkout/cart_customer_api')->set ($quote->getId (), $customerData, $storeId);
 
+        $shippingPostcode = preg_replace ('[\D]', null, Mage::getStoreConfig ('shipping/origin/postcode', $storeId));
+
+        Mage::getModel ('checkout/cart_customer_api')->setAddresses ($quote->getId (), array(
+            array(
+                'mode'       => 'billing',
+                'firstname'  => $customer->getFirstname (),
+                'lastname'   => $customer->getLastname (),
+                'street'     => array(
+                    Mage::getStoreConfig ('shipping/origin/street_line1', $storeId),
+                    Mage::getStoreConfig ('shipping/origin/street_line2', $storeId),
+                    Mage::getStoreConfig ('shipping/origin/street_line3', $storeId),
+                    Mage::getStoreConfig ('shipping/origin/street_line4', $storeId),
+                ),
+                'city'       => Mage::getStoreConfig ('shipping/origin/city',       $storeId),
+                'region'     => Mage::getStoreConfig ('shipping/origin/region_id',  $storeId),
+                'country_id' => Mage::getStoreConfig ('shipping/origin/country_id', $storeId),
+                'postcode'   => $shippingPostcode,
+                'cellphone'  => Mage::getStoreConfig ('general/store_information/phone', $storeId),
+                'use_for_shipping' => 1,
+            )
+        ), $storeId);
+
+        $customerBillingAddress  = $customer->getDefaultBillingAddress ();
+        $customerShippingAddress = $customer->getDefaultShippingAddress ();
+
+        if ($customerBillingAddress && $customerBillingAddress->getId () && $customerBillingAddress->validate () === true
+            && $customerShippingAddress && $customerShippingAddress->getId () && $customerShippingAddress->validate () === true)
+        {
+
         $customerBillingPostcode  = preg_replace ('[\D]', null, $customerBillingAddress->getPostcode ());
         $customerShippingPostcode = preg_replace ('[\D]', null, $customerShippingAddress->getPostcode ());
 
@@ -324,6 +326,8 @@ class Toluca_PDV_Model_Cart_Api extends Mage_Api_Model_Resource_Abstract
                 'cellphone'  => $customerShippingCellphone,
             ),
         ), $storeId);
+
+        }
 
     __returnQuote:
 
