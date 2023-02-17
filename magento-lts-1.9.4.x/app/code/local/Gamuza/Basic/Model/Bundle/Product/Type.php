@@ -17,9 +17,20 @@ class Gamuza_Basic_Model_Bundle_Product_Type extends Mage_Bundle_Model_Product_T
      */
     public function beforeSave($product = null)
     {
-        /*
-        $product->setPriceType (Mage_Bundle_Model_Product_Price::PRICE_TYPE_DYNAMIC);
-        */
+        if (in_array ($product->getPriceView(), array (
+            Gamuza_Basic_Helper_Data::PRODUCT_PRICE_VIEW_AS_LOW_AS_ONE,
+            Gamuza_Basic_Helper_Data::PRODUCT_PRICE_VIEW_AS_HIGH_AS_ONE,
+            Gamuza_Basic_Helper_Data::PRODUCT_PRICE_VIEW_PRICE_AVERAGE
+        )))
+        {
+            /**
+             * NOTE: setting to NULL will be calculated by:
+             *
+             * Gamuza_Basic_Model_Bundle_Product_Price::getTotalBundleItemsPrice()
+             */
+            $product->setPriceType (new Zend_Db_Expr ('NULL'));
+        }
+
         return parent::beforeSave($product);
     }
 
