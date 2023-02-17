@@ -169,7 +169,7 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
      * @param null|object|array $filters
      * @return array
      */
-    public function items($filters = null)
+    public function items($filters = null, $code = null)
     {
         $orders = array();
 
