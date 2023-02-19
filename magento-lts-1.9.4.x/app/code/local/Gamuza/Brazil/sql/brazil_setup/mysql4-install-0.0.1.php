@@ -36,7 +36,7 @@ $attribute = Mage::getSingleton ('eav/config')->getAttribute(
 ;
 $attribute->setData ('used_in_forms', $forms)
     ->setData('is_system', true)
-    ->setData('sort_order', 101)
+    ->setData('sort_order', 1000)
 ;
 $attribute->save ();
 
