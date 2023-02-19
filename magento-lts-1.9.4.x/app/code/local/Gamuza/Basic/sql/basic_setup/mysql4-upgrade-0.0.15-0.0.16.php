@@ -9,6 +9,38 @@ $installer = new Mage_Customer_Model_Entity_Setup('basic_setup');
 $installer->startSetup ();
 
 /**
+ * Cellphone
+ */
+$installer->addAttribute(
+    'customer',
+    Gamuza_Basic_Helper_Data::CUSTOMER_ATTRIBUTE_CELLPHONE,
+    array(
+        'type'         => 'varchar',
+        'length'       => 255,
+        'input'        => 'text',
+        'label'        => Mage::helper ('basic')->__('Cellphone'),
+        'visible'      => true,
+        'required'     => false,
+        'user_defined' => false,
+        'unique'       => false,
+    )
+);
+
+$forms = array(
+    'adminhtml_customer',
+    'adminhtml_checkout',
+);
+
+$attribute = Mage::getSingleton ('eav/config')->getAttribute(
+    $installer->getEntityTypeId ('customer'), Gamuza_Basic_Helper_Data::CUSTOMER_ATTRIBUTE_CELLPHONE)
+;
+$attribute->setData ('used_in_forms', $forms)
+    ->setData('is_system', true)
+    ->setData('sort_order', 72)
+;
+$attribute->save ();
+
+/**
  * SecondaryName
  */
 $installer->addAttribute(
@@ -70,7 +102,7 @@ $attribute = Mage::getSingleton ('eav/config')->getAttribute(
 ;
 $attribute->setData ('used_in_forms', $forms)
     ->setData('is_system', true)
-    ->setData('sort_order', 1000)
+    ->setData('sort_order', 1100)
 ;
 $attribute->save ();
 

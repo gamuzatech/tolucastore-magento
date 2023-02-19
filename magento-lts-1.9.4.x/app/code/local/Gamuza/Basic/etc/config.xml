@@ -136,6 +136,7 @@
             </customer>
             <customer_resource>
                 <rewrite>
+                    <address>Gamuza_Basic_Model_Customer_Resource_Address</address>
                     <group_collection>Gamuza_Basic_Model_Customer_Resource_Group_Collection</group_collection>
                 </rewrite>
             </customer_resource>
