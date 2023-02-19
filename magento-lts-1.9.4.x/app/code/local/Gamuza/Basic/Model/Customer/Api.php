@@ -24,6 +24,8 @@ class Gamuza_Basic_Model_Customer_Api extends Mage_Customer_Model_Api_Resource
                 'e.group_id = cg.customer_group_id',
                 array (
                     'group_code' => 'cg.customer_group_code',
+                    'group_name' => 'cg.name',
+                    'group_is_system' => 'cg.is_system',
                     'tax_class_id' => 'cg.tax_class_id',
                 )
             )
@@ -69,6 +71,8 @@ class Gamuza_Basic_Model_Customer_Api extends Mage_Customer_Model_Api_Resource
             }
 
             $row['group_code'] = $data['group_code'];
+            $row['group_name'] = $data['group_name'];
+            $row['group_is_system'] = boolval ($data['group_is_system']);
             $row['tax_class_id'] = $data['tax_class_id'];
 
             unset($row['password_hash']);
