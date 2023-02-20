@@ -114,4 +114,6 @@
 "Requested order has been refunded.","Pedido já foi reembolsado."
 "Requested order was not refunded.","Pedido não foi reembolsado."
 "Grid Auto Reload","Auto Recarregar Grid"
+"Weight in grams or milliliters (numbers only). E.g: 1234","Peso em gramas ou mililitros (somente números). Ex: 1234"
+"Please use dot (.) for decimal. E.g: 1234.5678","Por favor use ponto (.) para decimal. Ex: 1234.5678"
 

@@ -227,6 +227,17 @@ foreach ($customerGroups as $id => $value)
     ;
 }
 
+/**
+ * Attribute
+ */
+$installer = new Mage_Catalog_Model_Resource_Setup ('basic_setup');
+
+$installer->updateAttribute ('catalog_product', 'weight',        'note', Mage::helper ('basic')->__('Weight in grams or milliliters (numbers only). E.g: 1234'));
+$installer->updateAttribute ('catalog_product', 'price',         'note', Mage::helper ('basic')->__('Please use dot (.) for decimal. E.g: 1234.5678'));
+$installer->updateAttribute ('catalog_product', 'special_price', 'note', Mage::helper ('basic')->__('Please use dot (.) for decimal. E.g: 1234.5678'));
+$installer->updateAttribute ('catalog_product', 'cost',          'note', Mage::helper ('basic')->__('Please use dot (.) for decimal. E.g: 1234.5678'));
+$installer->updateAttribute ('catalog_product', 'msrp',          'note', Mage::helper ('basic')->__('Please use dot (.) for decimal. E.g: 1234.5678'));
+
 $emulation->stopEnvironmentEmulation($oldEnvironment);
 
 $installer->endSetup();
