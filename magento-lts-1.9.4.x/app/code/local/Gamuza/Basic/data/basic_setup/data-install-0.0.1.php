@@ -24,6 +24,28 @@ $installer->updateAttribute ('catalog_product', 'short_description', 'frontend_i
 $installer->updateAttribute ('catalog_product', 'url_key',           'frontend_input', 'label');
 $installer->updateAttribute ('catalog_product', 'tax_class_id',      'default_value',  '0');
 
+$resource = Mage::getSingleton ('core/resource');
+$write = $resource->getConnection ('core_write');
+
+$productAttributeSortOrder = array(
+    'description' => 3,
+    'short_description' => 2,
+);
+
+foreach ($productAttributeSortOrder as $attributeCode => $sortOrder)
+{
+    $attributeId = Mage::getSingleton ('eav/config')
+        ->getAttribute ('catalog_product', $attributeCode)
+        ->getId ()
+    ;
+
+    $write->query (sprintf(
+        'UPDATE %s SET sort_order = %s WHERE attribute_id = %s LIMIT 1',
+        $resource->getTablename ('eav/entity_attribute'),
+        $sortOrder, $attributeId
+    ));
+}
+
 $applyToAttributes = array(
     'price',
     'special_price',
@@ -105,7 +127,7 @@ $coreConfig->saveConfig (Mage_Directory_Helper_Data::XML_PATH_DISPLAY_ALL_STATES
  */
 $pt_BR_SQL = file_get_contents (Mage::getConfig ()->getOptions ()->getLocaleDir () . DS . Gamuza_Basic_Helper_Data::SQL_PT_BR);
 
-Mage::getSingleton ('core/resource')->getConnection ('core_write')->query ($pt_BR_SQL);
+$write->query ($pt_BR_SQL);
 
 $emulation = Mage::getModel ('core/app_emulation');
 
