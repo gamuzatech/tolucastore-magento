@@ -17,6 +17,7 @@ class Gamuza_Basic_Block_Adminhtml_Customer_Grid
             ->addAttributeToSelect('email')
             ->addAttributeToSelect('created_at')
             ->addAttributeToSelect('group_id')
+            ->addAttributeToSelect('cellphone')
             ->addAttributeToSelect ('taxvat')
             ->addAttributeToSelect ('dob')
             ->addAttributeToSelect ('gender')
@@ -44,17 +45,17 @@ class Gamuza_Basic_Block_Adminhtml_Customer_Grid
             'index'     => 'billing_city',
         ), 'billing_postcode');
 
-        $this->addColumnAfter('billing_cellphone', array(
+        $this->addColumnAfter('cellphone', array(
             'header'    => Mage::helper('customer')->__('Cellphone'),
             'width'     => '100',
-            'index'     => 'billing_cellphone',
+            'index'     => 'cellphone',
         ), 'email');
 
         $this->addColumnAfter ('taxvat', array(
             'header'    => Mage::helper ('customer')->__('Taxvat'),
             'width'     => '100',
             'index'     => 'taxvat',
-        ), 'billing_cellphone');
+        ), 'cellphone');
 
         $this->addColumnAfter ('dob', array(
             'header'    => Mage::helper ('customer')->__('Date of Birth'),
