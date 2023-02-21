@@ -16,6 +16,7 @@ class Gamuza_Basic_Block_Adminhtml_Sales_Order_Create_Customer_Grid
         $collection = Mage::getResourceModel('customer/customer_collection')
             ->addNameToSelect()
             ->addAttributeToSelect('email')
+            ->addAttributeToSelect('cellphone')
             ->addAttributeToSelect('created_at')
             ->joinAttribute('billing_postcode', 'customer_address/postcode', 'default_billing', null, 'left')
             ->joinAttribute('billing_city', 'customer_address/city', 'default_billing', null, 'left')
@@ -38,8 +39,19 @@ class Gamuza_Basic_Block_Adminhtml_Sales_Order_Create_Customer_Grid
         $this->addColumnAfter('cellphone', array(
             'header'    =>Mage::helper('sales')->__('Cellphone'),
             'width'     =>'100px',
-            'index'     =>'billing_cellphone'
+            'index'     =>'cellphone'
         ), 'email');
+
+        $this->addColumnAfter('billing_city', array(
+            'header' => Mage::helper('sales')->__('City'),
+            'index'  => 'billing_city'
+        ), 'billing_postcode');
+
+        $this->addColumnAfter('billing_regione', array(
+            'header' => Mage::helper('sales')->__('State/Province'),
+            'width'  => '100px',
+            'index'  => 'billing_regione',
+        ), 'billing_city');
 
         $this->sortColumnsByOrder();
 
