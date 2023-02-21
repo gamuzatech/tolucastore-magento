@@ -284,7 +284,7 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
      * @param string $orderIncrementId
      * @return array
      */
-    public function info($orderIncrementId = null, $orderProtectCode = null)
+    public function info($orderIncrementId = null, $orderProtectCode = null, $code = null)
     {
         if (empty ($orderIncrementId))
         {
@@ -515,7 +515,7 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
      * @param  string $comment
      * @return boolean
      */
-    public function rate ($orderIncrementId = null, $orderProtectCode = null, $stars = null, $comment = null)
+    public function rate ($orderIncrementId = null, $orderProtectCode = null, $stars = null, $comment = null, $code = null)
     {
         if (empty ($orderIncrementId))
         {
@@ -667,7 +667,7 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
      * @param string $orderIncrementId
      * @return array
      */
-    public function draft($orderIncrementId = null, $orderProtectCode = null)
+    public function draft($orderIncrementId = null, $orderProtectCode = null, $code = null)
     {
         if (empty ($orderIncrementId))
         {
@@ -698,7 +698,7 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
      * @param mixed $orderIncrementId
      * @return Mage_Sales_Model_Order
      */
-    protected function _initOrder($orderIncrementId, $orderProtectCode = null)
+    protected function _initOrder($orderIncrementId, $orderProtectCode = null, $code = null)
     {
         $order = Mage::getModel('sales/order')->getCollection()
             ->addFieldToFilter ('increment_id', array ('eq' => $orderIncrementId))
