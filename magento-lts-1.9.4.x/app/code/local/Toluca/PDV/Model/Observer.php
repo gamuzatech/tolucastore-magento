@@ -82,21 +82,15 @@ class Toluca_PDV_Model_Observer
 
         $orderIsPdv = boolval ($order->getData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_IS_PDV));
 
-        if (!$orderIsPdv && !Mage::getStoreConfigFlag (self::XML_PATH_PDV_CASHIER_INCLUDE_ALL_ORDERS))
+        if (!$orderIsPdv)
         {
             return $this; // cancel
         }
 
-        $orderPdvCashierId  = Mage::getStoreConfig (self::XML_PATH_PDV_SETTING_DEFAULT_CASHIER);
-        $orderPdvOperatorId = Mage::getStoreConfig (self::XML_PATH_PDV_SETTING_DEFAULT_OPERATOR);
-        $orderPdvCustomerId = Mage::getStoreConfig (self::XML_PATH_PDV_SETTING_DEFAULT_CUSTOMER);
-
-        if ($orderIsPdv)
-        {
-            $orderPdvCashierId  = $order->getData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_CASHIER_ID);
-            $orderPdvOperatorId = $order->getData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_OPERATOR_ID);
-            $orderPdvCustomerId = $order->getData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_CUSTOMER_ID);
-        }
+        $orderPdvCashierId  = $order->getData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_CASHIER_ID);
+        $orderPdvOperatorId = $order->getData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_OPERATOR_ID);
+        $orderPdvCustomerId = $order->getData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_CUSTOMER_ID);
+        $orderPdvHistoryId  = $order->getData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_HISTORY_ID);
 
         $amount = $order->getBaseGrandTotal ();
 
@@ -112,13 +106,7 @@ class Toluca_PDV_Model_Observer
         $cashier = Mage::getModel ('pdv/cashier')->load ($orderPdvCashierId);
         $operator = Mage::getModel ('pdv/operator')->load ($orderPdvOperatorId);
         $customer = Mage::getModel ('customer/customer')->load ($orderPdvCustomerId);
-
-        $history = Mage::getModel ('pdv/history')->load ($cashier->getHistoryId ());
-
-        if (!$history || !$history->getId ())
-        {
-            throw new Mage_Core_Exception (Mage::helper ('pdv')->__('Requested history was not found.'));
-        }
+        $history = Mage::getModel ('pdv/history')->load ($orderPdvHistoryId);
 
         $history->setShippingAmount (floatval ($history->getShippingAmount ()) + $order->getBaseShippingAmount ());
 
