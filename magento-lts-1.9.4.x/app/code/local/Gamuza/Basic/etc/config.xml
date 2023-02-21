@@ -617,6 +617,7 @@
                 <allow_items>0</allow_items>
             </gift_options>
         </sales>
+        <!--
         <sales_email>
             <order>
                 <enabled>0</enabled>
@@ -643,6 +644,7 @@
                 <enabled>0</enabled>
             </creditmemo_comment>
         </sales_email>
+        -->
         <tax>
             <defaults>
                 <country>BR</country>
