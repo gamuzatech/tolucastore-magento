@@ -19,6 +19,7 @@
     </li>
     <?php endif; ?>
     <?php $_additionalInfo = $this->getInfoData('additional_information') ?>
+    <?php $_additionalInfo = !empty ($_additionalInfo) ? $_additionalInfo : array (0, 0); ?>
     <li>
         <label for="<?php echo $_code ?>_change_type" class="required"><em>*</em><?php echo $this->__('Need Change') ?></label>
         <div class="input-box">
