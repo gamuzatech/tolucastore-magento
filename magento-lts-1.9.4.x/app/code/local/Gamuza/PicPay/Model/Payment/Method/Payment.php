@@ -103,8 +103,10 @@ class Gamuza_PicPay_Model_Payment_Method_Payment extends Mage_Payment_Model_Meth
         }
         catch (Exception $e)
         {
+            Mage::log ($e->getMessage (), null, Gamuza_PicPay_Helper_Data::LOG, true);
+
             throw new Mage_Core_Exception (
-                Mage::helper ('picpay')->__('There was an error in the PICPAY transaction. Please try again!') . PHP_EOL . $e->getMessage ()
+                Mage::helper ('picpay')->__('There was an error in the PICPAY transaction. Please try again!')
             );
         }
 

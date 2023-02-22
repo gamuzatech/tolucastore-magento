@@ -112,8 +112,10 @@ class Gamuza_PagCripto_Model_Payment_Method_Payment extends Mage_Payment_Model_M
         }
         catch (Exception $e)
         {
+            Mage::log ($e->getMessage (), null, Gamuza_PagCripto_Helper_Data::LOG, true);
+
             throw new Mage_Core_Exception (
-                Mage::helper ('pagcripto')->__('There was an error in the PAGCRIPTO transaction. Please try again!') . PHP_EOL . $e->getMessage ()
+                Mage::helper ('pagcripto')->__('There was an error in the PAGCRIPTO transaction. Please try again!')
             );
         }
 
