@@ -61,6 +61,19 @@
                     </list>
                 </methods>
             </basic_customer>
+            <!-- Country -->
+            <basic_country translate="title" module="basic">
+                <model>basic/directory_country_api</model>
+                <title>Basic Country API</title>
+                <acl>basic/country</acl>
+                <methods>
+                    <list translate="title" module="basic">
+                        <title>Retrieve country list</title>
+                        <method>items</method>
+                        <acl>basic/country/list</acl>
+                    </list>
+                </methods>
+            </basic_country>
             <!-- Order Status -->
             <basic_order_status translate="title" module="basic">
                 <model>basic/order_status_api</model>
@@ -246,6 +259,17 @@
                             <title>Retrieve customer list</title>
                         </list>
                     </customer>
+                    <!-- Country -->
+                    <basic_country translate="title" module="basic">
+                        <title>Basic Country API</title>
+                        <methods>
+                            <list translate="title" module="basic">
+                                <title>Retrieve country list</title>
+                                <method>items</method>
+                                <acl>basic/country/list</acl>
+                            </list>
+                        </methods>
+                    </basic_country>
                     <!-- Order Status -->
                     <order_status translate="title" module="basic">
                         <title>Order Status</title>
