@@ -38,4 +38,9 @@
     <?php endif; ?>
     <?php echo $this->getChildHtml() ?>
 </ul>
+<?php if (Mage::app()->getStore()->isAdmin()): ?>
+<script type="text/javascript">
+$$('input[type="radio"][name="payment[cc_type]"]').first().click();
+</script>
+<?php endif; ?>
 
