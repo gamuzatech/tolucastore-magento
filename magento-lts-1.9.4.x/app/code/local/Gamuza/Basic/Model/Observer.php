@@ -25,6 +25,92 @@ class Gamuza_Basic_Model_Observer
         Mage::getDesign ()->setArea ('adminhtml')->setTheme ('zzz'); // use fallback theme
     }
 
+    public function afterReindexProcessCatalogProductPrice ($observer)
+    {
+        $collection = Mage::getModel ('catalog/product')->getCollection ()
+            ->addFieldToFilter ('type_id', Mage_Catalog_Model_Product_Type::TYPE_BUNDLE)
+        ;
+
+        if (!$collection->getSize ())
+        {
+            return; // cancel
+        }
+
+        $groupCollection = Mage::getModel ('customer/group')->getCollection ()
+            ->addTaxClass ()
+        ;
+
+        if (!$groupCollection->getSize ())
+        {
+            return; // cancel
+        }
+
+        $resource = Mage::getSingleton ('core/resource');
+        $write    = $resource->getConnection ('core_write');
+        $table    = $resource->getTablename ('catalog/product_index_price');
+
+        foreach ($collection as $product)
+        {
+            foreach ($product->getWebsiteIds () as $websiteId)
+            {
+                $productMinPrice = PHP_INT_MAX;
+                $productMaxPrice = 0;
+
+                $defaultStoreId = Mage::app ()->getWebsite ($websiteId)->getDefaultGroup ()->getDefaultStoreId ();
+
+                Mage::app ()->setCurrentStore ($defaultStoreId); // for bundle selections
+
+                $optionsCollection    = $product->getTypeInstance (true)->getOptionsCollection ($product);
+                $selectionsCollection = $product->getTypeInstance (true)->getSelectionsCollection ($optionsCollection->getAllIds (), $product);
+
+                foreach ($optionsCollection->appendSelections ($selectionsCollection) as $option)
+                {
+                    foreach ($option->getSelections() as $selection)
+                    {
+                        if (!$selection->getIsSalable ())
+                        {
+                            continue; // skip
+                        }
+
+                        if ($selection->getPrice () < $productMinPrice)
+                        {
+                            $productMinPrice = $selection->getPrice ();
+                        }
+                        else if ($selection->getSpecialPrice () < $productMinPrice)
+                        {
+                            $productMinPrice = $selection->getSpecialPrice ();
+                        }
+
+                        if ($selection->getSpecialPrice () > $productMaxPrice)
+                        {
+                            $productMaxPrice = $selection->getSpecialPrice ();
+                        }
+                        if ($selection->getPrice () > $productMaxPrice)
+                        {
+                            $productMaxPrice = $selection->getPrice ();
+                        }
+                    }
+                }
+
+                foreach ($groupCollection as $group)
+                {
+                    $row = array(
+                        'entity_id' => $product->getId (),
+                        'customer_group_id' => $group->getId (),
+                        'website_id' => $websiteId,
+                        'tax_class_id' => $group->getTaxClassId (),
+                        'price' => $productMinPrice,
+                        'final_price' => $productMaxPrice,
+                        'min_price' => $productMinPrice,
+                        'max_price' => $productMaxPrice,
+                    );
+
+                    $write->insert ($table, $row);
+                }
+            }
+        }
+    }
+
     public function catalogProductSaveBefore ($observer)
     {
         $event   = $observer->getEvent ();

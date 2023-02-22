@@ -243,6 +243,14 @@
                     </bubble_admintheme_admin_predispatch>
                 </observers>
             </adminhtml_controller_action_predispatch_start>
+            <after_reindex_process_catalog_product_price>
+                <observers>
+                    <gamuza_basic_after_reindex_process_catalog_product_price>
+                        <class>basic/observer</class>
+                        <method>afterReindexProcessCatalogProductPrice</method>
+                    </gamuza_basic_after_reindex_process_catalog_product_price>
+                </observers>
+            </after_reindex_process_catalog_product_price>
             <catalog_category_save_after>
                 <observers>
                     <admin_basic_catalog_category_save_after>
