@@ -18,6 +18,8 @@ class Gamuza_Basic_Model_Directory_Country_Api
      */
     public function items()
     {
+        $countryId = Mage::getStoreConfig ('shipping/origin/country_id');
+
         $allowedCountries = explode(',', Mage::getStoreConfig('general/country/allow'));
 
         $collection = Mage::getModel('directory/country')->getCollection()
@@ -31,7 +33,11 @@ class Gamuza_Basic_Model_Directory_Country_Api
             /** @var Mage_Directory_Model_Country $country */
             $country->getName(); // Loading name in default locale
 
-            $result[] = $country->toArray(array('country_id', 'iso2_code', 'iso3_code', 'name'));
+            $data = $country->toArray(array('country_id', 'iso2_code', 'iso3_code', 'name'));
+
+            $data['is_default'] = !strcmp($data['country_id'], $countryId);
+
+            $result[] = $data;
         }
 
         return $result;
