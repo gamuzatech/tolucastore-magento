@@ -74,6 +74,19 @@
                     </list>
                 </methods>
             </basic_country>
+            <!-- Region -->
+            <basic_region translate="title" module="basic">
+                <model>basic/directory_region_api</model>
+                <title>Basic Region API</title>
+                <acl>basic/region</acl>
+                <methods>
+                    <list translate="title" module="basic">
+                        <title>Retrieve region list</title>
+                        <method>items</method>
+                        <acl>basic/region/list</acl>
+                    </list>
+                </methods>
+            </basic_region>
             <!-- Order Status -->
             <basic_order_status translate="title" module="basic">
                 <model>basic/order_status_api</model>
@@ -270,6 +283,17 @@
                             </list>
                         </methods>
                     </basic_country>
+                    <!-- Region -->
+                    <basic_region translate="title" module="basic">
+                        <title>Basic Region API</title>
+                        <methods>
+                            <list translate="title" module="basic">
+                                <title>Retrieve region list</title>
+                                <method>items</method>
+                                <acl>basic/region/list</acl>
+                            </list>
+                        </methods>
+                    </basic_region>
                     <!-- Order Status -->
                     <order_status translate="title" module="basic">
                         <title>Order Status</title>
