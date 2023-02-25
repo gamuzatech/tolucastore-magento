@@ -9,7 +9,7 @@ class Gamuza_Autocomplete_Helper_Data extends Mage_Core_Helper_Abstract
 {
     const VIACEP_URL = 'https://viacep.com.br/ws/{zipcode}/json';
 
-    public function autocomplete ($zipcode)
+    public function cep ($zipcode)
     {
 	    $curl = curl_init ();
 
