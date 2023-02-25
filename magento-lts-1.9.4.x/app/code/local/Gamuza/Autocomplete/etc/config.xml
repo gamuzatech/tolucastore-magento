@@ -19,6 +19,11 @@
                 <class>Gamuza_Autocomplete_Helper</class>
             </autocomplete>
         </helpers>
+        <models>
+            <autocomplete>
+                <class>Gamuza_Autocomplete_Model</class>
+            </autocomplete>
+        </models>
     </global>
     <frontend>
         <routers>
@@ -30,6 +35,15 @@
                 </args>
             </autocomplete>
         </routers>
+        <translate>
+            <modules>
+                <Gamuza_Autocomplete>
+                    <files>
+                        <default>Gamuza_Autocomplete.csv</default>
+                    </files>
+                </Gamuza_Autocomplete>
+            </modules>
+        </translate>
         <layout>
             <updates>
                 <autocomplete>
