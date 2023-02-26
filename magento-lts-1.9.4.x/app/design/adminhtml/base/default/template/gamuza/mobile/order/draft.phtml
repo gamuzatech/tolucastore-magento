@@ -44,6 +44,13 @@ foreach ($_order->getAllItems() as $item)
         echo sprintf('%s: %s', $option ['label'], $option ['value']) . PHP_EOL;
     }
 
+    if ($item->getParentItemId ())
+    {
+        echo str_repeat('-', 30) . PHP_EOL;
+
+        continue; // skip
+    }
+
     $price = Mage::helper('core')->currency($item->getPrice(), true, false);
     $qty   = intval($item->getQtyOrdered());
 
