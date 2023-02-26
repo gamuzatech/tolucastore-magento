@@ -21,7 +21,7 @@ class Toluca_PDV_Model_History extends Mage_Core_Model_Abstract
         $moneyAmount  = floatval ($this->getMoneyAmount ());
         $changeAmount = floatval ($this->getChangeAmount ());
 
-        $closeAmount = ((($openAmount + $reinforceAmount) - $bleedAmount) + $moneyAmount) - $changeAmount;
+        $closeAmount = ((($openAmount + $reinforceAmount) + $bleedAmount) + $moneyAmount) + $changeAmount;
 
         $machineAmount = floatval ($this->getMachineAmount ());
         $pagcriptoAmount = floatval ($this->getPagcriptoAmount ());
@@ -30,11 +30,12 @@ class Toluca_PDV_Model_History extends Mage_Core_Model_Abstract
         $creditcardAmount   = floatval ($this->getCreditcardAmount ());
         $billetAmount       = floatval ($this->getBilletAmount ());
         $banktransferAmount = floatval ($this->getBanktransferAmount ());
+        $checkAmount        = floatval ($this->getCheckAmount ());
 
         $this->setTotalAmount (
             $closeAmount + $machineAmount
             + $pagcriptoAmount + $picpayAmount + $openpixAmount
-            + $creditcardAmount + $billetAmount + $banktransferAmount
+            + $creditcardAmount + $billetAmount + $banktransferAmount + $checkAmount
         );
 
         $this->_getResource ()->save ($this); // total_amount
