@@ -12,7 +12,9 @@ class Toluca_PDV_Block_Adminhtml_Log_Grid extends Mage_Adminhtml_Block_Widget_Gr
     protected $_isExport = true;
 
     public $_fieldsTotals = array(
-        'amount' => 0,
+        'total_amount' => 0,
+        'subtotal_amount' => 0,
+        'shipping_amount' => 0,
     );
 
 	public function __construct ()
@@ -91,6 +93,7 @@ class Toluca_PDV_Block_Adminhtml_Log_Grid extends Mage_Adminhtml_Block_Widget_Gr
 	        'type'    => 'price',
 		    'index'   => 'total_amount',
             'currency_code' => $store->getBaseCurrency()->getCode(),
+            'default' => 0,
 		));
 		$this->addColumn ('message', array(
 		    'header'  => Mage::helper ('pdv')->__('Message'),
@@ -125,6 +128,7 @@ class Toluca_PDV_Block_Adminhtml_Log_Grid extends Mage_Adminhtml_Block_Widget_Gr
 		    'align'   => 'right',
 	        'type'    => 'price',
             'currency_code' => $store->getBaseCurrency()->getCode(),
+            'default' => 0,
 		));
 		$this->addColumn ('shipping_method_1', array(
 		    'header'  => Mage::helper ('pdv')->__('Shipping Method'),
@@ -140,6 +144,7 @@ class Toluca_PDV_Block_Adminhtml_Log_Grid extends Mage_Adminhtml_Block_Widget_Gr
 		    'align'   => 'right',
 	        'type'    => 'price',
             'currency_code' => $store->getBaseCurrency()->getCode(),
+            'default' => 0,
 		));
 		$this->addColumn ('created_at', array(
 			'header' => Mage::helper ('pdv')->__('Created At'),

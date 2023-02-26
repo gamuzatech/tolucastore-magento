@@ -98,6 +98,7 @@ class Toluca_PDV_Block_Adminhtml_History_Grid extends Mage_Adminhtml_Block_Widge
 	        'type'    => 'price',
 		    'index'   => 'open_amount',
             'currency_code' => $store->getBaseCurrency()->getCode(),
+            'default' => 0,
 		));
 		$this->addColumn ('reinforce_amount', array(
 		    'header'  => Mage::helper ('pdv')->__('Reinforce'),
@@ -105,6 +106,7 @@ class Toluca_PDV_Block_Adminhtml_History_Grid extends Mage_Adminhtml_Block_Widge
 	        'type'    => 'price',
 		    'index'   => 'reinforce_amount',
             'currency_code' => $store->getBaseCurrency()->getCode(),
+            'default' => 0,
 		));
 		$this->addColumn ('bleed_amount', array(
 		    'header'  => Mage::helper ('pdv')->__('Bleed'),
@@ -112,6 +114,7 @@ class Toluca_PDV_Block_Adminhtml_History_Grid extends Mage_Adminhtml_Block_Widge
 	        'type'    => 'price',
 		    'index'   => 'bleed_amount',
             'currency_code' => $store->getBaseCurrency()->getCode(),
+            'default' => 0,
 		));
 		$this->addColumn ('close_amount', array(
 		    'header'  => Mage::helper ('pdv')->__('Close'),
@@ -119,6 +122,7 @@ class Toluca_PDV_Block_Adminhtml_History_Grid extends Mage_Adminhtml_Block_Widge
 	        'type'    => 'price',
 		    'index'   => 'close_amount',
             'currency_code' => $store->getBaseCurrency()->getCode(),
+            'default' => 0,
 		));
 
 		$this->addColumn ('opened_at', array(
@@ -138,6 +142,7 @@ class Toluca_PDV_Block_Adminhtml_History_Grid extends Mage_Adminhtml_Block_Widge
 	        'type'    => 'price',
 		    'index'   => 'money_amount',
             'currency_code' => $store->getBaseCurrency()->getCode(),
+            'default' => 0,
 		));
 		$this->addColumn ('change_amount', array(
 		    'header'  => Mage::helper ('pdv')->__('Money Change'),
@@ -145,6 +150,7 @@ class Toluca_PDV_Block_Adminhtml_History_Grid extends Mage_Adminhtml_Block_Widge
 	        'type'    => 'price',
 		    'index'   => 'change_amount',
             'currency_code' => $store->getBaseCurrency()->getCode(),
+            'default' => 0,
 		));
 		$this->addColumn ('machine_amount', array(
 		    'header'  => Mage::helper ('pdv')->__('Machine'),
@@ -152,6 +158,7 @@ class Toluca_PDV_Block_Adminhtml_History_Grid extends Mage_Adminhtml_Block_Widge
 	        'type'    => 'price',
 		    'index'   => 'machine_amount',
             'currency_code' => $store->getBaseCurrency()->getCode(),
+            'default' => 0,
 		));
 
 		$this->addColumn ('pagcripto_amount', array(
@@ -160,6 +167,7 @@ class Toluca_PDV_Block_Adminhtml_History_Grid extends Mage_Adminhtml_Block_Widge
 	        'type'    => 'price',
 		    'index'   => 'pagcripto_amount',
             'currency_code' => $store->getBaseCurrency()->getCode(),
+            'default' => 0,
 		));
 		$this->addColumn ('picpay_amount', array(
 		    'header'  => Mage::helper ('pdv')->__('PicPay'),
@@ -167,6 +175,7 @@ class Toluca_PDV_Block_Adminhtml_History_Grid extends Mage_Adminhtml_Block_Widge
 	        'type'    => 'price',
 		    'index'   => 'picpay_amount',
             'currency_code' => $store->getBaseCurrency()->getCode(),
+            'default' => 0,
 		));
 		$this->addColumn ('openpix_amount', array(
 		    'header'  => Mage::helper ('pdv')->__('OpenPix'),
@@ -174,6 +183,7 @@ class Toluca_PDV_Block_Adminhtml_History_Grid extends Mage_Adminhtml_Block_Widge
 	        'type'    => 'price',
 		    'index'   => 'openpix_amount',
             'currency_code' => $store->getBaseCurrency()->getCode(),
+            'default' => 0,
 		));
 
 		$this->addColumn ('creditcard_amount', array(
@@ -182,6 +192,7 @@ class Toluca_PDV_Block_Adminhtml_History_Grid extends Mage_Adminhtml_Block_Widge
 	        'type'    => 'price',
 		    'index'   => 'creditcard_amount',
             'currency_code' => $store->getBaseCurrency()->getCode(),
+            'default' => 0,
 		));
 		$this->addColumn ('billet_amount', array(
 		    'header'  => Mage::helper ('pdv')->__('Billet'),
@@ -189,6 +200,7 @@ class Toluca_PDV_Block_Adminhtml_History_Grid extends Mage_Adminhtml_Block_Widge
 	        'type'    => 'price',
 		    'index'   => 'billet_amount',
             'currency_code' => $store->getBaseCurrency()->getCode(),
+            'default' => 0,
 		));
 		$this->addColumn ('banktransfer_amount', array(
 		    'header'  => Mage::helper ('pdv')->__('Bank Transfer'),
@@ -196,6 +208,7 @@ class Toluca_PDV_Block_Adminhtml_History_Grid extends Mage_Adminhtml_Block_Widge
 	        'type'    => 'price',
 		    'index'   => 'banktransfer_amount',
             'currency_code' => $store->getBaseCurrency()->getCode(),
+            'default' => 0,
 		));
 		$this->addColumn ('check_amount', array(
 		    'header'  => Mage::helper ('pdv')->__('Check Money'),
@@ -203,6 +216,7 @@ class Toluca_PDV_Block_Adminhtml_History_Grid extends Mage_Adminhtml_Block_Widge
 	        'type'    => 'price',
 		    'index'   => 'check_amount',
             'currency_code' => $store->getBaseCurrency()->getCode(),
+            'default' => 0,
 		));
 
 		$this->addColumn ('shipping_amount', array(
@@ -211,6 +225,7 @@ class Toluca_PDV_Block_Adminhtml_History_Grid extends Mage_Adminhtml_Block_Widge
 	        'type'    => 'price',
 		    'index'   => 'shipping_amount',
             'currency_code' => $store->getBaseCurrency()->getCode(),
+            'default' => 0,
 		));
 		$this->addColumn ('total_amount', array(
 		    'header'  => Mage::helper ('pdv')->__('Total'),
@@ -218,6 +233,7 @@ class Toluca_PDV_Block_Adminhtml_History_Grid extends Mage_Adminhtml_Block_Widge
 	        'type'    => 'price',
 		    'index'   => 'total_amount',
             'currency_code' => $store->getBaseCurrency()->getCode(),
+            'default' => 0,
 		));
 
 		$this->addColumn ('created_at', array(
