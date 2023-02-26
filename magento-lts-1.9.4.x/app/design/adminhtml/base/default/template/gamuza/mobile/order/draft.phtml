@@ -16,11 +16,11 @@ echo str_repeat('-', 30) . PHP_EOL;
 $address = $_order->getShippingAddress() ? $_order->getShippingAddress() : $_order->getBillingAddress();
 
 echo Mage::helper ('customer')->__('Customer: %s', $address->getFirstname()) . PHP_EOL;
-echo $address->getFax() . PHP_EOL;
+echo $address->getCellphone() . PHP_EOL;
 echo sprintf('%s %s', $address->getStreet1(), $address->getStreet2()) . PHP_EOL;
 if ($address->getStreet3()) echo $address->getStreet3() . PHP_EOL;
 echo $address->getStreet4() . PHP_EOL;
-echo sprintf('%s %s', $address->getCity(), $address->getRegionCode()) . PHP_EOL;
+echo sprintf('%s %s %s', $address->getCity(), $address->getRegionCode(), $address->getCountryId()) . PHP_EOL;
 echo $address->getPostcode() . PHP_EOL;
 echo str_repeat('-', 30) . PHP_EOL;
 
