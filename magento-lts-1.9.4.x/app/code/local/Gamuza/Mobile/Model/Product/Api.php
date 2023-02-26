@@ -356,6 +356,9 @@ class Gamuza_Mobile_Model_Product_Api extends Mage_Catalog_Model_Api_Resource
                             'store_title'        => $selection->getStoreTitle (),
                             'title'              => $selection->getName (),
                             // bundle
+                            'product_id'               => intval ($selection->getProductId ()),
+                            'parent_product_id'        => intval ($selection->getParentProductId ()),
+                            'selection_id'             => intval ($selection->getId ()),
                             'selection_qty'            => floatval ($selection->getSelectionQty ()),
                             'selection_can_change_qty' => boolval ($selection->getSelectionCanChangeQty ()),
                             'is_default'               => boolval ($selection->getIsDefault ()),
