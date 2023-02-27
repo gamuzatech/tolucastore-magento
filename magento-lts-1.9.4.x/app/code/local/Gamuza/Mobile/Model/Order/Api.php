@@ -689,7 +689,7 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
             ->setTemplate ('gamuza/mobile/order/draft.phtml')
             ->toHtml ();
 
-        return wordwrap(strip_tags($result), 30);
+        return wordwrap($result, 30); // thermal printer
     }
 
     /**

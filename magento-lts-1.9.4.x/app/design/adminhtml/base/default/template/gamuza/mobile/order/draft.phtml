@@ -76,7 +76,27 @@ echo str_repeat('-', 30) . PHP_EOL;
 echo $_order->getShippingDescription() . PHP_EOL;
 echo str_repeat('-', 30) . PHP_EOL;
 
-echo Mage::helper('payment')->getInfoBlock($_order->getPayment())->toHtml() . PHP_EOL;
+$_paymentMethod = $_order->getPayment()->getMethodInstance();
+
+if ($_paymentMethod)
+{
+    echo $_paymentMethod->getTitle() . PHP_EOL;
+
+    $_paymentInfo = Mage::helper('payment')->getInfoBlock($_order->getPayment());
+
+    if ($_paymentInfo)
+    {
+        foreach ($_paymentInfo->getSpecificInformation() as $id => $value)
+        {
+            echo sprintf('%s: %s', $id, $value) . PHP_EOL;
+        }
+    }
+}
+else
+{
+    echo Mage::helper('adminhtml')->__('Payment method is not available.') . PHP_EOL;
+}
+
 echo str_repeat('-', 30) . PHP_EOL;
 
 echo Mage::getStoreConfig('general/store_information/name',    $_order->getStoreId()) . PHP_EOL;

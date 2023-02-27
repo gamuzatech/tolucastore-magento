@@ -11,4 +11,5 @@
 "Order: %s-%s","Pedido: %s-%s"
 "Customer: %s","Cliente: %s"
 "Total Items Qty: %s","Qtde Total Itens: %s"
+"Payment method is not available.","Forma de pagamento não disponível."
 
