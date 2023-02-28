@@ -110,7 +110,8 @@ class Gamuza_Mobile_Model_Cart_Api extends Mage_Checkout_Model_Api_Resource
         {
             $totalsResult[] = array(
                 "title" => $total->getTitle(),
-                "amount" => floatval($total->getValue())
+                "amount" => floatval($total->getValue()),
+                "quote_id" => intval($quote->getId()),
             );
         }
 
