@@ -675,7 +675,7 @@
                 <validate_formkey_checkout>1</validate_formkey_checkout>
             </security>
             <sales>
-                <grid_auto_reload>1</grid_auto_reload>
+                <grid_auto_reload>0</grid_auto_reload>
             </sales>
         </admin>
         <hints>
