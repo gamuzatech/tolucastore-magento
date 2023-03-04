@@ -332,7 +332,11 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         $moneyAmount  = floatval ($history->getMoneyAmount ());
         $changeAmount = floatval ($history->getChangeAmount ());
 
-        $closeAmount = ((($openAmount + $reinforceAmount) + $bleedAmount) + $moneyAmount) + $changeAmount;
+        $openpixAmount = floatval ($history->getOpenpixAmount ());
+        $checkAmount = floatval ($history->getCheckAmount ());
+
+        $closeAmount = ((($openAmount + $reinforceAmount) + $bleedAmount) + $moneyAmount) + $changeAmount
+            + $openpixAmount + $checkAmount;
 
         if ($amount > $closeAmount)
         {
