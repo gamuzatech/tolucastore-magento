@@ -87,6 +87,8 @@ class Gamuza_Basic_Helper_Data extends Mage_Core_Helper_Abstract
 
     const XML_PATH_CATALOG_EXPRESS_ACTIVE = 'catalog/express/active';
 
+    const XML_PATH_GENERAL_STORE_INFORMATION_LOGO = 'general/store_information/logo';
+
     public function getLocaleCode ($scope = 'default', $scope_id = 0)
     {
         $read = Mage::getSingleton('core/resource')->getConnection('core_read');
@@ -96,6 +98,17 @@ class Gamuza_Basic_Helper_Data extends Mage_Core_Helper_Abstract
             " WHERE scope = '$scope' AND scope_id = $scope_id " .
             " AND path = 'general/locale/code'"
         );
+    }
+
+    public function getLogoUrl ()
+    {
+        $media = Mage::getBaseDir('media') . DS . 'store' . DS . 'info';
+        $file  = Mage::getStoreConfig(self::XML_PATH_GENERAL_STORE_INFORMATION_LOGO);
+
+        if (is_file($media . DS . $file))
+        {
+            return Mage::getBaseUrl('media') . 'store/info/' . $file;
+        }
     }
 
     public function getTotals (Mage_Adminhtml_Block_Widget_Grid $grid)

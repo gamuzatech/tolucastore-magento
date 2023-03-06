@@ -103,5 +103,37 @@ class Gamuza_Basic_Block_Page_Html_Head extends Mage_Page_Block_Html_Head
         
         return $this;
     }
+
+    public function getHomeUrl ()
+    {
+        return Mage::helper ('core/url')->getHomeUrl ();
+    }
+
+    public function getLogoUrl ()
+    {
+        return Mage::helper ('basic')->getLogoUrl ();
+    }
+
+    public function getLocaleCode ()
+    {
+        return Mage::helper ('basic')->getLocaleCode ();
+    }
+
+    public function getPageTitle ()
+    {
+        return $this->getLayout()->getBlock('head')->getTitle ();
+    }
+
+    public function getShortDescription ()
+    {
+        $description = Mage::getStoreConfig ('general/store_information/short_description');
+
+        if (empty ($description))
+        {
+            return $this->getDescription ();
+        }
+
+        return $description;
+    }
 }
 

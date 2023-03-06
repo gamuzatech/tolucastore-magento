@@ -16,13 +16,7 @@ class Gamuza_Basic_Block_Page_Html_Header extends Mage_Page_Block_Html_Header
     {
         parent::_construct();
 
-        $media = Mage::getBaseDir('media') . DS . 'store' . DS . 'info';
-        $file  = Mage::getStoreConfig('general/store_information/logo');
-
-        if (is_file($media . DS . $file))
-        {
-            $this->_logo = Mage::getBaseUrl('media') . 'store/info/' . $file;
-        }
+        $this->_logo = Mage::helper('basic')->getLogoUrl();
     }
 
     /**

@@ -39,6 +39,16 @@
                 <name>css/gamuza/basic/styles.css</name>
                 <params>media="all"</params>
             </action>
+
+            <!--
+            /**
+             * Open Graph Sharing Debugger
+             *
+             * https://developers.facebook.com/docs/sharing/webmasters/
+             * https://developers.facebook.com/tools/debug/
+             */
+            -->
+            <block type="basic/page_html_head" name="open_graph" template="gamuza/basic/page/html/opengraph.phtml"/>
         </reference>
         <reference name="top.links">
             <action method="addLink" translate="label title" module="customer"><label>My Addresses</label><url>/customer/address/</url><title>My Addresses</title><prepare/><urlParams/><position>20</position></action>
