@@ -9,27 +9,25 @@
 <?php
 $_order = $this->getOrder();
 
-echo Mage::helper('sales')->__('Order: %s-%s', $_order->getRealOrderId(), $_order->getProtectCode()) . PHP_EOL;
-echo Mage::helper('core')->formatDate($_order->getCreatedAtDate(), 'medium', true) . PHP_EOL;
-echo str_repeat('-', 30) . PHP_EOL;
+echo $this->getLineSeparator(Mage::helper('basic')->__('Order')) . PHP_EOL;
+
+echo sprintf('%s %s', $this->getOrderNumber(), $this->getOrderDatetime()) . PHP_EOL;
 
 $address = $_order->getShippingAddress() ? $_order->getShippingAddress() : $_order->getBillingAddress();
 
-echo Mage::helper ('customer')->__('Customer: %s', $address->getFirstname()) . PHP_EOL;
-echo $address->getCellphone() . PHP_EOL;
-echo sprintf('%s %s', $address->getStreet1(), $address->getStreet2()) . PHP_EOL;
-if ($address->getStreet3()) echo $address->getStreet3() . PHP_EOL;
-echo $address->getStreet4() . PHP_EOL;
+echo $this->getLineSeparator(Mage::helper('basic')->__('Customer')) . PHP_EOL;
+
+echo sprintf('%s %s', $address->getFirstname(), $address->getCellphone()) . PHP_EOL;
+echo sprintf('%s %s %s', $address->getStreet1(), $address->getStreet2(), $address->getStreet3()) . PHP_EOL;
+echo sprintf('%s %s', $address->getStreet4(), $address->getPostcode()) . PHP_EOL;
 echo sprintf('%s %s %s', $address->getCity(), $address->getRegionCode(), $address->getCountryId()) . PHP_EOL;
-echo $address->getPostcode() . PHP_EOL;
-echo str_repeat('-', 30) . PHP_EOL;
+echo $this->getLineSeparator() . PHP_EOL;
 
 echo Mage::helper('sales')->__('Total Items Qty: %s', intval($_order->getTotalQtyOrdered())) . PHP_EOL;
-echo str_repeat('-', 30) . PHP_EOL;
 
 foreach ($_order->getAllItems() as $item)
 {
-    echo Mage::helper ('catalog')->__('SKU: %s', $item->getSku()) . PHP_EOL;
+    echo $this->getLineSeparator($item->getSku()).PHP_EOL;
     echo $item->getName() . PHP_EOL;
 
     $productOptions = $item->getProductOptions();
@@ -46,35 +44,27 @@ foreach ($_order->getAllItems() as $item)
 
     if ($item->getParentItemId ())
     {
-        echo str_repeat('-', 30) . PHP_EOL;
-
         continue; // skip
     }
 
     $price = Mage::helper('core')->currency($item->getPrice(), true, false);
-    $qty   = intval($item->getQtyOrdered());
-
-    echo Mage::helper('sales')->__('Price: %s', $price) . PHP_EOL;
-    echo Mage::helper('sales')->__('Qty: %s', $qty) . PHP_EOL;
-
+    $qty = floatval($item->getQtyOrdered());
     $rowTotal = Mage::helper('core')->currency($item->getBaseRowTotal(), true, false);
 
-    echo Mage::helper('sales')->__('Total: %s', $rowTotal) . PHP_EOL;
-
-    echo str_repeat('-', 30) . PHP_EOL;
+    echo Mage::helper('basic')->__('Price: %s Qty: %s Total: %s', $price, $qty, $rowTotal) . PHP_EOL;
 }
+
+echo $this->getLineSeparator() . PHP_EOL;
 
 $subtotal = Mage::helper('core')->currency($_order->getBaseSubtotal(), true, false);
 $shipping = Mage::helper('core')->currency($_order->getBaseShippingAmount(), true, false);
 $total    = Mage::helper('core')->currency($_order->getBaseGrandTotal(), true, false);
 
-echo Mage::helper('sales')->__('Subtotal: %s', $subtotal) . PHP_EOL;
-echo Mage::helper('sales')->__('Shipping: %s', $shipping) . PHP_EOL;
+echo Mage::helper('sales')->__('Subtotal: %s Shipping: %s', $subtotal, $shipping) . PHP_EOL;
 echo Mage::helper('sales')->__('Grand Total: %s', $total) . PHP_EOL;
-echo str_repeat('-', 30) . PHP_EOL;
+echo $this->getLineSeparator() . PHP_EOL;
 
 echo $_order->getShippingDescription() . PHP_EOL;
-echo str_repeat('-', 30) . PHP_EOL;
 
 $_paymentMethod = $_order->getPayment()->getMethodInstance();
 
@@ -97,10 +87,12 @@ else
     echo Mage::helper('adminhtml')->__('Payment method is not available.') . PHP_EOL;
 }
 
-echo str_repeat('-', 30) . PHP_EOL;
+echo $this->getLineSeparator() . PHP_EOL;
 
-echo Mage::getStoreConfig('general/store_information/name',    $_order->getStoreId()) . PHP_EOL;
-echo Mage::getStoreConfig('general/store_information/address', $_order->getStoreId()) . PHP_EOL;
-echo Mage::getStoreConfig('general/store_information/phone',   $_order->getStoreId()) . PHP_EOL;
-echo Mage::getModel('core/date')->date('d/m/Y H:i:s') . PHP_EOL;
+$storeName  = Mage::getStoreConfig('general/store_information/name',  $_order->getStoreId());
+$storePhone = Mage::getStoreConfig('general/store_information/phone', $_order->getStoreId());
+
+echo sprintf('%s %s', $storeName, $storePhone) . PHP_EOL;
+
+echo sprintf('Toluca Store PDV %s', Mage::getModel('core/date')->date('d/m/Y H:i:s')) . PHP_EOL;
 

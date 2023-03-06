@@ -255,6 +255,11 @@
                 <group>offline</group>
             </machineondelivery>
         </payment>
+        <sales>
+            <order_draft>
+                <word_wrap>48</word_wrap>
+            </order_draft>
+        </sales>
     </default>
 </config>
 

@@ -8,8 +8,10 @@
 "Change To Amount","Troco para Quanto"
 "Rating %s star(s): %s","Avaliação %s estrela(s): %s"
 "Default Email Prefix","Prefixo do Email Padrão"
-"Order: %s-%s","Pedido: %s-%s"
-"Customer: %s","Cliente: %s"
 "Total Items Qty: %s","Qtde Total Itens: %s"
 "Payment method is not available.","Forma de pagamento não disponível."
+"Order Draft","Rascunho do Pedido"
+"Word Wrap","Quebra de Linha"
+"Price: %s Qty: %s Total: %s","Preço: %s Qtde: %s Total: %s"
+"Subtotal: %s Shipping: %s","Subtotal: %s Entrega: %s"
 

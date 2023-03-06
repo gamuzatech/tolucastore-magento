@@ -683,13 +683,12 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
 
         $result = Mage::app ()
             ->getLayout ()
-            ->createBlock ('adminhtml/template')
+            ->createBlock ('mobile/adminhtml_order_draft')
             ->setArea (Mage_Core_Model_App_Area::AREA_ADMINHTML)
             ->setOrder ($order)
-            ->setTemplate ('gamuza/mobile/order/draft.phtml')
-            ->toHtml ();
+            ->setTemplate ('gamuza/mobile/order/draft.phtml');
 
-        return wordwrap($result, 30); // thermal printer
+        return wordwrap($result->toHtml(), $result->getWordwrap()); // thermal printer
     }
 
     /**

@@ -157,6 +157,27 @@
                 </machineondelivery>
             </groups>
         </payment>
+        <sales>
+            <groups>
+                <order_draft translate="label">
+                    <label>Order Draft</label>
+                    <sort_order>200</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <word_wrap translate="label">
+                            <label>Word Wrap</label>
+                            <sort_order>0</sort_order>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </word_wrap>
+                    </fields>
+                </order_draft>
+            </groups>
+        </sales>
     </sections>
 </config>
 
