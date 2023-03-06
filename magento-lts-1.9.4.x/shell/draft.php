@@ -37,15 +37,18 @@ try
 
     Mage::app()->getTranslator()->init(Mage_Core_Model_App_Area::AREA_ADMINHTML, true);
 
-    $order = Mage::getModel('sales/order')->loadByIncrementId($argv[1]);
+    $order = strrpos($argv[1], '-');
 
-    $contents = Mage::getModel('mobile/order_api')->draft($order->getIncrementId(), $order->getProtectCode());
+    $orderIncrementId = substr($argv[1], 0, $order);
+    $orderProtectCode = substr($argv[1], $order + 1, 6);
+
+    $contents = Mage::getModel('mobile/order_api')->draft($orderIncrementId, $orderProtectCode);
 
     $dir = Mage::getConfig()->getOptions()->getVarDir() . DS . 'draft';
 
     mkdir($dir, 0777, true);
 
-    $file = sprintf('%s%s%s-%s-%s.txt', $dir, DS, 'order', $order->getIncrementId(), $order->getProtectCode());
+    $file = sprintf('%s%s%s-%s-%s.txt', $dir, DS, 'order', $orderIncrementId, $orderProtectCode);
 
     file_put_contents($file, $contents);
 }
