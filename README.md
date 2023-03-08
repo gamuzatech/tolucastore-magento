@@ -2,6 +2,7 @@
 
 ## Table of features
 
+- APP
 - Chat Bot
 - PDV
 - PagCripto
