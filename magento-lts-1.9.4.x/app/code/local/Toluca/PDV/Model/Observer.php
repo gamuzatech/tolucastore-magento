@@ -42,9 +42,11 @@ class Toluca_PDV_Model_Observer
         if ($orderIsPdv)
         {
             $quote->delete (); // discard
+
+            return $this; // cancel
         }
 
-        if (!$orderIsPdv && !Mage::getStoreConfigFlag (self::XML_PATH_PDV_CASHIER_INCLUDE_ALL_ORDERS))
+        if (!Mage::getStoreConfigFlag (self::XML_PATH_PDV_CASHIER_INCLUDE_ALL_ORDERS))
         {
             return $this; // cancel
         }
