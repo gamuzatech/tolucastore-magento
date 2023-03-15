@@ -89,6 +89,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             ->addFieldToFilter ('is_pdv', array ('eq' => true))
             ->addFieldToFilter ('pdv_cashier_id', array ('eq' => $cashier->getId ()))
             ->addFieldToFilter ('pdv_operator_id', array ('eq' => $cashier->getOperatorId ()))
+            ->addFieldToFilter ('pdv_history_id', array ('eq' => $cashier->getHistoryId ()))
         ;
 
         $collection->getSelect ()
