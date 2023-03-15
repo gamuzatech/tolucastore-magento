@@ -12,19 +12,6 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
 {
     const XML_PATH_PDV_CASHIER_INCLUDE_ALL_ORDERS = Toluca_PDV_Helper_Data::XML_PATH_PDV_CASHIER_INCLUDE_ALL_ORDERS;
 
-    protected $_defaultCustomerId = null;
-
-    protected $_includeAllOrders = null;
-
-    public function __construct ()
-    {
-        // parent::__construct ();
-
-        $this->_defaultCustomerId = Mage::getStoreConfig (Toluca_PDV_Helper_Data::XML_PATH_PDV_SETTING_DEFAULT_CUSTOMER);
-
-        $this->_includeAllOrders = Mage::getStoreConfigFlag (Toluca_PDV_Helper_Data::XML_PATH_PDV_CASHIER_INCLUDE_ALL_ORDERS);
-    }
-
     public function info ($cashier_id)
     {
         if (empty ($cashier_id))
@@ -56,8 +43,6 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             'created_at' => $cashier->getCreatedAt (),
             'updated_at' => $cashier->getUpdatedAt (),
             'order_amount'     => floatval ($cashier->getOrderAmount ()),
-            'include_all_orders'  => boolval ($this->_includeAllOrders),
-            'default_customer_id' => intval ($this->_defaultCustomerId),
             'customer_id' => intval ($cashier->getCustomerId ()),
             'quote_id'    => intval ($cashier->getQuoteId ()),
             'history'     => null,
