@@ -17,14 +17,12 @@ function updatePicPayTransactionsTable ($installer, $model, $description)
             'type'     => Varien_Db_Ddl_Table::TYPE_TEXT,
             'nullable' => false,
             'comment'  => 'QRCode Content',
-            'after'    => 'payment_url',
         ));
     $installer->getConnection ()
         ->addColumn ($table, 'qrcode_base64', array(
             'type'     => Varien_Db_Ddl_Table::TYPE_TEXT,
             'nullable' => false,
             'comment'  => 'QRCode Base64',
-            'after'    => 'qrcode_content',
         ));
 }
 

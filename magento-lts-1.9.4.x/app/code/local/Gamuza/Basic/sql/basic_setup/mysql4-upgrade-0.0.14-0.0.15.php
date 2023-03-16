@@ -19,7 +19,6 @@ function updateAdminUserTable ($installer, $model, $comment)
             'unsigned' => true,
             'nullable' => false,
             'comment'  => 'Is System',
-            'after'    => 'is_active',
         ))
     ;
 }
@@ -37,7 +36,6 @@ function updateApiUserTable ($installer, $model, $comment)
             'unsigned' => true,
             'nullable' => false,
             'comment'  => 'Is System',
-            'after'    => 'is_active',
         ))
     ;
 }

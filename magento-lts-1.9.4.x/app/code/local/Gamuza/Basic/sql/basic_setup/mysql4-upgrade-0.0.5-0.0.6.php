@@ -19,7 +19,6 @@ function updateCatalogProductOptionTable ($installer, $model, $comment)
             'unsigned' => true,
             'nullable' => false,
             'comment'  => 'Max Length',
-            'after'    => 'max_characters',
         ))
     ;
 }

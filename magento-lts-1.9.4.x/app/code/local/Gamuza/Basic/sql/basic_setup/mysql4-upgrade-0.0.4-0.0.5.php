@@ -18,7 +18,6 @@ function updateCatalogCategoryTable ($installer, $model, $comment)
             'length'   => 64,
             'nullable' => true,
             'comment'  => 'SKU',
-            'after'    => 'parent_id',
         ))
     ;
 }
