@@ -44,7 +44,6 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             'updated_at' => $cashier->getUpdatedAt (),
             'order_amount'     => floatval ($cashier->getOrderAmount ()),
             'customer_id' => intval ($cashier->getCustomerId ()),
-            'customer_cellphone' => $cashier->getCustomerCellphone (),
             'quote_id'    => intval ($cashier->getQuoteId ()),
             'history' => $cashier->getHistory (),
         );
@@ -84,13 +83,6 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
                 'created_at' => $history->getCreatedAt (),
                 'updated_at' => $history->getUpdatedAt (),
             );
-        }
-
-        $customer = Mage::getModel ('customer/customer')->load ($cashier->getCustomerId ());
-
-        if ($customer && $customer->getId ())
-        {
-            $result ['customer_cellphone'] = preg_replace ('[\D]', "", $customer->getCellphone ());
         }
 
         $collection = Mage::getModel ('sales/order')->getCollection ()
