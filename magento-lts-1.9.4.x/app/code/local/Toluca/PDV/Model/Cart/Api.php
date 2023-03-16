@@ -78,6 +78,7 @@ class Toluca_PDV_Model_Cart_Api extends Mage_Api_Model_Resource_Abstract
                 'customer_firstname' => $quote->getCustomerFirstname (),
                 'customer_lastname'  => $quote->getCustomerLastname (),
                 'customer_note' => $quote->getCustomerNote (),
+                'customer_cellphone' => $quote->getCustomerCellphone (),
                 'customer_is_guest'  => boolval ($quote->getCustomerIsGuest ()),
                 'remote_ip' => $quote->getRemoteIp (),
                 'customer_taxvat' => $quote->getCustomerTaxvat (),
@@ -131,6 +132,7 @@ class Toluca_PDV_Model_Cart_Api extends Mage_Api_Model_Resource_Abstract
             'customer_firstname' => $quote->getCustomerFirstname (),
             'customer_lastname'  => $quote->getCustomerLastname (),
             'customer_note' => $quote->getCustomerNote (),
+            'customer_cellphone' => $quote->getCustomerCellphone (),
             'customer_is_guest'  => boolval ($quote->getCustomerIsGuest ()),
             'remote_ip' => $quote->getRemoteIp (),
             'customer_taxvat' => $quote->getCustomerTaxvat (),
@@ -236,6 +238,7 @@ class Toluca_PDV_Model_Cart_Api extends Mage_Api_Model_Resource_Abstract
             ->setCustomerEmail ($customerEmail)
             ->setCustomerTaxvat ($customer->getTaxvat ())
             ->setCustomerNote ($message)
+            ->setCustomerCellphone ($customer->getCellphone ())
         ;
 
         $quote->setData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_IS_PDV, true)
