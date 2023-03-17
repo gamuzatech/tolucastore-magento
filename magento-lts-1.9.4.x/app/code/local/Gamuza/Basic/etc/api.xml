@@ -250,6 +250,18 @@
                     </service_not_exists>
                 </faults>
             </basic_order_pdf>
+            <!-- Shipping -->
+            <basic_shipping translate="title" module="basic">
+                <model>basic/shipping_api</model>
+                <title>Basic Shipping API</title>
+                <acl>basic/shipping</acl>
+                <methods>
+                    <origin translate="title" module="basic">
+                        <title>Get info about current Shipping origin</title>
+                        <acl>basic/shipping/origin</acl>
+                    </origin>
+                </methods>
+            </basic_shipping>
         </resources>
         <acl>
             <resources>
@@ -355,6 +367,13 @@
                             <title>Create order service PDF information</title>
                         </service>
                     </order_pdf>
+                    <!-- Shipping -->
+                    <shipping translate="title" module="basic">
+                        <title>Magento</title>
+                        <origin translate="title" module="basic">
+                            <title>Retrieve info about current Shipping origin</title>
+                        </origin>
+                    </shipping>
                 </basic>
             </resources>
         </acl>
