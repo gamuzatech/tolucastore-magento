@@ -140,6 +140,16 @@
                     <group_collection>Gamuza_Basic_Model_Customer_Resource_Group_Collection</group_collection>
                 </rewrite>
             </customer_resource>
+            <directory>
+                <rewrite>
+                    <region>Gamuza_Basic_Model_Directory_Region</region>
+                </rewrite>
+            </directory>
+            <directory_resource>
+                <rewrite>
+                    <region>Gamuza_Basic_Model_Directory_Resource_Region</region>
+                </rewrite>
+            </directory_resource>
             <eav>
                 <rewrite>
                     <entity_type>Gamuza_Basic_Model_Eav_Entity_Type</entity_type>
