@@ -85,6 +85,17 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             );
         }
 
+        $collection = Mage::getModel ('sales/quote')->getCollection ()
+            ->addFieldToFilter ('entity_id', array ('eq' => $cashier->getQuoteId ()))
+            ->addFieldToFilter ('pdv_customer_id', array ('eq' => $cashier->getCustomerId ()))
+        ;
+
+        if (!$collection->getSize ())
+        {
+            $result ['quote_id'] = 0;
+            $result ['customer_id'] = 0;
+        }
+
         $collection = Mage::getModel ('sales/order')->getCollection ()
             ->addFieldToFilter ('is_pdv', array ('eq' => true))
             ->addFieldToFilter ('pdv_cashier_id', array ('eq' => $cashier->getId ()))
