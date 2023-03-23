@@ -87,5 +87,11 @@
     <checkout_onepage_success translate="label">
         <update handle="gamuza_checkout_handle"/>
     </checkout_onepage_success>
+
+    <PRODUCT_TYPE_bundle>
+        <reference name="product.info">
+            <remove name="bundle.prices"/>
+        </reference>
+    </PRODUCT_TYPE_bundle>
 </layout>
 
