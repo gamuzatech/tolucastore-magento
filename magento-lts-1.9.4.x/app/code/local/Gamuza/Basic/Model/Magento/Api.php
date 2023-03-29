@@ -14,7 +14,6 @@ class Gamuza_Basic_Model_Magento_Api extends Mage_Core_Model_Magento_Api
     {
         Mage::getModel ('backup/observer')->scheduledBackup ();
 
-        /*
         $point = date ('Y-m-d', strtotime ('-7 days'));
 
         foreach (Mage::getModel ('backup/fs_collection') as $fs)
@@ -28,7 +27,6 @@ class Gamuza_Basic_Model_Magento_Api extends Mage_Core_Model_Magento_Api
                 if ($backup && $backup->getId ()) $backup->deleteFile();
             }
         }
-        */
 
         return true;
     }
