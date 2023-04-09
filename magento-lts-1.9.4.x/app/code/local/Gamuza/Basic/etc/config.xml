@@ -171,6 +171,7 @@
                 <rewrite>
                     <order>Gamuza_Basic_Model_Sales_Order</order>
                     <quote_address>Gamuza_Basic_Model_Sales_Quote_Address</quote_address>
+                    <quote_item>Gamuza_Basic_Model_Sales_Quote_Item</quote_item>
                 </rewrite>
             </sales>
             <sales_resource>
