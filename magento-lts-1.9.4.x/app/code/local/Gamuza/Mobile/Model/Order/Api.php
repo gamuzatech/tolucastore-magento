@@ -79,6 +79,7 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
     );
 
     protected $_orderItemAttributes = array(
+        'item_id', 'parent_item_id', 'quote_item_id', 'order_id', 'product_id',
         'product_type', 'product_options', 'weight', 'is_virtual', 'sku', 'name', 'description',
         'applied_rule_ids', 'additional_data', 'free_shipping', 'is_qty_decimal',
         'no_discount', 'qty_backordered', 'qty_canceled', 'qty_invoiced',
@@ -147,6 +148,7 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
         'total_item_count', 'customer_gender', 'gift_message_id',
         /* info */
         'region_id', 'order_id', 'increment_number', 'cc_status', 'cc_installments',
+        'item_id', 'parent_item_id', 'quote_item_id', 'order_id', 'product_id',
         /* eav_type */
         'increment_per_store', 'increment_pad_length', /* 'increment_pad_char', */
         /* eav_store */
