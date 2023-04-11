@@ -70,7 +70,8 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
         'is_motoboy',
         'base_customer_balance_amount', 'base_customer_balance_invoiced', 'base_customer_balance_refunded',
         'customer_balance_amount', 'customer_balance_invoiced', 'customer_balance_refunded',
-        'bs_customer_bal_total_refunded', 'customer_bal_total_refunded'
+        'bs_customer_bal_total_refunded', 'customer_bal_total_refunded',
+        'pdv_cashier_id', 'pdv_operator_id', 'pdv_customer_id', 'pdv_history_id', 'pdv_sequence_id'
     );
 
     protected $_orderAddressAttributes = array(
@@ -149,6 +150,7 @@ class Gamuza_Mobile_Model_Order_Api extends Mage_Sales_Model_Order_Api
         /* info */
         'region_id', 'order_id', 'increment_number', 'cc_status', 'cc_installments',
         'item_id', 'parent_item_id', 'quote_item_id', 'order_id', 'product_id',
+        'pdv_cashier_id', 'pdv_operator_id', 'pdv_customer_id', 'pdv_history_id', 'pdv_sequence_id',
         /* eav_type */
         'increment_per_store', 'increment_pad_length', /* 'increment_pad_char', */
         /* eav_store */
