@@ -9,7 +9,7 @@
 <?php
 $_order = $this->getOrder();
 
-echo $this->getLineSeparator(Mage::helper('basic')->__('Order')) . PHP_EOL;
+echo $this->getLineSeparator(Mage::helper('basic')->__('Order #%s', $this->getOrderSequence())) . PHP_EOL;
 
 echo sprintf('%s %s', $this->getOrderNumber(), $this->getOrderDatetime()) . PHP_EOL;
 

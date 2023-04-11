@@ -51,5 +51,17 @@ class Gamuza_Mobile_Block_Adminhtml_Order_Draft extends Mage_Adminhtml_Block_Tem
     {
         return Mage::helper('core')->formatDate($this->getOrder ()->getCreatedAtDate(), 'medium', true);
     }
+
+    public function getOrderSequence ()
+    {
+        $result = 0;
+
+        if (Mage::helper ('core')->isModuleEnabled ('Toluca_PDV'))
+        {
+            $result = $this->getOrder ()->getData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_SEQUENCE_ID);
+        }
+
+        return $result;
+    }
 }
 
