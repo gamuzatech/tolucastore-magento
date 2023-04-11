@@ -66,13 +66,18 @@ class Toluca_PDV_Model_Observer
             throw new Mage_Core_Exception (Mage::helper ('pdv')->__('Requested history was not found.'));
         }
 
+        $sequenceId = intval ($cashier->getSequenceId ()) + 1;
+
         $order->setIsPdv (true)
             ->setPdvCashierId ($cashier->getId ())
             ->setPdvOperatorId ($operator->getId ())
             ->setPdvHistoryId ($history->getId ())
             ->setPdvCustomerId ($customer->getId ())
+            ->setPdvSequenceId ($sequenceId)
             ->save ()
         ;
+
+        $cashier->setSequenceId ($sequenceId)->save ();
     }
 
     public function salesOrderInvoicePay ($observer)
@@ -93,6 +98,7 @@ class Toluca_PDV_Model_Observer
         $orderPdvOperatorId = $order->getData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_OPERATOR_ID);
         $orderPdvCustomerId = $order->getData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_CUSTOMER_ID);
         $orderPdvHistoryId  = $order->getData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_HISTORY_ID);
+        $orderPdvSequenceId = $order->getData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_SEQUENCE_ID);
 
         $amount = $order->getBaseGrandTotal ();
 
@@ -117,6 +123,7 @@ class Toluca_PDV_Model_Observer
             ->setCashierId ($cashier->getId ())
             ->setOperatorId ($operator->getId ())
             ->setHistoryId ($history->getId ())
+            ->setSequenceId ($orderPdvSequenceId)
             ->setCustomerId ($customer->getId ())
             ->setQuoteId ($order->getQuoteId ())
             ->setOrderId ($order->getId ())
@@ -144,6 +151,7 @@ class Toluca_PDV_Model_Observer
                 ->setCashierId ($cashier->getId ())
                 ->setOperatorId ($operator->getId ())
                 ->setHistoryId ($history->getId ())
+                ->setSequenceId ($orderPdvSequenceId)
                 ->setCustomerId ($customer->getId ())
                 ->setQuoteId ($order->getQuoteId ())
                 ->setOrderId ($order->getId ())

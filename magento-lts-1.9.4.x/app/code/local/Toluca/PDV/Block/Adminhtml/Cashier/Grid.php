@@ -89,6 +89,12 @@ class Toluca_PDV_Block_Adminhtml_Cashier_Grid extends Mage_Adminhtml_Block_Widge
 	        'type'    => 'number',
 		    'index'   => 'history_id',
 		));
+		$this->addColumn ('sequence_id', array(
+		    'header'  => Mage::helper ('pdv')->__('Sequence ID'),
+		    'align'   => 'right',
+	        'type'    => 'number',
+		    'index'   => 'sequence_id',
+		));
 		$this->addColumn ('customer_id', array(
 		    'header' => Mage::helper ('pdv')->__('Customer ID'),
 		    'index'  => 'customer_id',
