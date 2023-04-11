@@ -43,7 +43,11 @@ class Toluca_PDV_Model_Observer
         {
             $quote->delete (); // discard
 
-            return $this; // cancel
+            $orderPdvCashierId = $order->getData (Toluca_PDV_Helper_Data::ORDER_ATTRIBUTE_PDV_CASHIER_ID);
+
+            $cashier = Mage::getModel ('pdv/cashier')->load ($orderPdvCashierId);
+
+            goto __updateSequenceId;
         }
 
         if (!Mage::getStoreConfigFlag (self::XML_PATH_PDV_CASHIER_INCLUDE_ALL_ORDERS))
@@ -66,18 +70,20 @@ class Toluca_PDV_Model_Observer
             throw new Mage_Core_Exception (Mage::helper ('pdv')->__('Requested history was not found.'));
         }
 
-        $sequenceId = intval ($cashier->getSequenceId ()) + 1;
-
         $order->setIsPdv (true)
             ->setPdvCashierId ($cashier->getId ())
             ->setPdvOperatorId ($operator->getId ())
             ->setPdvHistoryId ($history->getId ())
             ->setPdvCustomerId ($customer->getId ())
-            ->setPdvSequenceId ($sequenceId)
             ->save ()
         ;
 
+    __updateSequenceId:
+
+        $sequenceId = intval ($cashier->getSequenceId ()) + 1;
+
         $cashier->setSequenceId ($sequenceId)->save ();
+        $order->setPdvSequenceId ($sequenceId)->save ();
     }
 
     public function salesOrderInvoicePay ($observer)
