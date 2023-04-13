@@ -78,6 +78,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
                 'billet_amount'       => floatval ($history->getBilletAmount ()),
                 'banktransfer_amount' => floatval ($history->getBanktransferAmount ()),
                 'check_amount'        => floatval ($history->getCheckAmount ()),
+                'pix_amount'          => floatval ($history->getPixAmount ()),
                 'shipping_amount' => floatval ($history->getShippingAmount ()),
                 'total_amount'    => floatval ($history->getTotalAmount ()),
                 'created_at' => $history->getCreatedAt (),
@@ -241,6 +242,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             ->setBilletAmount (0)
             ->setBanktransferAmount (0)
             ->setCheckAmount (0)
+            ->setPixAmount (0)
             ->setShippingAmount (0)
             ->setTotalAmount (0)
             ->setCreatedAt (date ('c'))
@@ -332,9 +334,10 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
 
         $openpixAmount = floatval ($history->getOpenpixAmount ());
         $checkAmount = floatval ($history->getCheckAmount ());
+        $pixAmount = floatval ($history->getPixAmount ());
 
         $closeAmount = ((($openAmount + $reinforceAmount) + $bleedAmount) + $moneyAmount) + $changeAmount
-            + $openpixAmount + $checkAmount;
+            + $openpixAmount + $checkAmount + $pixAmount;
 
         if ($amount > $closeAmount)
         {
@@ -400,10 +403,11 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             $billetAmount       = floatval ($history->getBilletAmount ());
             $banktransferAmount = floatval ($history->getBanktransferAmount ());
             $checkAmount        = floatval ($history->getCheckAmount ());
+            $pixAmount          = floatval ($history->getPixAmount ());
 
             $orderAmount = $machineAmount
                 + $pagcriptoAmount + $picpayAmount + $openpixAmount
-                + $creditcardAmount + $billetAmount + $banktransferAmount + $checkAmount
+                + $creditcardAmount + $billetAmount + $banktransferAmount + $checkAmount + $pixAmount
             ;
         }
 

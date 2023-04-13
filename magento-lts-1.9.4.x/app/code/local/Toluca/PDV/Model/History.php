@@ -31,11 +31,12 @@ class Toluca_PDV_Model_History extends Mage_Core_Model_Abstract
         $billetAmount       = floatval ($this->getBilletAmount ());
         $banktransferAmount = floatval ($this->getBanktransferAmount ());
         $checkAmount        = floatval ($this->getCheckAmount ());
+        $pixAmount          = floatval ($this->getPixAmount ());
 
         $this->setTotalAmount (
             $closeAmount + $machineAmount
             + $pagcriptoAmount + $picpayAmount + $openpixAmount
-            + $creditcardAmount + $billetAmount + $banktransferAmount + $checkAmount
+            + $creditcardAmount + $billetAmount + $banktransferAmount + $checkAmount + $pixAmount
         );
 
         $this->_getResource ()->save ($this); // total_amount

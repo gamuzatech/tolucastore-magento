@@ -218,6 +218,14 @@ class Toluca_PDV_Block_Adminhtml_History_Grid extends Mage_Adminhtml_Block_Widge
             'currency_code' => $store->getBaseCurrency()->getCode(),
             'default' => 0,
 		));
+		$this->addColumn ('pix_amount', array(
+		    'header'  => Mage::helper ('pdv')->__('Pix'),
+		    'align'   => 'right',
+	        'type'    => 'price',
+		    'index'   => 'pix_amount',
+            'currency_code' => $store->getBaseCurrency()->getCode(),
+            'default' => 0,
+		));
 
 		$this->addColumn ('shipping_amount', array(
 		    'header'  => Mage::helper ('pdv')->__('Shipping'),

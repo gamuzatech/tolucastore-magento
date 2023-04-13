@@ -167,6 +167,14 @@ SQLBLOCK;
             'nullable' => false,
             'comment'  => 'Check Amount',
         ));
+    $installer->getConnection ()
+        ->addColumn ($table, 'pix_amount', array(
+            'type'     => Varien_Db_Ddl_Table::TYPE_DECIMAL,
+            'length'   => '12,4',
+            'unsigned' => true,
+            'nullable' => false,
+            'comment'  => 'Pix Amount',
+        ));
 
     $installer->getConnection ()
         ->addColumn ($table, 'shipping_amount', array(

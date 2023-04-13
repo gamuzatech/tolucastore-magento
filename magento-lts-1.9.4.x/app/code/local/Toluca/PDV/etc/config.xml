@@ -203,6 +203,7 @@
                 <billet>pagseguropro_boleto</billet>
                 <banktransfer>banktransfer</banktransfer>
                 <check>checkmo</check>
+                <pix>gamuza_brazil_pix</pix>
             </payment_method>
         </pdv>
     </default>
