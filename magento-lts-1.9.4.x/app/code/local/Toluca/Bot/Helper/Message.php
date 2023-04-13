@@ -492,6 +492,14 @@ class Toluca_Bot_Helper_Message extends Mage_Core_Helper_Abstract
             ;
         }
 
+        if (Mage::helper ('core')->isModuleEnabled ('Gamuza_Brazil')
+            && !strcmp ($payment->getMethod (), Gamuza_Brazil_Model_Payment_Method_Pix::CODE))
+        {
+            $result .= $this->__('Here are the payment instructions:') . PHP_EOL . PHP_EOL
+                . Mage::getStoreConfig ('payment/gamuza_brazil_pix/instructions', $order->getStoreId ()) . PHP_EOL . PHP_EOL
+            ;
+        }
+
         if ($order->getPayment ()->getMethod () == Mage_Payment_Model_Method_Banktransfer::PAYMENT_METHOD_BANKTRANSFER_CODE)
         {
             $result .= $this->__('Here are the payment instructions:') . PHP_EOL . PHP_EOL

@@ -57,6 +57,8 @@ class Toluca_Bot_Model_Chat_Api extends Mage_Api_Model_Resource_Abstract
         '8' => 'pagseguropro_boleto',
 
         '9' => 'free',
+
+        '10' => 'gamuza_brazil_pix',
     );
 
     protected $_paymentCcTypes = array(
