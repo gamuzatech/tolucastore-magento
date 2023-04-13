@@ -10,7 +10,7 @@
 <config>
     <modules>
         <Gamuza_Brazil>
-            <version>0.0.1</version>
+            <version>0.0.2</version>
         </Gamuza_Brazil>
     </modules>
     <global>
@@ -55,6 +55,28 @@
                 </connection>
             </brazil_read>
         </resources>
+        <fieldsets>
+            <sales_convert_quote>
+                <is_pix>
+                    <to_order>*</to_order>
+                </is_pix>
+            </sales_convert_quote>
+            <sales_convert_order>
+                <is_pix>
+                    <to_quote>*</to_quote>
+                </is_pix>
+            </sales_convert_order>
+        </fieldsets>
+        <events>
+            <sales_order_place_after>
+                <observers>
+                    <gamuza_brazil_sales_order_place_after>
+                        <class>brazil/observer</class>
+                        <method>salesOrderPlaceAfter</method>
+                    </gamuza_brazil_sales_order_place_after>
+                </observers>
+            </sales_order_place_after>
+        </events>
     </global>
     <adminhtml>
         <translate>
@@ -78,5 +100,18 @@
             </modules>
         </translate>
     </frontend>
+    <default>
+        <payment>
+            <gamuza_brazil_pix>
+                <active>0</active>
+                <title>Payment via Pix</title>
+                <order_status>pending</order_status>
+                <paid_status>paid</paid_status>
+                <allowspecific>0</allowspecific>
+                <group>offline</group>
+                <model>brazil/payment_method_pix</model>
+            </gamuza_brazil_pix>
+        </payment>
+    </default>
 </config>
 

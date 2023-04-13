@@ -8,5 +8,7 @@
 class Gamuza_Brazil_Helper_Data extends Mage_Core_Helper_Abstract
 {
     const CUSTOMER_ATTRIBUTE_RG_IE = 'br_rg_ie';
+
+    const ORDER_ATTRIBUTE_IS_PIX = 'is_pix';
 }
 
