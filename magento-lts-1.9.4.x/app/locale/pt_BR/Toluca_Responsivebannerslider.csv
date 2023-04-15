@@ -1,0 +1,18 @@
+"Manage Groups","Gerenciar Grupos"
+"Manage Slides","Gerenciar Slides"
+"Responsive Banner Slider Groups","Grupos de Banners"
+"Group Title","Título do Grupo"
+
+"Include Jquery","Incluir jQuery"
+"Lazy Load","Carregamento Preguiçoso"
+"Thumbnail Upload Width","Largura do Thumbnail no Upload"
+"Show in CMS Pages","Exibir em Páginas CMS"
+"Show in Category Pages","Exibir em Páginas de Categorias"
+"Show in Product Pages","Exibir em Páginas de Produtos"
+"Select Yes for display the Responsive Banner Slider on frontend.","Selecione Sim para exibir os banners no site."
+"Select Yes for include the jquery library.","Selecione Sim para incluir o jQuery."
+"Select Yes for the Lazy Load.","Selecione Sim para o Carregamento Preguiçoso."
+"Set the width of the thumbnails created during upload. Thumbnails are used in carousels (default is 200).","Defina a largura das miniaturas criadas durante o upload. Miniaturas são usadas em carrosséis (o padrão é 200)."
+"Select Yes for display the Responsive Banner Slider on frontend for Selected CMS Pages.","Selecione Sim para exibir o controle deslizante do banner no site para páginas CMS selecionadas."
+"Select Yes for display the Responsive Banner Slider on frontend for Selected Product Pages.","Selecione Sim para exibir o controle deslizante do banner no site para páginas de produtos selecionados."
+

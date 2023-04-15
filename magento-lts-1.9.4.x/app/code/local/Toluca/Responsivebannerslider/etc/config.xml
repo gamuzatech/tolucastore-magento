@@ -13,5 +13,26 @@
             <version>0.0.1</version>
         </Toluca_Responsivebannerslider>
     </modules>
+    <global>
+        <blocks>
+            <responsivebannerslider>
+                <rewrite>
+                    <adminhtml_slidergroup>Toluca_Responsivebannerslider_Block_Adminhtml_Slidergroup</adminhtml_slidergroup>
+                    <adminhtml_slidergroup_grid>Toluca_Responsivebannerslider_Block_Adminhtml_Slidergroup_Grid</adminhtml_slidergroup_grid>
+                </rewrite>
+            </responsivebannerslider>
+        </blocks>
+    </global>
+    <adminhtml>
+        <translate>
+            <modules>
+                <Toluca_Responsivebannerslider>
+                    <files>
+                        <default>Toluca_Responsivebannerslider.csv</default>
+                    </files>
+                </Toluca_Responsivebannerslider>
+            </modules>
+        </translate>
+    </adminhtml>
 </config>
 
