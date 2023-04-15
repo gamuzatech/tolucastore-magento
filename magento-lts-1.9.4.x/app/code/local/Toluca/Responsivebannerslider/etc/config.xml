@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+/*
+ * @package     Toluca_Responsivebannerslider
+ * @copyright   Copyright (c) 2023 Gamuza Technologies (https://www.gamuza.com.br/)
+ * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
+ */
+-->
+
+<config>
+    <modules>
+        <Toluca_Responsivebannerslider>
+            <version>0.0.1</version>
+        </Toluca_Responsivebannerslider>
+    </modules>
+</config>
+
