@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!--
 /*
- * @package     Toluca_Responsivebannerslider
+ * @package     Toluca_Banner
  * @copyright   Copyright (c) 2023 Gamuza Technologies (https://www.gamuza.com.br/)
  * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
  */
@@ -9,16 +9,21 @@
 
 <config>
     <modules>
-        <Toluca_Responsivebannerslider>
+        <Toluca_Banner>
             <version>0.0.1</version>
-        </Toluca_Responsivebannerslider>
+        </Toluca_Banner>
     </modules>
     <global>
+        <helpers>
+            <banner>
+                <class>Toluca_Banner_Helper</class>
+            </banner>
+        </helpers>
         <blocks>
             <responsivebannerslider>
                 <rewrite>
-                    <adminhtml_slidergroup>Toluca_Responsivebannerslider_Block_Adminhtml_Slidergroup</adminhtml_slidergroup>
-                    <adminhtml_slidergroup_grid>Toluca_Responsivebannerslider_Block_Adminhtml_Slidergroup_Grid</adminhtml_slidergroup_grid>
+                    <adminhtml_slidergroup>Toluca_Banner_Block_Adminhtml_Slidergroup</adminhtml_slidergroup>
+                    <adminhtml_slidergroup_grid>Toluca_Banner_Block_Adminhtml_Slidergroup_Grid</adminhtml_slidergroup_grid>
                 </rewrite>
             </responsivebannerslider>
         </blocks>
@@ -26,11 +31,11 @@
     <adminhtml>
         <translate>
             <modules>
-                <Toluca_Responsivebannerslider>
+                <Toluca_Banner>
                     <files>
-                        <default>Toluca_Responsivebannerslider.csv</default>
+                        <default>Toluca_Banner.csv</default>
                     </files>
-                </Toluca_Responsivebannerslider>
+                </Toluca_Banner>
             </modules>
         </translate>
     </adminhtml>

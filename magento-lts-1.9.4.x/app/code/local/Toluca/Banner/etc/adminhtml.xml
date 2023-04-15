@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!--
 /*
- * @package     Toluca_Responsivebannerslider
+ * @package     Toluca_Banner
  * @copyright   Copyright (c) 2023 Gamuza Technologies (https://www.gamuza.com.br/)
  * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
  */
@@ -12,29 +12,24 @@
         <cws>
             <disabled>1</disabled>
         </cws>
-        <toluca translate="title" module="pdv">
+        <toluca translate="title" module="banner">
             <title>Toluca</title>
             <sort_order>100</sort_order>
             <children>
-				<responsivebannerslider module="responsivebannerslider">
+				<responsivebannerslider module="banner">
 					<title>Banners</title>
 					<sort_order>70</sort_order>     
 					<children>
-						<group module="responsivebannerslider">
+						<group module="banner">
 							<title>Manage Groups</title>
 							<sort_order>0</sort_order>
 							<action>adminhtml/slidergroup</action>
 						</group>
-						<slides module="responsivebannerslider">
+						<slides module="banner">
 							<title>Manage Slides</title>
 							<sort_order>10</sort_order>
 							<action>adminhtml/slider</action>
 						</slides>
-						<settings module="responsivebannerslider">
-							<title>Settings</title>
-							<sort_order>20</sort_order>
-							<action>adminhtml/system_config/edit/section/responsivebannerslider</action> 
-						</settings>
 					</children>
 				</responsivebannerslider>
 			</children>
@@ -49,13 +44,13 @@
 				<children>
 					<toluca>
 						<children>
-							<responsivebannerslider module="responsivebannerslider">
+							<responsivebannerslider module="banner">
 								<title>Banners</title>
 								<children>
-									<group module="responsivebannerslider">
+									<group module="banner">
 										<title>Manage Groups</title>
 									</group>
-									<slides module="responsivebannerslider">
+									<slides module="banner">
 										<title>Manage Slides</title>
 									</slides>
 								</children>

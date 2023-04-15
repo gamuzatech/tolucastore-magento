@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!--
 /*
- * @package     Toluca_Responsivebannerslider
+ * @package     Toluca_Banner
  * @copyright   Copyright (c) 2023 Gamuza Technologies (https://www.gamuza.com.br/)
  * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
  */
@@ -9,13 +9,13 @@
 
 <config>
     <modules>
-        <Toluca_Responsivebannerslider>
+        <Toluca_Banner>
             <active>true</active>
             <codePool>local</codePool>
             <depends>
                 <Magebees_Responsivebannerslider />
             </depends>
-        </Toluca_Responsivebannerslider>
+        </Toluca_Banner>
     </modules>
 </config>
 
