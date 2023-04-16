@@ -53,5 +53,12 @@
             </modules>
         </translate>
     </adminhtml>
+	<default>
+		<responsivebannerslider>
+			<general>
+				<jquery>0</jquery>
+			</general>
+		</responsivebannerslider>
+	</default>
 </config>
 
