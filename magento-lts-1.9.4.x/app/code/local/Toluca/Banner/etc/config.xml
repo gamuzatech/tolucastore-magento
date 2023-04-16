@@ -53,6 +53,15 @@
             </modules>
         </translate>
     </adminhtml>
+    <frontend>
+		<layout>
+			<updates>
+				<banner>
+					<file>toluca/banner.xml</file>
+				</banner>
+			</updates>
+		</layout>
+    </frontend>
 	<default>
 		<responsivebannerslider>
 			<general>
