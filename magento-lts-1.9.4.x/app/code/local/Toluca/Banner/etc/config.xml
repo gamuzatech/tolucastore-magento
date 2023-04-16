@@ -57,6 +57,7 @@
 		<responsivebannerslider>
 			<general>
 				<jquery>0</jquery>
+                <lazy_load_jquery>0</lazy_load_jquery>
 			</general>
 		</responsivebannerslider>
 	</default>
