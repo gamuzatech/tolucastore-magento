@@ -20,9 +20,14 @@
             </banner>
         </helpers>
         <blocks>
+            <banner>
+                <class>Toluca_Banner_Block</class>
+            </banner>
             <responsivebannerslider>
                 <rewrite>
                     <adminhtml_slidergroup>Toluca_Banner_Block_Adminhtml_Slidergroup</adminhtml_slidergroup>
+                    <adminhtml_slidergroup_edit_tab_form>Toluca_Banner_Block_Adminhtml_Slidergroup_Edit_Tab_Form</adminhtml_slidergroup_edit_tab_form>
+                    <adminhtml_slidergroup_edit_tabs>Toluca_Banner_Block_Adminhtml_Slidergroup_Edit_Tabs</adminhtml_slidergroup_edit_tabs>
                     <adminhtml_slidergroup_grid>Toluca_Banner_Block_Adminhtml_Slidergroup_Grid</adminhtml_slidergroup_grid>
                 </rewrite>
             </responsivebannerslider>
