@@ -36,6 +36,13 @@
         </blocks>
     </global>
     <adminhtml>
+		<layout>
+			<updates>
+				<banner>
+					<file>toluca/banner.xml</file>
+				</banner>
+			</updates>
+		</layout>
         <translate>
             <modules>
                 <Toluca_Banner>
