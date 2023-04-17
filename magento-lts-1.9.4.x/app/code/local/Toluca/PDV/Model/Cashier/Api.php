@@ -429,9 +429,6 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         ;
 
         $cashier->setStatus (Toluca_PDV_Helper_Data::CASHIER_STATUS_CLOSED)
-            ->setSequenceId (0)
-            ->setQuoteId (0)
-            ->setCustomerId (0)
             ->setClosedAt (date ('c'))
             ->save ()
         ;
