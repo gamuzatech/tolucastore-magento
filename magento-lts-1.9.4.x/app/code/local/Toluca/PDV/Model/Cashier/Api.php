@@ -173,7 +173,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
 
         $result = Mage::app ()
             ->getLayout ()
-            ->createBlock ('adminhtml/template')
+            ->createBlock ('pdv/adminhtml_cashier_draft')
             ->setArea (Mage_Core_Model_App_Area::AREA_ADMINHTML)
             ->setOperation ($operation)
             ->setCashier ($cashier)
