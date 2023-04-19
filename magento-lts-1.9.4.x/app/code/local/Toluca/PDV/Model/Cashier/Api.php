@@ -97,12 +97,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             $result ['customer_id'] = 0;
         }
 
-        $collection = Mage::getModel ('sales/order')->getCollection ()
-            ->addFieldToFilter ('is_pdv', array ('eq' => true))
-            ->addFieldToFilter ('pdv_cashier_id', array ('eq' => $cashier->getId ()))
-            ->addFieldToFilter ('pdv_operator_id', array ('eq' => $cashier->getOperatorId ()))
-            ->addFieldToFilter ('pdv_history_id', array ('eq' => $cashier->getHistoryId ()))
-        ;
+        $collection = $this->_getOrderCollection ($cashier, $operator, $history);
 
         $collection->getSelect ()
             ->columns (array(
@@ -154,11 +149,7 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
             $this->_fault ('history_not_exists');
         }
 
-        $collection = Mage::getModel ('sales/order')->getCollection ()
-            ->addFieldToFilter ('is_pdv', array ('eq' => true))
-            ->addFieldToFilter ('pdv_cashier_id', array ('eq' => $cashier->getId ()))
-            ->addFieldToFilter ('pdv_operator_id', array ('eq' => $operator->getId ()))
-        ;
+        $collection = $this->_getOrderCollection ($cashier, $operator, $history);
 
         $collection->getSelect ()
             ->columns (array(
@@ -499,6 +490,22 @@ class Toluca_PDV_Model_Cashier_Api extends Mage_Api_Model_Resource_Abstract
         }
 
         return $cashier;
+    }
+
+    public function _getOrderCollection ($cashier, $operator, $history)
+    {
+        $collection = Mage::getModel ('sales/order')->getCollection ()
+            ->addFieldToFilter ('state', array ('in' => array (
+                Mage_Sales_Model_Order::STATE_PROCESSING,
+                Mage_Sales_Model_Order::STATE_COMPLETE,
+            )))
+            ->addFieldToFilter ('is_pdv', array ('eq' => true))
+            ->addFieldToFilter ('pdv_cashier_id', array ('eq' => $cashier->getId ()))
+            ->addFieldToFilter ('pdv_operator_id', array ('eq' => $operator->getId ()))
+            ->addFieldToFilter ('pdv_history_id', array ('eq' => $history->getId ()))
+        ;
+
+        return $collection;
     }
 }
 
