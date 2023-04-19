@@ -344,5 +344,25 @@ class Gamuza_Mobile_Model_Cart_Api extends Mage_Checkout_Model_Api_Resource
 
         return true;
     }
+
+    public function draft ($code = null, $store = null)
+    {
+        if (empty ($code))
+        {
+            $this->_fault ('customer_code_not_specified');
+        }
+
+        $quote = $this->_getCustomerQuote ($code, $store);
+
+        $result = Mage::app ()
+            ->getLayout ()
+            ->createBlock ('mobile/adminhtml_order_draft')
+            ->setArea (Mage_Core_Model_App_Area::AREA_ADMINHTML)
+            ->setOrder ($quote)
+            ->setTemplate ('gamuza/mobile/order/draft.phtml')
+            ->toHtml ();
+
+        return $result;
+    }
 }
 

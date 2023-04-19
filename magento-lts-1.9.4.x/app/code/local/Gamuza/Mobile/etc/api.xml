@@ -67,11 +67,15 @@
                         <acl>mobile/cart/order</acl>
                     </order>
                     <clear translate="title" module="mobile">
-                        <public />
                         <title>Delete quote from shopping cart</title>
                         <method>clear</method>
                         <acl>mobile/cart/clear</acl>
                     </clear>
+                    <draft translate="title" module="mobile">
+                        <title>Draft quote from shopping cart</title>
+                        <method>draft</method>
+                        <acl>mobile/cart/draft</acl>
+                    </draft>
                 </methods>
                 <faults translate="message" module="mobile">
                     <customer_not_exists>
@@ -524,6 +528,9 @@
                         <clear translate="title" module="mobile">
                             <title>Clear</title>
                         </clear>
+                        <draft translate="title" module="mobile">
+                            <title>Draft</title>
+                        </draft>
                      </cart>
                      <cart_coupon translate="title" module="mobile">
                         <title>Cart Coupon</title>
