@@ -193,6 +193,10 @@
     </frontend>
     <default>
         <pdv>
+            <cashier>
+                <include_all_orders>1</include_all_orders>
+                <show_pending_orders>1</show_pending_orders>
+            </cashier>
             <payment_method>
                 <money>cashondelivery</money>
                 <machine>machineondelivery</machine>
