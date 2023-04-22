@@ -63,6 +63,10 @@ class Gamuza_Mobile_Model_Cart_Product_Api extends Gamuza_Mobile_Model_Api_Resou
             {
                 $productByItem = $this->_getProduct($productItem['sku'], $storeId, "sku");
             }
+            else if (isset($productItem['ean']) && strlen($productItem['ean']) > 0)
+            {
+                $productByItem = $this->_getProduct($productItem['ean'], $storeId, "ean");
+            }
             else
             {
                 $errors [] = Mage::helper('checkout')->__("One item of products do not have identifier or sku");
@@ -206,6 +210,10 @@ class Gamuza_Mobile_Model_Cart_Product_Api extends Gamuza_Mobile_Model_Api_Resou
             {
                 $productByItem = $this->_getProduct($productItem['sku'], $storeId, "sku");
             }
+            else if (isset($productItem['ean']) && strlen($productItem['ean']) > 0)
+            {
+                $productByItem = $this->_getProduct($productItem['ean'], $storeId, "ean");
+            }
             else
             {
                 $errors[] = Mage::helper('checkout')->__("One item of products do not have identifier or sku");
@@ -312,6 +320,10 @@ class Gamuza_Mobile_Model_Cart_Product_Api extends Gamuza_Mobile_Model_Api_Resou
             else if (isset($productItem['sku']) && strlen($productItem['sku']) > 0)
             {
                 $productByItem = $this->_getProduct($productItem['sku'], $storeId, "sku");
+            }
+            else if (isset($productItem['ean']) && strlen($productItem['ean']) > 0)
+            {
+                $productByItem = $this->_getProduct($productItem['ean'], $storeId, "ean");
             }
             else
             {
@@ -435,6 +447,7 @@ class Gamuza_Mobile_Model_Cart_Product_Api extends Gamuza_Mobile_Model_Api_Resou
                 'quote_id'                => intval($item->getQuoteId()),
                 // Basic item data
                 'type_id'                 => $product->getTypeId(),
+                'ean'                     => $product->getEan(),
                 'sku'                     => $item->getSku(),
                 'name'                    => $item->getName(),
                 'free_shipping'           => boolval($item->getFreeShipping()),
