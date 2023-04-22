@@ -99,15 +99,19 @@ class Toluca_PDV_Block_Adminhtml_Cashier_Draft extends Mage_Adminhtml_Block_Temp
     private function _getOrderCollection ($cashier, $operator, $history)
     {
         $collection = Mage::getModel ('sales/order')->getCollection ()
-            ->addFieldToFilter ('state', array ('in' => array (
-                Mage_Sales_Model_Order::STATE_PROCESSING,
-                Mage_Sales_Model_Order::STATE_COMPLETE,
-            )))
             ->addFieldToFilter ('is_pdv', array ('eq' => true))
             ->addFieldToFilter ('pdv_cashier_id', array ('eq' => $cashier->getId ()))
             ->addFieldToFilter ('pdv_operator_id', array ('eq' => $operator->getId ()))
             ->addFieldToFilter ('pdv_history_id', array ('eq' => $history->getId ()))
         ;
+
+        if (!Mage::getStoreConfigFlag ('pdv/cashier/show_pending_orders'))
+        {
+             $collection->addFieldToFilter ('state', array ('in' => array (
+                 Mage_Sales_Model_Order::STATE_PROCESSING,
+                 Mage_Sales_Model_Order::STATE_COMPLETE,
+             )));
+        }
 
         return $collection;
     }
