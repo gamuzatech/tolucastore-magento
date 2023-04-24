@@ -7,7 +7,9 @@
 
 class Gamuza_Basic_Helper_Data extends Mage_Core_Helper_Abstract
 {
-    const DEFAULT_ADMIN_USER = 'admin';
+    const DEFAULT_ADMIN_USER  = 'tolucastoredesktop';
+    const DEFAULT_ADMIN_NAME  = 'Toluca Store Desktop';
+    const DEFAULT_ADMIN_EMAIL = 'desktop@toluca.com.br';
 
     const DEFAULT_API_USER  = 'tolucastoredesktop';
     const DEFAULT_API_NAME  = 'Toluca Store Desktop';
