@@ -43,9 +43,10 @@ $write->beginTransaction ();
 
 try
 {
-    /*
-    $write->delete ($table);
-    */
+    $collection = Mage::getResourceModel ('api/rules_collection')
+        ->getByRoles ($role->getId ())
+        ->walk ('delete');
+
     foreach ($resourcesList2D as $resource)
     {
         $row ['resource_id'] = $resource;
