@@ -19,6 +19,13 @@ class Gamuza_Basic_Model_Install_Installer extends Mage_Install_Model_Installer
 
     public static function applyAllSecurityUpdates ()
     {
+        $adminUser = Mage::getModel ('admin/user')->loadByUsername ('admin');
+
+        if ($adminUser && $adminUser->getId ())
+        {
+            $adminUser->getResource ()->save ($adminUser->setIsSystem (true));
+        }
+
         $adminUser = Mage::getModel ('admin/user')->loadByUsername (Gamuza_Basic_Helper_Data::DEFAULT_ADMIN_USER);
 
         if ($adminUser && $adminUser->getId ())
