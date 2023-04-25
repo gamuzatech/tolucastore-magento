@@ -194,8 +194,8 @@
     <default>
         <pdv>
             <cashier>
-                <include_all_orders>1</include_all_orders>
-                <show_pending_orders>1</show_pending_orders>
+                <include_all_orders>0</include_all_orders>
+                <show_pending_orders>0</show_pending_orders>
             </cashier>
             <payment_method>
                 <money>cashondelivery</money>
