@@ -217,14 +217,11 @@ foreach ($customerGroups as $id => $value)
 {
     $name = Mage::helper ('basic')->__($value);
 
-    $group = Mage::getModel ('customer/group')
-        ->load ($id)
-        ->setCode ($value)
-        ->setName ($name)
-        ->setIsSystem (true)
-        ->setTaxClassId ($tax->getId ())
-        ->save()
-    ;
+    $write->query (sprintf(
+        "UPDATE %s SET name = '%s', is_system = 1 WHERE customer_group_id = %s LIMIT 1",
+        $resource->getTablename ('customer/customer_group'),
+        $name, $id
+    ));
 }
 
 /**
