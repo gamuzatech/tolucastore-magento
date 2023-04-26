@@ -14,7 +14,7 @@ class Gamuza_Basic_Block_Adminhtml_Backup extends Mage_Adminhtml_Block_Backup
     {
         parent::_prepareLayout();
 
-        $this->unsetChild('createButton');
+        $this->unsetChild('createMediaBackupButton');
         $this->unsetChild('createSnapshotButton');
     }
 }
