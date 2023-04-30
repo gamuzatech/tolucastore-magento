@@ -16,9 +16,12 @@ class Gamuza_Autocomplete_CepController extends Mage_Core_Controller_Front_Actio
             $result = Mage::helper ('autocomplete')->cep ($q);
 
 	        $this->getResponse ()
+                ->clearHeaders ()
                 ->setHeader('Content-Type', 'application/json')
                 ->setBody ($result);
 	    }
+
+        return $this;
     }
 }
 
