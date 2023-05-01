@@ -8,21 +8,19 @@
 $installer = new Mage_Core_Model_Resource_Setup ('basic_setup');
 $installer->startSetup ();
 
-$role = Mage::getModel ('admin/roles')
-    ->load (Gamuza_Basic_Helper_Data::DEFAULT_ADMIN_NAME, 'role_name')
-    ->setName (Gamuza_Basic_Helper_Data::DEFAULT_ADMIN_NAME)
-    ->setRoleType ('G')
-    ->save ();
+$user = Mage::getModel ('admin/user')->loadByUsername ('admin');
+
+$role = Mage::getModel ('admin/roles')->load ($user->getRole ()->getId ());
 
 $resourcesList2D = Mage::getModel('admin/roles')->getResourcesList2D();
 
 $resourcesList2D = array_filter ($resourcesList2D, function($var) {
-    return !!strcmp ($var, 'all');
+    return !strcmp ($var, 'all');
 });
 
 /*
 Mage::getModel ('admin/rules')
-    ->setRoleId (1)
+    ->setRoleId ($role->getId ())
     ->setResources ($resourcesList2D)
     ->saveRel ();
 */
@@ -60,22 +58,6 @@ catch (Exception $e)
 {
     $write->rollback ();
 }
-
-$firstName = strrstr (Gamuza_Basic_Helper_Data::DEFAULT_ADMIN_NAME, ' ', true);
-$lastName  = trim (strrstr (Gamuza_Basic_Helper_Data::DEFAULT_ADMIN_NAME, ' '));
-
-$user = Mage::getModel ('admin/user')
-    ->loadByUsername (Gamuza_Basic_Helper_Data::DEFAULT_ADMIN_USER)
-    ->setUsername (Gamuza_Basic_Helper_Data::DEFAULT_ADMIN_USER)
-    ->setFirstname ($firstName)
-    ->setLastname ($lastName)
-    ->setEmail (Gamuza_Basic_Helper_Data::DEFAULT_ADMIN_EMAIL)
-    ->setApiKey (hash ('sha512', uniqid(rand (), true)))
-    ->setIsActive (true)
-    ->save ();
-
-$user->setRoleIds (array ($role->getId ()))
-    ->saveRelations ();
 
 $installer->endSetup ();
 

@@ -100,7 +100,7 @@ class Gamuza_Basic_Model_Install_Installer extends Mage_Install_Model_Installer
             $adminUser->getResource ()->save ($adminUser->setIsSystem (true));
         }
 
-        $adminUser = Mage::getModel ('admin/user')->loadByUsername (Gamuza_Basic_Helper_Data::DEFAULT_ADMIN_USER);
+        $adminUser = Mage::getModel ('admin/user')->loadByUsername (Gamuza_Basic_Helper_Data::DESKTOP_ADMIN_USER);
 
         if ($adminUser && $adminUser->getId ())
         {
