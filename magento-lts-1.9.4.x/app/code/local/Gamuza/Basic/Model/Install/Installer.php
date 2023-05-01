@@ -107,7 +107,7 @@ class Gamuza_Basic_Model_Install_Installer extends Mage_Install_Model_Installer
             $adminUser->getResource()->save($adminUser->setIsSystem(true));
         }
 
-        $apiUser = Mage::getModel ('api/user')->loadByUsername (Gamuza_Basic_Helper_Data::DEFAULT_API_USER);
+        $apiUser = Mage::getModel ('api/user')->loadByUsername (Gamuza_Basic_Helper_Data::DESKTOP_API_USER);
 
         if ($apiUser && $apiUser->getId ())
         {

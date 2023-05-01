@@ -9,8 +9,8 @@ $installer = new Mage_Core_Model_Resource_Setup ('basic_setup');
 $installer->startSetup ();
 
 $role = Mage::getModel('api/roles')
-    ->load(Gamuza_Basic_Helper_Data::DEFAULT_API_NAME, 'role_name')
-    ->setName(Gamuza_Basic_Helper_Data::DEFAULT_API_NAME)
+    ->load(Gamuza_Basic_Helper_Data::DESKTOP_API_NAME, 'role_name')
+    ->setName(Gamuza_Basic_Helper_Data::DESKTOP_API_NAME)
     ->setRoleType('G')
     ->save();
 
@@ -61,15 +61,15 @@ catch (Exception $e)
     $write->rollback ();
 }
 
-$firstName = strrstr(Gamuza_Basic_Helper_Data::DEFAULT_API_NAME, ' ', true);
-$lastName  = trim(strrstr(Gamuza_Basic_Helper_Data::DEFAULT_API_NAME, ' '));
+$firstName = strrstr(Gamuza_Basic_Helper_Data::DESKTOP_API_NAME, ' ', true);
+$lastName  = trim(strrstr(Gamuza_Basic_Helper_Data::DESKTOP_API_NAME, ' '));
 
 $user = Mage::getModel('api/user')
-    ->loadByUsername(Gamuza_Basic_Helper_Data::DEFAULT_API_USER)
-    ->setUsername(Gamuza_Basic_Helper_Data::DEFAULT_API_USER)
+    ->loadByUsername(Gamuza_Basic_Helper_Data::DESKTOP_API_USER)
+    ->setUsername(Gamuza_Basic_Helper_Data::DESKTOP_API_USER)
     ->setFirstname($firstName)
     ->setLastname($lastName)
-    ->setEmail(Gamuza_Basic_Helper_Data::DEFAULT_API_EMAIL)
+    ->setEmail(Gamuza_Basic_Helper_Data::DESKTOP_API_EMAIL)
     ->setApiKey(hash('sha512', uniqid(rand(), true)))
     ->setIsActive(true)
     ->save();
