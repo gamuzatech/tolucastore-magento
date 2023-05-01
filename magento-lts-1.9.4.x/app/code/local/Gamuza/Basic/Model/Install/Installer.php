@@ -30,7 +30,7 @@ class Gamuza_Basic_Model_Install_Installer extends Mage_Install_Model_Installer
         $resourcesList2D = Mage::getModel ('admin/roles')->getResourcesList2D ();
 
         $resourcesList2D = array_filter ($resourcesList2D, function ($var) {
-            return !strcmp ($var, 'all');
+            return !!strcmp ($var, 'all');
         });
 
         /*
@@ -44,7 +44,7 @@ class Gamuza_Basic_Model_Install_Installer extends Mage_Install_Model_Installer
             'role_id'     => $role->getId (),
             'resource_id' => 'all',
             'role_type'   => 'G',
-            'permission'  => 'allow'
+            'permission'  => 'deny'
         );
 
         $resource = Mage::getSingleton ('core/resource');
