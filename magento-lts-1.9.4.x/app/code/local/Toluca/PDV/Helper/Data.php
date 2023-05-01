@@ -7,9 +7,9 @@
 
 class Toluca_PDV_Helper_Data extends Mage_Core_Helper_Abstract
 {
-    const DEFAULT_API_USER  = 'tolucastorepdv';
-    const DEFAULT_API_NAME  = 'Toluca Store PDV';
-    const DEFAULT_API_EMAIL = 'pdv@toluca.com.br';
+    const PDV_API_USER  = 'tolucastorepdv';
+    const PDV_API_NAME  = 'Toluca Store PDV';
+    const PDV_API_EMAIL = 'pdv@toluca.com.br';
 
     const CASHIER_TABLE  = 'toluca_pdv_cashier';
     const OPERATOR_TABLE = 'toluca_pdv_operator';
