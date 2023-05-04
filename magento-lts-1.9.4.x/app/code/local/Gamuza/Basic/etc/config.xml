@@ -702,7 +702,7 @@
                 <disable>1</disable>
             </smtp>
             <log>
-                <enable_log>2</enable_log>
+                <enable_log>1</enable_log>
             </log>
             <adminnotification>
                 <feed_url>www.toluca.com.br/media/sitemap/notifications.rss</feed_url>
