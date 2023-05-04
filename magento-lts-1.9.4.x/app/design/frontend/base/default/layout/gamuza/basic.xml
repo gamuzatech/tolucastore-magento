@@ -36,8 +36,26 @@
 
             <action method="appendItem">
                 <type>skin_css</type>
+                <name>css/bootstrap-5.3.0/bootstrap.min.css</name>
+                <params>media="all"</params>
+            </action>
+
+            <action method="appendItem">
+                <type>skin_css</type>
+                <name>css/bootstrap-5.3.0/bootstrap.rtl.min.css</name>
+                <params>media="all"</params>
+            </action>
+
+            <action method="appendItem">
+                <type>skin_css</type>
                 <name>css/gamuza/basic.css</name>
                 <params>media="all"</params>
+            </action>
+
+            <action method="appendItem">
+                <type>skin_js</type>
+                <name>js/bootstrap-5.3.0/bootstrap.bundle.min.js</name>
+                <params />
             </action>
 
             <!--
