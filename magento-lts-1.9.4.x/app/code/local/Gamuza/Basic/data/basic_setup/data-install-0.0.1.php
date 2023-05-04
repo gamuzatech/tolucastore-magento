@@ -178,6 +178,7 @@ $reportLayoutUpdate = <<< REPORT_LAYOUT_UPDATE
 REPORT_LAYOUT_UPDATE;
 
 $cms->setLayoutUpdateXml($reportLayoutUpdate)
+    ->setRootTemplate('one_column')
     ->setContent($homepageContent)
     ->setTitle($homepageTitle)
     ->save();
