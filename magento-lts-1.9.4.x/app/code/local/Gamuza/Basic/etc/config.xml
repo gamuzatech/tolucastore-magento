@@ -56,6 +56,11 @@
                     <widget_grid_column>Gamuza_Basic_Block_Adminhtml_Widget_Grid_Column</widget_grid_column>
                 </rewrite>
             </adminhtml>
+            <checkout>
+                <rewrite>
+                    <cart_shipping>Gamuza_Basic_Block_Checkout_Cart_Shipping</cart_shipping>
+                </rewrite>
+            </checkout>
             <customer>
                 <rewrite>
                     <account_navigation>Gamuza_Basic_Block_Customer_Account_Navigation</account_navigation>
