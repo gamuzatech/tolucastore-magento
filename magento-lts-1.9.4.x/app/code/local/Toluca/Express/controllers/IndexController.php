@@ -1,7 +1,7 @@
 <?php
 /**
- * @package     Gamuza_Basic
- * @copyright   Copyright (c) 2022 Gamuza Technologies (http://www.gamuza.com.br/)
+ * @package     Toluca_Express
+ * @copyright   Copyright (c) 2023 Gamuza Technologies (https://www.gamuza.com.br/)
  * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
  */
 
@@ -10,7 +10,7 @@ require_once (Mage::getModuleDir ('controllers', 'Mage_Catalog') . DS . 'Categor
 /**
  * Express controller
  */
-class Gamuza_Basic_ExpressController extends Mage_Catalog_CategoryController
+class Toluca_Express_IndexController extends Mage_Catalog_CategoryController
 {
     public const TREE_ROOT_ID = Mage_Catalog_Model_Category::TREE_ROOT_ID;
 
@@ -28,7 +28,7 @@ class Gamuza_Basic_ExpressController extends Mage_Catalog_CategoryController
      */
     protected function _initCategory()
     {
-        if (!Mage::getStoreConfigFlag(Gamuza_Basic_Helper_Data::XML_PATH_CATALOG_EXPRESS_ACTIVE))
+        if (!Mage::getStoreConfigFlag(Toluca_Express_Helper_Data::XML_PATH_EXPRESS_SETTING_ACTIVE))
         {
             return false;
         }

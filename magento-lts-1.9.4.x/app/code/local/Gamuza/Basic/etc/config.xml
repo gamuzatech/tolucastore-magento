@@ -451,15 +451,6 @@
         </events>
     </adminhtml>
     <frontend>
-        <routers>
-            <basic_express>
-                <use>standard</use>
-                <args>
-                    <module>Gamuza_Basic</module>
-                    <frontName>express</frontName>
-                </args>
-            </basic_express>
-        </routers>
         <translate>
             <modules>
                 <Gamuza_Basic>
@@ -506,12 +497,6 @@
                 <use_frontend_sid>0</use_frontend_sid>
                 <use_admin_sid>1</use_admin_sid>
             </session>
-            <routers>
-                <basic_express>
-                    <area>frontend</area>
-                    <class>Gamuza_Basic_Controller_Router_Express</class>
-                </basic_express>
-            </routers>
         </web>
         <design>
             <head>
@@ -547,9 +532,6 @@
                 <date_fields_order><![CDATA[d,m,y]]></date_fields_order>
                 <time_format>24h</time_format>
             </custom_options>
-            <express>
-                <active>1</active>
-            </express>
         </catalog>
         <cataloginventory>
             <options>

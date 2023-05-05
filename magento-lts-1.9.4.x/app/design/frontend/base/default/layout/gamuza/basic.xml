@@ -48,7 +48,7 @@
 
             <action method="appendItem">
                 <type>skin_css</type>
-                <name>css/gamuza/basic.css</name>
+                <name>css/gamuza/basic/styles.css</name>
                 <params>media="all"</params>
             </action>
 
