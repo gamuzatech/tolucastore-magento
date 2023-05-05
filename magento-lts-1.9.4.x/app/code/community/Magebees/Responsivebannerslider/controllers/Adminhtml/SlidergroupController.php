@@ -113,7 +113,7 @@ class Magebees_Responsivebannerslider_Adminhtml_SlidergroupController extends Ma
 
                 $cmspages = $model->getData('pages');
                 if(isset($cmspages)) {
-                    if(count($model->getData('pages') > 0)) {
+                    if(count($model->getData('pages')) > 0) {
                         foreach($model->getData('pages') as $pages)    {
                             $data_page['slidergroup_id'] = $model->getData('slidergroup_id');
                             $data_page['pages'] = $pages;
