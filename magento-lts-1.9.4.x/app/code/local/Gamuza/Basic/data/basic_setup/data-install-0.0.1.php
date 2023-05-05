@@ -186,7 +186,7 @@ $cms->setLayoutUpdateXml($reportLayoutUpdate)
 /**
  * Design
  */
-$coreConfig->saveConfig ('design/header/welcome', Mage::helper ('page')->__('Default welcome msg!'));
+$coreConfig->saveConfig ('design/header/welcome', Mage::helper ('basic')->__('Welcome!'));
 
 $copyright = Mage::helper ('basic')->__('Toluca Store&trade; is a trademark of Gamuza Technologies.') . '<br/>'
     . Mage::helper ('basic')->__('Copyright &copy; %s Gamuza Technologies. All rights reserved.', date('Y'));
