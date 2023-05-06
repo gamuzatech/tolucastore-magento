@@ -10,7 +10,7 @@ class Toluca_Express_Controller_Router_Express
 {
     public function match (Zend_Controller_Request_Http $request)
     {
-        if (!strcmp ($request->getPathInfo (), '/express'))
+        if (strpos ($request->getPathInfo (), '/express') !== false)
         {
             $request->setModuleName ('express')
                 ->setControllerName ('index')
