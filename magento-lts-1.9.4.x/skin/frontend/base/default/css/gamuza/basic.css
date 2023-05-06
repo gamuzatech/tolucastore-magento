@@ -1,0 +1,197 @@
+/**
+ * @package     Gamuza_Basic
+ * @copyright   Copyright (c) 2016 Gamuza Technologies. (http://www.gamuza.com.br/)
+ * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
+ */
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+address.copyright {
+    color: #636363;
+    font-size: 12.9px;
+}
+
+header.header.sticky.mm-slideout {
+    display: none;
+}
+
+input[type=email],
+input[type=search],
+input[type=number],
+input[type=password],
+input[type=tel],
+input[type=text] {
+    height: auto;
+    padding: .375rem .75rem;
+}
+
+ol, ul {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.add-to-links {
+    display: none;
+}
+
+.button2 span, .button2 span span {
+    text-decoration: none;
+}
+
+.cart-forms {
+    float: left;
+}
+
+.cart-table {
+    width: 100%;
+}
+
+.cart-table .cart-links > li {
+    padding: 5px;
+}
+
+.cart-table .product-cart-actions .button {
+    display: inline-block;
+}
+
+.cart-table .product-cart-actions .qty {
+    float: left;
+    height: auto;
+}
+
+.customer-account-login .col2-set .col-1 ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.header-language-background {
+    background-color: #54217c;
+}
+
+.footer .block-subscribe .actions .button {
+    width: 100%;
+}
+
+.form-list .control label,
+.sp-methods dt label,
+#checkout-shipping-method-load .sp-methods dd label,
+#co-shipping-method-form .sp-methods dd label,
+.product-options ul.options-list label {
+    background-color: transparent;
+}
+
+.form-list .control label:hover,
+.sp-methods dt label:hover,
+#checkout-shipping-method-load .sp-methods dd label:hover,
+#co-shipping-method-form .sp-methods dd label:hover,
+.product-options ul.options-list label:hover {
+    background-color: transparent;
+}
+
+.form-list .customer-dob .dob-month,
+.form-list .customer-dob .dob-day {
+    width: 50px;
+}
+
+.header-minicart .info-wrapper .qty {
+    display: inline-block;
+    height: auto;
+}
+
+.logo {
+    padding: 10px 0 10px 0;
+    width: 100%;
+}
+
+.logo .large {
+    max-height: 115px;
+}
+
+.logo .small {
+    margin: 0 auto;
+    max-height: 115px;
+}
+
+.pager > .count-container {
+    min-height: 50px;
+}
+
+.pager > .count-container > .limiter > select {
+    float: right;
+    width: auto;
+}
+
+.product-view .add-to-links {
+    display: unset;
+}
+
+.product-options dd .qty-holder .qty {
+    display: inline-block;
+}
+
+.nav-primary {
+    margin-top: 0;
+}
+
+.shipping select,
+.shipping .form-list input {
+    height: auto;
+}
+
+.shipping .form-list .shipping-postcode {
+    width: auto;
+}
+
+.shipping #co-shipping-method-form .sp-methods dd label {
+    background-color: transparent;
+    border: transparent;
+}
+
+.shipping #co-shipping-method-form .sp-methods dd label:hover {
+    background-color: transparent;
+    border: transparent;
+}
+
+.sorter > .sort-by > select {
+    float: left;
+    width: auto;
+}
+
+#discount-coupon-form label,
+.cart .giftcard label {
+    margin-top: 10px;
+    vertical-align: top;
+}
+
+#somediv {
+    display: table;
+}
+
+@media only screen and (min-width: 771px) {
+    .nav-primary a.level0 {
+        padding-left: 0;
+    }
+}
+
+@media only screen and (max-width: 770px) {
+    .header-minicart .minicart-actions .cart-link {
+        bottom: 15px;
+    }
+}
+
+@media only screen and (max-width: 979px) {
+    .col2-left-layout .sorter,
+    .col2-left-layout .pager,
+    .col2-right-layout .sorter,
+    .col2-right-layout .pager,
+    .col3-layout .sorter, .col3-layout .pager {
+        width: auto;
+    }
+}
+

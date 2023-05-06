@@ -48,13 +48,19 @@
 
             <action method="appendItem">
                 <type>skin_css</type>
-                <name>css/gamuza/basic/styles.css</name>
+                <name>css/gamuza/basic.css</name>
                 <params>media="all"</params>
             </action>
 
             <action method="appendItem">
                 <type>skin_js</type>
                 <name>js/bootstrap-5.3.0/bootstrap.bundle.min.js</name>
+                <params />
+            </action>
+
+            <action method="appendItem">
+                <type>skin_js</type>
+                <name>js/gamuza/basic.js</name>
                 <params />
             </action>
 
