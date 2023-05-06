@@ -173,12 +173,6 @@ ol, ul {
     display: table;
 }
 
-@media only screen and (min-width: 771px) {
-    .nav-primary a.level0 {
-        padding-left: 0;
-    }
-}
-
 @media only screen and (max-width: 770px) {
     .header-minicart .minicart-actions .cart-link {
         bottom: 15px;
@@ -192,6 +186,12 @@ ol, ul {
     .col2-right-layout .pager,
     .col3-layout .sorter, .col3-layout .pager {
         width: auto;
+    }
+}
+
+@media only screen and (min-width: 771px) {
+    .nav-primary a.level0 {
+        padding-left: 0;
     }
 }
 
