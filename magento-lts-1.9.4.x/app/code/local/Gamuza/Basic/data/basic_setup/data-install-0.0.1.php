@@ -100,11 +100,15 @@ $installer->updateAttribute ('customer', 'dob',    'is_visible', '0');
 $installer->updateAttribute ('customer', 'taxvat', 'is_visible', '0');
 $installer->updateAttribute ('customer', 'gender', 'is_visible', '0');
 
+$installer->updateAttribute ('customer_address', 'prefix',     'is_visible',      '0');
 $installer->updateAttribute ('customer_address', 'middlename', 'is_visible',      '0');
-$installer->updateAttribute ('customer_address', 'company',    'is_visible',      '1');
+$installer->updateAttribute ('customer_address', 'suffix',     'is_visible',      '0');
+$installer->updateAttribute ('customer_address', 'company',    'is_visible',      '0');
 $installer->updateAttribute ('customer_address', 'street',     'multiline_count', '4');
 $installer->updateAttribute ('customer_address', 'region_id',  'is_required',     '1');
+$installer->updateAttribute ('customer_address', 'telephone',  'is_visible',      '0');
 $installer->updateAttribute ('customer_address', 'telephone',  'is_required',     '0');
+$installer->updateAttribute ('customer_address', 'fax',        'is_visible',      '0');
 $installer->updateAttribute ('customer_address', 'fax',        'is_required',     '0');
 
 /**
