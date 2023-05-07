@@ -41,12 +41,15 @@
             <ul>
                 <li class="fields"><?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getAddress()->getFirstname() ? $this->getAddress() : $this->getQuote()->getCustomer())->setForceUseCustomerRequiredAttributes(!$this->isCustomerLoggedIn())->setFieldIdFormat('billing:%s')->setFieldNameFormat('billing[%s]')->toHtml() ?></li>
                 <li class="fields">
+        <?php $_company = $this->getLayout()->createBlock('basic/customer_widget_company') ?>
+        <?php if ($_company->isEnabled()): ?>
                     <div class="field">
                         <label for="billing:company"><?php echo $this->__('Company') ?></label>
                         <div class="input-box">
                             <input type="text" id="billing:company" name="billing[company]" value="<?php echo $this->escapeHtml($this->getAddress()->getCompany()) ?>" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Company')) ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('company') ?>" />
                         </div>
                     </div>
+        <?php endif ?>
         <?php if(!$this->isCustomerLoggedIn()): ?>
                     <div class="field">
                         <label for="billing:email" class="required"><em>*</em><?php echo $this->__('Email Address') ?></label>
@@ -112,6 +115,9 @@
                         <label for="billing:postcode" class="required"><em>*</em><?php echo $this->__('Zip/Postal Code') ?></label>
                         <div class="input-box">
                             <input type="text" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Zip/Postal Code')) ?>" name="billing[postcode]" id="billing:postcode" value="<?php echo $this->escapeHtml($this->getAddress()->getPostcode()) ?>" class="input-text validate-zip-international <?php echo $this->helper('customer/address')->getAttributeValidationClass('postcode') ?>" />
+                            <p class="form-instructions">
+                                <?php echo $this->__('Enter your zipcode and we will complete the address for you.') ?>
+                            </p>
                         </div>
                     </div>
                 </li>
@@ -193,18 +199,24 @@
                             <input type="text" name="billing[cellphone]" value="<?php echo $this->escapeHtml($this->getAddress()->getCellphone()) ?>" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Cellphone')) ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('cellphone') ?>" id="billing:cellphone" />
                         </div>
                     </div>
+                    <?php $_telephone = $this->getLayout()->createBlock('basic/customer_widget_telephone') ?>
+                    <?php if ($_telephone->isEnabled()): ?>
                     <div class="field">
                         <label for="billing:telephone"><?php echo $this->__('Telephone') ?></label>
                         <div class="input-box">
                             <input type="text" name="billing[telephone]" value="<?php echo $this->escapeHtml($this->getAddress()->getTelephone()) ?>" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Telephone')) ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('telephone') ?>" id="billing:telephone" />
                         </div>
                     </div>
+                    <?php endif ?>
+                    <?php $_fax = $this->getLayout()->createBlock('basic/customer_widget_fax') ?>
+                    <?php if ($_fax->isEnabled()): ?>
                     <div class="field">
                         <label for="billing:fax"><?php echo $this->__('Fax') ?></label>
                         <div class="input-box">
                             <input type="text" name="billing[fax]" value="<?php echo $this->escapeHtml($this->getAddress()->getFax()) ?>" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Fax')) ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('fax') ?>" id="billing:fax" />
                         </div>
                     </div>
+                    <?php endif ?>
                 </li>
                 <?php if ($this->isCustomerLoggedIn() && $this->customerHasAddresses()):?>
                     <li class="control">

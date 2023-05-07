@@ -26,6 +26,10 @@ address.copyright {
     font-size: 12.9px;
 }
 
+form .form-instructions {
+    color: black;
+}
+
 h2.product-name a:focus,
 h3.product-name a:focus,
 h4.product-name a:focus,

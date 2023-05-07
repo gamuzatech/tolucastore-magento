@@ -40,6 +40,8 @@
                 <ul>
                     <li class="fields"><?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getAddress())->setFieldIdFormat('shipping:%s')->setFieldNameFormat('shipping[%s]')->setFieldParams('onchange="shipping.setSameAsBilling(false)"')->toHtml() ?></li>
                     <li class="fields">
+            <?php $_company = $this->getLayout()->createBlock('basic/customer_widget_company') ?>
+            <?php if ($_company->isEnabled()): ?>
                         <div class="fields">
                             <label for="shipping:company"><?php echo $this->__('Company') ?></label>
                             <div class="input-box">
@@ -47,11 +49,15 @@
                             </div>
                         </div>
                     </li>
+            <?php endif ?>
                     <li class="fields">
                         <div class="field">
                             <label for="shipping:postcode" class="required"><em>*</em><?php echo $this->__('Zip/Postal Code') ?></label>
                             <div class="input-box">
                                 <input type="text" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Zip/Postal Code')) ?>" name="shipping[postcode]" id="shipping:postcode" value="<?php echo $this->escapeHtml($this->getAddress()->getPostcode()) ?>" class="input-text validate-zip-international <?php echo $this->helper('customer/address')->getAttributeValidationClass('postcode') ?>" onchange="shipping.setSameAsBilling(false);" />
+                                <p class="form-instructions">
+                                    <?php echo $this->__('Enter your zipcode and we will complete the address for you.') ?>
+                                </p>
                             </div>
                         </div>
                     </li>
@@ -133,12 +139,17 @@
                                 <input type="text" name="shipping[cellphone]" value="<?php echo $this->escapeHtml($this->getAddress()->getCellphone()) ?>" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Cellphone')) ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('cellphone') ?>" id="shipping:cellphone" onchange="shipping.setSameAsBilling(false);" />
                             </div>
                         </div>
+                <?php $_telephone = $this->getLayout()->createBlock('basic/customer_widget_telephone') ?>
+                <?php if ($_telephone->isEnabled()): ?>
                         <div class="field">
                             <label for="shipping:telephone"><?php echo $this->__('Telephone') ?></label>
                             <div class="input-box">
                                 <input type="text" name="shipping[telephone]" value="<?php echo $this->escapeHtml($this->getAddress()->getTelephone()) ?>" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Telephone')) ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('telephone') ?>" id="shipping:telephone" onchange="shipping.setSameAsBilling(false);" />
                             </div>
                         </div>
+                <?php endif ?>
+                <?php $_fax = $this->getLayout()->createBlock('basic/customer_widget_fax') ?>
+                <?php if ($_fax->isEnabled()): ?>
                         <div class="field">
                             <label for="shipping:fax"><?php echo $this->__('Fax') ?></label>
                             <div class="input-box">
@@ -146,6 +157,7 @@
                             </div>
                         </div>
                     </li>
+                <?php endif ?>
                 <?php if ($this->isCustomerLoggedIn() && $this->customerHasAddresses()):?>
                     <li class="control">
                         <input type="checkbox" name="shipping[save_in_address_book]" value="1" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Save in address book')) ?>" id="shipping:save_in_address_book" onchange="shipping.setSameAsBilling(false);"<?php if ($this->getAddress()->getSaveInAddressBook()):?> checked="checked"<?php endif ?> class="checkbox" /><label for="shipping:save_in_address_book"><?php echo $this->__('Save in address book') ?></label></li>
