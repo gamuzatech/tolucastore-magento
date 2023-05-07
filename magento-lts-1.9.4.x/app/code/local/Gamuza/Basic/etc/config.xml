@@ -557,10 +557,9 @@
             </password>
             <address>
                 <street_lines>4</street_lines>
+                <prefix_show>0</prefix_show>
                 <middlename_show>0</middlename_show>
-                <dob_show>opt</dob_show>
-                <taxvat_show>opt</taxvat_show>
-                <gender_show>opt</gender_show>
+                <suffix_show>0</suffix_show>
             </address>
             <address_templates>
                 <text>{{depend prefix}}{{var prefix}} {{/depend}}{{var firstname}} {{depend middlename}}{{var middlename}} {{/depend}}{{var lastname}}{{depend suffix}} {{var suffix}}{{/depend}}

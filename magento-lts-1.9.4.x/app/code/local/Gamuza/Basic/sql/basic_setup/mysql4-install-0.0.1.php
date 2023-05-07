@@ -73,10 +73,13 @@ $coreConfig->saveConfig ('customer/online_customers/online_minutes_interval', '1
 $coreConfig->saveConfig ('customer/password/require_admin_user_to_change_user_password', '0');
 
 $coreConfig->saveConfig ('customer/address/street_lines',    '4');
+$coreConfig->saveConfig ('customer/address/prefix_show',     '0');
 $coreConfig->saveConfig ('customer/address/middlename_show', '0');
-$coreConfig->saveConfig ('customer/address/dob_show',        'opt');
-$coreConfig->saveConfig ('customer/address/taxvat_show',     'opt');
-$coreConfig->saveConfig ('customer/address/gender_show',     'opt');
+$coreConfig->saveConfig ('customer/address/suffix_show',     '0');
+
+$coreConfig->deleteConfig ('customer/address/dob_show');
+$coreConfig->deleteConfig ('customer/address/taxvat_show');
+$coreConfig->deleteConfig ('customer/address/gender_show');
 
 /**
  * Wishlist

@@ -92,7 +92,13 @@ $rootCategory = Mage::getModel ('catalog/category')->load ($rootCategoryId)
 $installer = new Mage_Customer_Model_Resource_Setup ('basic_setup');
 $installer->startSetup ();
 
+$installer->updateAttribute ('customer', 'prefix',     'is_visible', '0');
 $installer->updateAttribute ('customer', 'middlename', 'is_visible', '0');
+$installer->updateAttribute ('customer', 'suffix',     'is_visible', '0');
+
+$installer->updateAttribute ('customer', 'dob',    'is_visible', '0');
+$installer->updateAttribute ('customer', 'taxvat', 'is_visible', '0');
+$installer->updateAttribute ('customer', 'gender', 'is_visible', '0');
 
 $installer->updateAttribute ('customer_address', 'middlename', 'is_visible',      '0');
 $installer->updateAttribute ('customer_address', 'company',    'is_visible',      '1');
