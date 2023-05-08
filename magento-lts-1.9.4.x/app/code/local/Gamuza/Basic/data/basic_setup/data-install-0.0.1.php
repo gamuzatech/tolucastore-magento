@@ -219,7 +219,7 @@ $cms = Mage::getModel('cms/block')
     ->setTitle($footerlinksTitle)
     ->setContent($footerlinksContent)
     ->setStores(array(Mage_Core_Model_App::ADMIN_STORE_ID))
-    ->setIsActive(true)
+    ->setIsActive(false)
     ->save();
 
 /**
