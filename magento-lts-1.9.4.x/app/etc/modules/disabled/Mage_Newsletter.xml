@@ -8,7 +8,7 @@
  * It is also available at https://opensource.org/license/afl-3-0-php
  *
  * @category   Mage
- * @package    Mage_CatalogInventory
+ * @package    Mage_Newsletter
  * @copyright  Copyright (c) 2006-2020 Magento, Inc. (https://www.magento.com)
  * @copyright  Copyright (c) 2022 The OpenMage Contributors (https://www.openmage.org)
  * @license    https://opensource.org/licenses/afl-3.0.php Academic Free License (AFL 3.0)
@@ -16,12 +16,15 @@
 -->
 <config>
     <modules>
-        <Mage_CatalogInventory>
+        <Mage_Newsletter>
             <active>true</active>
             <codePool>core</codePool>
             <depends>
-                <Mage_Catalog/>
+                <Mage_Core/>
+                <Mage_Customer/>
+                <Mage_Eav/>
+                <Mage_Widget/>
             </depends>
-        </Mage_CatalogInventory>
+        </Mage_Newsletter>
     </modules>
 </config>
