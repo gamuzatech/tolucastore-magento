@@ -94,6 +94,17 @@ ol, ul {
     text-decoration: none;
 }
 
+.cart .cart-totals table tfoot strong {
+    color: black;
+    font-weight: normal;
+}
+
+.cart .cart-totals table tfoot strong span,
+.cart .cart-totals table tfoot span.price {
+    color: black;
+    font-weight: bold;
+}
+
 .cart-forms {
     float: left;
 }

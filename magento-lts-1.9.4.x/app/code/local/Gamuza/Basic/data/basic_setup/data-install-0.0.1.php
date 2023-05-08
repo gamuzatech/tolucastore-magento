@@ -153,12 +153,14 @@ $oldEnvironment = $emulation->startEnvironmentEmulation(
 /** @var Mage_Cms_Model_Page $cms */
 $cms = Mage::getModel('cms/page')->load('home', 'identifier');
 
-$homepageTitle = Mage::helper ('page')->__('Home Page');
+$homepageTitle = Mage::helper ('page')->__('Toluca Store');
 
 $homepageContent = <<< HOMEPAGE_CONTENT
+<!--
 <div class="page-title">
 <h2>{$homepageTitle}</h2>
 </div>
+-->
 HOMEPAGE_CONTENT;
 
 $reportLayoutUpdate = <<< REPORT_LAYOUT_UPDATE
@@ -191,6 +193,33 @@ $cms->setLayoutUpdateXml($reportLayoutUpdate)
     ->setRootTemplate('one_column')
     ->setContent($homepageContent)
     ->setTitle($homepageTitle)
+    ->save();
+
+/**
+ * Cms Block with 'home' identifier
+ */
+
+$footerlinksCompany = Mage::helper ('page')->__('Company');
+$footerlinksContact = Mage::helper ('page')->__('Contact Us');
+$footerlinksTitle   = Mage::helper ('page')->__('Footer Links Contact');
+
+$footerlinksContent = <<< FOOTER_LINKS_CONTENT
+<div class="links">
+<div class="block-title"><strong><span>{$footerlinksCompany}</span></strong></div>
+<ul>
+<li><a href="{{store url=""}}contacts/">{$footerlinksContact}</a></li>
+</ul>
+</div>
+FOOTER_LINKS_CONTENT;
+
+/** @var Mage_Cms_Model_Block $cms */
+$cms = Mage::getModel('cms/block')
+    ->load('footer_links_contact', 'identifier')
+    ->setIdentifier('footer_links_contact')
+    ->setTitle($footerlinksTitle)
+    ->setContent($footerlinksContent)
+    ->setStores(array(Mage_Core_Model_App::ADMIN_STORE_ID))
+    ->setIsActive(true)
     ->save();
 
 /**

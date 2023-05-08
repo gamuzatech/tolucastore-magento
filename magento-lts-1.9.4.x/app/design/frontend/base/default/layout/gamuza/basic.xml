@@ -74,9 +74,14 @@
             -->
             <block type="basic/page_html_head" name="open_graph" template="gamuza/basic/page/html/opengraph.phtml"/>
         </reference>
+
         <reference name="top.links">
             <action method="addLink" translate="label title" module="customer"><label>My Addresses</label><url>/customer/address/</url><title>My Addresses</title><prepare/><urlParams/><position>20</position></action>
             <action method="addLink" translate="label title" module="sales"><label>My Orders</label><url>/sales/order/history</url><title>My Orders</title><prepare/><urlParams/><position>30</position></action>
+        </reference>
+
+        <reference name="cms_footer_links">
+            <action method="setBlockId"><block_id>footer_links_contact</block_id></action>
         </reference>
     </default>
 
