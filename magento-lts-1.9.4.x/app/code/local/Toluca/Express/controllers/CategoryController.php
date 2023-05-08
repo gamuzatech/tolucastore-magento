@@ -10,7 +10,7 @@ require_once (Mage::getModuleDir ('controllers', 'Mage_Catalog') . DS . 'Categor
 /**
  * Express controller
  */
-class Toluca_Express_IndexController extends Mage_Catalog_CategoryController
+class Toluca_Express_CategoryController extends Mage_Catalog_CategoryController
 {
     public const TREE_ROOT_ID = Mage_Catalog_Model_Category::TREE_ROOT_ID;
 

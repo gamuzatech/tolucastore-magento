@@ -13,7 +13,7 @@ class Toluca_Express_Controller_Router_Express
         if (strpos ($request->getPathInfo (), '/express') !== false)
         {
             $request->setModuleName ('express')
-                ->setControllerName ('index')
+                ->setControllerName ('category')
                 ->setActionName ('view');
 
             return true;
