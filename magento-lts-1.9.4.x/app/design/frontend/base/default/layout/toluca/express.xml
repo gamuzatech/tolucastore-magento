@@ -8,10 +8,10 @@
 -->
 
 <layout>
-    <toluca_express_index_view>
+    <toluca_express_category_view>
         <reference name="root">
             <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
         </reference>
-    </toluca_express_index_view>
+    </toluca_express_category_view>
 </layout>
 

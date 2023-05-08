@@ -16,7 +16,12 @@ class Toluca_Express_CategoryController extends Mage_Catalog_CategoryController
 
     public function renderLayout($output = '')
     {
-        $this->getLayout()->getBlock('head')->setTitle($this->__('Express'));
+        $this->getLayout()->getBlock('head')->setTitle(
+            sprintf('%s - %s',
+                Mage::getStoreConfig(Mage_Core_Model_Store::XML_PATH_STORE_STORE_NAME),
+                $this->__('Express')
+            )
+        );
 
         return parent::renderLayout($output);
     }
@@ -53,6 +58,10 @@ class Toluca_Express_CategoryController extends Mage_Catalog_CategoryController
         if (!$category || !$category->getId() || !$category->getIsActive())
         {
             return false;
+        }
+        else
+        {
+            $category->setName('Express');
         }
 
 /*
