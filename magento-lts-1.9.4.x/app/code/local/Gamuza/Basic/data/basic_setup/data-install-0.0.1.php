@@ -172,7 +172,14 @@ $reportLayoutUpdate = <<< REPORT_LAYOUT_UPDATE
             <template>bundle/catalog/product/price.phtml</template>
         </action>
     </block>
-    <block type="reports/product_viewed" name="home.reports.product.viewed" alias="product_viewed" template="reports/home_product_viewed.phtml" after="product_new">
+    <block type="basic/catalog_product_category" name="home.catalog.product.category" alias="product_category" template="gamuza/basic/catalog/product/category.phtml" after="product_new">
+        <action method="addPriceBlockType">
+            <type>bundle</type>
+            <block>bundle/catalog_product_price</block>
+            <template>bundle/catalog/product/price.phtml</template>
+        </action>
+    </block>
+    <block type="reports/product_viewed" name="home.reports.product.viewed" alias="product_viewed" template="reports/home_product_viewed.phtml" after="product_category">
         <action method="addPriceBlockType">
             <type>bundle</type>
             <block>bundle/catalog_product_price</block>

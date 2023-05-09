@@ -17,6 +17,7 @@ class Gamuza_Basic_Helper_Data extends Mage_Core_Helper_Abstract
 
     const BASIC_ORDER_SERVICE_TABLE = 'basic_order_service';
 
+    const CATEGORY_ATTRIBUTE_INCLUDE_IN_HOME = 'include_in_home';
     const CATEGORY_ATTRIBUTE_CODE = 'code';
     const CATEGORY_ATTRIBUTE_SKU = 'sku';
 

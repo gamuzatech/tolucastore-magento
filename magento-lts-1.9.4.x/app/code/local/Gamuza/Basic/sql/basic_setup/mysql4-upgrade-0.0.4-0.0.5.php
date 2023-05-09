@@ -24,6 +24,24 @@ function updateCatalogCategoryTable ($installer, $model, $comment)
 
 updateCatalogCategoryTable ($installer, 'catalog_category_entity', 'Mage Catalog Category Table');
 
+$installer->addAttribute ('catalog_category', Gamuza_Basic_Helper_Data::CATEGORY_ATTRIBUTE_INCLUDE_IN_HOME, array(
+    'type'             => 'int',
+    'source'           => 'eav/entity_attribute_source_boolean',
+    'label'            => Mage::helper ('basic')->__('Include In Home'),
+    'input'            => 'select',
+    'global'           => Mage_Catalog_Model_Resource_Eav_Attribute::SCOPE_GLOBAL,
+    'visible'          => true,
+    'required'         => true,
+    'user_defined'     => false,
+    'searchable'       => false,
+    'filterable'       => false,
+    'comparable'       => false,
+    'visible_on_front' => false,
+    'unique'           => false,
+    'group'            => Mage::helper ('basic')->__('General Information'),
+    'sort_order'       => 1000,
+));
+
 $installer->addAttribute ('catalog_category', Gamuza_Basic_Helper_Data::CATEGORY_ATTRIBUTE_SKU, array(
     'type'             => 'static',
     'backend'          => 'basic/catalog_category_attribute_backend_sku',
@@ -39,7 +57,7 @@ $installer->addAttribute ('catalog_category', Gamuza_Basic_Helper_Data::CATEGORY
     'visible_on_front' => false,
     'unique'           => true,
     'group'            => Mage::helper ('basic')->__('General Information'),
-    'sort_order'       => 1000,
+    'sort_order'       => 2000,
 ));
 
 $installer->addAttribute ('catalog_category', Gamuza_Basic_Helper_Data::CATEGORY_ATTRIBUTE_CODE, array(
