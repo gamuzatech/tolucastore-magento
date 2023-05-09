@@ -397,6 +397,28 @@ ol, ul {
     }
 }
 
+@media only screen and (min-width: 480px) {
+    .cms-home .products-grid > li {
+        width: 17.0377%;
+    }
+
+    .cms-home .products-grid > li:nth-child(3n) {
+        margin-right: 3.7037%;
+    }
+
+    .cms-home .products-grid > li:nth-child(3n+1) {
+        clear: none;
+    }
+
+    .cms-home .products-grid > li:nth-child(5n) {
+        margin-right: 0;
+    }
+
+    .cms-home .products-grid > li:nth-child(5n+1) {
+        clear: left;
+    }
+}
+
 @media only screen and (min-width: 771px) {
     .product-collateral .toggle-tabs li.current span,
     .product-collateral .toggle-tabs li:hover span {
