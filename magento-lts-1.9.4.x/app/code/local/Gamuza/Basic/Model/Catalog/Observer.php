@@ -8,6 +8,26 @@
 class Gamuza_Basic_Model_Catalog_Observer extends Mage_Catalog_Model_Observer
 {
     /**
+     * Adds catalog categories to top menu
+     *
+     * @param Varien_Event_Observer $observer
+     */
+    public function addCatalogToTopmenuItems (Varien_Event_Observer $observer)
+    {
+        $storeCategories = Mage::helper ('catalog/category')->getStoreCategories ();
+
+        Mage::dispatchEvent ('basic_catalog_add_topmenu_items', array ('store_categories' => & $storeCategories));
+
+        $block = $observer->getEvent ()->getBlock ();
+        $block->addCacheTag (Mage_Catalog_Model_Category::CACHE_TAG);
+        $this->_addCategoriesToMenu(
+            $storeCategories,
+            $observer->getMenu (),
+            $block
+        );
+    }
+
+    /**
      * Recursively adds categories to top menu
      *
      * @param Varien_Data_Tree_Node_Collection|array $categories
