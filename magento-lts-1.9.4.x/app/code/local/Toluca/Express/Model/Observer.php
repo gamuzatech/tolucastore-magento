@@ -23,7 +23,7 @@ class Toluca_Express_Model_Observer
         $category = Mage::getModel ('catalog/category')
             ->setIsActive (true)
             ->setName ('Express')
-            ->setUrl ('express');
+            ->setUrl ('/express');
 
         array_unshift ($storeCategories, $category);
 
