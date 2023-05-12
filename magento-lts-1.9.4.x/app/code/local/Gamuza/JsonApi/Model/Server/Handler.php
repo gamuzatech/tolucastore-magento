@@ -36,11 +36,6 @@ protected function _getConfig()
     return Mage::getSingleton('jsonapi/config');
 }
 
-protected function _getServer()
-{
-    return Mage::getSingleton('jsonapi/server');
-}
-
 public function call($sessionId, $apiPath, $args = array())
 {
     $this->_startSession($sessionId);
