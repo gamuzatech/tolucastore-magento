@@ -2,12 +2,13 @@
 
 ## Table of features
 
-- APP
-- Chat Bot
-- PDV
+- APP ( Android & iOS)
+- Sales Bot ( WhatsApp )
+- Point of Sale ( POS )
+- Express ( eCommerce & POS )
 - PagCripto
 - PicPay
-- PagSeguro (Cartão e Boleto)
+- PagSeguro
 - OpenPix
 - Correios
 
