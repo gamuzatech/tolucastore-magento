@@ -11,16 +11,19 @@
 class Gamuza_Basic_Block_Catalog_Product_List_Category
     extends Mage_Catalog_Block_Product_List_Random
 {
-    const TOOLBAR_DEFAULT_MODE = 'grid';
-
     /**
-     * Retrieve current view mode
+     * Retrieve Toolbar block
      *
-     * @return string
+     * @return Mage_Catalog_Block_Product_List_Toolbar
      */
-    public function getMode()
+    public function getToolbarBlock()
     {
-        return self::TOOLBAR_DEFAULT_MODE;
+        $block = parent::getToolbarBlock();
+
+        $block->setData('_current_grid_mode', 'grid');
+        $block->setData('_current_limit', '10');
+
+        return $block;
     }
 
     /**
