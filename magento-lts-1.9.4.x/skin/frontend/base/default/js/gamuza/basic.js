@@ -32,7 +32,7 @@ $j(document).ready(function(){
             mouseDrag: true,
             responsive: {
                 481: {
-                    items: 5,
+                    items: 6,
                 }
             }
         });
