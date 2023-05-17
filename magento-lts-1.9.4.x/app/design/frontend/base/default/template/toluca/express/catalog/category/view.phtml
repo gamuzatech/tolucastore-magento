@@ -1,0 +1,58 @@
+<?php
+/**
+ * @package     Toluca_Express
+ * @copyright   Copyright (c) 2023 Gamuza Technologies (https://www.gamuza.com.br/)
+ * @author      Eneias Ramos de Melo <eneias@gamuza.com.br>
+ */
+?>
+<?php
+/**
+ * Category view template
+ */
+?>
+<?php
+    $_helper    = $this->helper('catalog/output');
+    $_category  = $this->getCurrentCategory();
+    $_imgHtml   = '';
+    if ($_imgUrl = $_category->getImageUrl()) {
+        $_imgHtml = '<p class="category-image"><img src="'.$_imgUrl.'" alt="'.$this->escapeHtml($_category->getName()).'" title="'.$this->escapeHtml($_category->getName()).'" /></p>';
+        $_imgHtml = $_helper->categoryAttribute($_category, $_imgHtml, 'image');
+    }
+?>
+<div class="page-title category-title">
+    <?php if($this->isRssCatalogEnable() && $this->isTopCategory()): ?>
+        <a href="<?php echo $this->getRssLink() ?>" class="link-rss"><?php echo $this->__('Subscribe to RSS Feed') ?></a>
+    <?php endif ?>
+    <h1><?php echo $_helper->categoryAttribute($_category, $_category->getName(), 'name') ?></h1>
+</div>
+
+<?php echo $this->getMessagesBlock()->toHtml() ?>
+
+<?php if($_imgUrl): ?>
+    <?php echo $_imgHtml ?>
+<?php endif ?>
+
+<?php if($_description=$this->getCurrentCategory()->getDescription()): ?>
+<div class="category-description std">
+    <?php echo $_helper->categoryAttribute($_category, $_description, 'description') ?>
+</div>
+<?php endif ?>
+
+<div class="accordion" id="category-accordion">
+<?php foreach($_category->getChildrenCategories() as $_child): ?>
+<?php $_childId = sprintf('collapse-%s', $_child->getId()); ?>
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#<?php echo $_childId; ?>" aria-expanded="true" aria-controls="<?php echo $_childId; ?>">
+                <?php echo $_child->getName(); ?>
+            </button>
+        </h2>
+        <div id="<?php echo $_childId; ?>" class="accordion-collapse collapse show" data-bs-parent="category-accordion">
+            <div class="accordion-body">
+            <?php echo $this->_getProductListHtml($_child); ?>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
+</div>
+

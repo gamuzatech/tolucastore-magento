@@ -19,6 +19,11 @@
                 <class>Toluca_Express_Helper</class>
             </express>
         </helpers>
+        <blocks>
+            <express>
+                <class>Toluca_Express_Block</class>
+            </express>
+        </blocks>
         <models>
             <express>
                 <class>Toluca_Express_Model</class>

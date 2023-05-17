@@ -12,6 +12,8 @@ require_once (Mage::getModuleDir ('controllers', 'Mage_Catalog') . DS . 'Categor
  */
 class Toluca_Express_CategoryController extends Mage_Catalog_CategoryController
 {
+    public const LAYOUT_UPDATE_HANDLE = 'toluca_express_category_layered';
+
     public const TREE_ROOT_ID = Mage_Catalog_Model_Category::TREE_ROOT_ID;
 
     public function renderLayout($output = '')
@@ -61,7 +63,8 @@ class Toluca_Express_CategoryController extends Mage_Catalog_CategoryController
         }
         else
         {
-            $category->setName('Express');
+            $category->setName(null);
+            $category->setLayoutCustomHandle(self::LAYOUT_UPDATE_HANDLE);
         }
 
 /*
