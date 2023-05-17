@@ -11,7 +11,7 @@
     <toluca_express_category_layered translate="label">
         <reference name="breadcrumbs">
             <action method="setTemplate"><template>toluca/express/catalog/category/view/breadcrumbs.phtml</template></action>
-            <block type="core/template" name="checkout.onepage.link" template="toluca/express/checkout/cart/link.phtml" />
+            <block type="core/template" name="checkout.cart.link" template="toluca/express/checkout/cart/link.phtml" />
         </reference>
         <reference name="content">
             <block type="express/catalog_category_view" name="category.products" template="toluca/express/catalog/category/view.phtml" />

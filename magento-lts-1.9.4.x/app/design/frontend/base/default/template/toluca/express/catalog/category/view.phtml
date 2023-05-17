@@ -40,14 +40,14 @@
 
 <div class="accordion" id="category-accordion">
 <?php foreach($_category->getChildrenCategories() as $_child): ?>
-<?php $_childId = sprintf('collapse-%s', $_child->getId()); ?>
     <div class="accordion-item">
         <h2 class="accordion-header">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#<?php echo $_childId; ?>" aria-expanded="true" aria-controls="<?php echo $_childId; ?>">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-<?php echo $_child->getId(); ?>"
+                    aria-expanded="true" aria-controls="collapse-<?php echo $_child->getId(); ?>">
                 <?php echo $_child->getName(); ?>
             </button>
         </h2>
-        <div id="<?php echo $_childId; ?>" class="accordion-collapse collapse show" data-bs-parent="category-accordion">
+        <div id="collapse-<?php echo $_child->getId(); ?>" class="accordion-collapse collapse show" data-bs-parent="#category-accordion">
             <div class="accordion-body">
             <?php echo $this->_getProductListHtml($_child); ?>
             </div>
