@@ -95,6 +95,10 @@
         <reference name="cms_footer_links">
             <action method="setBlockId"><block_id>footer_links_contact</block_id></action>
         </reference>
+
+        <reference name="before_body_end">
+            <block type="core/template" template="gamuza/basic/page/html/bootstrap.phtml" after="-" />
+        </reference>
     </default>
 
     <catalog_category_view>

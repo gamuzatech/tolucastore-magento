@@ -6,20 +6,9 @@
 
 $j(document).ready(function(){
     /**
-     * Bootstrap
-     */
-    $j('a.button, button.button').removeClass('button').addClass('btn btn-success');
-    $j('a.checkout-button, button.btn-checkout, button.btn-cart').removeClass('checkout-button btn-checkout btn-cart').addClass('btn-lg');
-    $j('input.input-text').removeClass('input-text').addClass('form-control');
-    $j('input.checkbox:checkbox').addClass('form-check-input');
-    $j('input.radio:radio').addClass('form-check-input');
-    $j('select').addClass('form-select');
-    $j('textarea.input-text').removeClass('input-text').addClass('form-control');
-
-    /**
      * TinySlider
      */
-    $j('.products-slider').each(function(index, value){
+    $j('.tiny-slider').each(function(index, value){
         var slider = tns({
             container: value,
             items: 2,
