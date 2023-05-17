@@ -38,9 +38,19 @@
 </div>
 <?php endif ?>
 
-<div class="accordion" id="category-accordion">
-<?php foreach($_category->getChildrenCategories() as $_child): ?>
-    <div class="accordion-item">
+<?php $_children = $_category->getChildrenCategories(); ?>
+
+<ul class="nav nav-underline bg-body-tertiary sticky-top flex-nowrap text-nowrap overflow-x-auto" id="category-nav">
+<?php foreach($_children as $_child): ?>
+    <li class="nav-item">
+        <a class="nav-link" href="#cat<?php echo $_child->getId(); ?>"><?php echo $_child->getName(); ?></a>
+    </li>
+<?php endforeach; ?>
+</ul>
+
+<div class="accordion" id="category-accordion" data-bs-spy="scroll" data-bs-target="#category-nav" tabindex="0">
+<?php foreach($_children as $_child): ?>
+    <div class="accordion-item" id="cat<?php echo $_child->getId(); ?>">
         <h2 class="accordion-header">
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-<?php echo $_child->getId(); ?>"
                     aria-expanded="true" aria-controls="collapse-<?php echo $_child->getId(); ?>">

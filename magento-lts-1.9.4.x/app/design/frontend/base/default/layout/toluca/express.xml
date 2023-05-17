@@ -9,6 +9,13 @@
 
 <layout>
     <toluca_express_category_layered translate="label">
+        <reference name="head">
+            <action method="appendItem">
+                <type>skin_css</type>
+                <name>css/toluca/express.css</name>
+                <params>media="all"</params>
+            </action>
+        </reference>
         <reference name="breadcrumbs">
             <action method="setTemplate"><template>toluca/express/catalog/category/view/breadcrumbs.phtml</template></action>
             <block type="core/template" name="checkout.cart.link" template="toluca/express/checkout/cart/link.phtml" />
