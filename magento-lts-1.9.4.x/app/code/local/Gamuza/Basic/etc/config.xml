@@ -141,11 +141,13 @@
             </catalog>
             <customer>
                 <rewrite>
+                    <customer>Gamuza_Basic_Model_Customer_Customer</customer>
                     <address>Gamuza_Basic_Model_Customer_Address</address>
                 </rewrite>
             </customer>
             <customer_resource>
                 <rewrite>
+                    <customer>Gamuza_Basic_Model_Customer_Resource_Customer</customer>
                     <address>Gamuza_Basic_Model_Customer_Resource_Address</address>
                     <group_collection>Gamuza_Basic_Model_Customer_Resource_Group_Collection</group_collection>
                 </rewrite>

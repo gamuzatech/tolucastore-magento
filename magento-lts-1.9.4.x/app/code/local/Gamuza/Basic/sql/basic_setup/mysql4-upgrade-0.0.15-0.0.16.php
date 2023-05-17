@@ -22,7 +22,7 @@ $installer->addAttribute(
         'visible'      => true,
         'required'     => false,
         'user_defined' => false,
-        'unique'       => false,
+        'unique'       => true,
     )
 );
 
