@@ -28,6 +28,7 @@ address.copyright {
 
 form .form-instructions {
     color: black;
+    font-weight: bold;
 }
 
 h2.product-name a:focus,
@@ -191,6 +192,10 @@ ol, ul {
 .header-minicart .info-wrapper .qty {
     display: inline-block;
     height: auto;
+}
+
+.header-minicart .minicart-actions .cart-link {
+    font-size: 15px;
 }
 
 .header-minicart .subtotal .label {
