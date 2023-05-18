@@ -23,6 +23,8 @@
         <reference name="content">
             <block type="express/catalog_category_view" name="category.products" template="toluca/express/catalog/category/view.phtml" />
         </reference>
+        <!-- Omni_AjaxAddToCart -->
+        <update handle="omni_ajax_add_to_cart" />
     </toluca_express_category_layered>
 
     <toluca_express_category_view>
