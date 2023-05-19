@@ -124,13 +124,16 @@ if ($this->getChild('after')) {
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                <h5 class="modal-title" id="products-label">TESTE</h5>
+                <h5 class="modal-title" id="products-label"><?php echo Mage::helper('express')->__('Loading...'); ?></h5>
             </div>
             <div class="modal-body"></div>
             <div class="modal-loading" style="display:none;">
-                <div class="d-flex justify-content-center">
-                    <div class="spinner-border m-5" role="status" style="width: 3rem; height: 3rem;">
-                        <span class="visually-hidden"><?php echo Mage::helper('express')->__('Loading...'); ?></span>
+                <div class="d-flex flex-column align-items-center justify-content-center m-5">
+                    <div class="row">
+                        <div class="spinner-border" role="status" style="width: 3rem; height: 3rem;"></div>
+                    </div>
+                    <div class="row">
+                        <strong><?php echo Mage::helper('express')->__('Loading...'); ?></strong>
                     </div>
                 </div>
             </div>
@@ -150,18 +153,20 @@ $j('.products-grid a.product-image, .products-grid .product-name a').on('click',
     var url = $j(this).attr('href');
 
     $j('.modal-body').html(loading);
-    $j('.modal-title').html(title);
 
     productsModal.show();
 
     $j.ajax(url, {
         success: function(data, textStatus, jqXHR) {
             $j('.modal-body').html(data);
+            $j('.modal-title').html(title);
 
             productsModal.handleUpdate()
         },
         error: function(data, textStatus, jqXHR) {
-            productsModal.hide();
+            $j('.modal-body').html('<?php echo Mage::helper('express')->__('Unable to load product information :('); ?>');
+
+            // productsModal.hide();
         }
     });
 });
