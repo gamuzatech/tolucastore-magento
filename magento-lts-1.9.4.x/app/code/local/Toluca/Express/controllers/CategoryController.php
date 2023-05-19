@@ -25,6 +25,10 @@ class Toluca_Express_CategoryController extends Mage_Catalog_CategoryController
             )
         );
 
+        Mage::getConfig ()->setNode (
+            Mage_Catalog_Model_Factory::XML_PATH_PRODUCT_URL_MODEL, 'express/catalog_product_url'
+        );
+
         return parent::renderLayout($output);
     }
 
