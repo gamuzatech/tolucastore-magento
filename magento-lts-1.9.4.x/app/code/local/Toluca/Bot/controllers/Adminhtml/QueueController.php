@@ -144,5 +144,25 @@ class Toluca_Bot_Adminhtml_QueueController extends Mage_Adminhtml_Controller_Act
 
         $this->_redirect ('*/*/index');
     }
+
+    /**
+     * Export order grid to CSV format
+     */
+    public function exportCsvAction()
+    {
+        $fileName = 'queues.csv';
+        $grid     = $this->getLayout()->createBlock('bot/adminhtml_queue_grid');
+        $this->_prepareDownloadResponse($fileName, $grid->getCsvFile());
+    }
+
+    /**
+     *  Export order grid to Excel XML format
+     */
+    public function exportExcelAction()
+    {
+        $fileName   = 'queues.xml';
+        $grid       = $this->getLayout()->createBlock('bot/adminhtml_queue_grid');
+        $this->_prepareDownloadResponse($fileName, $grid->getExcelFile($fileName));
+    }
 }
 

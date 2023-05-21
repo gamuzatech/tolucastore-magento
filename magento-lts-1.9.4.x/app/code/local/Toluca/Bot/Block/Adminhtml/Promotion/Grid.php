@@ -88,6 +88,9 @@ class Toluca_Bot_Block_Adminhtml_Promotion_Grid extends Mage_Adminhtml_Block_Wid
             ),
         ));
 
+        $this->addExportType('*/*/exportCsv', Mage::helper('bot')->__('CSV'));
+        $this->addExportType('*/*/exportExcel', Mage::helper('bot')->__('Excel XML'));
+
 		return parent::_prepareColumns ();
 	}
 

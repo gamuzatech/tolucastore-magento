@@ -66,5 +66,25 @@ class Toluca_Bot_Adminhtml_ContactController extends Mage_Adminhtml_Controller_A
 
         $this->_redirect ('*/*/index');
     }
+
+    /**
+     * Export order grid to CSV format
+     */
+    public function exportCsvAction()
+    {
+        $fileName = 'contacts.csv';
+        $grid     = $this->getLayout()->createBlock('bot/adminhtml_contact_grid');
+        $this->_prepareDownloadResponse($fileName, $grid->getCsvFile());
+    }
+
+    /**
+     *  Export order grid to Excel XML format
+     */
+    public function exportExcelAction()
+    {
+        $fileName   = 'contacts.xml';
+        $grid       = $this->getLayout()->createBlock('bot/adminhtml_contact_grid');
+        $this->_prepareDownloadResponse($fileName, $grid->getExcelFile($fileName));
+    }
 }
 

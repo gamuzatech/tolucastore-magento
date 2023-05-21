@@ -157,6 +157,9 @@ class Toluca_Bot_Block_Adminhtml_Chat_Grid extends Mage_Adminhtml_Block_Widget_G
             ),
         ));
 
+        $this->addExportType('*/*/exportCsv', Mage::helper('bot')->__('CSV'));
+        $this->addExportType('*/*/exportExcel', Mage::helper('bot')->__('Excel XML'));
+
 		return parent::_prepareColumns ();
 	}
 

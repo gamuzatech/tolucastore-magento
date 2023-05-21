@@ -276,5 +276,25 @@ class Toluca_Bot_Adminhtml_PromotionController extends Mage_Adminhtml_Controller
 
 		$this->_redirect ('*/*/index');
     }
+
+    /**
+     * Export order grid to CSV format
+     */
+    public function exportCsvAction()
+    {
+        $fileName = 'promotions.csv';
+        $grid     = $this->getLayout()->createBlock('bot/adminhtml_promotion_grid');
+        $this->_prepareDownloadResponse($fileName, $grid->getCsvFile());
+    }
+
+    /**
+     *  Export order grid to Excel XML format
+     */
+    public function exportExcelAction()
+    {
+        $fileName   = 'promotions.xml';
+        $grid       = $this->getLayout()->createBlock('bot/adminhtml_promotion_grid');
+        $this->_prepareDownloadResponse($fileName, $grid->getExcelFile($fileName));
+    }
 }
 

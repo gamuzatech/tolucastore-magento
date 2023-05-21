@@ -88,5 +88,25 @@ class Toluca_Bot_Adminhtml_ChatController extends Mage_Adminhtml_Controller_Acti
 		    $this->renderLayout ();
         }
     }
+
+    /**
+     * Export order grid to CSV format
+     */
+    public function exportCsvAction()
+    {
+        $fileName = 'chats.csv';
+        $grid     = $this->getLayout()->createBlock('bot/adminhtml_chat_grid');
+        $this->_prepareDownloadResponse($fileName, $grid->getCsvFile());
+    }
+
+    /**
+     *  Export order grid to Excel XML format
+     */
+    public function exportExcelAction()
+    {
+        $fileName   = 'chats.xml';
+        $grid       = $this->getLayout()->createBlock('bot/adminhtml_chat_grid');
+        $this->_prepareDownloadResponse($fileName, $grid->getExcelFile($fileName));
+    }
 }
 
