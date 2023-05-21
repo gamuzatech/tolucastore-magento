@@ -34,5 +34,25 @@ class Gamuza_Basic_Adminhtml_Shipping_TablerateController extends Mage_Adminhtml
 
 		$this->renderLayout ();
 	}
+
+    /**
+     * Export order grid to CSV format
+     */
+    public function exportCsvAction()
+    {
+        $fileName = 'tablerates.csv';
+        $grid     = $this->getLayout()->createBlock('basic/adminhtml_shipping_tablerate_grid');
+        $this->_prepareDownloadResponse($fileName, $grid->getCsvFile());
+    }
+
+    /**
+     *  Export order grid to Excel XML format
+     */
+    public function exportExcelAction()
+    {
+        $fileName   = 'tablerates.xml';
+        $grid       = $this->getLayout()->createBlock('basic/adminhtml_shipping_tablerate_grid');
+        $this->_prepareDownloadResponse($fileName, $grid->getExcelFile($fileName));
+    }
 }
 

@@ -380,5 +380,25 @@ class Gamuza_Basic_Adminhtml_Catalog_ProductController extends Mage_Adminhtml_Ca
 
         $this->_redirect('*/*/index');
     }
+
+    /**
+     * Export order grid to CSV format
+     */
+    public function exportCsvAction()
+    {
+        $fileName = 'products.csv';
+        $grid     = $this->getLayout()->createBlock('basic/adminhtml_catalog_product_grid');
+        $this->_prepareDownloadResponse($fileName, $grid->getCsvFile());
+    }
+
+    /**
+     *  Export order grid to Excel XML format
+     */
+    public function exportExcelAction()
+    {
+        $fileName   = 'products.xml';
+        $grid       = $this->getLayout()->createBlock('basic/adminhtml_catalog_product_grid');
+        $this->_prepareDownloadResponse($fileName, $grid->getExcelFile($fileName));
+    }
 }
 

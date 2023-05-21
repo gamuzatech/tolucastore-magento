@@ -146,6 +146,9 @@ class Gamuza_Basic_Block_Adminhtml_Order_Service_Grid
             ),
         ));
 
+        $this->addExportType('*/*/exportCsv', Mage::helper('basic')->__('CSV'));
+        $this->addExportType('*/*/exportExcel', Mage::helper('basic')->__('Excel XML'));
+
 		return parent::_prepareColumns ();
 	}
 

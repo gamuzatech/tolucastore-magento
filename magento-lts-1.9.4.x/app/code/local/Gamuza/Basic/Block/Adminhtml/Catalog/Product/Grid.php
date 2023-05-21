@@ -95,6 +95,9 @@ class Gamuza_Basic_Block_Adminhtml_Catalog_Product_Grid
         ), 'status');
 
         $this->sortColumnsByOrder ();
+
+        $this->addExportType('*/*/exportCsv', Mage::helper('basic')->__('CSV'));
+        $this->addExportType('*/*/exportExcel', Mage::helper('basic')->__('Excel XML'));
     }
 
     protected function _prepareMassaction()

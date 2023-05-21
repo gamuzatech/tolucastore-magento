@@ -48,5 +48,15 @@ class Gamuza_Basic_Adminhtml_Shipping_RateController extends Mage_Adminhtml_Cont
 
         $this->_prepareDownloadResponse ($fileName, $content);
     }
+
+    /**
+     *  Export order grid to Excel XML format
+     */
+    public function exportExcelAction()
+    {
+        $fileName   = 'shippingrates.xml';
+        $grid       = $this->getLayout()->createBlock('basic/adminhtml_shipping_rate_grid');
+        $this->_prepareDownloadResponse($fileName, $grid->getExcelFile($fileName));
+    }
 }
 

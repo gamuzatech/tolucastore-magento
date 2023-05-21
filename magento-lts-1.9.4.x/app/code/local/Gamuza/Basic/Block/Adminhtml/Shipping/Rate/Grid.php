@@ -157,6 +157,7 @@ class Gamuza_Basic_Block_Adminhtml_Shipping_Rate_Grid extends Mage_Adminhtml_Blo
         ));
 
         $this->addExportType ('*/*/exportCsv', Mage::helper ('basic')->__('CSV'));
+        $this->addExportType ('*/*/exportExcel', Mage::helper ('basic')->__('Excel XML'));
 
         return parent::_prepareColumns ();
     }
