@@ -121,6 +121,9 @@ class Bubble_StockMovements_Block_Adminhtml_Stock_Movement_Grid extends Mage_Adm
             'filter_index'  => 'main_table.created_at',
         ));
 
+        $this->addExportType('*/*/exportCsv', Mage::helper('basic')->__('CSV'));
+        $this->addExportType('*/*/exportExcel', Mage::helper('basic')->__('Excel XML'));
+
         return parent::_prepareColumns();
     }
 
