@@ -255,6 +255,9 @@ class Toluca_PDV_Block_Adminhtml_History_Grid extends Mage_Adminhtml_Block_Widge
             'type'   => 'datetime',
 		));
 
+        $this->addExportType('*/*/exportCsv', Mage::helper('pdv')->__('CSV'));
+        $this->addExportType('*/*/exportExcel', Mage::helper('pdv')->__('Excel XML'));
+
 		return parent::_prepareColumns ();
 	}
 

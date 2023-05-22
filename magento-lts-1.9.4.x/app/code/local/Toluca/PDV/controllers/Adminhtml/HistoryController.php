@@ -33,5 +33,25 @@ class Toluca_PDV_Adminhtml_HistoryController extends Mage_Adminhtml_Controller_A
 
 		$this->renderLayout ();
 	}
+
+    /**
+     * Export order grid to CSV format
+     */
+    public function exportCsvAction()
+    {
+        $fileName = 'histories.csv';
+        $grid     = $this->getLayout()->createBlock('pdv/adminhtml_history_grid');
+        $this->_prepareDownloadResponse($fileName, $grid->getCsvFile());
+    }
+
+    /**
+     *  Export order grid to Excel XML format
+     */
+    public function exportExcelAction()
+    {
+        $fileName   = 'histories.xml';
+        $grid       = $this->getLayout()->createBlock('pdv/adminhtml_history_grid');
+        $this->_prepareDownloadResponse($fileName, $grid->getExcelFile($fileName));
+    }
 }
 

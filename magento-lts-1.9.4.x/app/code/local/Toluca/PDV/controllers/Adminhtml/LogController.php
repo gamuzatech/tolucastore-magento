@@ -33,5 +33,25 @@ class Toluca_PDV_Adminhtml_LogController extends Mage_Adminhtml_Controller_Actio
 
 		$this->renderLayout ();
 	}
+
+    /**
+     * Export order grid to CSV format
+     */
+    public function exportCsvAction()
+    {
+        $fileName = 'logs.csv';
+        $grid     = $this->getLayout()->createBlock('pdv/adminhtml_log_grid');
+        $this->_prepareDownloadResponse($fileName, $grid->getCsvFile());
+    }
+
+    /**
+     *  Export order grid to Excel XML format
+     */
+    public function exportExcelAction()
+    {
+        $fileName   = 'logs.xml';
+        $grid       = $this->getLayout()->createBlock('pdv/adminhtml_log_grid');
+        $this->_prepareDownloadResponse($fileName, $grid->getExcelFile($fileName));
+    }
 }
 

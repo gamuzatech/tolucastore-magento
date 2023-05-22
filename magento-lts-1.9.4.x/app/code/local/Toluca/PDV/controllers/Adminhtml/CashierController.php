@@ -138,5 +138,25 @@ class Toluca_PDV_Adminhtml_CashierController extends Mage_Adminhtml_Controller_A
 
 		$this->_redirect ('*/*/index');
 	}
+
+    /**
+     * Export order grid to CSV format
+     */
+    public function exportCsvAction()
+    {
+        $fileName = 'cashiers.csv';
+        $grid     = $this->getLayout()->createBlock('pdv/adminhtml_cashier_grid');
+        $this->_prepareDownloadResponse($fileName, $grid->getCsvFile());
+    }
+
+    /**
+     *  Export order grid to Excel XML format
+     */
+    public function exportExcelAction()
+    {
+        $fileName   = 'cashiers.xml';
+        $grid       = $this->getLayout()->createBlock('pdv/adminhtml_cashier_grid');
+        $this->_prepareDownloadResponse($fileName, $grid->getExcelFile($fileName));
+    }
 }
 

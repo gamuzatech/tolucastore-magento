@@ -163,6 +163,9 @@ class Toluca_PDV_Block_Adminhtml_Log_Grid extends Mage_Adminhtml_Block_Widget_Gr
             'type'   => 'datetime',
 		));
 */
+        $this->addExportType('*/*/exportCsv', Mage::helper('pdv')->__('CSV'));
+        $this->addExportType('*/*/exportExcel', Mage::helper('pdv')->__('Excel XML'));
+
 		return parent::_prepareColumns ();
 	}
 
