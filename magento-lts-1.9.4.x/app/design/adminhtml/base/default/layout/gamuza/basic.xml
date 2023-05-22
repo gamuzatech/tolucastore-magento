@@ -23,6 +23,12 @@
                 <name>css/gamuza/basic/menu.css</name>
                 <params>media="screen, projection"</params>
             </action>
+
+            <action method="appendItem">
+                <type>skin_css</type>
+                <name>css/gamuza/basic/calendar-win2k-1.css</name>
+                <params>media="all"</params>
+            </action>
         </reference>
         <!--
         <reference name="notifications">

@@ -11,7 +11,8 @@
 }
 
 .grid tr.filter .range div.date {
-    display: inline;
+    display: inline-block;
+    min-width: 131px;
 }
 
 .header-top {
