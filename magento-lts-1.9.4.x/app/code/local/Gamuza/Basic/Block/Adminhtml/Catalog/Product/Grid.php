@@ -193,6 +193,43 @@ class Gamuza_Basic_Block_Adminhtml_Catalog_Product_Grid
                      )
              )
         ));
+
+        $nameAttribute = Mage::getModel ('eav/entity_attribute')->loadByCode (Mage_Catalog_Model_Product::ENTITY, 'name');
+
+        $collection = Mage::getModel('bundle/option')->getCollection()->joinValues(0);
+
+        $collection->getSelect()
+            ->join(
+                array('cpev' => Mage::getSingleton('core/resource')->getTableName ('catalog_product_entity_' . $nameAttribute->getBackendType ())),
+                sprintf('main_table.parent_id = cpev.entity_id and cpev.store_id = 0 and cpev.attribute_id = %s', $nameAttribute->getAttributeId()),
+                array(
+                    'name' => 'cpev.value'
+                )
+            )
+            ->order('parent_id')
+            ->order('position')
+        ;
+
+        $bundleOptions = array();
+
+        foreach($collection as $option)
+        {
+            $bundleOptions[$option->getId()] = sprintf('%s - %s', $option->getName(), $option->getTitle());
+        }
+
+        $this->getMassactionBlock()->addItem('bundle_option', array(
+            'label'=> Mage::helper('basic')->__('Change Bundle Option'),
+            'url'  => $this->getUrl('*/*/massBundleOption', array('_current'=>true)),
+            'additional' => array(
+                'visibility' => array(
+                    'name' => 'bundle_option[]',
+                    'type' => 'checkboxes',
+                    'class' => 'required-entry validate-one-required',
+                    // 'label' => Mage::helper('basic')->__('Option'),
+                    'values' => $bundleOptions,
+                )
+            )
+        ));
     }
 }
 

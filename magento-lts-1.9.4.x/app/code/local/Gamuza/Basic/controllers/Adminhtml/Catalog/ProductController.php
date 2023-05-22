@@ -381,6 +381,71 @@ class Gamuza_Basic_Adminhtml_Catalog_ProductController extends Mage_Adminhtml_Ca
         $this->_redirect('*/*/index');
     }
 
+    public function massBundleOptionAction()
+    {
+        $productIds     = $this->getRequest()->getParam('product');
+        $productOptions = $this->getRequest()->getParam('bundle_option');
+
+        if (empty($productIds) || empty($productOptions))
+        {
+            $this->_getSession()->addError($this->__('Please select product(s).'));
+        }
+        else if (is_array($productIds) && is_array($productOptions))
+        {
+            try
+            {
+                $resource = Mage::getSingleton ('core/resource');
+
+                $write = $resource->getConnection ('core_write');
+
+                foreach ($productOptions as $optionId)
+                {
+                    $option = Mage::getModel('bundle/option')->load($optionId);
+
+                    $query = sprintf(
+                        'DELETE FROM %s WHERE option_id = %s AND parent_product_id = %s',
+                        $resource->getTableName('bundle/selection'),
+                        $option->getId(), $option->getParentId()
+                    );
+
+                    $write->query ($query);
+
+                    Mage::unregister('product');
+                    Mage::register('product', new Varien_Object()); // fake
+
+                    foreach($productIds as $id)
+                    {
+                        $selection = Mage::getModel('bundle/selection')
+                            ->setOptionId($optionId)
+                            ->setParentProductId($option->getParentId())
+                            ->setProductId($id)
+                            ->setSelectionQty(1)
+                            ->save()
+                        ;
+                    }
+
+                    $query = sprintf (
+                        "UPDATE %s SET updated_at = '%s' WHERE entity_id = %s LIMIT 1",
+                        $resource->getTableName('catalog/product'),
+                        date ('Y-m-d H:i:s'), $option->getParentId()
+                    );
+
+                    $write->query ($query);
+                }
+
+                $this->_getSession()->addSuccess(
+                    $this->__('Total of %d record(s) have been updated.', count($productOptions))
+                );
+            }
+            catch (Exception $e)
+            {
+                $this->_getSession()->addError($e->getMessage());
+            }
+        }
+
+        $this->_redirect('*/*/index');
+    }
+
     /**
      * Export order grid to CSV format
      */
