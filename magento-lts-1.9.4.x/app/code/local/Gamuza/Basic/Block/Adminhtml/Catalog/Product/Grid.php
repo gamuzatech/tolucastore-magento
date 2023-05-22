@@ -13,6 +13,8 @@ class Gamuza_Basic_Block_Adminhtml_Catalog_Product_Grid
 {
     protected $_isExport = true;
 
+    protected $_categoryVarName = 'category';
+
     protected function _prepareCollection()
     {
         parent::_prepareCollection();
@@ -35,6 +37,16 @@ class Gamuza_Basic_Block_Adminhtml_Catalog_Product_Grid
             );
         }
 */
+        if ($categoryId = $this->getRequest ()->getParam ($this->_categoryVarName))
+        {
+            $category = Mage::getModel ('catalog/category')->load ($categoryId);
+
+            if ($category->getLevel () > 1)
+            {
+                $this->getCollection ()->addCategoryFilter ($category);
+            }
+        }
+
         $this->getCollection ()->_addWebsiteNamesToResult ();
     }
 
