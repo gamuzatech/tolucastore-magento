@@ -69,14 +69,6 @@ if (!empty($httpXOriginalHost)) {
             $_SERVER['HTTP_X_INBOUND_HOST'] = $httpHost;
             $_SERVER['HTTP_HOST'] = $httpXOriginalHost;
             $mageRunCode = $store->getCode();
-            setcookie('abuse_interstitial', $httpXOriginalHost, [
-                'expires' => time() + 86400,
-                'path' => '/',
-                'domain' => null,
-                'secure' => true,
-                'httponly' => false,
-                'samesite' => 'None'
-            ]);
             break;
         }
     }
