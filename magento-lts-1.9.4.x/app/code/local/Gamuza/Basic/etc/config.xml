@@ -119,6 +119,7 @@
             <catalog>
                 <rewrite>
                     <category>Gamuza_Basic_Model_Catalog_Category</category>
+                    <product_image>Gamuza_Basic_Model_Catalog_Product_image</product_image>
                 </rewrite>
             </catalog>
             <catalog_resource>
@@ -530,6 +531,9 @@
                 <flat_catalog_category>1</flat_catalog_category>
                 <flat_catalog_product>1</flat_catalog_product>
             </frontend>
+            <product_image>
+                <use_original>1</use_original>
+            </product_image>
             <search>
                 <search_type>3</search_type>
             </search>
