@@ -45,7 +45,7 @@ if (file_exists($maintenanceFile)) {
 
     if (file_exists($maintenanceIpFile)) {
         /* if maintenanceFile and maintenanceIpFile are set use Mage to get remote IP (in order to respect remote_addr_headers xml config) */
-        Mage::init($mageRunCode, $mageRunType);
+        Mage::init($mageRunCode, $mageRunType, $mageRunOptions);
         $currentIp = Mage::helper('core/http')->getRemoteAddr();
         $allowedIps = explode(',', trim(file_get_contents($maintenanceIpFile)));
 
@@ -58,12 +58,6 @@ if (file_exists($maintenanceFile)) {
         include_once __DIR__ . '/errors/503.php';
         exit;
     }
-}
-
-$mageRunOptions = array();
-
-if ($mageRunCache = getenv('TOLUCASTORE_APPLICATION_VAR_CACHE', true)) {
-    $mageRunOptions['cache_dir'] = $mageRunCache;
 }
 
 $httpXOriginalHost = @$_SERVER['HTTP_X_FORWARDED_HOST'];
