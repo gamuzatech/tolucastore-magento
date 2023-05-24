@@ -60,12 +60,20 @@ if (file_exists($maintenanceFile)) {
     }
 }
 
-$httpXOriginalHost = Mage::app()->getRequest()->getServer('HTTP_X_FORWARDED_HOST');
+$mageRunOptions = array();
+
+if ($mageRunCache = getenv('TOLUCASTORE_APPLICATION_VAR_CACHE', true)) {
+    $mageRunOptions['cache_dir'] = $mageRunCache;
+}
+
+$httpXOriginalHost = @$_SERVER['HTTP_X_FORWARDED_HOST'];
 
 if (!empty($httpXOriginalHost)) {
+    Mage::init('admin', 'store', $mageRunOptions, array('Mage_Core'));
+
     foreach (Mage::app()->getStores(false, false) as $store) {
         if (strpos($store->getBaseUrl(), $httpXOriginalHost) !== false) {
-            $httpHost = Mage::app()->getRequest()->getServer('HTTP_HOST');
+            $httpHost = $_SERVER['HTTP_HOST'];
             $_SERVER['HTTP_X_INBOUND_HOST'] = $httpHost;
             $_SERVER['HTTP_HOST'] = $httpXOriginalHost;
             $mageRunCode = $store->getCode();
@@ -74,4 +82,4 @@ if (!empty($httpXOriginalHost)) {
     }
 }
 
-Mage::run($mageRunCode, $mageRunType);
+Mage::run($mageRunCode, $mageRunType, $mageRunOptions);
