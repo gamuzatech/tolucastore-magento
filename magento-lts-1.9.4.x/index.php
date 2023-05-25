@@ -63,7 +63,7 @@ if (file_exists($maintenanceFile)) {
 $httpXOriginalHost = @$_SERVER['HTTP_X_FORWARDED_HOST'];
 
 if (!empty($httpXOriginalHost)) {
-    Mage::init('admin', 'store', $mageRunOptions, array('Mage_Core'));
+    Mage::init('admin', 'store', $mageRunOptions);
 
     foreach (Mage::app()->getStores(false, false) as $store) {
         if (strpos($store->getBaseUrl(), $httpXOriginalHost) !== false) {
