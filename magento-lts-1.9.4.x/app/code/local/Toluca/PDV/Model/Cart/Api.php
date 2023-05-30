@@ -59,15 +59,28 @@ class Toluca_PDV_Model_Cart_Api extends Mage_Api_Model_Resource_Abstract
             $collection->addFieldToFilter ('pdv_customer_id', array ('eq' => $customer_id));
         }
 
+        $resource = Mage::getSingleton ('core/resource');
+
+        $read = $resource->getConnection ('core_read');
+        $table = $resource->getTableName ('sales/quote_item');
+
+        $itemsVirtual = $read->fetchAll(sprintf(
+            'SELECT quote_id, COUNT(is_virtual) FROM %s WHERE is_virtual = 1', $table
+        ));
+
         foreach ($collection as $quote)
         {
+            $quoteId = $quote->getId ();
+
             $result [] = array(
                 'entity_id' => intval ($quote->getId ()),
                 'store_id'  => intval ($quote->getStoreId ()),
                 'created_at' => $quote->getCreatedAt (),
                 'updated_at' => $quote->getUpdatedAt (),
                 'is_active'  => boolval ($quote->getIsActive ()),
-                'is_virtual' => boolval ($quote->getIsVirtual ()),
+                'is_virtual' => !empty (array_filter ($itemsVirtual, function ($item) use ($quoteId) {
+                    return $item ['quote_id'] == $quoteId;
+                })),
                 'items_count' => intval ($quote->getItemsCount ()),
                 'items_qty'   => intval ($quote->getItemsQty ()),
                 'base_currency_code' => $quote->getBaseCurrencyCode (),
