@@ -26,7 +26,7 @@ class Gamuza_Basic_Block_Adminhtml_Catalog_Category_Tree
 
     public function canAddRootCategory ()
     {
-        return false;
+        return Mage::getStoreConfigFlag ('catalog/category/add_root_category');
     }
 
     public function canAddSubCategory()
@@ -35,7 +35,7 @@ class Gamuza_Basic_Block_Adminhtml_Catalog_Category_Tree
 
         if ($category && $category->getId() && $category->getLevel() != 1)
         {
-            return false;
+            return Mage::getStoreConfigFlag ('catalog/category/add_subcategory');
         }
 
         return parent::canAddSubCategory();
