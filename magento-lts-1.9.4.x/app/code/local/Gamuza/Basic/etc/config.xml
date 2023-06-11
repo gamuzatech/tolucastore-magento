@@ -560,6 +560,7 @@
             <create_account>
                 <email_domain><![CDATA[toluca.com.br]]></email_domain>
                 <confirm>0</confirm>
+                <generate_human_friendly_email>1</generate_human_friendly_email>
             </create_account>
             <online_customers>
                 <online_minutes_interval>1</online_minutes_interval>

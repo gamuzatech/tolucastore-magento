@@ -43,6 +43,15 @@ class Gamuza_Basic_Model_Customer_Resource_Customer
             );
         }
 
+        if (!$customer->getEmail() && Mage::getStoreConfigFlag(Gamuza_Basic_Model_Customer_Customer::XML_PATH_GENERATE_HUMAN_FRIENDLY_EMAIL))
+        {
+            $customerCode   = hash('md5', uniqid(rand(), true));
+            $customerDomain = Mage::getStoreConfig(Mage_Customer_Model_Customer::XML_PATH_DEFAULT_EMAIL_DOMAIN);
+            $customerEmail  = sprintf('%s@%s', $customerCode, $customerDomain);
+
+            $customer->setEmail($customerEmail);
+        }
+
         return parent::_beforeSave($customer);
     }
 }

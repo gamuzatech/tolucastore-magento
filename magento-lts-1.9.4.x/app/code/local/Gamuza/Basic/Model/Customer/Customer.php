@@ -15,5 +15,7 @@ class Gamuza_Basic_Model_Customer_Customer
      * Codes of exceptions related to customer model
      */
     public const EXCEPTION_CELLPHONE_EXISTS = 6;
+
+    public const XML_PATH_GENERATE_HUMAN_FRIENDLY_EMAIL = 'customer/create_account/generate_human_friendly_email';
 }
 
