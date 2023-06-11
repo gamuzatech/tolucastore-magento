@@ -697,9 +697,6 @@
                 <enableRunNow>1</enableRunNow>
                 <showCronUserMessage>0</showCronUserMessage>
             </cron>
-            <smtp>
-                <disable>1</disable>
-            </smtp>
             <log>
                 <enable_log>1</enable_log>
             </log>
