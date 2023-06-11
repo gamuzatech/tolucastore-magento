@@ -21,6 +21,12 @@
 	</global>
 	<default>
 		<smtppro>
+            <general>
+                <option>smtp</option>
+                <smtp_authentication>none</smtp_authentication>
+                <smtp_host>localhost</smtp_host>
+                <smtp_ssl>none</smtp_ssl>
+            </general>
             <queue>
                 <usage>default</usage>
             </queue>
