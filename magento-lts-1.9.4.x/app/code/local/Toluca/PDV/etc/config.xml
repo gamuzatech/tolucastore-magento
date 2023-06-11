@@ -117,14 +117,14 @@
             </sales_convert_order>
         </fieldsets>
         <events>
-            <controller_action_predispatch>
+            <jsonapi_call_before>
                 <observers>
-                    <toluca_pdv_controller_action_predispatch>
+                    <toluca_pdv_jsonapi_call_before>
                         <class>pdv/observer</class>
-                        <method>controllerActionPredispatch</method>
-                    </toluca_pdv_controller_action_predispatch>
+                        <method>jsonapiCallBefore</method>
+                    </toluca_pdv_jsonapi_call_before>
                 </observers>
-            </controller_action_predispatch>
+            </jsonapi_call_before>
             <sales_order_place_after>
                 <observers>
                     <toluca_pdv_sales_order_place_after>

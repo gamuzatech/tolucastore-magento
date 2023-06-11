@@ -17,13 +17,11 @@ class Toluca_PDV_Model_Observer
 
     const XML_PATH_PDV_PAYMENT_METHOD_ALL = Toluca_PDV_Helper_Data::XML_PATH_PDV_PAYMENT_METHOD_ALL;
 
-    public function controllerActionPredispatch ($observer)
+    public function jsonapiCallBefore ($observer)
     {
-        $controllerModule = Mage::app ()->getRequest ()->getControllerModule ();
-
         $isPdv = Mage::helper ('pdv')->isPDV ();
 
-        if (!strcmp ($controllerModule, 'Toluca_PDV') || $isPdv)
+        if ($isPdv)
         {
             Mage::app ()->getStore ()->setConfig (
                 Toluca_PDV_Helper_Data::XML_PATH_DEFAULT_EMAIL_PREFIX, 'pdv'
