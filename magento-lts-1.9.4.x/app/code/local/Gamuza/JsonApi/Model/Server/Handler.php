@@ -55,6 +55,11 @@ public function call($sessionId, $apiPath, $args = array())
         if (!empty ($result)) return unserialize ($result);
     }
 
+    Mage::dispatchEvent('jsonapi_call_before', array(
+        'apiPath' => $apiPath,
+        'args' => $args
+    ));
+
     $result = parent::call ($sessionId, $apiPath, $args);
 
     if ($cached)
