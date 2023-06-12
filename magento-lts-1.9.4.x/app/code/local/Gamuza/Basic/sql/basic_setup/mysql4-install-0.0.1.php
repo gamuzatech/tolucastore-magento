@@ -38,6 +38,24 @@ $coreConfig->saveConfig ('design/header/logo_src_small', 'images/logo.png');
 $coreConfig->saveConfig ('design/header/logo_alt',       'Toluca Store Commerce');
 
 /**
+ * Trans Email
+ */
+$coreConfig->saveConfig ('trans_email/ident_general/name',  'Toluca Store');
+$coreConfig->saveConfig ('trans_email/ident_general/email', 'general@toluca.com.br');
+
+$coreConfig->saveConfig ('trans_email/ident_sales/name',    'Toluca Store');
+$coreConfig->saveConfig ('trans_email/ident_sales/email',   'sales@toluca.com.br');
+
+$coreConfig->saveConfig ('trans_email/ident_support/name',  'Toluca Store');
+$coreConfig->saveConfig ('trans_email/ident_support/email', 'support@toluca.com.br');
+
+$coreConfig->saveConfig ('trans_email/ident_custom1/name',  'Toluca Store');
+$coreConfig->saveConfig ('trans_email/ident_custom1/email', 'custom1@toluca.com.br');
+
+$coreConfig->saveConfig ('trans_email/ident_custom2/name',  'Toluca Store');
+$coreConfig->saveConfig ('trans_email/ident_custom2/email', 'custom2@toluca.com.br');
+
+/**
  * Catalog
  */
 $coreConfig->saveConfig ('catalog/frontend/list_allow_all', '1');

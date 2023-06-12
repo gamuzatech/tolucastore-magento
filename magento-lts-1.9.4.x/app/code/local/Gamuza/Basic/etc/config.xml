@@ -525,6 +525,28 @@
                 <fallback>magento2</fallback>
             </theme>
         </design>
+        <trans_email>
+            <ident_general>
+                <name>Toluca Store</name>
+                <email><![CDATA[general@toluca.com.br]]></email>
+            </ident_general>
+            <ident_sales>
+                <name>Toluca Store</name>
+                <email><![CDATA[sales@toluca.com.br]]></email>
+            </ident_sales>
+            <ident_support>
+                <name>Toluca Store</name>
+                <email><![CDATA[support@toluca.com.br]]></email>
+            </ident_support>
+            <ident_custom1>
+                <name>Toluca Store</name>
+                <email><![CDATA[custom1@toluca.com.br]]></email>
+            </ident_custom1>
+            <ident_custom2>
+                <name>Toluca Store</name>
+                <email><![CDATA[custom2@toluca.com.br]]></email>
+            </ident_custom2>
+        </trans_email>
         <catalog>
             <frontend>
                 <list_allow_all>1</list_allow_all>
